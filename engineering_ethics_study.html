@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Ethics — Midterm Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #15151a;
+    --surface2: #1e1e26;
+    --border: #2a2a35;
+    --accent: #e8c84a;
+    --accent2: #5b8fff;
+    --accent3: #ff6b6b;
+    --text: #e8e8f0;
+    --text-muted: #7a7a92;
+    --text-dim: #4a4a5a;
+    --green: #4ade80;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+  }
+
+  .nav-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 18px 16px 18px 0;
+    border-right: 1px solid var(--border);
+    margin-right: 8px;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .nav-btn.active {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  /* SECTIONS */
+  .section { display: none; padding: 40px 24px; max-width: 900px; margin: 0 auto; }
+  .section.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 64px 24px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(232,200,74,0.1);
+    border: 1px solid rgba(232,200,74,0.3);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .section-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  /* CHAPTER CARDS */
+  .chapter-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .chapter-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .chapter-card:hover { border-color: var(--accent2); }
+
+  .chapter-header {
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .chapter-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(232,200,74,0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .chapter-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .chapter-toggle {
+    color: var(--text-dim);
+    font-size: 18px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .chapter-card.open .chapter-toggle { transform: rotate(180deg); }
+
+  .chapter-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .chapter-card.open .chapter-body { display: block; }
+
+  .chapter-body h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin: 20px 0 12px;
+  }
+
+  .chapter-body p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .bullet-list li {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .bullet-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+  }
+
+  /* DEFINITIONS */
+  .def-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .def-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+
+  .def-term {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .def-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* FLASHCARDS */
+  .flashcard-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .progress-bar-wrap {
+    flex: 1;
+    min-width: 200px;
+    background: var(--surface2);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .fc-counter {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .flashcard-area {
+    perspective: 1000px;
+    margin-bottom: 24px;
+  }
+
+  .flashcard {
+    position: relative;
+    width: 100%;
+    min-height: 260px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .flashcard.flipped { transform: rotateY(180deg); }
+
+  .fc-face {
+    position: absolute;
+    width: 100%;
+    min-height: 260px;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .fc-front {
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .fc-back {
+    background: var(--surface2);
+    border: 1px solid var(--accent2);
+    transform: rotateY(180deg);
+  }
+
+  .fc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+
+  .fc-front .fc-label { color: var(--accent); }
+  .fc-back .fc-label { color: var(--accent2); }
+
+  .fc-question {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .fc-hint {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .fc-answer {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .fc-nav {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* BUTTONS */
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0d0d0f;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover { background: #f0d264; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .btn-success {
+    background: rgba(74,222,128,0.15);
+    color: var(--green);
+    border: 1px solid rgba(74,222,128,0.3);
+  }
+
+  .btn-danger {
+    background: rgba(255,107,107,0.15);
+    color: var(--accent3);
+    border: 1px solid rgba(255,107,107,0.3);
+  }
+
+  /* QUIZ */
+  .quiz-score-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .score-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .score-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .quiz-q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  .quiz-question {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quiz-option {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    text-align: left;
+    font-family: 'Lora', serif;
+    line-height: 1.5;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--accent2);
+    color: var(--text);
+  }
+
+  .quiz-option.correct {
+    background: rgba(74,222,128,0.1);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .quiz-option.wrong {
+    background: rgba(255,107,107,0.1);
+    border-color: var(--accent3);
+    color: var(--accent3);
+  }
+
+  .quiz-option:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(74,222,128,0.1); border-left: 3px solid var(--green); color: var(--text-muted); }
+  .quiz-feedback.wrong-fb { background: rgba(255,107,107,0.1); border-left: 3px solid var(--accent3); color: var(--text-muted); }
+
+  /* ESSAY */
+  .essay-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .essay-q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  .essay-question {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .essay-hint-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: rgba(91,143,255,0.1);
+    border: 1px solid rgba(91,143,255,0.3);
+    color: var(--accent2);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .essay-hint-btn:hover { background: rgba(91,143,255,0.2); }
+
+  .essay-hints {
+    display: none;
+    margin-top: 16px;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 18px;
+  }
+
+  .essay-hints.show { display: block; }
+
+  .essay-hints h5 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .essay-hints ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .essay-hints li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .essay-hints li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+  }
+
+  /* QUIZ RESULT */
+  .result-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    display: none;
+  }
+
+  .result-box.show { display: block; }
+
+  .result-score {
+    font-family: 'Syne', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .result-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+
+  .result-msg {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+
+  /* SEARCH */
+  .search-box {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px 14px 44px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'DM Mono', monospace;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--accent2); }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+
+  .tag-blue { background: rgba(91,143,255,0.15); color: var(--accent2); }
+  .tag-yellow { background: rgba(232,200,74,0.15); color: var(--accent); }
+  .tag-red { background: rgba(255,107,107,0.15); color: var(--accent3); }
+  .tag-green { background: rgba(74,222,128,0.15); color: var(--green); }
+
+  /* GRID 2 COL */
+  @media(min-width:600px) {
+    .def-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .submit-quiz-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 15px;
+    margin-top: 8px;
+    border-radius: var(--radius);
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">EE · Ethics</div>
+  <button class="nav-btn active" onclick="showSection('home')">Home</button>
+  <button class="nav-btn" onclick="showSection('notes')">📖 Notes</button>
+  <button class="nav-btn" onclick="showSection('definitions')">📚 Definitions</button>
+  <button class="nav-btn" onclick="showSection('flashcards')">🃏 Flashcards</button>
+  <button class="nav-btn" onclick="showSection('mcq')">✅ MCQ Quiz</button>
+  <button class="nav-btn" onclick="showSection('essay')">✍️ Essay Prep</button>
+</nav>
+
+<!-- ========== HOME ========== -->
+<div id="home" class="section active">
+  <div class="hero">
+    <div class="hero-tag">Midterm Study Guide · Chapters 1–5</div>
+    <h1>Engineering <span>Ethics</span></h1>
+    <p>A complete interactive review of all lecture material. Study with notes, flashcards, quizzes, and essay prep.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Chapters</span></div>
+      <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Definitions</span></div>
+      <div class="stat"><span class="stat-num">20</span><span class="stat-label">Flashcards</span></div>
+      <div class="stat"><span class="stat-num">20</span><span class="stat-label">Exam Qs</span></div>
+    </div>
+  </div>
+
+  <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));max-width:700px;margin:0 auto 32px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('notes')">
+      <div style="font-size:28px;margin-bottom:8px;">📖</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Study Notes</div>
+      <div style="font-size:13px;color:var(--text-muted);">All 5 chapters organized clearly</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('flashcards')">
+      <div style="font-size:28px;margin-bottom:8px;">🃏</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Flashcards</div>
+      <div style="font-size:13px;color:var(--text-muted);">Flip cards to test your recall</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('mcq')">
+      <div style="font-size:28px;margin-bottom:8px;">✅</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">MCQ Practice</div>
+      <div style="font-size:13px;color:var(--text-muted);">10 multiple choice questions</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('essay')">
+      <div style="font-size:28px;margin-bottom:8px;">✍️</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Essay Prep</div>
+      <div style="font-size:13px;color:var(--text-muted);">10 essay Qs with answer hints</div>
+    </div>
+  </div>
+
+  <div style="max-width:700px;margin:0 auto;background:rgba(232,200,74,0.08);border:1px solid rgba(232,200,74,0.25);border-radius:var(--radius);padding:20px 24px;">
+    <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--accent);margin-bottom:10px;">⚠️ Midterm Coverage</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">Chapters 1–5 (mostly from lectures). Format: 10 multiple choice + 10 essay type. Focus on <strong style="color:var(--text);">concepts, definitions, and application cases</strong>. Duration: 60 minutes.</p>
+  </div>
+</div>
+
+<!-- ========== NOTES ========== -->
+<div id="notes" class="section">
+  <div class="section-header">
+    <h2>Lecture Notes</h2>
+    <p>Click any chapter to expand. All key concepts from the slides.</p>
+  </div>
+
+  <!-- Chapter 1 -->
+  <div class="chapter-grid">
+    <div class="chapter-card" onclick="toggleChapter(this)">
+      <div class="chapter-header">
+        <span class="chapter-num">Ch. 1</span>
+        <span class="chapter-title">Engineering Ethics: Introduction</span>
+        <span class="chapter-toggle">▼</span>
+      </div>
+      <div class="chapter-body">
+        <div class="tag tag-yellow">Tesla Case Study</div>
+        <h4>Key Case Discussion</h4>
+        <p>The Tesla autopilot case raises core ethics questions: who bears moral responsibility when autonomous systems fail? Key issues include realistic driver override expectations, safety standards, consumer information rights, hacking/terrorism risks, and job displacement.</p>
+
+        <h4>Professionalism</h4>
+        <ul class="bullet-list">
+          <li>Expertise in a specialized area (engineering, law, medicine, accounting)</li>
+          <li>Adherence to moral guidelines, usually formalized in a code of ethics</li>
+        </ul>
+
+        <h4>What is a Profession?</h4>
+        <ul class="bullet-list">
+          <li><strong>Sociological Account:</strong> A profession involves specialized knowledge and autonomy</li>
+          <li><strong>Social Contract Account:</strong> Society grants privileges in exchange for service to the public good</li>
+          <li><strong>Public Element:</strong> Professions serve the broader community, not just clients</li>
+        </ul>
+
+        <h4>Public Good & Well-Being</h4>
+        <p>Engineers must hold paramount the safety, health, and welfare of the public. The <strong>Capabilities Approach</strong> (Sen & Nussbaum) defines well-being as access to food/shelter/water, satisfying human relationships, free movement and expression, and a satisfactory relationship with the natural world.</p>
+
+        <h4>Three Types of Ethical Actions</h4>
+        <ul class="bullet-list">
+          <li><strong>Prohibited Actions:</strong> Actions forbidden by ethics codes</li>
+          <li><strong>Preventing Harm:</strong> Identifying and disclosing potential harms, attempting to prevent them</li>
+          <li><strong>Promoting Well-Being (Aspirational Ethics):</strong> Going beyond minimum requirements</li>
+        </ul>
+
+        <h4>Social Context of Technology</h4>
+        <ul class="bullet-list">
+          <li>Engineering is a form of social experimentation</li>
+          <li>Technology affects society; society shapes technology development</li>
+          <li><strong>Technological Determinism:</strong> Technology controls society</li>
+          <li><strong>Technological Optimism:</strong> Technology will solve all problems</li>
+          <li><strong>Technological Pessimism:</strong> Technology causes more harm than good</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Chapter 2 -->
+    <div class="chapter-card" onclick="toggleChapter(this)">
+      <div class="chapter-header">
+        <span class="chapter-num">Ch. 2</span>
+        <span class="chapter-title">A Practical Ethics Toolkit</span>
+        <span class="chapter-toggle">▼</span>
+      </div>
+      <div class="chapter-body">
+        <div class="tag tag-blue">Heidelberg Cadaver Case</div>
+        <p>Engineers must hold paramount safety, health, and welfare — but does this override human dignity (e.g., using cadavers for crash testing)?</p>
+
+        <h4>The Ethics Toolbox: Types of Issues</h4>
+        <ul class="bullet-list">
+          <li><strong>Factual Issues:</strong> Disagreements about what the facts actually are; sometimes cannot be fully resolved</li>
+          <li><strong>Conceptual Issues:</strong> Disagreements about the meaning of terms (e.g., human dignity, informed consent, bribery, conflict of interest)</li>
+          <li><strong>Application Issues:</strong> Whether a term or concept applies to a specific action or practice</li>
+          <li><strong>Line Drawing:</strong> Resolving morally-laden application issues; sometimes must balance competing moral considerations</li>
+        </ul>
+
+        <h4>Conflicting Values: Creative Middle-Way Solutions</h4>
+        <p>Key obligations to balance: public safety (Canon 1), faithful service to employer (Canon 4), and the engineer's own legitimate personal interests.</p>
+
+        <h4>Common Morality</h4>
+        <p>The stock of shared moral beliefs most people in a culture accept. The <strong>Universalization Principle</strong> states we must be willing for others to do what we do in similar situations.</p>
+
+        <h4>Moral Theories</h4>
+        <ul class="bullet-list">
+          <li><strong>Utilitarianism:</strong> Maximize overall well-being. Use Cost-Benefit Test, Maximizing Good Consequences Test, and Rules & Practices Test</li>
+          <li><strong>Respect for Persons (RP/Kantian):</strong> Act so you respect all humans as free and equal moral agents. Uses Golden Rule Test, Self-Defeating Test, and Rights Test</li>
+          <li><strong>Virtue Ethics:</strong> Act as a good/virtuous person would. Virtue = dispositional trait (mean between two vices, per Aristotle)</li>
+        </ul>
+
+        <h4>Professional Virtues</h4>
+        <ul class="bullet-list">
+          <li><strong>Professional Care:</strong> Protect and promote well-being</li>
+          <li><strong>Respect for Nature:</strong> Show consideration; avoid violation; treat with deference</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Chapter 3 -->
+    <div class="chapter-card" onclick="toggleChapter(this)">
+      <div class="chapter-header">
+        <span class="chapter-num">Ch. 3</span>
+        <span class="chapter-title">Responsibility in Engineering</span>
+        <span class="chapter-toggle">▼</span>
+      </div>
+      <div class="chapter-body">
+        <div class="tag tag-red">Columbia Shuttle Case</div>
+        <p>The Columbia disaster had two causes: a physical cause (foam strike) and organizational causes (culture of ignoring risk signals).</p>
+
+        <h4>Types of Responsibility</h4>
+        <ul class="bullet-list">
+          <li><strong>Obligation-Responsibility:</strong> A duty to perform certain actions (e.g., follow standards)</li>
+          <li><strong>Blame-Responsibility:</strong> Being held accountable for outcomes; involves causation</li>
+        </ul>
+
+        <h4>Standard of Care</h4>
+        <p>Engineers are not liable for every error — society accepts "normal errors." The standard of care represents the highest shared standard among competent, responsible engineers in a given practice area. It goes beyond just following standard operating procedures.</p>
+
+        <h4>Organizational Moral Responsibility</h4>
+        <p>Philosopher Peter French argues organizations (corporations) can be morally responsible because they have: a decision-making mechanism, policies guiding decisions, and interests.</p>
+
+        <h4>Impediments to Responsibility</h4>
+        <p>Various factors can block engineers from acting responsibly, including organizational pressure, fear of retaliation, unclear lines of authority, and inadequate information.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 4 -->
+    <div class="chapter-card" onclick="toggleChapter(this)">
+      <div class="chapter-header">
+        <span class="chapter-num">Ch. 4</span>
+        <span class="chapter-title">Engineers in Organizations</span>
+        <span class="chapter-toggle">▼</span>
+      </div>
+      <div class="chapter-body">
+        <div class="tag tag-green">Whistleblowing Focus</div>
+
+        <h4>Engineers vs. Managers (Raelin)</h4>
+        <p>There is a natural conflict due to differences in education, socialization, values, and work habits. Engineers often experience tension between loyalty to employer and loyalty to profession.</p>
+
+        <h4>Jackall's Study of Managers</h4>
+        <ul class="bullet-list">
+          <li>Managers prefer trade-offs between moral principles and utility</li>
+          <li>Loyalty to peers and superiors is the primary virtue</li>
+          <li>Lines of responsibility are deliberately blurred for self-protection</li>
+          <li>Organizational well-being measured primarily in financial terms</li>
+        </ul>
+
+        <h4>Recommendations for Ethical Organizations</h4>
+        <ul class="bullet-list">
+          <li>Encourage employees to report bad news (critical loyalty)</li>
+          <li>Focus criticism on issues, not personalities</li>
+          <li>Keep written records of suggestions and complaints</li>
+          <li>Maintain confidentiality of complaints</li>
+          <li>Provide neutral outside participants</li>
+          <li>Protect against retaliation</li>
+        </ul>
+
+        <h4>Whistleblowing (DeGeorge)</h4>
+        <p>Whistleblowing is morally <strong>permissible</strong> when: (1) harm is serious, (2) concerns are reported to immediate supervisors, (3) internal channels are exhausted. It is morally <strong>obligatory</strong> when: (4) documented evidence would convince a reasonable observer, and (5) going public will actually prevent the harm.</p>
+
+        <h4>Davis's Complicity-Avoiding View</h4>
+        <p>An engineer may be obligated to blow the whistle to avoid being complicit in wrongdoing, independent of whether it will prevent harm.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 5 -->
+    <div class="chapter-card" onclick="toggleChapter(this)">
+      <div class="chapter-header">
+        <span class="chapter-num">Ch. 5</span>
+        <span class="chapter-title">Trust and Reliability</span>
+        <span class="chapter-toggle">▼</span>
+      </div>
+      <div class="chapter-body">
+        <div class="tag tag-blue">Honesty & Integrity</div>
+
+        <h4>Why Trust Matters</h4>
+        <p>Society depends on professionals with specialized knowledge. The "knowledge explosion" creates an "ignorance explosion" — most people cannot evaluate technical claims themselves, so trust is essential.</p>
+
+        <h4>Forms of Dishonesty</h4>
+        <ul class="bullet-list">
+          <li><strong>Lying:</strong> Stating something believed to be false with the intention to deceive</li>
+          <li><strong>Deliberate Deception:</strong> Misleading through true statements arranged deceptively</li>
+          <li><strong>Withholding Information:</strong> Omitting information the audience would reasonably expect, with intent to deceive</li>
+          <li><strong>Failure to Seek Truth:</strong> Not making reasonable effort to verify claims</li>
+        </ul>
+
+        <h4>Why Dishonesty is Wrong (3 Frameworks)</h4>
+        <ul class="bullet-list">
+          <li><strong>Virtue Ethics:</strong> Honesty is a fundamental virtue; dishonesty is a character flaw</li>
+          <li><strong>Respect for Persons:</strong> Deception violates the autonomy of moral agents by corrupting their decision-making</li>
+          <li><strong>Utilitarian:</strong> Dishonesty undermines trust, which is essential for engineering and society to function</li>
+        </ul>
+
+        <h4>Research Integrity</h4>
+        <ul class="bullet-list">
+          <li>Falsification of data</li>
+          <li>Fabrication of data</li>
+          <li>Failure to respect intellectual property</li>
+          <li>Plagiarism</li>
+          <li>Inappropriate attribution of authorship</li>
+        </ul>
+
+        <h4>Conflicts of Interest</h4>
+        <p>A conflict between an obligation to exercise good judgment and an interest that may compromise that judgment. Note: it is not just any set of conflicting interests. A distinction exists between actual and potential conflicts of interest. Sometimes unavoidable — must be disclosed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== DEFINITIONS ========== -->
+<div id="definitions" class="section">
+  <div class="section-header">
+    <h2>Key Definitions</h2>
+    <p>All important terms from the lectures — know these cold.</p>
+  </div>
+
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" placeholder="Search definitions..." oninput="filterDefs(this.value)" id="defSearch">
+  </div>
+
+  <div class="def-grid" id="defGrid">
+    <!-- dynamically rendered -->
+  </div>
+</div>
+
+<!-- ========== FLASHCARDS ========== -->
+<div id="flashcards" class="section">
+  <div class="section-header">
+    <h2>Flashcards</h2>
+    <p>Click the card to reveal the answer. Use arrow buttons to navigate.</p>
+  </div>
+
+  <div class="flashcard-controls">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="fcProgress" style="width:5%"></div>
+    </div>
+    <div class="fc-counter" id="fcCounter">1 / 20</div>
+    <button class="btn btn-secondary" onclick="shuffleCards()">🔀 Shuffle</button>
+    <button class="btn btn-secondary" onclick="resetCards()">↺ Reset</button>
+  </div>
+
+  <div class="flashcard-area">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-face fc-front">
+        <div class="fc-label">Tap to flip</div>
+        <div class="fc-question" id="fcQuestion">Loading...</div>
+        <div class="fc-hint" id="fcHint"></div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-label">Answer</div>
+        <div class="fc-answer" id="fcAnswer">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-nav">
+    <button class="btn btn-secondary" onclick="prevCard()">← Previous</button>
+    <button class="btn btn-danger" onclick="markCard('hard')">😓 Hard</button>
+    <button class="btn btn-success" onclick="markCard('easy')">✓ Got it</button>
+    <button class="btn btn-secondary" onclick="nextCard()">Next →</button>
+  </div>
+</div>
+
+<!-- ========== MCQ QUIZ ========== -->
+<div id="mcq" class="section">
+  <div class="section-header">
+    <h2>Multiple Choice Quiz</h2>
+    <p>10 questions — choose the best answer for each. Get immediate feedback.</p>
+  </div>
+
+  <div class="quiz-score-bar">
+    <div><div class="score-label">Score</div><div class="score-value" id="mcqScore">0 / 10</div></div>
+    <div><div class="score-label">Answered</div><div class="score-value" id="mcqAnswered">0</div></div>
+    <button class="btn btn-secondary" onclick="resetMCQ()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="mcqContainer"></div>
+
+  <div class="result-box" id="mcqResult">
+    <div class="result-score" id="mcqFinalScore" style="color:var(--accent)"></div>
+    <div class="result-label">out of 10 correct</div>
+    <div class="result-msg" id="mcqMsg"></div>
+    <button class="btn btn-primary" onclick="resetMCQ()">Try Again</button>
+  </div>
+</div>
+
+<!-- ========== ESSAY ========== -->
+<div id="essay" class="section">
+  <div class="section-header">
+    <h2>Essay Question Prep</h2>
+    <p>10 essay-type questions with structured answer hints. Practice writing before the exam.</p>
+  </div>
+
+  <div id="essayContainer"></div>
+</div>
+
+<script>
+// ===================== DATA =====================
+
+const definitions = [
+  { term: "Professionalism", def: "Expertise in a specialized area combined with adherence to moral guidelines, usually laid out in a formal code of ethics." },
+  { term: "Profession (Social Contract Account)", def: "Society grants professionals privileges (autonomy, status) in exchange for their commitment to serve the public good." },
+  { term: "Public Good", def: "The safety, health, and welfare of the public; engineering has a direct and vital impact on the quality of life for all people." },
+  { term: "Well-Being (Capabilities Approach)", def: "Having food, shelter, and water; satisfying human relationships; free movement and expression; and a satisfactory relationship to the natural world. (Sen & Nussbaum)" },
+  { term: "Aspirational Ethics", def: "Ethics that goes beyond avoiding prohibited actions to actively promoting well-being — going the extra mile beyond minimal requirements." },
+  { term: "Technological Determinism", def: "The view that technology is the primary driver of social change and that society is largely controlled by technological forces." },
+  { term: "Factual Issues (Ethics)", def: "Questions about what the facts actually are. Many apparent moral disagreements are really disagreements over facts." },
+  { term: "Conceptual Issues", def: "Questions about the meanings of terms used in moral reasoning (e.g., human dignity, informed consent, bribery)." },
+  { term: "Application Issues", def: "Claims about whether a given concept or term applies to a specific action or practice." },
+  { term: "Line Drawing", def: "Resolving a morally-laden application issue by determining where to draw the line between acceptable and unacceptable behavior." },
+  { term: "Common Morality", def: "The stock of shared moral beliefs that most people in a culture, and perhaps people generally, accept." },
+  { term: "Universalization Principle", def: "We must be willing for others to do what we do in similar situations — a key test of moral consistency." },
+  { term: "Utilitarianism", def: "A moral theory holding that we should maximize overall well-being — the greatest good for the greatest number." },
+  { term: "Cost-Benefit Test", def: "The course of action producing the greatest benefit relative to cost should be chosen. A utilitarian decision-making tool." },
+  { term: "Respect for Persons (RP) Approach", def: "Act so that you respect all humans as free and equal moral agents with their own goals and purposes." },
+  { term: "Golden Rule Test", def: "Do unto others as you would have them do unto you. Tests reversibility and universalizability." },
+  { term: "Self-Defeating Test", def: "If everyone did what I am doing, would it undermine my own ability to do the same? If yes, the action is self-defeating and impermissible." },
+  { term: "Rights Test", def: "Honor the rights of people necessary for them to exercise their moral agency and pursue their well-being." },
+  { term: "Virtue Ethics", def: "Act in the way the good or virtuous person would act. Virtue is a dispositional trait — the mean between two vices (Aristotle)." },
+  { term: "Obligation-Responsibility", def: "A duty or obligation to perform certain actions — e.g., following engineering standards." },
+  { term: "Blame-Responsibility", def: "Being held accountable for an outcome; requires that the person caused the harm under appropriate conditions." },
+  { term: "Standard of Care", def: "The highest shared standard among competent, responsible engineers in the relevant area. Not just following regulations — allows for discretion." },
+  { term: "Whistleblowing", def: "Revealing information an organization does not want shared with the public or authorities, done outside of approved organizational channels." },
+  { term: "Critical Loyalty", def: "Employees should generally support their organization while retaining the right to raise concerns about unethical practices." },
+  { term: "Conflict of Interest", def: "A conflict between an obligation to exercise good professional judgment and an interest (personal, financial, etc.) that may compromise that judgment." },
+  { term: "Lying", def: "A statement believed to be false or seriously misleading, ordinarily made in words, with the intention to deceive." },
+  { term: "Deliberate Deception", def: "Misleading someone through technically true statements, selective emphasis, or misleading framing." },
+  { term: "Withholding Information", def: "Failing to convey information that the audience would reasonably expect not to be omitted, with intent to deceive." },
+  { term: "Research Integrity", def: "Adherence to honest practices in research: avoiding falsification, fabrication, plagiarism, and improper authorship." },
+  { term: "Moral Agent", def: "A normal adult human being who can formulate goals and purposes of their own and is capable of moral reasoning." },
+];
+
+const flashcards = [
+  { q: "What is the Capabilities Approach to well-being?", hint: "Associated with Sen & Nussbaum", a: "Developed by Amartya Sen and Martha Nussbaum, it holds that certain living conditions are essential to quality of life: having food, shelter, and water; satisfying human relationships; free movement and expression; and a healthy relationship to the natural world." },
+  { q: "List the three types of actions that guide engineers' ethics.", hint: "Think: forbidden, preventive, positive", a: "1. Prohibited actions (actions that must not be done), 2. Preventing harm (identifying and disclosing potential harms), 3. Promoting well-being (aspirational ethics — going beyond minimum requirements)." },
+  { q: "What is the Social Contract Account of a profession?", hint: "What does society give/get?", a: "Society grants professionals privileges such as autonomy and status in exchange for the profession's commitment to serve the public good and uphold ethical standards." },
+  { q: "What is the difference between factual, conceptual, and application issues in ethics?", hint: "Three layers of ethical disagreement", a: "Factual issues are about what the facts are. Conceptual issues are about the meaning of terms. Application issues are about whether a concept applies to a specific situation. Many moral disagreements involve all three." },
+  { q: "State the Universalization Principle.", hint: "Would you want everyone to do it?", a: "We must be willing for others to do what we do in similar situations. If we could not will our action to become a universal rule, the action is impermissible." },
+  { q: "What are DeGeorge's conditions for whistleblowing being morally obligatory?", hint: "Two extra conditions beyond permissibility", a: "(1) The employee has documented evidence that would convince a reasonable, impartial observer. (2) The employee has strong evidence that making the information public will actually prevent the threatened serious harm." },
+  { q: "Explain the Self-Defeating Test.", hint: "From the Respect for Persons approach", a: "Ask: 'If everyone else did what I am doing, would this undermine my ability to do the same thing?' If yes, the action is self-defeating and cannot be universalized — making it morally impermissible." },
+  { q: "What is virtue ethics and what is its Aristotelian basis?", hint: "Think character, not rules", a: "Virtue ethics asks us to act as a virtuous person would. Aristotle argued that each virtue is the mean (middle position) between two vices — for example, courage is the mean between cowardice and recklessness." },
+  { q: "What does Philosopher Peter French argue about corporations?", hint: "Can organizations be morally responsible?", a: "French argues corporations can be morally responsible agents because they, like people, have: (1) a decision-making mechanism, (2) policies guiding their decisions, and (3) interests of their own." },
+  { q: "What is the Standard of Care in engineering?", hint: "Not just following rules", a: "The highest shared standard among competent, responsible engineers in the relevant area of practice. Engineers are not liable for every error — society accepts 'normal errors' — but must meet the shared professional standard." },
+  { q: "What is a conflict of interest?", hint: "Distinguish from ordinary competing interests", a: "A conflict between an obligation to exercise good professional judgment and an interest that may compromise that judgment. It is not just any set of conflicting interests — it specifically involves a duty to exercise objective judgment." },
+  { q: "What is the Golden Rule Test?", hint: "Reversibility matters", a: "'Do unto others as you would have them do unto you.' It tests universalizability and reversibility — whether you would accept your action if you were on the receiving end." },
+  { q: "What is critical loyalty in organizations?", hint: "Not blind loyalty", a: "Employees and companies should generally support organizational goals and interests, while retaining the right and duty to raise concerns about unethical or harmful practices through legitimate channels." },
+  { q: "What were the two causes of the Columbia disaster identified by the investigation board?", hint: "Physical vs. organizational", a: "1. The physical cause: foam striking and damaging the shuttle's wing. 2. The organizational causes: NASA's culture that discouraged raising safety concerns and normalized known risks." },
+  { q: "List the five types of research misconduct.", hint: "Covers data and attribution", a: "1. Falsification of data, 2. Fabrication of data, 3. Failure to respect intellectual property, 4. Plagiarism, 5. Inappropriate attribution of authorship." },
+  { q: "What are the three frameworks for why dishonesty is wrong?", hint: "Virtue, deontological, consequentialist", a: "1. Virtue Ethics: Dishonesty is a character flaw; honesty is a fundamental virtue. 2. Respect for Persons: Deception violates others' autonomy as moral agents. 3. Utilitarianism: Dishonesty destroys trust, which is essential for society and engineering to function." },
+  { q: "What is technological determinism?", hint: "One of three attitudes toward technology", a: "The view that technology is the primary driver of social change — that society is largely shaped and controlled by technological forces, rather than the reverse." },
+  { q: "What is 'aspirational ethics' in engineering?", hint: "Beyond minimum requirements", a: "Ethics that goes beyond merely avoiding prohibited actions and preventing harm, to actively promoting the well-being of people and society — working toward the best possible outcomes, not just acceptable ones." },
+  { q: "According to Jackall's study, what is the primary virtue for managers?", hint: "Loyalty, but to whom?", a: "Loyalty to one's peers and superiors is the primary virtue for managers. Jackall found that managers deliberately blur lines of responsibility to protect themselves and their superiors." },
+  { q: "What are the three forms of dishonesty in engineering?", hint: "Words, actions, omissions", a: "1. Lying: making a false statement with intent to deceive. 2. Deliberate Deception: misleading through true statements or framing. 3. Withholding Information: omitting information the audience would reasonably expect." },
+];
+
+const mcqData = [
+  {
+    q: "According to the Capabilities Approach (Sen & Nussbaum), which of the following best describes 'well-being'?",
+    opts: [
+      "A. The maximization of financial wealth and economic productivity.",
+      "B. Having food, shelter, satisfying relationships, free movement, and a good relationship to the natural world.",
+      "C. Following all applicable laws and engineering standards.",
+      "D. Achieving personal career success and professional recognition."
+    ],
+    correct: 1,
+    feedback: "The Capabilities Approach defines well-being through certain essential living conditions: basic necessities, human relationships, freedom of movement and expression, and a healthy relationship with nature."
+  },
+  {
+    q: "An engineer discovers that her company's product has a serious safety defect. She has told her supervisor twice but nothing has been done. According to DeGeorge, whistleblowing is morally OBLIGATORY (not just permissible) when which additional conditions are met?",
+    opts: [
+      "A. When the engineer is personally harmed by the product.",
+      "B. When the engineer has documented evidence that would convince an impartial observer AND strong evidence that going public will actually prevent harm.",
+      "C. When the engineer has told her supervisor at least once.",
+      "D. When the engineer disagrees with company policy on any ethical grounds."
+    ],
+    correct: 1,
+    feedback: "DeGeorge's obligatory conditions are: (1) documented evidence sufficient to convince a reasonable, impartial observer, AND (2) strong evidence that going public will actually prevent the threatened serious harm."
+  },
+  {
+    q: "The 'Universalization Principle' in common morality means:",
+    opts: [
+      "A. Every culture has its own moral rules that should be respected equally.",
+      "B. We must apply laws universally without exception.",
+      "C. We must be willing for others to do what we do in similar situations.",
+      "D. Moral rules should apply only to professionals, not the general public."
+    ],
+    correct: 2,
+    feedback: "The Universalization Principle requires moral consistency: if you perform an action, you must be willing to accept the same action from others in relevantly similar situations."
+  },
+  {
+    q: "In Aristotle's virtue ethics, a virtue is:",
+    opts: [
+      "A. Any action that maximizes good consequences for the majority.",
+      "B. A strict rule to follow regardless of circumstances.",
+      "C. The mean between two opposing vices.",
+      "D. Any trait valued by one's professional organization."
+    ],
+    correct: 2,
+    feedback: "Aristotle defined virtue as the mean between two extremes (vices). For example, courage is the mean between cowardice and recklessness; generosity between miserliness and spendthrift."
+  },
+  {
+    q: "What distinguishes a 'conflict of interest' from simply having competing commitments?",
+    opts: [
+      "A. A conflict of interest always involves financial gain.",
+      "B. A conflict of interest involves an obligation to exercise objective professional judgment being compromised by another interest.",
+      "C. A conflict of interest occurs when an engineer works for two companies simultaneously.",
+      "D. Any situation where an engineer has more work than they can handle is a conflict of interest."
+    ],
+    correct: 1,
+    feedback: "A conflict of interest specifically involves a duty to exercise good professional judgment being potentially compromised by another interest. Having too many commitments is NOT a conflict of interest."
+  },
+  {
+    q: "Philosopher Peter French argues organizations can be morally responsible agents because they have:",
+    opts: [
+      "A. Legal status and the ability to enter contracts.",
+      "B. Decision-making mechanisms, policies guiding decisions, and interests.",
+      "C. Individual human members who bear responsibility.",
+      "D. Financial resources to pay for damages."
+    ],
+    correct: 1,
+    feedback: "French argues corporations have the features of a moral agent: (1) a decision-making mechanism, (2) policies that guide decisions, and (3) interests of their own — making them analogous to individual moral agents."
+  },
+  {
+    q: "The Self-Defeating Test asks:",
+    opts: [
+      "A. Does my action produce more good than any alternative?",
+      "B. Would I accept this action if I were on the receiving end?",
+      "C. If everyone did what I am doing, would it undermine my own ability to do the same?",
+      "D. Does my action conform to my professional code of ethics?"
+    ],
+    correct: 2,
+    feedback: "The Self-Defeating Test: if universalizing my action would undermine my own ability to perform it, then I cannot coherently will that everyone do the same — making the action impermissible."
+  },
+  {
+    q: "According to Jackall's study, what is the PRIMARY virtue for managers in organizational culture?",
+    opts: [
+      "A. Public service and transparency.",
+      "B. Technical competence and accuracy.",
+      "C. Loyalty to one's peers and superiors.",
+      "D. Maximizing long-term organizational performance."
+    ],
+    correct: 2,
+    feedback: "Jackall found that loyalty to peers and superiors is the primary virtue in managerial culture. He also noted that lines of responsibility are deliberately blurred to protect those in the hierarchy."
+  },
+  {
+    q: "Which of the following is NOT one of the five types of research misconduct listed in the lectures?",
+    opts: [
+      "A. Falsification of data",
+      "B. Fabrication of data",
+      "C. Failing to disclose a conflict of interest",
+      "D. Plagiarism"
+    ],
+    correct: 2,
+    feedback: "The five types listed are: falsification of data, fabrication of data, failure to respect intellectual property, plagiarism, and inappropriate attribution of authorship. Failing to disclose a conflict of interest is a separate ethical issue."
+  },
+  {
+    q: "What does the 'Social Context of Technology' principle say about engineering?",
+    opts: [
+      "A. Engineers should work in isolation from social concerns to maintain objectivity.",
+      "B. Engineering is a type of social experimentation — technology affects society AND society influences the development of technology.",
+      "C. Technology is neutral; only its users determine whether it is good or bad.",
+      "D. Engineers bear no responsibility for how society uses their products."
+    ],
+    correct: 1,
+    feedback: "The social context of technology principle holds that engineering is a type of social experimentation: technology affects society, and the social context shapes how technology develops. Engineers must consider this two-way relationship."
+  }
+];
+
+const essayData = [
+  {
+    q: "Explain the three types of ethical actions that guide engineering practice. Provide a real or hypothetical example for each type.",
+    hints: [
+      "Prohibited actions: cite a specific example from engineering codes (e.g., bribery, falsifying test results)",
+      "Preventing harm: discuss the duty to identify and disclose safety hazards before a product ships",
+      "Promoting well-being (aspirational ethics): give an example where an engineer goes beyond the minimum — such as designing for accessibility beyond what codes require",
+      "Discuss how all three work together to define the full scope of ethical engineering behavior"
+    ]
+  },
+  {
+    q: "Compare and contrast the Utilitarian Approach and the Respect for Persons (Kantian) Approach to engineering ethics. When might these two approaches conflict?",
+    hints: [
+      "Utilitarianism: maximize overall well-being, use cost-benefit analysis, greatest good for greatest number",
+      "RP Approach: respect individual rights, use Golden Rule Test and Self-Defeating Test, treat people as ends not means",
+      "Conflict example: could lying to prevent mass harm (utilitarian yes, Kantian no) — or sacrificing one person's interests for greater public benefit",
+      "Discuss which approach you think is more appropriate in engineering contexts and why"
+    ]
+  },
+  {
+    q: "Analyze the Columbia Space Shuttle disaster through the lens of responsibility in engineering. Who bore moral responsibility, and how does the concept of 'organizational responsibility' apply?",
+    hints: [
+      "Identify both causes: physical (foam strike) and organizational (safety culture failures)",
+      "Distinguish obligation-responsibility from blame-responsibility",
+      "Apply Peter French's theory: NASA as a corporation with decision-making mechanisms, policies, and interests",
+      "Discuss whether individual engineers, managers, or the organization as a whole bears primary moral responsibility",
+      "Reference the standard of care — did NASA meet it?"
+    ]
+  },
+  {
+    q: "Discuss the ethics of whistleblowing using DeGeorge's framework. When is it morally permissible? When is it obligatory? Apply these criteria to the Challenger disaster case (Roger Boisjoly).",
+    hints: [
+      "List DeGeorge's three conditions for permissibility: serious harm, reports to supervisor, internal channels exhausted",
+      "List DeGeorge's two additional conditions for obligation: documented evidence + evidence going public will actually prevent harm",
+      "Apply to Boisjoly: he had evidence, reported concerns, was overruled — was he obligated to go public before the launch?",
+      "Consider Davis's complicity-avoiding view as an alternative justification",
+      "Discuss the organizational and personal risks of whistleblowing and the recommendations for organizations"
+    ]
+  },
+  {
+    q: "What is a 'conflict of interest' in engineering? Why is it problematic even when no actual wrongdoing has occurred? Provide an example and explain how it should be handled.",
+    hints: [
+      "Define conflict of interest precisely: distinguish from ordinary competing interests",
+      "Explain the problem of potential vs. actual conflicts — appearance of bias can undermine trust even without wrongdoing",
+      "Example: an engineer who evaluates vendor bids when their spouse works for one vendor",
+      "Discuss disclosure as the primary ethical response; sometimes recusal is required",
+      "Connect to the broader theme of trust and reliability — why trust in engineering is essential to society"
+    ]
+  },
+  {
+    q: "Why is honesty particularly important in engineering? Discuss the three frameworks (virtue ethics, respect for persons, and utilitarianism) that explain why dishonesty is wrong in the engineering context.",
+    hints: [
+      "Virtue ethics: honesty as a core professional virtue; engineering identity is built on trust",
+      "Respect for persons: dishonesty manipulates others' autonomous decision-making (employers, clients, public)",
+      "Utilitarian: society depends on accurate technical information; dishonesty creates systemic risks ('ignorance explosion')",
+      "Give examples relevant to engineering: falsifying safety data, misleading a client about project status, academic dishonesty",
+      "Discuss the 'knowledge explosion/ignorance explosion' dynamic from the lecture"
+    ]
+  },
+  {
+    q: "Explain the tension between engineers and managers in organizations (referencing Raelin and Jackall). How can engineers act in a morally responsible way within organizations?",
+    hints: [
+      "Raelin: natural conflict due to differences in education, socialization, values, and work habits",
+      "Jackall: managers prioritize loyalty, blur responsibility, measure success in financial terms",
+      "Engineers must understand organizational culture to act effectively and ethically",
+      "Discuss the recommendations: written records, critical loyalty, reporting bad news, neutral outside participants, protection from retaliation",
+      "Address the boundary between engineering decisions (technical) and management decisions (business)"
+    ]
+  },
+  {
+    q: "What is virtue ethics, and how does it apply to engineering through 'professional virtues'? What are the strengths of virtue ethics compared to rule-based approaches?",
+    hints: [
+      "Define virtue: a dispositional character trait; Aristotle's mean between two vices",
+      "Professional virtues in engineering: professional care (protect/promote well-being), respect for nature",
+      "Strengths: handles open-ended situations rules can't anticipate; integrates rational and intuitive elements; role of moral exemplars; moral habituation",
+      "Contrast with utilitarianism (which focuses on outcomes) and RP approach (which focuses on rules)",
+      "Discuss whether virtue ethics alone is sufficient or whether it needs to be combined with other approaches"
+    ]
+  },
+  {
+    q: "How does engineering relate to the concept of 'social experimentation'? What are the ethical implications for engineers working with emerging technologies?",
+    hints: [
+      "Social experimentation: engineers test technologies on society without fully knowing outcomes",
+      "Connect to the Tesla case: deploying autonomous vehicles before fully understanding risks",
+      "Discuss technological determinism, optimism, and pessimism — where is the ethical balance?",
+      "Engineers must consider second-order effects: job displacement, inequality, privacy, environment",
+      "Apply the three ethical action types: what harms must be prevented? What well-being should be promoted?"
+    ]
+  },
+  {
+    q: "Explain the difference between 'obligation-responsibility' and 'blame-responsibility' in engineering. What does the 'Standard of Care' mean, and how does it relate to these two types of responsibility?",
+    hints: [
+      "Obligation-responsibility: a duty to do certain things (follow standards, report hazards, maintain competence)",
+      "Blame-responsibility: being held accountable for harm caused; requires causation and appropriate conditions",
+      "Standard of care: the highest shared standard among competent, responsible engineers — not just minimum compliance",
+      "'Normal errors' are accepted by society; gross negligence or recklessness crosses into blame",
+      "Apply to a case: an engineer who follows all standard procedures but an unforeseen failure occurs — is she blame-responsible?"
+    ]
+  }
+];
+
+// ===================== UTILS =====================
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleChapter(card) {
+  card.classList.toggle('open');
+}
+
+// ===================== DEFINITIONS =====================
+function renderDefs(filter = '') {
+  const grid = document.getElementById('defGrid');
+  const filtered = filter
+    ? definitions.filter(d => d.term.toLowerCase().includes(filter.toLowerCase()) || d.def.toLowerCase().includes(filter.toLowerCase()))
+    : definitions;
+
+  grid.innerHTML = filtered.map(d => `
+    <div class="def-card">
+      <div class="def-term">${d.term}</div>
+      <div class="def-text">${d.def}</div>
+    </div>
+  `).join('');
+}
+
+function filterDefs(val) { renderDefs(val); }
+renderDefs();
+
+// ===================== FLASHCARDS =====================
+let fcCards = [...flashcards];
+let fcIndex = 0;
+
+function updateFC() {
+  const card = fcCards[fcIndex];
+  document.getElementById('fcQuestion').textContent = card.q;
+  document.getElementById('fcHint').textContent = card.hint ? `Hint: ${card.hint}` : '';
+  document.getElementById('fcAnswer').textContent = card.a;
+  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${fcCards.length}`;
+  document.getElementById('fcProgress').style.width = `${((fcIndex + 1) / fcCards.length) * 100}%`;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+function nextCard() { fcIndex = (fcIndex + 1) % fcCards.length; updateFC(); }
+function prevCard() { fcIndex = (fcIndex - 1 + fcCards.length) % fcCards.length; updateFC(); }
+function resetCards() { fcIndex = 0; updateFC(); }
+
+function shuffleCards() {
+  for (let i = fcCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [fcCards[i], fcCards[j]] = [fcCards[j], fcCards[i]];
+  }
+  fcIndex = 0; updateFC();
+}
+
+function markCard(type) {
+  // visual feedback
+  const card = document.getElementById('flashcard');
+  card.style.transition = 'opacity 0.3s';
+  card.style.opacity = '0.3';
+  setTimeout(() => {
+    card.style.opacity = '1';
+    nextCard();
+  }, 300);
+}
+
+updateFC();
+
+// ===================== MCQ =====================
+let mcqScore = 0;
+let mcqAnswered = 0;
+
+function renderMCQ() {
+  const container = document.getElementById('mcqContainer');
+  container.innerHTML = mcqData.map((q, qi) => `
+    <div class="quiz-card" id="qcard-${qi}">
+      <div class="quiz-q-num">Question ${qi + 1} of 10</div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((opt, oi) => `
+          <button class="quiz-option" onclick="answerMCQ(${qi}, ${oi})" id="opt-${qi}-${oi}">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${qi}"></div>
+    </div>
+  `).join('');
+  document.getElementById('mcqResult').classList.remove('show');
+  mcqScore = 0; mcqAnswered = 0;
+  updateMCQScore();
+}
+
+function answerMCQ(qi, oi) {
+  const q = mcqData[qi];
+  const card = document.getElementById(`qcard-${qi}`);
+  const fb = document.getElementById(`fb-${qi}`);
+  // Disable all options for this question
+  q.opts.forEach((_, i) => {
+    const btn = document.getElementById(`opt-${qi}-${i}`);
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === oi) btn.classList.add('wrong');
+  });
+  const isCorrect = oi === q.correct;
+  if (isCorrect) { mcqScore++; }
+  mcqAnswered++;
+  fb.textContent = (isCorrect ? '✓ Correct! ' : '✗ Incorrect. ') + q.feedback;
+  fb.className = `quiz-feedback show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
+  updateMCQScore();
+  if (mcqAnswered === 10) showMCQResult();
+}
+
+function updateMCQScore() {
+  document.getElementById('mcqScore').textContent = `${mcqScore} / 10`;
+  document.getElementById('mcqAnswered').textContent = mcqAnswered;
+}
+
+function showMCQResult() {
+  const result = document.getElementById('mcqResult');
+  result.classList.add('show');
+  document.getElementById('mcqFinalScore').textContent = `${mcqScore}/10`;
+  const msgs = ['Keep studying! Review the lecture notes.', 'Good effort! Focus on the weaker areas.', 'Solid performance! Review any missed questions.', 'Great job! You know this material well.', 'Perfect! You are ready for the midterm.'];
+  document.getElementById('mcqMsg').textContent = msgs[Math.floor((mcqScore / 10) * (msgs.length - 1))];
+  document.getElementById('mcqFinalScore').style.color = mcqScore >= 8 ? 'var(--green)' : mcqScore >= 5 ? 'var(--accent)' : 'var(--accent3)';
+}
+
+function resetMCQ() { renderMCQ(); }
+renderMCQ();
+
+// ===================== ESSAY =====================
+function renderEssay() {
+  const container = document.getElementById('essayContainer');
+  container.innerHTML = essayData.map((q, qi) => `
+    <div class="essay-card">
+      <div class="essay-q-num">Essay Question ${qi + 1} of 10</div>
+      <div class="essay-question">${q.q}</div>
+      <button class="essay-hint-btn" onclick="toggleHints(${qi})">💡 Show Answer Guide</button>
+      <div class="essay-hints" id="hints-${qi}">
+        <h5>Key Points to Address</h5>
+        <ul>${q.hints.map(h => `<li>${h}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleHints(qi) {
+  const hints = document.getElementById(`hints-${qi}`);
+  hints.classList.toggle('show');
+  const btn = hints.previousElementSibling;
+  btn.textContent = hints.classList.contains('show') ? '🙈 Hide Answer Guide' : '💡 Show Answer Guide';
+}
+
+renderEssay();
+</script>
+</body>
+</html>
