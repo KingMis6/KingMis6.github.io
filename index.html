@@ -3,1520 +3,1800 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Ethics — Midterm Study Guide</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>Multimedia Application — Quiz 2 Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0d0f;
-    --surface: #15151a;
-    --surface2: #1e1e26;
-    --border: #2a2a35;
-    --accent: #e8c84a;
-    --accent2: #5b8fff;
-    --accent3: #ff6b6b;
-    --text: #e8e8f0;
-    --text-muted: #7a7a92;
-    --text-dim: #4a4a5a;
-    --green: #4ade80;
-    --radius: 12px;
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --accent4: #f59e0b;
+    --accent5: #ef4444;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --def-bg: #0d1f3c;
+    --def-border: #00d4ff;
+    --practice-bg: #0d1a0d;
+    --practice-border: #10b981;
+    --warn-bg: #1f0d0d;
+    --warn-border: #ef4444;
+    --note-bg: #1a1505;
+    --note-border: #f59e0b;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Lora', Georgia, serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
-  /* NAV */
-  nav {
-    background: var(--surface);
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #0a1628 100%);
     border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    flex-wrap: wrap;
-  }
-
-  .nav-brand {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 14px;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 18px 16px 18px 0;
-    border-right: 1px solid var(--border);
-    margin-right: 8px;
-  }
-
-  .nav-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.03em;
-  }
-
-  .nav-btn:hover, .nav-btn.active {
-    background: var(--surface2);
-    color: var(--text);
-  }
-
-  .nav-btn.active {
-    color: var(--accent);
-    border: 1px solid var(--accent);
-  }
-
-  /* SECTIONS */
-  .section { display: none; padding: 40px 24px; max-width: 900px; margin: 0 auto; }
-  .section.active { display: block; animation: fadeIn 0.3s ease; }
-
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* HERO */
-  .hero {
+    padding: 60px 0 40px;
     text-align: center;
-    padding: 64px 24px 40px;
-    max-width: 700px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--accent); }
+  header p {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
+  /* ── TOPIC PILLS ── */
+  .topic-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 20px 20px 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+  }
+  .pill:hover { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 40px auto;
+    max-width: 1100px;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+  .toc h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--accent);
-    background: rgba(232,200,74,0.1);
-    border: 1px solid rgba(232,200,74,0.3);
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
-
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(32px, 6vw, 56px);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
   }
-
-  .hero h1 span { color: var(--accent); }
-
-  .hero p {
-    color: var(--text-muted);
-    font-size: 16px;
-    line-height: 1.6;
-    font-style: italic;
-  }
-
-  .hero-stats {
+  .toc-item {
     display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin-top: 40px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
   }
-
-  .stat {
-    text-align: center;
-  }
-
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 36px;
-    font-weight: 800;
+  .toc-item:hover { background: var(--surface2); border-color: var(--border); color: var(--text); }
+  .toc-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     color: var(--accent);
+    min-width: 20px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: #fff;
+  }
+
+  /* ── DEFINITION BOX ── */
+  .def {
+    background: var(--def-bg);
+    border-left: 3px solid var(--def-border);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .def::before {
+    content: 'DEFINITION';
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .def strong { color: var(--accent); font-weight: 600; }
+  .def p { color: var(--text-dim); font-size: 15px; }
+
+  /* ── KEY CONCEPT ── */
+  .key-concept {
+    background: rgba(124,58,237,0.08);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .key-concept .kc-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .key-concept h4 { color: #c4b5fd; margin-bottom: 8px; font-size: 16px; }
+  .key-concept p { color: var(--text-dim); font-size: 15px; }
+
+  /* ── NOTE ── */
+  .note {
+    background: var(--note-bg);
+    border-left: 3px solid var(--note-border);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #d1b264;
+  }
+  .note::before { content: '⚠ NOTE · '; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; }
+
+  /* ── FORMULA BOX ── */
+  .formula {
+    background: #050d1a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: #a5f3fc;
+    overflow-x: auto;
+  }
+  .formula .formula-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
     display: block;
   }
 
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  /* ── PRACTICE SECTION ── */
+  .practice-section {
+    background: var(--practice-bg);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 28px 0;
   }
-
-  /* SECTION HEADER */
-  .section-header {
-    margin-bottom: 32px;
-  }
-
-  .section-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
-  .section-header p {
-    color: var(--text-muted);
-    font-size: 14px;
-    font-style: italic;
-  }
-
-  /* CHAPTER CARDS */
-  .chapter-grid {
-    display: grid;
-    gap: 16px;
-  }
-
-  .chapter-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color 0.2s;
-  }
-
-  .chapter-card:hover { border-color: var(--accent2); }
-
-  .chapter-header {
-    padding: 20px 24px;
-    cursor: pointer;
+  .practice-section .ps-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
+    margin-bottom: 20px;
   }
-
-  .chapter-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    background: rgba(232,200,74,0.1);
+  .practice-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent3);
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
     padding: 4px 10px;
     border-radius: 4px;
-    flex-shrink: 0;
   }
-
-  .chapter-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    flex: 1;
-  }
-
-  .chapter-toggle {
-    color: var(--text-dim);
-    font-size: 18px;
-    transition: transform 0.3s;
-    flex-shrink: 0;
-  }
-
-  .chapter-card.open .chapter-toggle { transform: rotate(180deg); }
-
-  .chapter-body {
-    display: none;
-    padding: 0 24px 24px;
-    border-top: 1px solid var(--border);
-  }
-
-  .chapter-card.open .chapter-body { display: block; }
-
-  .chapter-body h4 {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin: 20px 0 12px;
-  }
-
-  .chapter-body p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 12px;
-  }
-
-  .bullet-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .bullet-list li {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    padding-left: 20px;
-    position: relative;
-  }
-
-  .bullet-list li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent2);
-  }
-
-  /* DEFINITIONS */
-  .def-grid {
-    display: grid;
-    gap: 12px;
-  }
-
-  .def-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-  }
-
-  .def-term {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  .def-text {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* FLASHCARDS */
-  .flashcard-controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-  }
-
-  .progress-bar-wrap {
-    flex: 1;
-    min-width: 200px;
-    background: var(--surface2);
-    border-radius: 4px;
-    height: 6px;
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent2), var(--accent));
-    border-radius: 4px;
-    transition: width 0.4s ease;
-  }
-
-  .fc-counter {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    color: var(--text-muted);
-    flex-shrink: 0;
-  }
-
-  .flashcard-area {
-    perspective: 1000px;
-    margin-bottom: 24px;
-  }
-
-  .flashcard {
-    position: relative;
-    width: 100%;
-    min-height: 260px;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .flashcard.flipped { transform: rotateY(180deg); }
-
-  .fc-face {
-    position: absolute;
-    width: 100%;
-    min-height: 260px;
-    backface-visibility: hidden;
-    border-radius: var(--radius);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-    text-align: center;
-  }
-
-  .fc-front {
-    background: var(--surface);
-    border: 1px solid var(--border);
-  }
-
-  .fc-back {
-    background: var(--surface2);
-    border: 1px solid var(--accent2);
-    transform: rotateY(180deg);
-  }
-
-  .fc-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--text-dim);
-    margin-bottom: 20px;
-  }
-
-  .fc-front .fc-label { color: var(--accent); }
-  .fc-back .fc-label { color: var(--accent2); }
-
-  .fc-question {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--text);
-    margin-bottom: 16px;
-  }
-
-  .fc-hint {
-    font-size: 12px;
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  .fc-answer {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  .fc-nav {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* BUTTONS */
-  .btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    padding: 10px 20px;
+  .practice-section h3 { color: #6ee7b7; font-size: 17px; }
+  .practice-section p, .practice-section li { color: var(--text-dim); font-size: 15px; }
+  .practice-section ol, .practice-section ul { padding-left: 20px; margin-top: 12px; }
+  .practice-section li { margin-bottom: 10px; }
+  .practice-section .step {
+    background: rgba(16,185,129,0.05);
+    border: 1px solid rgba(16,185,129,0.1);
     border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    letter-spacing: 0.03em;
+    padding: 14px 18px;
+    margin: 10px 0;
   }
+  .practice-section .step strong { color: #6ee7b7; }
 
-  .btn-primary {
-    background: var(--accent);
-    color: #0d0d0f;
-    font-weight: 500;
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
   }
-
-  .btn-primary:hover { background: #f0d264; transform: translateY(-1px); }
-
-  .btn-secondary {
+  .compare-table th {
     background: var(--surface2);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-
-  .btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
-
-  .btn-success {
-    background: rgba(74,222,128,0.15);
-    color: var(--green);
-    border: 1px solid rgba(74,222,128,0.3);
-  }
-
-  .btn-danger {
-    background: rgba(255,107,107,0.15);
-    color: var(--accent3);
-    border: 1px solid rgba(255,107,107,0.3);
-  }
-
-  /* QUIZ */
-  .quiz-score-bar {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .score-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-
-  .score-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
     color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid var(--border);
   }
+  .compare-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .compare-table .highlight { color: var(--text); font-weight: 500; }
 
-  .quiz-card {
+  /* ── GRID CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
     transition: border-color 0.2s;
   }
+  .card:hover { border-color: var(--accent); }
+  .card-icon { font-size: 24px; margin-bottom: 12px; }
+  .card h4 { color: #fff; font-size: 15px; margin-bottom: 8px; }
+  .card p { color: var(--text-dim); font-size: 14px; }
 
-  .quiz-q-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 14px;
-  }
-
-  .quiz-question {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .quiz-options {
+  /* ── FLOW DIAGRAM ── */
+  .flow {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 20px 0;
   }
-
-  .quiz-option {
+  .flow-box {
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 14px 18px;
-    cursor: pointer;
+    padding: 12px 18px;
     font-size: 14px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .flow-box.active { background: rgba(0,212,255,0.08); border-color: var(--accent); color: var(--accent); }
+  .flow-arrow {
     color: var(--text-muted);
-    transition: all 0.2s;
-    text-align: left;
-    font-family: 'Lora', serif;
-    line-height: 1.5;
+    font-size: 18px;
+    padding: 0 8px;
   }
 
-  .quiz-option:hover:not(:disabled) {
-    border-color: var(--accent2);
-    color: var(--text);
-  }
-
-  .quiz-option.correct {
-    background: rgba(74,222,128,0.1);
-    border-color: var(--green);
-    color: var(--green);
-  }
-
-  .quiz-option.wrong {
-    background: rgba(255,107,107,0.1);
-    border-color: var(--accent3);
-    color: var(--accent3);
-  }
-
-  .quiz-option:disabled { cursor: default; }
-
-  .quiz-feedback {
-    margin-top: 16px;
-    padding: 14px 18px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.6;
-    display: none;
-  }
-
-  .quiz-feedback.show { display: block; }
-  .quiz-feedback.correct-fb { background: rgba(74,222,128,0.1); border-left: 3px solid var(--green); color: var(--text-muted); }
-  .quiz-feedback.wrong-fb { background: rgba(255,107,107,0.1); border-left: 3px solid var(--accent3); color: var(--text-muted); }
-
-  /* ESSAY */
-  .essay-card {
-    background: var(--surface);
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: #030912;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 20px;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #a5f3fc;
+    overflow-x: auto;
+    margin: 16px 0;
+    line-height: 1.6;
   }
+  .code-block .kw { color: #c084fc; }
+  .code-block .str { color: #86efac; }
+  .code-block .cm { color: #475569; font-style: italic; }
+  .code-block .fn { color: #fbbf24; }
+  .code-block .num { color: #f97316; }
 
-  .essay-q-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 14px;
+  /* ── QUIZ CALLOUT ── */
+  .quiz-callout {
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 20px 0;
   }
-
-  .essay-question {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 16px;
+  .quiz-callout::before {
+    content: '🎯 LIKELY EXAM QUESTION';
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--accent4);
+    display: block;
+    margin-bottom: 8px;
   }
+  .quiz-callout p { color: #fde68a; font-size: 15px; }
 
-  .essay-hint-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    background: rgba(91,143,255,0.1);
-    border: 1px solid rgba(91,143,255,0.3);
-    color: var(--accent2);
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
+  /* ── PROS/CONS ── */
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
   }
-
-  .essay-hint-btn:hover { background: rgba(91,143,255,0.2); }
-
-  .essay-hints {
-    display: none;
-    margin-top: 16px;
-    background: var(--surface2);
+  .pros, .cons {
     border-radius: 8px;
     padding: 18px;
   }
-
-  .essay-hints.show { display: block; }
-
-  .essay-hints h5 {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent2);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
+  .pros {
+    background: rgba(16,185,129,0.05);
+    border: 1px solid rgba(16,185,129,0.2);
   }
-
-  .essay-hints ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .cons {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.2);
   }
+  .pros h4 { color: var(--accent3); margin-bottom: 10px; font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+  .cons h4 { color: var(--accent5); margin-bottom: 10px; font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+  .pros li, .cons li { color: var(--text-dim); font-size: 14px; margin-bottom: 6px; list-style: none; padding-left: 16px; position: relative; }
+  .pros li::before { content: '+'; color: var(--accent3); position: absolute; left: 0; }
+  .cons li::before { content: '−'; color: var(--accent5); position: absolute; left: 0; }
 
-  .essay-hints li {
-    font-size: 13px;
-    color: var(--text-muted);
-    padding-left: 18px;
-    position: relative;
-    line-height: 1.6;
-  }
+  /* ── TEXT ── */
+  p { margin-bottom: 14px; color: var(--text-dim); }
+  h3 { font-size: 18px; color: #fff; margin: 28px 0 12px; }
+  h4 { font-size: 15px; color: var(--text); margin: 20px 0 8px; }
+  ul, ol { padding-left: 22px; margin-bottom: 14px; }
+  li { color: var(--text-dim); margin-bottom: 6px; font-size: 15px; }
+  strong { color: var(--text); }
 
-  .essay-hints li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent2);
-  }
-
-  /* QUIZ RESULT */
-  .result-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 40px;
-    text-align: center;
-    display: none;
-  }
-
-  .result-box.show { display: block; }
-
-  .result-score {
-    font-family: 'Syne', sans-serif;
-    font-size: 72px;
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  .result-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 8px;
-    margin-bottom: 24px;
-  }
-
-  .result-msg {
-    font-size: 16px;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 28px;
-  }
-
-  /* SEARCH */
-  .search-box {
-    position: relative;
-    margin-bottom: 24px;
-  }
-
-  .search-input {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 18px 14px 44px;
-    color: var(--text);
-    font-size: 14px;
-    font-family: 'DM Mono', monospace;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .search-input:focus { border-color: var(--accent2); }
-
-  .search-icon {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-dim);
-    font-size: 16px;
-  }
-
-  /* TAGS */
-  .tag {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 10px;
-  }
-
-  .tag-blue { background: rgba(91,143,255,0.15); color: var(--accent2); }
-  .tag-yellow { background: rgba(232,200,74,0.15); color: var(--accent); }
-  .tag-red { background: rgba(255,107,107,0.15); color: var(--accent3); }
-  .tag-green { background: rgba(74,222,128,0.15); color: var(--green); }
-
-  /* GRID 2 COL */
-  @media(min-width:600px) {
-    .def-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  .submit-quiz-btn {
+  /* ── BACK TO TOP ── */
+  .back-top {
     display: block;
-    width: 100%;
-    padding: 16px;
-    font-size: 15px;
-    margin-top: 8px;
-    border-radius: var(--radius);
+    text-align: center;
+    padding: 12px;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-top:hover { color: var(--accent); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 20px 0;
   }
 
-  /* Divider */
-  .divider {
-    border: none;
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
     border-top: 1px solid var(--border);
-    margin: 32px 0;
+  }
+
+  @media (max-width: 640px) {
+    .pros-cons { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; align-items: flex-start; }
+    .flow-arrow { transform: rotate(90deg); }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-brand">EE · Ethics</div>
-  <button class="nav-btn active" onclick="showSection('home')">Home</button>
-  <button class="nav-btn" onclick="showSection('notes')">📖 Notes</button>
-  <button class="nav-btn" onclick="showSection('definitions')">📚 Definitions</button>
-  <button class="nav-btn" onclick="showSection('flashcards')">🃏 Flashcards</button>
-  <button class="nav-btn" onclick="showSection('mcq')">✅ MCQ Quiz</button>
-  <button class="nav-btn" onclick="showSection('essay')">✍️ Essay Prep</button>
-</nav>
-
-<!-- ========== HOME ========== -->
-<div id="home" class="section active">
-  <div class="hero">
-    <div class="hero-tag">Midterm Study Guide · Chapters 1–5</div>
-    <h1>Engineering <span>Ethics</span></h1>
-    <p>A complete interactive review of all lecture material. Study with notes, flashcards, quizzes, and essay prep.</p>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Chapters</span></div>
-      <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Definitions</span></div>
-      <div class="stat"><span class="stat-num">20</span><span class="stat-label">Flashcards</span></div>
-      <div class="stat"><span class="stat-num">20</span><span class="stat-label">Exam Qs</span></div>
-    </div>
+<header id="top">
+  <div class="header-tag">Inha University Tashkent · Multimedia Application</div>
+  <h1>Quiz <span>2</span> Preparation Guide</h1>
+  <p>Complete study material covering Encoder-Decoder, Attention, Transformers, LLMs, RAG, Beam Search, and Dialogue Systems</p>
+  <div class="topic-pills">
+    <a href="#s1" class="pill">Encoder-Decoder</a>
+    <a href="#s2" class="pill">Attention</a>
+    <a href="#s3" class="pill">Transformers</a>
+    <a href="#s4" class="pill">Transfer Learning</a>
+    <a href="#s5" class="pill">Beam Search</a>
+    <a href="#s6" class="pill">RAG</a>
+    <a href="#s7" class="pill">LLM Pipeline</a>
+    <a href="#s8" class="pill">Dialogue Systems</a>
+    <a href="#s9" class="pill">MoE</a>
+    <a href="#practice" class="pill">🧪 Practice Problems</a>
   </div>
+</header>
 
-  <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));max-width:700px;margin:0 auto 32px;">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('notes')">
-      <div style="font-size:28px;margin-bottom:8px;">📖</div>
-      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Study Notes</div>
-      <div style="font-size:13px;color:var(--text-muted);">All 5 chapters organized clearly</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('flashcards')">
-      <div style="font-size:28px;margin-bottom:8px;">🃏</div>
-      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Flashcards</div>
-      <div style="font-size:13px;color:var(--text-muted);">Flip cards to test your recall</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('mcq')">
-      <div style="font-size:28px;margin-bottom:8px;">✅</div>
-      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">MCQ Practice</div>
-      <div style="font-size:13px;color:var(--text-muted);">10 multiple choice questions</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;" onclick="showSection('essay')">
-      <div style="font-size:28px;margin-bottom:8px;">✍️</div>
-      <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Essay Prep</div>
-      <div style="font-size:13px;color:var(--text-muted);">10 essay Qs with answer hints</div>
-    </div>
-  </div>
-
-  <div style="max-width:700px;margin:0 auto;background:rgba(232,200,74,0.08);border:1px solid rgba(232,200,74,0.25);border-radius:var(--radius);padding:20px 24px;">
-    <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--accent);margin-bottom:10px;">⚠️ Midterm Coverage</div>
-    <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">Chapters 1–5 (mostly from lectures). Format: 10 multiple choice + 10 essay type. Focus on <strong style="color:var(--text);">concepts, definitions, and application cases</strong>. Duration: 60 minutes.</p>
+<!-- TOC -->
+<div class="toc" id="toc">
+  <h2>// Table of Contents</h2>
+  <div class="toc-grid">
+    <a href="#s1" class="toc-item"><span class="toc-num">01</span>Encoder-Decoder Model</a>
+    <a href="#s2" class="toc-item"><span class="toc-num">02</span>Attention Mechanism</a>
+    <a href="#s3" class="toc-item"><span class="toc-num">03</span>Transformers & Self-Attention</a>
+    <a href="#s4" class="toc-item"><span class="toc-num">04</span>Transfer Learning & Pre-training</a>
+    <a href="#s5" class="toc-item"><span class="toc-num">05</span>Beam Search</a>
+    <a href="#s6" class="toc-item"><span class="toc-num">06</span>RAG</a>
+    <a href="#s7" class="toc-item"><span class="toc-num">07</span>LLM Full Pipeline</a>
+    <a href="#s8" class="toc-item"><span class="toc-num">08</span>Dialogue Systems</a>
+    <a href="#s9" class="toc-item"><span class="toc-num">09</span>Mixture of Experts</a>
+    <a href="#s10" class="toc-item"><span class="toc-num">10</span>Decoding & Sampling</a>
+    <a href="#practice" class="toc-item"><span class="toc-num">✦</span>Practice Problems</a>
   </div>
 </div>
 
-<!-- ========== NOTES ========== -->
-<div id="notes" class="section">
+<div class="container">
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: ENCODER-DECODER
+══════════════════════════════════════════ -->
+<section class="section" id="s1">
   <div class="section-header">
-    <h2>Lecture Notes</h2>
-    <p>Click any chapter to expand. All key concepts from the slides.</p>
+    <span class="section-num">01</span>
+    <h2>Encoder-Decoder Model</h2>
   </div>
 
-  <!-- Chapter 1 -->
-  <div class="chapter-grid">
-    <div class="chapter-card" onclick="toggleChapter(this)">
-      <div class="chapter-header">
-        <span class="chapter-num">Ch. 1</span>
-        <span class="chapter-title">Engineering Ethics: Introduction</span>
-        <span class="chapter-toggle">▼</span>
-      </div>
-      <div class="chapter-body">
-        <div class="tag tag-yellow">Tesla Case Study</div>
-        <h4>Key Case Discussion</h4>
-        <p>The Tesla autopilot case raises core ethics questions: who bears moral responsibility when autonomous systems fail? Key issues include realistic driver override expectations, safety standards, consumer information rights, hacking/terrorism risks, and job displacement.</p>
+  <div class="def">
+    <strong>Encoder-Decoder (Seq2Seq) Model</strong>
+    <p>A neural architecture used when input and output sequences can have <em>different lengths</em> and don't align word-to-word. Also called <strong>sequence-to-sequence networks</strong>. Key applications: machine translation, summarization, dialogue, question answering.</p>
+  </div>
 
-        <h4>Professionalism</h4>
-        <ul class="bullet-list">
-          <li>Expertise in a specialized area (engineering, law, medicine, accounting)</li>
-          <li>Adherence to moral guidelines, usually formalized in a code of ethics</li>
-        </ul>
+  <h3>Why Not Simple RNN?</h3>
+  <p>In simple tasks like part-of-speech tagging, each input token maps to exactly one output tag — local information suffices. But in <strong>machine translation</strong>, a verb may appear at the beginning in one language and at the end in another. The alignment is highly indirect, requiring the encoder-decoder architecture.</p>
 
-        <h4>What is a Profession?</h4>
-        <ul class="bullet-list">
-          <li><strong>Sociological Account:</strong> A profession involves specialized knowledge and autonomy</li>
-          <li><strong>Social Contract Account:</strong> Society grants privileges in exchange for service to the public good</li>
-          <li><strong>Public Element:</strong> Professions serve the broader community, not just clients</li>
-        </ul>
-
-        <h4>Public Good & Well-Being</h4>
-        <p>Engineers must hold paramount the safety, health, and welfare of the public. The <strong>Capabilities Approach</strong> (Sen & Nussbaum) defines well-being as access to food/shelter/water, satisfying human relationships, free movement and expression, and a satisfactory relationship with the natural world.</p>
-
-        <h4>Three Types of Ethical Actions</h4>
-        <ul class="bullet-list">
-          <li><strong>Prohibited Actions:</strong> Actions forbidden by ethics codes</li>
-          <li><strong>Preventing Harm:</strong> Identifying and disclosing potential harms, attempting to prevent them</li>
-          <li><strong>Promoting Well-Being (Aspirational Ethics):</strong> Going beyond minimum requirements</li>
-        </ul>
-
-        <h4>Social Context of Technology</h4>
-        <ul class="bullet-list">
-          <li>Engineering is a form of social experimentation</li>
-          <li>Technology affects society; society shapes technology development</li>
-          <li><strong>Technological Determinism:</strong> Technology controls society</li>
-          <li><strong>Technological Optimism:</strong> Technology will solve all problems</li>
-          <li><strong>Technological Pessimism:</strong> Technology causes more harm than good</li>
-        </ul>
-      </div>
+  <h3>Three Core Components</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📥</div>
+      <h4>1. Encoder</h4>
+      <p>Accepts input sequence x<sub>1:n</sub>, generates contextualized hidden representations h<sub>1:n</sub>. Can be LSTM, CNN, or Transformer.</p>
     </div>
-
-    <!-- Chapter 2 -->
-    <div class="chapter-card" onclick="toggleChapter(this)">
-      <div class="chapter-header">
-        <span class="chapter-num">Ch. 2</span>
-        <span class="chapter-title">A Practical Ethics Toolkit</span>
-        <span class="chapter-toggle">▼</span>
-      </div>
-      <div class="chapter-body">
-        <div class="tag tag-blue">Heidelberg Cadaver Case</div>
-        <p>Engineers must hold paramount safety, health, and welfare — but does this override human dignity (e.g., using cadavers for crash testing)?</p>
-
-        <h4>The Ethics Toolbox: Types of Issues</h4>
-        <ul class="bullet-list">
-          <li><strong>Factual Issues:</strong> Disagreements about what the facts actually are; sometimes cannot be fully resolved</li>
-          <li><strong>Conceptual Issues:</strong> Disagreements about the meaning of terms (e.g., human dignity, informed consent, bribery, conflict of interest)</li>
-          <li><strong>Application Issues:</strong> Whether a term or concept applies to a specific action or practice</li>
-          <li><strong>Line Drawing:</strong> Resolving morally-laden application issues; sometimes must balance competing moral considerations</li>
-        </ul>
-
-        <h4>Conflicting Values: Creative Middle-Way Solutions</h4>
-        <p>Key obligations to balance: public safety (Canon 1), faithful service to employer (Canon 4), and the engineer's own legitimate personal interests.</p>
-
-        <h4>Common Morality</h4>
-        <p>The stock of shared moral beliefs most people in a culture accept. The <strong>Universalization Principle</strong> states we must be willing for others to do what we do in similar situations.</p>
-
-        <h4>Moral Theories</h4>
-        <ul class="bullet-list">
-          <li><strong>Utilitarianism:</strong> Maximize overall well-being. Use Cost-Benefit Test, Maximizing Good Consequences Test, and Rules & Practices Test</li>
-          <li><strong>Respect for Persons (RP/Kantian):</strong> Act so you respect all humans as free and equal moral agents. Uses Golden Rule Test, Self-Defeating Test, and Rights Test</li>
-          <li><strong>Virtue Ethics:</strong> Act as a good/virtuous person would. Virtue = dispositional trait (mean between two vices, per Aristotle)</li>
-        </ul>
-
-        <h4>Professional Virtues</h4>
-        <ul class="bullet-list">
-          <li><strong>Professional Care:</strong> Protect and promote well-being</li>
-          <li><strong>Respect for Nature:</strong> Show consideration; avoid violation; treat with deference</li>
-        </ul>
-      </div>
+    <div class="card">
+      <div class="card-icon">🔷</div>
+      <h4>2. Context Vector (c)</h4>
+      <p>A function of all encoder hidden states h<sub>1:n</sub>. Conveys the <em>essence</em> of the entire input to the decoder. This is the "bottleneck."</p>
     </div>
-
-    <!-- Chapter 3 -->
-    <div class="chapter-card" onclick="toggleChapter(this)">
-      <div class="chapter-header">
-        <span class="chapter-num">Ch. 3</span>
-        <span class="chapter-title">Responsibility in Engineering</span>
-        <span class="chapter-toggle">▼</span>
-      </div>
-      <div class="chapter-body">
-        <div class="tag tag-red">Columbia Shuttle Case</div>
-        <p>The Columbia disaster had two causes: a physical cause (foam strike) and organizational causes (culture of ignoring risk signals).</p>
-
-        <h4>Types of Responsibility</h4>
-        <ul class="bullet-list">
-          <li><strong>Obligation-Responsibility:</strong> A duty to perform certain actions (e.g., follow standards)</li>
-          <li><strong>Blame-Responsibility:</strong> Being held accountable for outcomes; involves causation</li>
-        </ul>
-
-        <h4>Standard of Care</h4>
-        <p>Engineers are not liable for every error — society accepts "normal errors." The standard of care represents the highest shared standard among competent, responsible engineers in a given practice area. It goes beyond just following standard operating procedures.</p>
-
-        <h4>Organizational Moral Responsibility</h4>
-        <p>Philosopher Peter French argues organizations (corporations) can be morally responsible because they have: a decision-making mechanism, policies guiding decisions, and interests.</p>
-
-        <h4>Impediments to Responsibility</h4>
-        <p>Various factors can block engineers from acting responsibly, including organizational pressure, fear of retaliation, unclear lines of authority, and inadequate information.</p>
-      </div>
-    </div>
-
-    <!-- Chapter 4 -->
-    <div class="chapter-card" onclick="toggleChapter(this)">
-      <div class="chapter-header">
-        <span class="chapter-num">Ch. 4</span>
-        <span class="chapter-title">Engineers in Organizations</span>
-        <span class="chapter-toggle">▼</span>
-      </div>
-      <div class="chapter-body">
-        <div class="tag tag-green">Whistleblowing Focus</div>
-
-        <h4>Engineers vs. Managers (Raelin)</h4>
-        <p>There is a natural conflict due to differences in education, socialization, values, and work habits. Engineers often experience tension between loyalty to employer and loyalty to profession.</p>
-
-        <h4>Jackall's Study of Managers</h4>
-        <ul class="bullet-list">
-          <li>Managers prefer trade-offs between moral principles and utility</li>
-          <li>Loyalty to peers and superiors is the primary virtue</li>
-          <li>Lines of responsibility are deliberately blurred for self-protection</li>
-          <li>Organizational well-being measured primarily in financial terms</li>
-        </ul>
-
-        <h4>Recommendations for Ethical Organizations</h4>
-        <ul class="bullet-list">
-          <li>Encourage employees to report bad news (critical loyalty)</li>
-          <li>Focus criticism on issues, not personalities</li>
-          <li>Keep written records of suggestions and complaints</li>
-          <li>Maintain confidentiality of complaints</li>
-          <li>Provide neutral outside participants</li>
-          <li>Protect against retaliation</li>
-        </ul>
-
-        <h4>Whistleblowing (DeGeorge)</h4>
-        <p>Whistleblowing is morally <strong>permissible</strong> when: (1) harm is serious, (2) concerns are reported to immediate supervisors, (3) internal channels are exhausted. It is morally <strong>obligatory</strong> when: (4) documented evidence would convince a reasonable observer, and (5) going public will actually prevent the harm.</p>
-
-        <h4>Davis's Complicity-Avoiding View</h4>
-        <p>An engineer may be obligated to blow the whistle to avoid being complicit in wrongdoing, independent of whether it will prevent harm.</p>
-      </div>
-    </div>
-
-    <!-- Chapter 5 -->
-    <div class="chapter-card" onclick="toggleChapter(this)">
-      <div class="chapter-header">
-        <span class="chapter-num">Ch. 5</span>
-        <span class="chapter-title">Trust and Reliability</span>
-        <span class="chapter-toggle">▼</span>
-      </div>
-      <div class="chapter-body">
-        <div class="tag tag-blue">Honesty & Integrity</div>
-
-        <h4>Why Trust Matters</h4>
-        <p>Society depends on professionals with specialized knowledge. The "knowledge explosion" creates an "ignorance explosion" — most people cannot evaluate technical claims themselves, so trust is essential.</p>
-
-        <h4>Forms of Dishonesty</h4>
-        <ul class="bullet-list">
-          <li><strong>Lying:</strong> Stating something believed to be false with the intention to deceive</li>
-          <li><strong>Deliberate Deception:</strong> Misleading through true statements arranged deceptively</li>
-          <li><strong>Withholding Information:</strong> Omitting information the audience would reasonably expect, with intent to deceive</li>
-          <li><strong>Failure to Seek Truth:</strong> Not making reasonable effort to verify claims</li>
-        </ul>
-
-        <h4>Why Dishonesty is Wrong (3 Frameworks)</h4>
-        <ul class="bullet-list">
-          <li><strong>Virtue Ethics:</strong> Honesty is a fundamental virtue; dishonesty is a character flaw</li>
-          <li><strong>Respect for Persons:</strong> Deception violates the autonomy of moral agents by corrupting their decision-making</li>
-          <li><strong>Utilitarian:</strong> Dishonesty undermines trust, which is essential for engineering and society to function</li>
-        </ul>
-
-        <h4>Research Integrity</h4>
-        <ul class="bullet-list">
-          <li>Falsification of data</li>
-          <li>Fabrication of data</li>
-          <li>Failure to respect intellectual property</li>
-          <li>Plagiarism</li>
-          <li>Inappropriate attribution of authorship</li>
-        </ul>
-
-        <h4>Conflicts of Interest</h4>
-        <p>A conflict between an obligation to exercise good judgment and an interest that may compromise that judgment. Note: it is not just any set of conflicting interests. A distinction exists between actual and potential conflicts of interest. Sometimes unavoidable — must be disclosed.</p>
-      </div>
+    <div class="card">
+      <div class="card-icon">📤</div>
+      <h4>3. Decoder</h4>
+      <p>Accepts context vector c, generates output sequence y<sub>1:m</sub> of arbitrary length autoregressively, one token at a time.</p>
     </div>
   </div>
-</div>
 
-<!-- ========== DEFINITIONS ========== -->
-<div id="definitions" class="section">
+  <h3>How the Encoder Works</h3>
+  <p>In practice, encoders are <strong>stacked biLSTMs</strong> (bidirectional LSTMs). The top-layer forward and backward hidden states are concatenated to produce the contextualized representation for each input time step. The final hidden state h<sub>n</sub> becomes the context vector <strong>C</strong>.</p>
+
+  <h3>How the Decoder Works</h3>
+  <p>The decoder uses C to initialize its hidden state and then generates tokens autoregressively. To prevent the context from "fading," C is also concatenated at every decoding step:</p>
+  <div class="formula">
+    <span class="formula-label">DECODER HIDDEN STATE UPDATE</span>
+    h<sub>i</sub> = g(h<sub>i-1</sub>, ŷ<sub>i-1</sub>, C)
+    <br><br>
+    Where: g = RNN function, ŷ<sub>i-1</sub> = embedding of previous output token, C = context vector
+  </div>
+
+  <h3>Training: End-to-End with Teacher Forcing</h3>
+  <div class="def">
+    <strong>Teacher Forcing</strong>
+    <p>During training, instead of feeding the decoder's own (possibly wrong) output back as the next input, we feed the <em>gold (correct) target token</em>. This prevents error accumulation and speeds up training. During inference, the model uses its own predictions.</p>
+  </div>
+
+  <div class="note">During inference the decoder uses its predicted output ŷ as the next input. During training with teacher forcing it uses the true label. This mismatch is a known limitation called "exposure bias."</div>
+
+  <h3>Language Model Formulation</h3>
+  <p>An encoder-decoder translation model simply concatenates the source text, a separator token <code>&lt;s&gt;</code>, and the target text, then computes:</p>
+  <div class="formula">
+    <span class="formula-label">CONDITIONAL PROBABILITY</span>
+    p(Y|X) = ∏ p(y<sub>i</sub> | y<sub>&lt;i</sub>, X)
+  </div>
+
+  <h3>Limitations of Basic Encoder-Decoder</h3>
+  <ul>
+    <li><strong>Fixed-length bottleneck:</strong> The entire source must be compressed into one fixed-size vector C — impossible for long sequences.</li>
+    <li><strong>No selective focus:</strong> No mechanism to attend to specific relevant parts of the input while generating each output token.</li>
+  </ul>
+
+  <div class="quiz-callout">
+    <p>What is the bottleneck problem in encoder-decoder models, and how is it solved?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: ATTENTION
+══════════════════════════════════════════ -->
+<section class="section" id="s2">
   <div class="section-header">
-    <h2>Key Definitions</h2>
-    <p>All important terms from the lectures — know these cold.</p>
+    <span class="section-num">02</span>
+    <h2>Attention Mechanism</h2>
   </div>
 
-  <div class="search-box">
-    <span class="search-icon">🔍</span>
-    <input class="search-input" type="text" placeholder="Search definitions..." oninput="filterDefs(this.value)" id="defSearch">
+  <div class="def">
+    <strong>Attention Mechanism</strong>
+    <p>A solution to the bottleneck problem. Instead of relying on a single static context vector, the decoder computes a <strong>dynamic context vector C<sub>i</sub></strong> at each decoding step i, as a weighted sum of ALL encoder hidden states. Each weight reflects how relevant each encoder state is to the current decoding step.</p>
   </div>
 
-  <div class="def-grid" id="defGrid">
-    <!-- dynamically rendered -->
-  </div>
-</div>
+  <h3>Step-by-Step: How Attention is Computed</h3>
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">ALGORITHM</span>
+      <h3>Dot-Product Attention — 4 Steps</h3>
+    </div>
 
-<!-- ========== FLASHCARDS ========== -->
-<div id="flashcards" class="section">
+    <div class="step">
+      <strong>Step 1 — Score:</strong> Compute relevance of each encoder state h<sub>j</sub> to the current decoder state h̃<sub>i</sub>:
+      <div class="formula" style="margin-top:10px;">score(h̃<sub>i</sub>, h<sub>j</sub>) = h̃<sub>i</sub> · h<sub>j</sub>   (dot product)</div>
+    </div>
+
+    <div class="step">
+      <strong>Step 2 — Normalize (Softmax):</strong> Convert scores to a probability distribution:
+      <div class="formula" style="margin-top:10px;">α<sub>ij</sub> = softmax(score(h̃<sub>i</sub>, h<sub>j</sub>))   ∀j</div>
+      α<sub>ij</sub> is the attention weight: how much attention decoder step i pays to encoder step j.
+    </div>
+
+    <div class="step">
+      <strong>Step 3 — Weighted Sum (Context Vector):</strong>
+      <div class="formula" style="margin-top:10px;">C<sub>i</sub> = Σ<sub>j</sub> α<sub>ij</sub> · h<sub>j</sub></div>
+      This gives a dynamic, fixed-length summary of the encoder states, focused on what's relevant now.
+    </div>
+
+    <div class="step">
+      <strong>Step 4 — Decode:</strong> Use C<sub>i</sub> to compute the next hidden state and generate a token:
+      <div class="formula" style="margin-top:10px;">h<sub>i</sub> = g(h<sub>i-1</sub>, ŷ<sub>i-1</sub>, C<sub>i</sub>)</div>
+    </div>
+  </div>
+
+  <h3>Types of Attention</h3>
+  <div class="compare-table-wrap" style="overflow-x:auto;">
+  <table class="compare-table">
+    <tr>
+      <th>Type</th>
+      <th>How Score is Computed</th>
+      <th>Speed</th>
+      <th>Flexibility</th>
+    </tr>
+    <tr>
+      <td class="highlight">Bahdanau (Additive)</td>
+      <td>Uses a small neural network layer: score = W·tanh(W<sub>1</sub>·h̃ + W<sub>2</sub>·h)</td>
+      <td>Slower</td>
+      <td>Very flexible</td>
+    </tr>
+    <tr>
+      <td class="highlight">Luong (Multiplicative)</td>
+      <td>Simple dot product: score = h̃ · h</td>
+      <td>Faster</td>
+      <td>Memory-efficient</td>
+    </tr>
+    <tr>
+      <td class="highlight">Global Attention</td>
+      <td>Considers ALL encoder hidden states</td>
+      <td>Slower for long seqs</td>
+      <td>Most thorough</td>
+    </tr>
+    <tr>
+      <td class="highlight">Local Attention</td>
+      <td>Focuses on a small window around current position</td>
+      <td>Faster</td>
+      <td>Good for long docs</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>Why RNN-based Attention Still Has Limits</h3>
+  <div class="note">Even with attention, RNNs are inherently sequential: step 100 cannot be computed until steps 1–99 are done. This prevents parallelization on GPUs, making training slow. → Solution: Transformers.</div>
+
+  <div class="quiz-callout">
+    <p>Explain how α<sub>ij</sub> is computed and what it represents physically in the attention mechanism.</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: TRANSFORMERS
+══════════════════════════════════════════ -->
+<section class="section" id="s3">
   <div class="section-header">
-    <h2>Flashcards</h2>
-    <p>Click the card to reveal the answer. Use arrow buttons to navigate.</p>
+    <span class="section-num">03</span>
+    <h2>Transformers & Self-Attention</h2>
   </div>
 
-  <div class="flashcard-controls">
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="fcProgress" style="width:5%"></div>
+  <div class="def">
+    <strong>Transformer</strong>
+    <p>A neural architecture that uses <strong>self-attention</strong> instead of recurrence. It is highly parallelizable and scales efficiently. Transformers map input sequences (x<sub>1</sub>,…,x<sub>n</sub>) to output sequences (z<sub>1</sub>,…,z<sub>n</sub>) of the same length using stacked transformer blocks.</p>
+  </div>
+
+  <div class="def">
+    <strong>Self-Attention</strong>
+    <p>An attention mechanism where a sequence attends to itself. Each token in a sequence looks at all other tokens (in its context window) to build a richer representation. Unlike encoder-decoder attention, self-attention operates within a single sequence.</p>
+  </div>
+
+  <h3>Query, Key, Value — The Core Idea</h3>
+  <p>In self-attention, each token plays <strong>three roles simultaneously</strong>:</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h4>Query (Q)</h4>
+      <p>The current token being processed. "What am I looking for?"</p>
     </div>
-    <div class="fc-counter" id="fcCounter">1 / 20</div>
-    <button class="btn btn-secondary" onclick="shuffleCards()">🔀 Shuffle</button>
-    <button class="btn btn-secondary" onclick="resetCards()">↺ Reset</button>
-  </div>
-
-  <div class="flashcard-area">
-    <div class="flashcard" id="flashcard" onclick="flipCard()">
-      <div class="fc-face fc-front">
-        <div class="fc-label">Tap to flip</div>
-        <div class="fc-question" id="fcQuestion">Loading...</div>
-        <div class="fc-hint" id="fcHint"></div>
-      </div>
-      <div class="fc-face fc-back">
-        <div class="fc-label">Answer</div>
-        <div class="fc-answer" id="fcAnswer">Loading...</div>
-      </div>
+    <div class="card">
+      <div class="card-icon">🗝️</div>
+      <h4>Key (K)</h4>
+      <p>Every token in the context, used for matching. "What do I contain?"</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💎</div>
+      <h4>Value (V)</h4>
+      <p>The actual content contribution of each token to the output.</p>
     </div>
   </div>
 
-  <div class="fc-nav">
-    <button class="btn btn-secondary" onclick="prevCard()">← Previous</button>
-    <button class="btn btn-danger" onclick="markCard('hard')">😓 Hard</button>
-    <button class="btn btn-success" onclick="markCard('easy')">✓ Got it</button>
-    <button class="btn btn-secondary" onclick="nextCard()">Next →</button>
+  <h3>Scaled Dot-Product Self-Attention</h3>
+  <div class="formula">
+    <span class="formula-label">SELF-ATTENTION FORMULA (EQUATIONS 10.4 → 10.12)</span>
+    Step 1 — Scores:      score(q<sub>i</sub>, k<sub>j</sub>) = q<sub>i</sub> · k<sub>j</sub>
+    <br><br>
+    Step 2 — Scale:       score_scaled = (q<sub>i</sub> · k<sub>j</sub>) / √d<sub>k</sub>
+    <br><br>
+    Step 3 — Softmax:     α<sub>ij</sub> = softmax(score_scaled)
+    <br><br>
+    Step 4 — Output:      a<sub>i</sub> = Σ<sub>j</sub> α<sub>ij</sub> · v<sub>j</sub>
+    <br><br>
+    In matrix form:       Attention(Q,K,V) = softmax(QK<sup>T</sup> / √d<sub>k</sub>) V
   </div>
-</div>
 
-<!-- ========== MCQ QUIZ ========== -->
-<div id="mcq" class="section">
+  <div class="note">We divide by √d<sub>k</sub> to prevent extremely large dot products from pushing softmax into regions of near-zero gradients (vanishing gradient during training).</div>
+
+  <h3>Causal (Backward-Looking) Self-Attention</h3>
+  <p>Used in <strong>language models</strong> (like GPT). At position i, the token can only attend to positions ≤ i (no future context). This is implemented by masking future positions with -∞ before softmax. Enables autoregressive generation.</p>
+
+  <h3>Bidirectional Self-Attention</h3>
+  <p>Used in <strong>encoders</strong> (like BERT). Each token can attend to all other tokens — both past and future. Better for tasks that need full context understanding (classification, NER, fill-in-the-blank).</p>
+
+  <h3>Multi-Head Attention</h3>
+  <div class="def">
+    <strong>Multi-Head Attention</strong>
+    <p>Instead of one self-attention computation, we run <strong>h parallel attention heads</strong>, each with its own Q, K, V weight matrices. Each head can learn different types of relationships. The outputs are concatenated and projected back.</p>
+  </div>
+  <div class="formula">
+    <span class="formula-label">MULTI-HEAD ATTENTION</span>
+    MultiHead(Q, K, V) = Concat(head<sub>1</sub>, ..., head<sub>h</sub>) W<sup>O</sup>
+    <br>
+    where head<sub>i</sub> = Attention(QW<sub>i</sub><sup>Q</sup>, KW<sub>i</sub><sup>K</sup>, VW<sub>i</sub><sup>V</sup>)
+  </div>
+
+  <h3>The Transformer Block</h3>
+  <p>Each transformer block contains 4 components in order:</p>
+  <div class="flow" style="flex-direction:column; align-items:flex-start; gap:8px;">
+    <div class="flow-box active">1. Multi-Head Self-Attention Layer</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">2. Add & Norm (Residual Connection + Layer Norm)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">3. Feed-Forward Network (two linear layers + ReLU)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">4. Add & Norm (Residual Connection + Layer Norm)</div>
+  </div>
+
+  <h3>Positional Encoding</h3>
+  <p>Since self-attention has no inherent notion of order (unlike RNNs), we add <strong>positional encodings</strong> to the input embeddings to inject sequence position information. Without this, the model treats all positions identically.</p>
+
+  <h3>Transformer Models by Architecture Type</h3>
+  <div class="compare-table-wrap" style="overflow-x:auto;">
+  <table class="compare-table">
+    <tr>
+      <th>Type</th>
+      <th>Examples</th>
+      <th>Attention Type</th>
+      <th>Good For</th>
+      <th>Cannot Do</th>
+    </tr>
+    <tr>
+      <td class="highlight">Encoder-Only</td>
+      <td>BERT, RoBERTa, DistilBERT</td>
+      <td>Bidirectional</td>
+      <td>Classification, NER, fill-in-blank</td>
+      <td>Generate text, translate, summarize</td>
+    </tr>
+    <tr>
+      <td class="highlight">Decoder-Only</td>
+      <td>GPT, GPT-2, GPT-3, LLaMA</td>
+      <td>Causal (unidirectional)</td>
+      <td>Text generation, chatbots, code</td>
+      <td>Bidirectional understanding tasks</td>
+    </tr>
+    <tr>
+      <td class="highlight">Encoder-Decoder</td>
+      <td>BART, T5</td>
+      <td>Both</td>
+      <td>Translation, summarization, Q&A</td>
+      <td>—</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="quiz-callout">
+    <p>Why does scaling by √d<sub>k</sub> help in self-attention? What problem does it solve?</p>
+  </div>
+
+  <div class="quiz-callout">
+    <p>BERT cannot generate text. Why? What CAN BERT do that GPT cannot?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: TRANSFER LEARNING & PRE-TRAINING
+══════════════════════════════════════════ -->
+<section class="section" id="s4">
   <div class="section-header">
-    <h2>Multiple Choice Quiz</h2>
-    <p>10 questions — choose the best answer for each. Get immediate feedback.</p>
+    <span class="section-num">04</span>
+    <h2>Transfer Learning & Pre-training</h2>
   </div>
 
-  <div class="quiz-score-bar">
-    <div><div class="score-label">Score</div><div class="score-value" id="mcqScore">0 / 10</div></div>
-    <div><div class="score-label">Answered</div><div class="score-value" id="mcqAnswered">0</div></div>
-    <button class="btn btn-secondary" onclick="resetMCQ()">↺ Reset Quiz</button>
+  <div class="def">
+    <strong>Pre-training</strong>
+    <p>Training a model on large amounts of unlabeled data with self-supervised objectives (e.g., next token prediction, masked language modeling). Weights start random and are learned from massive corpora. Produces a "base model" with general language understanding.</p>
   </div>
 
-  <div id="mcqContainer"></div>
-
-  <div class="result-box" id="mcqResult">
-    <div class="result-score" id="mcqFinalScore" style="color:var(--accent)"></div>
-    <div class="result-label">out of 10 correct</div>
-    <div class="result-msg" id="mcqMsg"></div>
-    <button class="btn btn-primary" onclick="resetMCQ()">Try Again</button>
+  <div class="def">
+    <strong>Transfer Learning</strong>
+    <p>Taking a pre-trained model (already trained on large data) and adapting it to a new, specific task using a much smaller labeled dataset. Avoids training from scratch. The model "transfers" its general knowledge to the new domain.</p>
   </div>
-</div>
 
-<!-- ========== ESSAY ========== -->
-<div id="essay" class="section">
+  <h3>Benefits of Transfer Learning</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Faster Development</h4>
+      <p>No need to train from scratch. Start from a powerful baseline and fine-tune quickly.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📉</div>
+      <h4>Less Data Needed</h4>
+      <p>Fine-tuning only requires a small labeled dataset — the base model supplies general knowledge.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏆</div>
+      <h4>Better Results</h4>
+      <p>Pre-trained models encode rich representations from billions of examples, leading to superior task performance.</p>
+    </div>
+  </div>
+
+  <h3>Types of Deep Transfer Learning</h3>
+  <table class="compare-table">
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td class="highlight">Instance-based</td>
+      <td>Reuse specific training instances from source domain</td>
+      <td>Weighting source samples</td>
+    </tr>
+    <tr>
+      <td class="highlight">Representation-based</td>
+      <td>Learn shared feature representations between domains</td>
+      <td>Shared embeddings</td>
+    </tr>
+    <tr>
+      <td class="highlight">Model Sharing-based</td>
+      <td>Share parameters or model layers between tasks</td>
+      <td>VGG-16 on ImageNet → custom task</td>
+    </tr>
+    <tr>
+      <td class="highlight">Adversarial-based</td>
+      <td>Use adversarial training to align source/target domains</td>
+      <td>Domain adaptation GANs</td>
+    </tr>
+  </table>
+
+  <h3>Implementation: Model Sharing (CNN Example)</h3>
+  <p>Using <strong>VGG-16</strong> (pre-trained on ImageNet with 1M+ images) and fine-tuning for a custom image classification task. The early layers (edge detectors, texture filters) are frozen; the final layers are retrained.</p>
+
+  <h3>GloVe: Pre-trained Word Embeddings</h3>
+  <div class="def">
+    <strong>GloVe (Global Vectors for Word Representation)</strong>
+    <p>An unsupervised algorithm that learns word vector representations by training on <strong>global word-word co-occurrence statistics</strong> from a corpus. The resulting vectors capture semantic relationships (e.g., king − man + woman ≈ queen). GloVe vectors represent a form of transfer learning for NLP.</p>
+  </div>
+
+  <div class="quiz-callout">
+    <p>What is the difference between instance-based and model-sharing-based transfer learning?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: BEAM SEARCH
+══════════════════════════════════════════ -->
+<section class="section" id="s5">
   <div class="section-header">
-    <h2>Essay Question Prep</h2>
-    <p>10 essay-type questions with structured answer hints. Practice writing before the exam.</p>
+    <span class="section-num">05</span>
+    <h2>Beam Search</h2>
   </div>
 
-  <div id="essayContainer"></div>
-</div>
+  <div class="def">
+    <strong>Beam Search</strong>
+    <p>A heuristic search algorithm that maintains <strong>k (beam width) active candidate sequences</strong> at each decoding step. At every step, it expands each candidate by all possible next tokens, scores the resulting W×B candidates, and keeps only the top k. It is a middle ground between greedy search (k=1) and exhaustive search (k=∞).</p>
+  </div>
 
-<script>
-// ===================== DATA =====================
+  <h3>Why Greedy Decoding Fails</h3>
+  <p><strong>Greedy decoding</strong> picks the highest-probability token at each step (argmax). Problem: a high-probability first token may lead to a very low-probability overall sequence. It cannot backtrack — it's "short-sighted" and gets trapped in local optima. It's also deterministic and produces repetitive text.</p>
 
-const definitions = [
-  { term: "Professionalism", def: "Expertise in a specialized area combined with adherence to moral guidelines, usually laid out in a formal code of ethics." },
-  { term: "Profession (Social Contract Account)", def: "Society grants professionals privileges (autonomy, status) in exchange for their commitment to serve the public good." },
-  { term: "Public Good", def: "The safety, health, and welfare of the public; engineering has a direct and vital impact on the quality of life for all people." },
-  { term: "Well-Being (Capabilities Approach)", def: "Having food, shelter, and water; satisfying human relationships; free movement and expression; and a satisfactory relationship to the natural world. (Sen & Nussbaum)" },
-  { term: "Aspirational Ethics", def: "Ethics that goes beyond avoiding prohibited actions to actively promoting well-being — going the extra mile beyond minimal requirements." },
-  { term: "Technological Determinism", def: "The view that technology is the primary driver of social change and that society is largely controlled by technological forces." },
-  { term: "Factual Issues (Ethics)", def: "Questions about what the facts actually are. Many apparent moral disagreements are really disagreements over facts." },
-  { term: "Conceptual Issues", def: "Questions about the meanings of terms used in moral reasoning (e.g., human dignity, informed consent, bribery)." },
-  { term: "Application Issues", def: "Claims about whether a given concept or term applies to a specific action or practice." },
-  { term: "Line Drawing", def: "Resolving a morally-laden application issue by determining where to draw the line between acceptable and unacceptable behavior." },
-  { term: "Common Morality", def: "The stock of shared moral beliefs that most people in a culture, and perhaps people generally, accept." },
-  { term: "Universalization Principle", def: "We must be willing for others to do what we do in similar situations — a key test of moral consistency." },
-  { term: "Utilitarianism", def: "A moral theory holding that we should maximize overall well-being — the greatest good for the greatest number." },
-  { term: "Cost-Benefit Test", def: "The course of action producing the greatest benefit relative to cost should be chosen. A utilitarian decision-making tool." },
-  { term: "Respect for Persons (RP) Approach", def: "Act so that you respect all humans as free and equal moral agents with their own goals and purposes." },
-  { term: "Golden Rule Test", def: "Do unto others as you would have them do unto you. Tests reversibility and universalizability." },
-  { term: "Self-Defeating Test", def: "If everyone did what I am doing, would it undermine my own ability to do the same? If yes, the action is self-defeating and impermissible." },
-  { term: "Rights Test", def: "Honor the rights of people necessary for them to exercise their moral agency and pursue their well-being." },
-  { term: "Virtue Ethics", def: "Act in the way the good or virtuous person would act. Virtue is a dispositional trait — the mean between two vices (Aristotle)." },
-  { term: "Obligation-Responsibility", def: "A duty or obligation to perform certain actions — e.g., following engineering standards." },
-  { term: "Blame-Responsibility", def: "Being held accountable for an outcome; requires that the person caused the harm under appropriate conditions." },
-  { term: "Standard of Care", def: "The highest shared standard among competent, responsible engineers in the relevant area. Not just following regulations — allows for discretion." },
-  { term: "Whistleblowing", def: "Revealing information an organization does not want shared with the public or authorities, done outside of approved organizational channels." },
-  { term: "Critical Loyalty", def: "Employees should generally support their organization while retaining the right to raise concerns about unethical practices." },
-  { term: "Conflict of Interest", def: "A conflict between an obligation to exercise good professional judgment and an interest (personal, financial, etc.) that may compromise that judgment." },
-  { term: "Lying", def: "A statement believed to be false or seriously misleading, ordinarily made in words, with the intention to deceive." },
-  { term: "Deliberate Deception", def: "Misleading someone through technically true statements, selective emphasis, or misleading framing." },
-  { term: "Withholding Information", def: "Failing to convey information that the audience would reasonably expect not to be omitted, with intent to deceive." },
-  { term: "Research Integrity", def: "Adherence to honest practices in research: avoiding falsification, fabrication, plagiarism, and improper authorship." },
-  { term: "Moral Agent", def: "A normal adult human being who can formulate goals and purposes of their own and is capable of moral reasoning." },
-];
+  <div class="formula">
+    <span class="formula-label">GREEDY DECODING</span>
+    ŷ<sub>t</sub> = argmax P(y<sub>t</sub> | y<sub>1</sub>, ..., y<sub>t-1</sub>, X)
+  </div>
 
-const flashcards = [
-  { q: "What is the Capabilities Approach to well-being?", hint: "Associated with Sen & Nussbaum", a: "Developed by Amartya Sen and Martha Nussbaum, it holds that certain living conditions are essential to quality of life: having food, shelter, and water; satisfying human relationships; free movement and expression; and a healthy relationship to the natural world." },
-  { q: "List the three types of actions that guide engineers' ethics.", hint: "Think: forbidden, preventive, positive", a: "1. Prohibited actions (actions that must not be done), 2. Preventing harm (identifying and disclosing potential harms), 3. Promoting well-being (aspirational ethics — going beyond minimum requirements)." },
-  { q: "What is the Social Contract Account of a profession?", hint: "What does society give/get?", a: "Society grants professionals privileges such as autonomy and status in exchange for the profession's commitment to serve the public good and uphold ethical standards." },
-  { q: "What is the difference between factual, conceptual, and application issues in ethics?", hint: "Three layers of ethical disagreement", a: "Factual issues are about what the facts are. Conceptual issues are about the meaning of terms. Application issues are about whether a concept applies to a specific situation. Many moral disagreements involve all three." },
-  { q: "State the Universalization Principle.", hint: "Would you want everyone to do it?", a: "We must be willing for others to do what we do in similar situations. If we could not will our action to become a universal rule, the action is impermissible." },
-  { q: "What are DeGeorge's conditions for whistleblowing being morally obligatory?", hint: "Two extra conditions beyond permissibility", a: "(1) The employee has documented evidence that would convince a reasonable, impartial observer. (2) The employee has strong evidence that making the information public will actually prevent the threatened serious harm." },
-  { q: "Explain the Self-Defeating Test.", hint: "From the Respect for Persons approach", a: "Ask: 'If everyone else did what I am doing, would this undermine my ability to do the same thing?' If yes, the action is self-defeating and cannot be universalized — making it morally impermissible." },
-  { q: "What is virtue ethics and what is its Aristotelian basis?", hint: "Think character, not rules", a: "Virtue ethics asks us to act as a virtuous person would. Aristotle argued that each virtue is the mean (middle position) between two vices — for example, courage is the mean between cowardice and recklessness." },
-  { q: "What does Philosopher Peter French argue about corporations?", hint: "Can organizations be morally responsible?", a: "French argues corporations can be morally responsible agents because they, like people, have: (1) a decision-making mechanism, (2) policies guiding their decisions, and (3) interests of their own." },
-  { q: "What is the Standard of Care in engineering?", hint: "Not just following rules", a: "The highest shared standard among competent, responsible engineers in the relevant area of practice. Engineers are not liable for every error — society accepts 'normal errors' — but must meet the shared professional standard." },
-  { q: "What is a conflict of interest?", hint: "Distinguish from ordinary competing interests", a: "A conflict between an obligation to exercise good professional judgment and an interest that may compromise that judgment. It is not just any set of conflicting interests — it specifically involves a duty to exercise objective judgment." },
-  { q: "What is the Golden Rule Test?", hint: "Reversibility matters", a: "'Do unto others as you would have them do unto you.' It tests universalizability and reversibility — whether you would accept your action if you were on the receiving end." },
-  { q: "What is critical loyalty in organizations?", hint: "Not blind loyalty", a: "Employees and companies should generally support organizational goals and interests, while retaining the right and duty to raise concerns about unethical or harmful practices through legitimate channels." },
-  { q: "What were the two causes of the Columbia disaster identified by the investigation board?", hint: "Physical vs. organizational", a: "1. The physical cause: foam striking and damaging the shuttle's wing. 2. The organizational causes: NASA's culture that discouraged raising safety concerns and normalized known risks." },
-  { q: "List the five types of research misconduct.", hint: "Covers data and attribution", a: "1. Falsification of data, 2. Fabrication of data, 3. Failure to respect intellectual property, 4. Plagiarism, 5. Inappropriate attribution of authorship." },
-  { q: "What are the three frameworks for why dishonesty is wrong?", hint: "Virtue, deontological, consequentialist", a: "1. Virtue Ethics: Dishonesty is a character flaw; honesty is a fundamental virtue. 2. Respect for Persons: Deception violates others' autonomy as moral agents. 3. Utilitarianism: Dishonesty destroys trust, which is essential for society and engineering to function." },
-  { q: "What is technological determinism?", hint: "One of three attitudes toward technology", a: "The view that technology is the primary driver of social change — that society is largely shaped and controlled by technological forces, rather than the reverse." },
-  { q: "What is 'aspirational ethics' in engineering?", hint: "Beyond minimum requirements", a: "Ethics that goes beyond merely avoiding prohibited actions and preventing harm, to actively promoting the well-being of people and society — working toward the best possible outcomes, not just acceptable ones." },
-  { q: "According to Jackall's study, what is the primary virtue for managers?", hint: "Loyalty, but to whom?", a: "Loyalty to one's peers and superiors is the primary virtue for managers. Jackall found that managers deliberately blur lines of responsibility to protect themselves and their superiors." },
-  { q: "What are the three forms of dishonesty in engineering?", hint: "Words, actions, omissions", a: "1. Lying: making a false statement with intent to deceive. 2. Deliberate Deception: misleading through true statements or framing. 3. Withholding Information: omitting information the audience would reasonably expect." },
-];
+  <h3>The Search Space Problem</h3>
+  <div class="flow">
+    <div class="flow-box">Greedy (k=1)<br><small>Fast, local optima</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box active">Beam Search (k=5–10)<br><small>Best balance</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Exhaustive (k=∞)<br><small>Infeasible</small></div>
+  </div>
 
-const mcqData = [
-  {
-    q: "According to the Capabilities Approach (Sen & Nussbaum), which of the following best describes 'well-being'?",
-    opts: [
-      "A. The maximization of financial wealth and economic productivity.",
-      "B. Having food, shelter, satisfying relationships, free movement, and a good relationship to the natural world.",
-      "C. Following all applicable laws and engineering standards.",
-      "D. Achieving personal career success and professional recognition."
-    ],
-    correct: 1,
-    feedback: "The Capabilities Approach defines well-being through certain essential living conditions: basic necessities, human relationships, freedom of movement and expression, and a healthy relationship with nature."
-  },
-  {
-    q: "An engineer discovers that her company's product has a serious safety defect. She has told her supervisor twice but nothing has been done. According to DeGeorge, whistleblowing is morally OBLIGATORY (not just permissible) when which additional conditions are met?",
-    opts: [
-      "A. When the engineer is personally harmed by the product.",
-      "B. When the engineer has documented evidence that would convince an impartial observer AND strong evidence that going public will actually prevent harm.",
-      "C. When the engineer has told her supervisor at least once.",
-      "D. When the engineer disagrees with company policy on any ethical grounds."
-    ],
-    correct: 1,
-    feedback: "DeGeorge's obligatory conditions are: (1) documented evidence sufficient to convince a reasonable, impartial observer, AND (2) strong evidence that going public will actually prevent the threatened serious harm."
-  },
-  {
-    q: "The 'Universalization Principle' in common morality means:",
-    opts: [
-      "A. Every culture has its own moral rules that should be respected equally.",
-      "B. We must apply laws universally without exception.",
-      "C. We must be willing for others to do what we do in similar situations.",
-      "D. Moral rules should apply only to professionals, not the general public."
-    ],
-    correct: 2,
-    feedback: "The Universalization Principle requires moral consistency: if you perform an action, you must be willing to accept the same action from others in relevantly similar situations."
-  },
-  {
-    q: "In Aristotle's virtue ethics, a virtue is:",
-    opts: [
-      "A. Any action that maximizes good consequences for the majority.",
-      "B. A strict rule to follow regardless of circumstances.",
-      "C. The mean between two opposing vices.",
-      "D. Any trait valued by one's professional organization."
-    ],
-    correct: 2,
-    feedback: "Aristotle defined virtue as the mean between two extremes (vices). For example, courage is the mean between cowardice and recklessness; generosity between miserliness and spendthrift."
-  },
-  {
-    q: "What distinguishes a 'conflict of interest' from simply having competing commitments?",
-    opts: [
-      "A. A conflict of interest always involves financial gain.",
-      "B. A conflict of interest involves an obligation to exercise objective professional judgment being compromised by another interest.",
-      "C. A conflict of interest occurs when an engineer works for two companies simultaneously.",
-      "D. Any situation where an engineer has more work than they can handle is a conflict of interest."
-    ],
-    correct: 1,
-    feedback: "A conflict of interest specifically involves a duty to exercise good professional judgment being potentially compromised by another interest. Having too many commitments is NOT a conflict of interest."
-  },
-  {
-    q: "Philosopher Peter French argues organizations can be morally responsible agents because they have:",
-    opts: [
-      "A. Legal status and the ability to enter contracts.",
-      "B. Decision-making mechanisms, policies guiding decisions, and interests.",
-      "C. Individual human members who bear responsibility.",
-      "D. Financial resources to pay for damages."
-    ],
-    correct: 1,
-    feedback: "French argues corporations have the features of a moral agent: (1) a decision-making mechanism, (2) policies that guide decisions, and (3) interests of their own — making them analogous to individual moral agents."
-  },
-  {
-    q: "The Self-Defeating Test asks:",
-    opts: [
-      "A. Does my action produce more good than any alternative?",
-      "B. Would I accept this action if I were on the receiving end?",
-      "C. If everyone did what I am doing, would it undermine my own ability to do the same?",
-      "D. Does my action conform to my professional code of ethics?"
-    ],
-    correct: 2,
-    feedback: "The Self-Defeating Test: if universalizing my action would undermine my own ability to perform it, then I cannot coherently will that everyone do the same — making the action impermissible."
-  },
-  {
-    q: "According to Jackall's study, what is the PRIMARY virtue for managers in organizational culture?",
-    opts: [
-      "A. Public service and transparency.",
-      "B. Technical competence and accuracy.",
-      "C. Loyalty to one's peers and superiors.",
-      "D. Maximizing long-term organizational performance."
-    ],
-    correct: 2,
-    feedback: "Jackall found that loyalty to peers and superiors is the primary virtue in managerial culture. He also noted that lines of responsibility are deliberately blurred to protect those in the hierarchy."
-  },
-  {
-    q: "Which of the following is NOT one of the five types of research misconduct listed in the lectures?",
-    opts: [
-      "A. Falsification of data",
-      "B. Fabrication of data",
-      "C. Failing to disclose a conflict of interest",
-      "D. Plagiarism"
-    ],
-    correct: 2,
-    feedback: "The five types listed are: falsification of data, fabrication of data, failure to respect intellectual property, plagiarism, and inappropriate attribution of authorship. Failing to disclose a conflict of interest is a separate ethical issue."
-  },
-  {
-    q: "What does the 'Social Context of Technology' principle say about engineering?",
-    opts: [
-      "A. Engineers should work in isolation from social concerns to maintain objectivity.",
-      "B. Engineering is a type of social experimentation — technology affects society AND society influences the development of technology.",
-      "C. Technology is neutral; only its users determine whether it is good or bad.",
-      "D. Engineers bear no responsibility for how society uses their products."
-    ],
-    correct: 1,
-    feedback: "The social context of technology principle holds that engineering is a type of social experimentation: technology affects society, and the social context shapes how technology develops. Engineers must consider this two-way relationship."
-  }
-];
-
-const essayData = [
-  {
-    q: "Explain the three types of ethical actions that guide engineering practice. Provide a real or hypothetical example for each type.",
-    hints: [
-      "Prohibited actions: cite a specific example from engineering codes (e.g., bribery, falsifying test results)",
-      "Preventing harm: discuss the duty to identify and disclose safety hazards before a product ships",
-      "Promoting well-being (aspirational ethics): give an example where an engineer goes beyond the minimum — such as designing for accessibility beyond what codes require",
-      "Discuss how all three work together to define the full scope of ethical engineering behavior"
-    ]
-  },
-  {
-    q: "Compare and contrast the Utilitarian Approach and the Respect for Persons (Kantian) Approach to engineering ethics. When might these two approaches conflict?",
-    hints: [
-      "Utilitarianism: maximize overall well-being, use cost-benefit analysis, greatest good for greatest number",
-      "RP Approach: respect individual rights, use Golden Rule Test and Self-Defeating Test, treat people as ends not means",
-      "Conflict example: could lying to prevent mass harm (utilitarian yes, Kantian no) — or sacrificing one person's interests for greater public benefit",
-      "Discuss which approach you think is more appropriate in engineering contexts and why"
-    ]
-  },
-  {
-    q: "Analyze the Columbia Space Shuttle disaster through the lens of responsibility in engineering. Who bore moral responsibility, and how does the concept of 'organizational responsibility' apply?",
-    hints: [
-      "Identify both causes: physical (foam strike) and organizational (safety culture failures)",
-      "Distinguish obligation-responsibility from blame-responsibility",
-      "Apply Peter French's theory: NASA as a corporation with decision-making mechanisms, policies, and interests",
-      "Discuss whether individual engineers, managers, or the organization as a whole bears primary moral responsibility",
-      "Reference the standard of care — did NASA meet it?"
-    ]
-  },
-  {
-    q: "Discuss the ethics of whistleblowing using DeGeorge's framework. When is it morally permissible? When is it obligatory? Apply these criteria to the Challenger disaster case (Roger Boisjoly).",
-    hints: [
-      "List DeGeorge's three conditions for permissibility: serious harm, reports to supervisor, internal channels exhausted",
-      "List DeGeorge's two additional conditions for obligation: documented evidence + evidence going public will actually prevent harm",
-      "Apply to Boisjoly: he had evidence, reported concerns, was overruled — was he obligated to go public before the launch?",
-      "Consider Davis's complicity-avoiding view as an alternative justification",
-      "Discuss the organizational and personal risks of whistleblowing and the recommendations for organizations"
-    ]
-  },
-  {
-    q: "What is a 'conflict of interest' in engineering? Why is it problematic even when no actual wrongdoing has occurred? Provide an example and explain how it should be handled.",
-    hints: [
-      "Define conflict of interest precisely: distinguish from ordinary competing interests",
-      "Explain the problem of potential vs. actual conflicts — appearance of bias can undermine trust even without wrongdoing",
-      "Example: an engineer who evaluates vendor bids when their spouse works for one vendor",
-      "Discuss disclosure as the primary ethical response; sometimes recusal is required",
-      "Connect to the broader theme of trust and reliability — why trust in engineering is essential to society"
-    ]
-  },
-  {
-    q: "Why is honesty particularly important in engineering? Discuss the three frameworks (virtue ethics, respect for persons, and utilitarianism) that explain why dishonesty is wrong in the engineering context.",
-    hints: [
-      "Virtue ethics: honesty as a core professional virtue; engineering identity is built on trust",
-      "Respect for persons: dishonesty manipulates others' autonomous decision-making (employers, clients, public)",
-      "Utilitarian: society depends on accurate technical information; dishonesty creates systemic risks ('ignorance explosion')",
-      "Give examples relevant to engineering: falsifying safety data, misleading a client about project status, academic dishonesty",
-      "Discuss the 'knowledge explosion/ignorance explosion' dynamic from the lecture"
-    ]
-  },
-  {
-    q: "Explain the tension between engineers and managers in organizations (referencing Raelin and Jackall). How can engineers act in a morally responsible way within organizations?",
-    hints: [
-      "Raelin: natural conflict due to differences in education, socialization, values, and work habits",
-      "Jackall: managers prioritize loyalty, blur responsibility, measure success in financial terms",
-      "Engineers must understand organizational culture to act effectively and ethically",
-      "Discuss the recommendations: written records, critical loyalty, reporting bad news, neutral outside participants, protection from retaliation",
-      "Address the boundary between engineering decisions (technical) and management decisions (business)"
-    ]
-  },
-  {
-    q: "What is virtue ethics, and how does it apply to engineering through 'professional virtues'? What are the strengths of virtue ethics compared to rule-based approaches?",
-    hints: [
-      "Define virtue: a dispositional character trait; Aristotle's mean between two vices",
-      "Professional virtues in engineering: professional care (protect/promote well-being), respect for nature",
-      "Strengths: handles open-ended situations rules can't anticipate; integrates rational and intuitive elements; role of moral exemplars; moral habituation",
-      "Contrast with utilitarianism (which focuses on outcomes) and RP approach (which focuses on rules)",
-      "Discuss whether virtue ethics alone is sufficient or whether it needs to be combined with other approaches"
-    ]
-  },
-  {
-    q: "How does engineering relate to the concept of 'social experimentation'? What are the ethical implications for engineers working with emerging technologies?",
-    hints: [
-      "Social experimentation: engineers test technologies on society without fully knowing outcomes",
-      "Connect to the Tesla case: deploying autonomous vehicles before fully understanding risks",
-      "Discuss technological determinism, optimism, and pessimism — where is the ethical balance?",
-      "Engineers must consider second-order effects: job displacement, inequality, privacy, environment",
-      "Apply the three ethical action types: what harms must be prevented? What well-being should be promoted?"
-    ]
-  },
-  {
-    q: "Explain the difference between 'obligation-responsibility' and 'blame-responsibility' in engineering. What does the 'Standard of Care' mean, and how does it relate to these two types of responsibility?",
-    hints: [
-      "Obligation-responsibility: a duty to do certain things (follow standards, report hazards, maintain competence)",
-      "Blame-responsibility: being held accountable for harm caused; requires causation and appropriate conditions",
-      "Standard of care: the highest shared standard among competent, responsible engineers — not just minimum compliance",
-      "'Normal errors' are accepted by society; gross negligence or recklessness crosses into blame",
-      "Apply to a case: an engineer who follows all standard procedures but an unforeseen failure occurs — is she blame-responsible?"
-    ]
-  }
-];
-
-// ===================== UTILS =====================
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
-}
-
-function toggleChapter(card) {
-  card.classList.toggle('open');
-}
-
-// ===================== DEFINITIONS =====================
-function renderDefs(filter = '') {
-  const grid = document.getElementById('defGrid');
-  const filtered = filter
-    ? definitions.filter(d => d.term.toLowerCase().includes(filter.toLowerCase()) || d.def.toLowerCase().includes(filter.toLowerCase()))
-    : definitions;
-
-  grid.innerHTML = filtered.map(d => `
-    <div class="def-card">
-      <div class="def-term">${d.term}</div>
-      <div class="def-text">${d.def}</div>
+  <h3>Beam Search Algorithm — Step by Step</h3>
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">ALGORITHM</span>
+      <h3>Beam Search with W=2, B=3</h3>
     </div>
-  `).join('');
-}
-
-function filterDefs(val) { renderDefs(val); }
-renderDefs();
-
-// ===================== FLASHCARDS =====================
-let fcCards = [...flashcards];
-let fcIndex = 0;
-
-function updateFC() {
-  const card = fcCards[fcIndex];
-  document.getElementById('fcQuestion').textContent = card.q;
-  document.getElementById('fcHint').textContent = card.hint ? `Hint: ${card.hint}` : '';
-  document.getElementById('fcAnswer').textContent = card.a;
-  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${fcCards.length}`;
-  document.getElementById('fcProgress').style.width = `${((fcIndex + 1) / fcCards.length) * 100}%`;
-  document.getElementById('flashcard').classList.remove('flipped');
-}
-
-function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
-function nextCard() { fcIndex = (fcIndex + 1) % fcCards.length; updateFC(); }
-function prevCard() { fcIndex = (fcIndex - 1 + fcCards.length) % fcCards.length; updateFC(); }
-function resetCards() { fcIndex = 0; updateFC(); }
-
-function shuffleCards() {
-  for (let i = fcCards.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [fcCards[i], fcCards[j]] = [fcCards[j], fcCards[i]];
-  }
-  fcIndex = 0; updateFC();
-}
-
-function markCard(type) {
-  // visual feedback
-  const card = document.getElementById('flashcard');
-  card.style.transition = 'opacity 0.3s';
-  card.style.opacity = '0.3';
-  setTimeout(() => {
-    card.style.opacity = '1';
-    nextCard();
-  }, 300);
-}
-
-updateFC();
-
-// ===================== MCQ =====================
-let mcqScore = 0;
-let mcqAnswered = 0;
-
-function renderMCQ() {
-  const container = document.getElementById('mcqContainer');
-  container.innerHTML = mcqData.map((q, qi) => `
-    <div class="quiz-card" id="qcard-${qi}">
-      <div class="quiz-q-num">Question ${qi + 1} of 10</div>
-      <div class="quiz-question">${q.q}</div>
-      <div class="quiz-options">
-        ${q.opts.map((opt, oi) => `
-          <button class="quiz-option" onclick="answerMCQ(${qi}, ${oi})" id="opt-${qi}-${oi}">${opt}</button>
-        `).join('')}
-      </div>
-      <div class="quiz-feedback" id="fb-${qi}"></div>
+    <div class="step">
+      <strong>1. Initialization:</strong> Start with root node (start token). Generate B=3 successors.
     </div>
-  `).join('');
-  document.getElementById('mcqResult').classList.remove('show');
-  mcqScore = 0; mcqAnswered = 0;
-  updateMCQScore();
-}
-
-function answerMCQ(qi, oi) {
-  const q = mcqData[qi];
-  const card = document.getElementById(`qcard-${qi}`);
-  const fb = document.getElementById(`fb-${qi}`);
-  // Disable all options for this question
-  q.opts.forEach((_, i) => {
-    const btn = document.getElementById(`opt-${qi}-${i}`);
-    btn.disabled = true;
-    if (i === q.correct) btn.classList.add('correct');
-    else if (i === oi) btn.classList.add('wrong');
-  });
-  const isCorrect = oi === q.correct;
-  if (isCorrect) { mcqScore++; }
-  mcqAnswered++;
-  fb.textContent = (isCorrect ? '✓ Correct! ' : '✗ Incorrect. ') + q.feedback;
-  fb.className = `quiz-feedback show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
-  updateMCQScore();
-  if (mcqAnswered === 10) showMCQResult();
-}
-
-function updateMCQScore() {
-  document.getElementById('mcqScore').textContent = `${mcqScore} / 10`;
-  document.getElementById('mcqAnswered').textContent = mcqAnswered;
-}
-
-function showMCQResult() {
-  const result = document.getElementById('mcqResult');
-  result.classList.add('show');
-  document.getElementById('mcqFinalScore').textContent = `${mcqScore}/10`;
-  const msgs = ['Keep studying! Review the lecture notes.', 'Good effort! Focus on the weaker areas.', 'Solid performance! Review any missed questions.', 'Great job! You know this material well.', 'Perfect! You are ready for the midterm.'];
-  document.getElementById('mcqMsg').textContent = msgs[Math.floor((mcqScore / 10) * (msgs.length - 1))];
-  document.getElementById('mcqFinalScore').style.color = mcqScore >= 8 ? 'var(--green)' : mcqScore >= 5 ? 'var(--accent)' : 'var(--accent3)';
-}
-
-function resetMCQ() { renderMCQ(); }
-renderMCQ();
-
-// ===================== ESSAY =====================
-function renderEssay() {
-  const container = document.getElementById('essayContainer');
-  container.innerHTML = essayData.map((q, qi) => `
-    <div class="essay-card">
-      <div class="essay-q-num">Essay Question ${qi + 1} of 10</div>
-      <div class="essay-question">${q.q}</div>
-      <button class="essay-hint-btn" onclick="toggleHints(${qi})">💡 Show Answer Guide</button>
-      <div class="essay-hints" id="hints-${qi}">
-        <h5>Key Points to Address</h5>
-        <ul>${q.hints.map(h => `<li>${h}</li>`).join('')}</ul>
-      </div>
+    <div class="step">
+      <strong>2. Expansion:</strong> From the W active beams, generate all B successors. Total candidates = W × B = 6.
     </div>
-  `).join('');
-}
+    <div class="step">
+      <strong>3. Selection:</strong> Score all 6 candidates using the heuristic (log probability sum). Keep top W=2.
+    </div>
+    <div class="step">
+      <strong>4. Iteration:</strong> Repeat Steps 2–3 until end-of-sequence token generated or max length reached.
+    </div>
+    <div class="step">
+      <strong>5. Termination:</strong> Return the highest-scoring complete sequence among all beams.
+    </div>
+  </div>
 
-function toggleHints(qi) {
-  const hints = document.getElementById(`hints-${qi}`);
-  hints.classList.toggle('show');
-  const btn = hints.previousElementSibling;
-  btn.textContent = hints.classList.contains('show') ? '🙈 Hide Answer Guide' : '💡 Show Answer Guide';
-}
+  <h3>Key Characteristics</h3>
+  <table class="compare-table">
+    <tr>
+      <th>Property</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td class="highlight">Beam Width (W)</td>
+      <td>Number of candidates kept at each level. Higher W = better quality but slower.</td>
+    </tr>
+    <tr>
+      <td class="highlight">Branching Factor (B)</td>
+      <td>Number of possible next tokens (vocab size V). Evaluates W×B at each step.</td>
+    </tr>
+    <tr>
+      <td class="highlight">Time Complexity</td>
+      <td>O(T × V × k) where T = sequence length, V = vocabulary size, k = beam width</td>
+    </tr>
+    <tr>
+      <td class="highlight">k=1</td>
+      <td>Equivalent to Greedy Search</td>
+    </tr>
+    <tr>
+      <td class="highlight">k→∞</td>
+      <td>Approaches Exhaustive Search</td>
+    </tr>
+  </table>
 
-renderEssay();
-</script>
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>ADVANTAGES</h4>
+      <ul>
+        <li>More efficient than exhaustive search</li>
+        <li>Better quality than greedy</li>
+        <li>Adjustable via beam width hyperparameter</li>
+        <li>Memory bounded by W</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>LIMITATIONS</h4>
+      <ul>
+        <li>No guarantee of optimal solution</li>
+        <li>Biased toward "safe," high-probability phrases</li>
+        <li>Produces repetitive, generic text</li>
+        <li>Heuristic-dependent quality</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>When to Use Beam Search vs. Sampling</h3>
+  <table class="compare-table">
+    <tr>
+      <th>Task Type</th>
+      <th>Preferred Method</th>
+      <th>Reason</th>
+    </tr>
+    <tr>
+      <td class="highlight">Machine Translation</td>
+      <td>Beam Search</td>
+      <td>Deterministic, constrained — one correct answer</td>
+    </tr>
+    <tr>
+      <td class="highlight">Summarization</td>
+      <td>Beam Search</td>
+      <td>Factual accuracy important</td>
+    </tr>
+    <tr>
+      <td class="highlight">Chatbots / Storytelling</td>
+      <td>Sampling (top-p, temperature)</td>
+      <td>Diversity and creativity needed</td>
+    </tr>
+    <tr>
+      <td class="highlight">Code Generation</td>
+      <td>Beam Search or Greedy</td>
+      <td>Correctness over diversity</td>
+    </tr>
+  </table>
+
+  <div class="quiz-callout">
+    <p>Given beam width W=2 and branching factor B=3, trace the first two steps of beam search for the sentence "The cat sat on the ___" with these token probabilities. Show which candidates survive.</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: RAG
+══════════════════════════════════════════ -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Retrieval-Augmented Generation (RAG)</h2>
+  </div>
+
+  <div class="def">
+    <strong>RAG (Retrieval-Augmented Generation)</strong>
+    <p>A technique that enhances LLMs by combining them with a <strong>retrieval system</strong> that fetches relevant external information at inference time. Instead of relying solely on internal (parametric) knowledge, the model also uses dynamically retrieved (non-parametric) external knowledge. Reduces hallucinations and keeps information current without retraining.</p>
+  </div>
+
+  <h3>Why RAG? The Problem with Pure LLMs</h3>
+  <ul>
+    <li><strong>Static knowledge:</strong> LLMs are frozen at training cutoff. They can't answer questions about recent events.</li>
+    <li><strong>Hallucinations:</strong> Without retrieval, LLMs make up plausible-sounding but wrong facts.</li>
+    <li><strong>No provenance:</strong> Can't cite sources or explain where information came from.</li>
+    <li><strong>Fine-tuning is expensive:</strong> Updating a model for new domain knowledge requires costly retraining.</li>
+  </ul>
+
+  <h3>Parametric vs. Non-Parametric Memory</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h4>Parametric Memory</h4>
+      <p>Knowledge stored inside the model's weights (parameters) learned during training. Fixed after training ends.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🗄️</div>
+      <h4>Non-Parametric Memory</h4>
+      <p>External knowledge base (vector database of documents). Can be updated without retraining the model.</p>
+    </div>
+  </div>
+
+  <h3>RAG Pipeline — How It Works</h3>
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PIPELINE</span>
+      <h3>RAG Process Flow</h3>
+    </div>
+    <div class="step"><strong>1. Query:</strong> User submits a question or prompt.</div>
+    <div class="step"><strong>2. NLP Analysis:</strong> System parses query to understand intent.</div>
+    <div class="step"><strong>3. Embedding:</strong> Query is converted to a vector embedding.</div>
+    <div class="step"><strong>4. Similarity Search:</strong> Vector database is searched for documents with similar embeddings.</div>
+    <div class="step"><strong>5. Ranking & Filtering:</strong> Retrieved documents ranked by relevance; top K selected.</div>
+    <div class="step"><strong>6. Augmented Prompt:</strong> Original query + retrieved context → combined into enriched prompt.</div>
+    <div class="step"><strong>7. Generation:</strong> LLM generates answer using both its parametric knowledge and retrieved context.</div>
+    <div class="step"><strong>8. Post-processing (optional):</strong> Fact-checking, summarization, formatting of the response.</div>
+  </div>
+
+  <h3>Two RAG Model Variants</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📄</div>
+      <h4>RAG-Sequence</h4>
+      <p>Uses the <em>same retrieved document</em> to predict every target token in the output. One document for the whole answer.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔀</div>
+      <h4>RAG-Token</h4>
+      <p>Can use a <em>different retrieved document</em> for each target token. More flexible, can pull from multiple sources per answer.</p>
+    </div>
+  </div>
+
+  <h3>Chunking</h3>
+  <div class="def">
+    <strong>Chunking</strong>
+    <p>Breaking large documents into smaller, manageable pieces before storing in the vector database. Improves retrieval accuracy because smaller units can be matched more precisely to specific queries.</p>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>ADVANTAGES OF RAG</h4>
+      <ul>
+        <li>Reduces hallucinations with grounded facts</li>
+        <li>Provides citations and provenance</li>
+        <li>Access to current/real-time information</li>
+        <li>No expensive model retraining for new data</li>
+        <li>Transparent reasoning process</li>
+        <li>Handles ambiguous queries with context</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>LIMITATIONS OF RAG</h4>
+      <ul>
+        <li>Missing info if KB is incomplete</li>
+        <li>Suboptimal retrieval may miss relevant docs</li>
+        <li>Token limit constraints on retrieved context</li>
+        <li>LLM may still hallucinate despite context</li>
+        <li>Complex system infrastructure to maintain</li>
+        <li>Bias propagation from knowledge base</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quiz-callout">
+    <p>Explain the difference between RAG-Sequence and RAG-Token. When would RAG-Token be preferable?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: LLM FULL PIPELINE
+══════════════════════════════════════════ -->
+<section class="section" id="s7">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>LLM Full Training Pipeline</h2>
+  </div>
+
+  <p>Modern LLMs are not simply trained once. They go through a <strong>3-stage progressive pipeline</strong>, each building on the previous.</p>
+
+  <div class="flow" style="flex-direction:column; align-items:stretch; gap:0;">
+    <div class="flow-box active" style="margin-bottom:0; border-radius:8px 8px 0 0; text-align:center; padding:16px;">
+      <strong style="color:#00d4ff;">Stage 1: Pre-training</strong><br>
+      <small style="color:#94a3b8;">Trillions of tokens • Self-supervised • Next token prediction</small>
+    </div>
+    <div class="flow-box" style="margin:0; border-radius:0; text-align:center; padding:16px; border-top:none;">
+      <strong style="color:#c4b5fd;">Stage 2: Supervised Fine-Tuning (SFT)</strong><br>
+      <small style="color:#94a3b8;">Instruction-following pairs • Smaller curated dataset</small>
+    </div>
+    <div class="flow-box" style="margin:0; border-radius:0 0 8px 8px; text-align:center; padding:16px; border-top:none;">
+      <strong style="color:#6ee7b7;">Stage 3: Preference Tuning (RLHF / DPO)</strong><br>
+      <small style="color:#94a3b8;">Human feedback • Helpful, Honest, Harmless</small>
+    </div>
+  </div>
+
+  <h3>Stage 1: Pre-training</h3>
+  <div class="def">
+    <strong>Pre-training</strong>
+    <p>The most computationally expensive phase. Uses <strong>Self-Supervised Learning (SSL)</strong>: the model predicts the next token from a massive unlabeled text corpus (Wikipedia, books, GitHub, ArXiv, Common Crawl). No human labels needed — the text itself is the supervision.</p>
+  </div>
+  <p>The model learns: grammar, world facts, reasoning, coding conventions, and much more. But a pre-trained model is NOT an assistant — if asked "What is the capital of France?" it might respond "And what is the capital of Germany?" because it thinks it's completing a quiz.</p>
+
+  <h3>Stage 2: Supervised Fine-Tuning (SFT)</h3>
+  <div class="def">
+    <strong>SFT / Instruction Tuning</strong>
+    <p>Training on a smaller, high-quality dataset of (Prompt, Response) pairs written by humans. Teaches the model the <em>format</em> of a helpful conversation. After SFT, the model knows that a question should be answered directly.</p>
+  </div>
+  <p>Data mixtures include: assistant dialogs, synthetic instructions, math/reasoning/code problems, safety alignment examples. Data can be both human-written and synthetic.</p>
+
+  <h3>Stage 3: Preference Tuning</h3>
+  <h4>RLHF (Reinforcement Learning from Human Feedback)</h4>
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">ALGORITHM</span>
+      <h3>RLHF Process</h3>
+    </div>
+    <div class="step"><strong>1. Sampling:</strong> The fine-tuned model generates multiple responses to the same prompt.</div>
+    <div class="step"><strong>2. Ranking:</strong> Human raters rank responses from best to worst (helpfulness, accuracy, harmlessness).</div>
+    <div class="step"><strong>3. Reward Model:</strong> A separate smaller model is trained to predict human preferences based on the rankings.</div>
+    <div class="step"><strong>4. Optimization:</strong> The main LLM is updated using PPO (Proximal Policy Optimization) to maximize the reward model's score.</div>
+  </div>
+
+  <h4>DPO (Direct Preference Optimization)</h4>
+  <p>A newer, more efficient alternative to RLHF. Skips the separate reward model and directly optimizes the LLM on ranked pairs (chosen vs. rejected responses). More stable training, lower computational cost.</p>
+
+  <h3>Scaling Laws</h3>
+  <div class="def">
+    <strong>Scaling Laws</strong>
+    <p>Performance of LLMs follows predictable <strong>power-law relationships</strong> with three factors: Parameters (N), Data (D), and Compute (C). Discovered by OpenAI and DeepMind researchers.</p>
+  </div>
+  <p><strong>Chinchilla Observation:</strong> For optimal training, dataset size should grow proportionally with model size. Scaling parameters without scaling data leads to diminishing returns quickly.</p>
+
+  <h3>LoRA: Parameter-Efficient Fine-Tuning</h3>
+  <div class="def">
+    <strong>LoRA (Low-Rank Adaptation)</strong>
+    <p>Instead of fine-tuning all model weights (expensive), LoRA adds small, trainable low-rank matrices to each layer. Only a small fraction of parameters are updated, with similar performance to full fine-tuning. Key benefit: you can swap LoRA matrices to switch tasks without re-loading the base model.</p>
+  </div>
+  <div class="note">LoRA needs a higher learning rate than full fine-tuning, and performs poorly with large batch sizes compared to full fine-tuning.</div>
+
+  <div class="quiz-callout">
+    <p>Describe the full 3-stage LLM pipeline. Why is each stage necessary? What happens if you skip Stage 3?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8: DIALOGUE SYSTEMS
+══════════════════════════════════════════ -->
+<section class="section" id="s8">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>Dialogue Systems & Conversational Agents</h2>
+  </div>
+
+  <div class="def">
+    <strong>Conversational Agents / Dialogue Systems</strong>
+    <p>Systems designed to interact with humans via text or speech. Examples: SIRI, Alexa, Cortana, Google Assistant. They range from simple (timers, music) to complex (travel booking, mental health support).</p>
+  </div>
+
+  <h3>Two Types of Conversational Agents</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">💬</div>
+      <h4>Chatbots</h4>
+      <p>Mimic informal human conversation. Goal: engaging, natural dialogue for fun or therapy. Example: early ELIZA, modern LLM chatbots.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h4>Task-Based Dialogue Agents</h4>
+      <p>Goal: help user complete a specific task (booking flights, setting alarms, ordering food). Architecture: frames with slots and values.</p>
+    </div>
+  </div>
+
+  <h3>Chatbot Architectures</h3>
+  <table class="compare-table">
+    <tr>
+      <th>Type</th>
+      <th>Examples</th>
+      <th>Mechanism</th>
+    </tr>
+    <tr>
+      <td class="highlight">Rule-Based: Pattern-Action</td>
+      <td>ELIZA</td>
+      <td>Pattern matching → scripted responses</td>
+    </tr>
+    <tr>
+      <td class="highlight">Rule-Based: Mental Model</td>
+      <td>PARRY</td>
+      <td>Internal state machine + rules. First to pass Turing Test!</td>
+    </tr>
+    <tr>
+      <td class="highlight">Corpus: Information Retrieval</td>
+      <td>XiaoIce</td>
+      <td>Retrieve best matching response from past conversations</td>
+    </tr>
+    <tr>
+      <td class="highlight">Corpus: Neural Encoder-Decoder</td>
+      <td>BlenderBot</td>
+      <td>Generate response from user utterance using seq2seq model</td>
+    </tr>
+  </table>
+
+  <h3>Task-Based Dialogue: Frames and Slots</h3>
+  <div class="def">
+    <strong>Frame</strong>
+    <p>A knowledge structure representing user intent, consisting of <strong>slots</strong> (fields to be filled) and associated questions. Example for flight booking:</p>
+  </div>
+  <div class="formula">
+    <span class="formula-label">FLIGHT BOOKING FRAME</span>
+    SLOT        TYPE    QUESTION
+    ORIGIN      city    "What city are you leaving from?"
+    DEST        city    "Where are you going?"
+    DEP_DATE    date    "What day would you like to leave?"
+    DEP_TIME    time    "What time would you like to leave?"
+    AIRLINE     line    "What is your preferred airline?"
+  </div>
+
+  <h3>Properties of Human Conversation</h3>
+  <ul>
+    <li><strong>Turns:</strong> Each contribution to a conversation is a "turn." Conversation is a game where participants take turns.</li>
+    <li><strong>Turn-taking:</strong> Rules for when to take the floor and when to yield it. Includes interruptions.</li>
+    <li><strong>Barge-in:</strong> Allowing a user to interrupt the system mid-speech.</li>
+    <li><strong>End-pointing:</strong> Detecting when the user has stopped talking. Very hard — people pause in the middle of turns.</li>
+    <li><strong>Latching:</strong> Speakers time their response to begin immediately when the other finishes, with minimal pause.</li>
+  </ul>
+
+  <h3>Speech Acts (Dialogue Acts)</h3>
+  <div class="def">
+    <strong>Speech Acts</strong>
+    <p>Each utterance in dialogue is an action. Classification from Bach and Harnish (1979):</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Constatives</h4>
+      <p>Commit speaker to something being true. (answering, claiming, stating, denying)</p>
+    </div>
+    <div class="card">
+      <h4>Directives</h4>
+      <p>Speaker tries to get addressee to do something. (asking, ordering, requesting, advising)</p>
+    </div>
+    <div class="card">
+      <h4>Commissives</h4>
+      <p>Commit speaker to future action. (promising, planning, vowing, betting)</p>
+    </div>
+    <div class="card">
+      <h4>Acknowledgments</h4>
+      <p>Express speaker's attitude toward hearer. (greeting, thanking, apologizing)</p>
+    </div>
+  </div>
+
+  <h3>Grounding</h3>
+  <div class="def">
+    <strong>Grounding</strong>
+    <p>The process of establishing <strong>common ground</strong> — mutual confirmation that communication was understood. The <em>Principle of Closure</em>: agents need evidence, sufficient for current purposes, that they succeeded in performing an action. In dialogue: one speaker signals understanding (e.g., "OK", "uh-huh"), the other continues.</p>
+  </div>
+  <p>Example: Why do elevator buttons light up? To ground the action — confirm to the user that pressing was registered.</p>
+
+  <h3>Conversation Structure</h3>
+  <ul>
+    <li><strong>Adjacency Pairs:</strong> Locally structured pairs: QUESTION→ANSWER, PROPOSAL→ACCEPTANCE/REJECTION, COMPLIMENT→DOWNPLAYER</li>
+    <li><strong>Subdialogues:</strong> Embedded sub-conversations within the main dialogue (e.g., clarification subdialogue, correction subdialogue)</li>
+    <li><strong>Presequences:</strong> "Can you make train reservations?" → "Yes" → "Then I'd like to book..."</li>
+  </ul>
+
+  <div class="quiz-callout">
+    <p>What is grounding and why does it matter for dialogue systems? Give a real-world example.</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 9: MIXTURE OF EXPERTS
+══════════════════════════════════════════ -->
+<section class="section" id="s9">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <h2>Mixture of Experts (MoE)</h2>
+  </div>
+
+  <div class="def">
+    <strong>Mixture of Experts (MoE)</strong>
+    <p>An architecture that improves LLM efficiency by dividing model capacity among multiple specialized sub-networks called "experts." A learned <strong>router</strong> selects only a small subset of experts for each input token. Unlike dense models (all parameters active every time), MoE models are <strong>sparse</strong> — most parameters sleep while only relevant ones activate.</p>
+  </div>
+
+  <h3>Why MoE?</h3>
+  <p>Dense models (e.g., LLaMA 3) activate <em>all</em> parameters for every token — even parameters specialized for chemistry are activated when processing a cooking recipe. MoE makes this efficient by routing tokens only to relevant experts.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">💡</div>
+      <h4>Scale without Cost</h4>
+      <p>MoE models can have 100B–1T+ parameters while keeping per-token compute manageable, because only ~1–2 experts activate per token.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔀</div>
+      <h4>Specialization</h4>
+      <p>Different experts learn different aspects of language/knowledge. One expert may specialize in code, another in mathematics.</p>
+    </div>
+  </div>
+
+  <h3>Routing Collapse — Key Challenge</h3>
+  <div class="note">The most dangerous MoE training failure: the router always sends tokens to the same 1–2 experts, ignoring all others. The unused experts never learn. Called <strong>routing collapse</strong>. Solved with auxiliary load-balancing losses that penalize imbalanced routing.</div>
+
+  <h3>MoE in Transformers</h3>
+  <p>In transformer-based MoE (e.g., Mixtral), the <strong>feedforward network (FFN)</strong> layer within each transformer block is replaced by a mixture of FFN experts plus a routing network. The attention layers remain shared/dense.</p>
+
+  <div class="quiz-callout">
+    <p>What is routing collapse in MoE models and why does it happen? How is it mitigated?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 10: DECODING & SAMPLING STRATEGIES
+══════════════════════════════════════════ -->
+<section class="section" id="s10">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <h2>Decoding & Sampling Strategies</h2>
+  </div>
+
+  <p>After the LLM computes probability distributions over the vocabulary, a <strong>decoding strategy</strong> determines which token to pick next.</p>
+
+  <table class="compare-table">
+    <tr>
+      <th>Strategy</th>
+      <th>How It Works</th>
+      <th>Problem</th>
+      <th>Best For</th>
+    </tr>
+    <tr>
+      <td class="highlight">Greedy</td>
+      <td>Always pick argmax P(y<sub>t</sub>|context)</td>
+      <td>Repetitive, deterministic, local optima</td>
+      <td>Simple tasks</td>
+    </tr>
+    <tr>
+      <td class="highlight">Beam Search</td>
+      <td>Keep top-k sequences at each step</td>
+      <td>Generic, "safe" output; no true creativity</td>
+      <td>Translation, summarization</td>
+    </tr>
+    <tr>
+      <td class="highlight">Random Sampling</td>
+      <td>Sample from full distribution P(y<sub>t</sub>|context)</td>
+      <td>Low-probability words pollute output</td>
+      <td>Not recommended directly</td>
+    </tr>
+    <tr>
+      <td class="highlight">Top-k Sampling</td>
+      <td>Sample only from top-k highest probability tokens</td>
+      <td>k is fixed regardless of distribution shape</td>
+      <td>Creative tasks</td>
+    </tr>
+    <tr>
+      <td class="highlight">Top-p (Nucleus) Sampling</td>
+      <td>Sample from smallest set covering cumulative probability ≥ p</td>
+      <td>More complex to tune</td>
+      <td>Best for open-ended generation</td>
+    </tr>
+    <tr>
+      <td class="highlight">Temperature Sampling</td>
+      <td>Reshape distribution: divide logits by T before softmax</td>
+      <td>T tuning required</td>
+      <td>Controlling diversity</td>
+    </tr>
+  </table>
+
+  <h3>Temperature Sampling Deep Dive</h3>
+  <div class="formula">
+    <span class="formula-label">TEMPERATURE SCALING</span>
+    P'(y<sub>t</sub>) = softmax(logits / T)
+    <br><br>
+    T &lt; 1.0 → sharper distribution → model is more confident → less diversity
+    T = 1.0 → original distribution
+    T &gt; 1.0 → flatter distribution → model is more random → more diversity
+  </div>
+
+  <h3>Top-p (Nucleus) Sampling vs. Top-k</h3>
+  <p><strong>Problem with top-k:</strong> If k=10, sometimes the top 10 tokens cover 99% of probability mass (good), other times they cover only 30% (the rest is spread thinly — bad). k doesn't adapt to distribution shape.</p>
+  <p><strong>Top-p fix:</strong> Include the smallest set of tokens whose cumulative probability ≥ p (e.g., 0.9). Automatically adapts the number of candidates to the distribution.</p>
+
+  <h3>Inference Optimizations</h3>
+  <ul>
+    <li><strong>KV Caching:</strong> Cache Key and Value tensors from attention for previously processed tokens. Avoids recomputing them at every decoding step.</li>
+    <li><strong>FlashAttention:</strong> Optimizes memory access patterns in GPU — reduces reads/writes between high-bandwidth memory (HBM) and on-chip SRAM.</li>
+    <li><strong>PagedAttention:</strong> Stores K and V in non-contiguous memory pages (like OS virtual memory). Minimizes wasted memory from fragmentation.</li>
+    <li><strong>Multi-Query Attention / Grouped Query Attention:</strong> Share key/value heads across groups of query heads — reduces KV cache size.</li>
+  </ul>
+
+  <div class="quiz-callout">
+    <p>Why is top-p sampling generally preferred over top-k sampling? Explain with a distribution shape example.</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRACTICE PROBLEMS
+══════════════════════════════════════════ -->
+<section class="section" id="practice">
+  <div class="section-header">
+    <span class="section-num" style="background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3); color:var(--accent3);">🧪 PRACTICE</span>
+    <h2>Practice Problems</h2>
+  </div>
+
+  <p style="color:var(--text-dim); margin-bottom:32px;">These problems require mathematical computation, algorithm tracing, or systematic reasoning — the kinds of problems likely to appear on the quiz. Work through each before checking the hints.</p>
+
+  <!-- Problem 1 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 1</span>
+      <h3>Trace Beam Search Step-by-Step</h3>
+    </div>
+    <p><strong>Scenario:</strong> You are decoding with beam width k=2. The vocabulary is {A, B, C}. Log-probabilities at each step are given below.</p>
+
+    <div class="formula">
+      <span class="formula-label">STEP 1: Initial probabilities</span>
+      P(A | &lt;start&gt;) = 0.5   → log = -0.69
+      P(B | &lt;start&gt;) = 0.3   → log = -1.20
+      P(C | &lt;start&gt;) = 0.2   → log = -1.61
+    </div>
+
+    <div class="formula">
+      <span class="formula-label">STEP 2: Given beam survived ["A", "B"], conditional log-probs</span>
+      P(A|A)=0.1, P(B|A)=0.6, P(C|A)=0.3
+      P(A|B)=0.5, P(B|B)=0.2, P(C|B)=0.3
+    </div>
+
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>After Step 1: Which 2 tokens survive? (Keep k=2 highest log-prob candidates)</li>
+      <li>After Step 2: Compute all 6 candidate sequences (2 beams × 3 tokens). Sum log-probs. Which 2 sequences survive?</li>
+      <li>What is the difference between this and greedy decoding?</li>
+    </ol>
+
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
+      <span class="formula-label">WORKED SOLUTION — STEP 1</span>
+      Survivors: A (log=-0.69), B (log=-1.20) ✓   [C dropped]
+
+      <span class="formula-label" style="margin-top:16px;">STEP 2: Compute joint log-probs</span>
+      A→A: -0.69 + log(0.1) = -0.69 + (-2.30) = -2.99
+      A→B: -0.69 + log(0.6) = -0.69 + (-0.51) = -1.20 ★
+      A→C: -0.69 + log(0.3) = -0.69 + (-1.20) = -1.89
+      B→A: -1.20 + log(0.5) = -1.20 + (-0.69) = -1.89
+      B→B: -1.20 + log(0.2) = -1.20 + (-1.61) = -2.81
+      B→C: -1.20 + log(0.3) = -1.20 + (-1.20) = -2.40
+
+      Survivors: "AB" (-1.20) and "AC" (-1.89) ★
+
+      Greedy would have chosen: A (step 1) → B (step 2) = "AB"
+      Beam search found same here, but on longer sequences it diverges!
+    </div>
+  </div>
+
+  <!-- Problem 2 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 2</span>
+      <h3>Compute Dot-Product Attention</h3>
+    </div>
+    <p><strong>Scenario:</strong> You have an encoder with 3 hidden states and a decoder state at step 1:</p>
+    <div class="formula">
+      <span class="formula-label">VECTORS (simplified 2D for practice)</span>
+      Encoder:   h1 = [1, 0]    h2 = [0, 1]    h3 = [1, 1]
+      Decoder:   d1 = [1, 0.5]
+    </div>
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>Compute the score (dot product) of d1 with each encoder hidden state.</li>
+      <li>Apply softmax to get attention weights α.</li>
+      <li>Compute context vector C = Σ α<sub>j</sub> · h<sub>j</sub>.</li>
+      <li>Interpret: which encoder position did the decoder attend to most?</li>
+    </ol>
+
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
+      <span class="formula-label">WORKED SOLUTION</span>
+      Step 1 — Scores (dot products):
+        score(d1, h1) = 1·1 + 0.5·0 = 1.0
+        score(d1, h2) = 1·0 + 0.5·1 = 0.5
+        score(d1, h3) = 1·1 + 0.5·1 = 1.5  ← highest
+
+      Step 2 — Softmax (exp then normalize):
+        exp(1.0) = 2.718,  exp(0.5) = 1.649,  exp(1.5) = 4.482
+        sum = 8.849
+        α1 = 2.718/8.849 ≈ 0.307
+        α2 = 1.649/8.849 ≈ 0.186
+        α3 = 4.482/8.849 ≈ 0.507
+
+      Step 3 — Context vector:
+        C = 0.307·[1,0] + 0.186·[0,1] + 0.507·[1,1]
+          = [0.307,0] + [0,0.186] + [0.507,0.507]
+          = [0.814, 0.693]
+
+      Step 4 — Interpretation:
+        The decoder attends MOST to h3 (α=0.507), moderately to h1, least to h2.
+    </div>
+  </div>
+
+  <!-- Problem 3 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 3</span>
+      <h3>Temperature Sampling Calculation</h3>
+    </div>
+    <p><strong>Scenario:</strong> A language model produces the following raw logits for the next token:</p>
+    <div class="formula">
+      Logits: token_A = 3.0,  token_B = 1.0,  token_C = 0.5
+    </div>
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>Compute the softmax probabilities at T=1.0 (standard).</li>
+      <li>Compute the softmax probabilities at T=0.5 (cold/sharp).</li>
+      <li>Compute the softmax probabilities at T=2.0 (hot/flat).</li>
+      <li>Which temperature makes the model more deterministic? More random? Why?</li>
+    </ol>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
+      <span class="formula-label">WORKED SOLUTION</span>
+      T=1.0: exp(3)=20.09, exp(1)=2.72, exp(0.5)=1.65  →  sum=24.46
+        P(A)=0.821, P(B)=0.111, P(C)=0.067
+
+      T=0.5: logits/0.5 → 6.0, 2.0, 1.0
+        exp(6)=403.4, exp(2)=7.39, exp(1)=2.72  →  sum=413.5
+        P(A)=0.976, P(B)=0.018, P(C)=0.007  → near-deterministic!
+
+      T=2.0: logits/2.0 → 1.5, 0.5, 0.25
+        exp(1.5)=4.48, exp(0.5)=1.65, exp(0.25)=1.28  →  sum=7.41
+        P(A)=0.605, P(B)=0.223, P(C)=0.173  → more uniform, creative
+
+      Lower T = sharper, more deterministic, safer
+      Higher T = flatter, more random, more creative (but more errors)
+    </div>
+  </div>
+
+  <!-- Problem 4 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 4</span>
+      <h3>Self-Attention Matrix Computation</h3>
+    </div>
+    <p><strong>Scenario:</strong> A 3-token sequence ["The", "cat", "sat"] with embedding dimension d=2.</p>
+    <div class="formula">
+      Token embeddings (matrix X):
+        "The" →  x1 = [1, 0]
+        "cat" →  x2 = [0, 1]
+        "sat" →  x3 = [0.5, 0.5]
+
+      For simplicity, assume Q = K = V = X (no weight matrices).
+    </div>
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>Compute the attention score matrix QK<sup>T</sup> (3×3).</li>
+      <li>Scale by 1/√d = 1/√2 ≈ 0.707.</li>
+      <li>Apply softmax to each row.</li>
+      <li>For a causal model: mask the upper triangle (future positions). What does this mean for row 1 (The) vs. row 3 (sat)?</li>
+    </ol>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
+      <span class="formula-label">PARTIAL SOLUTION</span>
+      QK^T:
+        q1·k1=1·1+0·0=1,  q1·k2=1·0+0·1=0,  q1·k3=0.5
+        q2·k1=0,           q2·k2=1,           q2·k3=0.5
+        q3·k1=0.5,         q3·k2=0.5,         q3·k3=0.5
+
+      Matrix: [[1,   0,   0.5],
+               [0,   1,   0.5],
+               [0.5, 0.5, 0.5]]
+
+      After ×0.707: [[0.71, 0,    0.35],
+                     [0,    0.71, 0.35],
+                     [0.35, 0.35, 0.35]]
+
+      CAUSAL MASK (set upper triangle to -inf before softmax):
+        Row 1 (The):  [0.71, -inf, -inf]  → The can only attend to itself
+        Row 2 (cat):  [0,    0.71, -inf]  → cat attends to The and itself
+        Row 3 (sat):  [0.35, 0.35, 0.35] → sat attends to all three ✓
+    </div>
+  </div>
+
+  <!-- Problem 5 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 5</span>
+      <h3>RAG vs. Standard LLM: Design Problem</h3>
+    </div>
+    <p><strong>Scenario:</strong> You are building a Q&A system for a hospital. Users ask questions about hospital-specific protocols and recent drug approvals (updated monthly).</p>
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>Would you use a standard LLM or RAG? Justify with at least 3 specific reasons.</li>
+      <li>What would you put in the knowledge base (non-parametric memory)?</li>
+      <li>What retrieval failure scenarios must you guard against?</li>
+      <li>Would you choose RAG-Sequence or RAG-Token? Why?</li>
+    </ol>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
+      <span class="formula-label">MODEL ANSWER</span>
+      1. Use RAG because:
+         - Hospital protocols change monthly → LLM training data is stale
+         - Medical hallucinations are dangerous → need grounded, citable facts
+         - Hospital-specific protocols can't be in general training data
+         - Updating KB is cheaper than retraining a large model
+
+      2. Knowledge base contents:
+         - Hospital-specific protocol PDFs
+         - Drug approval databases (FDA, EMA), updated monthly
+         - Patient care guidelines, formulary lists
+         - Internal clinical research summaries
+
+      3. Failure scenarios:
+         - Query-document mismatch: "What's the max dose of X?" ≠ "Maximum
+           dosage for X" → use better embedding/chunking strategies
+         - Missing information: drug not yet in KB → system must say "unknown"
+           not hallucinate a dose
+         - Token limit: long protocols may be truncated → smart chunking needed
+
+      4. RAG-Token preferred here:
+         - Medical answers often synthesize from multiple sources
+           (protocol doc + drug database + research paper)
+         - Each fact in the answer may come from a different source
+         - RAG-Sequence would be limited to a single retrieved document
+    </div>
+  </div>
+
+  <!-- Problem 6 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 6</span>
+      <h3>RLHF Process Walkthrough</h3>
+    </div>
+    <p><strong>Scenario:</strong> You are the researcher running RLHF on a 7B parameter LLM. The prompt is: "Explain quantum entanglement to a 10-year-old."</p>
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>Describe what happens in the Sampling step.</li>
+      <li>What would a human rater look for when Ranking responses?</li>
+      <li>What does the Reward Model learn? What is its input and output?</li>
+      <li>What optimization algorithm is used to update the main LLM?</li>
+      <li>What is DPO and how does it differ from standard RLHF?</li>
+    </ol>
+  </div>
+
+  <!-- Problem 7 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">PROBLEM 7 — FROM SLIDES</span>
+      <h3>Greedy vs. Beam Search (Uzbek/English)</h3>
+    </div>
+    <p>This is the exercise directly from the course slides (Exercise slide at end of Beam Search section):</p>
+    <p><strong>Task:</strong></p>
+    <ol>
+      <li>Apply greedy decoding to translate the Uzbek sentence: <em>"Bugun ob-havo juda yaxshi."</em> (Today the weather is very good.)</li>
+      <li>Apply beam search with k=2 to the same sentence.</li>
+      <li>Apply a length penalty so the output is not more than 3 words.</li>
+      <li>Compare: which approach produces a more natural-sounding English output?</li>
+    </ol>
+    <div class="note">This exercise tests your understanding of how beam search considers multiple candidates. With length penalty, beam search will prefer shorter complete sequences.</div>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     QUICK REFERENCE SUMMARY
+══════════════════════════════════════════ -->
+<section class="section" style="border-bottom:none;">
+  <div class="section-header">
+    <span class="section-num" style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.3); color:var(--accent4);">⚡ SUMMARY</span>
+    <h2>Key Formulas & Definitions Cheatsheet</h2>
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">ENCODER-DECODER</span>
+    p(Y|X) = ∏ p(y_i | y_&lt;i, X)
+    h_i (decoder) = g(h_{i-1}, ŷ_{i-1}, C)
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">ATTENTION</span>
+    score(d, h_j) = d · h_j                           [dot-product]
+    α_j = exp(score_j) / Σ_k exp(score_k)             [softmax]
+    C_i = Σ_j α_j · h_j                               [context vector]
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">SELF-ATTENTION (TRANSFORMER)</span>
+    Attention(Q,K,V) = softmax(QK^T / √d_k) · V
+    MultiHead = Concat(head_1,...,head_h) W^O
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">BEAM SEARCH</span>
+    Complexity: O(T × V × k)
+    k=1 → Greedy    k→∞ → Exhaustive
+    At each step: evaluate W×B candidates, keep top W
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">TEMPERATURE SAMPLING</span>
+    P'(y) = softmax(logits / T)
+    T&lt;1 → sharp → deterministic
+    T&gt;1 → flat → random
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">RAG PIPELINE</span>
+    Query → Embed → Vector Search → Top-K Docs → Augmented Prompt → LLM → Response
+    RAG-Sequence: same doc for all tokens
+    RAG-Token: different doc per token
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">LLM PIPELINE</span>
+    Pre-training (SSL, next token pred) →
+    SFT (instruction pairs) →
+    RLHF/DPO (human preferences) →
+    Deployed model
+  </div>
+
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  Multimedia Application · Inha University Tashkent · Dr. Minhaz Uddin Ahmed<br>
+  Quiz 2 Prep Material · Generated from lecture slides
+</footer>
+
 </body>
 </html>
