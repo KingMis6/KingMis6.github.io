@@ -3,1800 +3,1118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multimedia Application — Quiz 2 Prep</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<title>Computer Architecture — Complete Study Guide</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
   :root {
-    --bg: #0a0e1a;
-    --surface: #111827;
-    --surface2: #1a2235;
-    --border: #1e2d45;
-    --accent: #00d4ff;
-    --accent2: #7c3aed;
-    --accent3: #10b981;
-    --accent4: #f59e0b;
-    --accent5: #ef4444;
-    --text: #e2e8f0;
-    --text-muted: #64748b;
-    --text-dim: #94a3b8;
-    --def-bg: #0d1f3c;
-    --def-border: #00d4ff;
-    --practice-bg: #0d1a0d;
-    --practice-border: #10b981;
-    --warn-bg: #1f0d0d;
-    --warn-border: #ef4444;
-    --note-bg: #1a1505;
-    --note-border: #f59e0b;
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --accent: #4f9eff;
+    --accent2: #ff6b6b;
+    --accent3: #50e3c2;
+    --accent4: #f5a623;
+    --accent5: #b06aff;
+    --text: #d4d8e8;
+    --muted: #6b7394;
+    --heading: #ffffff;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-  }
-
-  /* ── HEADER ── */
-  header {
-    background: linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #0a1628 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 60px 0 40px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.05) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .header-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    opacity: 0.8;
-  }
-  header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-  header h1 span { color: var(--accent); }
-  header p {
-    color: var(--text-dim);
+    font-family: var(--sans);
     font-size: 15px;
-    max-width: 600px;
-    margin: 0 auto;
+    line-height: 1.75;
   }
 
-  /* ── TOPIC PILLS ── */
-  .topic-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    padding: 20px 20px 0;
-    max-width: 1000px;
-    margin: 0 auto;
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+    background: var(--surface); border-right: 1px solid var(--border);
+    overflow-y: auto; padding: 24px 0; z-index: 100;
   }
-  .pill {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    padding: 6px 14px;
-    border-radius: 100px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    font-family: 'Space Mono', monospace;
+  nav .logo {
+    padding: 0 20px 20px;
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border); margin-bottom: 16px;
   }
-  .pill:hover { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
-
-  /* ── LAYOUT ── */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
+  nav a {
+    display: block; padding: 6px 20px;
+    color: var(--muted); text-decoration: none;
+    font-size: 13px; transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  nav a:hover, nav a.active {
+    color: var(--accent); border-left-color: var(--accent);
+    background: rgba(79,158,255,0.05);
+  }
+  nav .nav-section {
+    font-family: var(--mono); font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 16px 20px 4px; margin-top: 8px;
   }
 
-  /* ── TOC ── */
-  .toc {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 32px;
-    margin: 40px auto;
-    max-width: 1100px;
-    margin-left: 24px;
-    margin-right: 24px;
-  }
-  .toc h2 {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-  .toc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 8px;
-  }
-  .toc-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: var(--text-dim);
-    text-decoration: none;
-    font-size: 14px;
-    transition: all 0.2s;
-    border: 1px solid transparent;
-  }
-  .toc-item:hover { background: var(--surface2); border-color: var(--border); color: var(--text); }
-  .toc-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--accent);
-    min-width: 20px;
-  }
+  /* MAIN */
+  main { margin-left: 260px; padding: 48px 56px; max-width: 960px; }
 
-  /* ── SECTION ── */
-  .section {
-    padding: 60px 0;
-    border-bottom: 1px solid var(--border);
+  /* HERO */
+  .hero {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 40px; margin-bottom: 56px;
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(79,158,255,0.04) 100%);
   }
+  .hero .tag {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 32px; font-weight: 600; color: var(--heading);
+    line-height: 1.2; margin-bottom: 12px;
+  }
+  .hero p { color: var(--muted); max-width: 560px; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 72px; }
   .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 32px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
   }
   .section-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    background: rgba(0,212,255,0.08);
-    border: 1px solid rgba(0,212,255,0.2);
-    padding: 4px 10px;
-    border-radius: 4px;
-    white-space: nowrap;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent); background: rgba(79,158,255,0.1);
+    border: 1px solid rgba(79,158,255,0.2); border-radius: 4px;
+    padding: 2px 8px; white-space: nowrap;
   }
-  .section h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 400;
-    color: #fff;
-  }
+  h2 { font-size: 22px; font-weight: 600; color: var(--heading); }
+  h3 { font-size: 16px; font-weight: 500; color: var(--heading); margin: 28px 0 12px; }
+  h4 { font-size: 14px; font-weight: 500; color: var(--accent3); margin: 20px 0 8px;
+       font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; }
 
-  /* ── DEFINITION BOX ── */
-  .def {
-    background: var(--def-bg);
-    border-left: 3px solid var(--def-border);
-    border-radius: 0 8px 8px 0;
-    padding: 20px 24px;
-    margin: 20px 0;
-    position: relative;
-  }
-  .def::before {
-    content: 'DEFINITION';
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 8px;
-    opacity: 0.7;
-  }
-  .def strong { color: var(--accent); font-weight: 600; }
-  .def p { color: var(--text-dim); font-size: 15px; }
-
-  /* ── KEY CONCEPT ── */
-  .key-concept {
-    background: rgba(124,58,237,0.08);
-    border: 1px solid rgba(124,58,237,0.25);
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin: 20px 0;
-  }
-  .key-concept .kc-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--accent2);
-    margin-bottom: 8px;
-  }
-  .key-concept h4 { color: #c4b5fd; margin-bottom: 8px; font-size: 16px; }
-  .key-concept p { color: var(--text-dim); font-size: 15px; }
-
-  /* ── NOTE ── */
-  .note {
-    background: var(--note-bg);
-    border-left: 3px solid var(--note-border);
-    border-radius: 0 8px 8px 0;
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-size: 14px;
-    color: #d1b264;
-  }
-  .note::before { content: '⚠ NOTE · '; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; }
-
-  /* ── FORMULA BOX ── */
-  .formula {
-    background: #050d1a;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 20px 0;
-    font-family: 'Space Mono', monospace;
-    font-size: 14px;
-    color: #a5f3fc;
-    overflow-x: auto;
-  }
-  .formula .formula-label {
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  /* ── PRACTICE SECTION ── */
-  .practice-section {
-    background: var(--practice-bg);
-    border: 1px solid rgba(16,185,129,0.2);
-    border-radius: 12px;
-    padding: 28px;
-    margin: 28px 0;
-  }
-  .practice-section .ps-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .practice-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--accent3);
-    background: rgba(16,185,129,0.1);
-    border: 1px solid rgba(16,185,129,0.3);
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-  .practice-section h3 { color: #6ee7b7; font-size: 17px; }
-  .practice-section p, .practice-section li { color: var(--text-dim); font-size: 15px; }
-  .practice-section ol, .practice-section ul { padding-left: 20px; margin-top: 12px; }
-  .practice-section li { margin-bottom: 10px; }
-  .practice-section .step {
-    background: rgba(16,185,129,0.05);
-    border: 1px solid rgba(16,185,129,0.1);
-    border-radius: 8px;
-    padding: 14px 18px;
-    margin: 10px 0;
-  }
-  .practice-section .step strong { color: #6ee7b7; }
-
-  /* ── COMPARISON TABLE ── */
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 14px;
-  }
-  .compare-table th {
-    background: var(--surface2);
-    color: var(--accent);
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 1px;
-    padding: 12px 16px;
-    text-align: left;
-    border: 1px solid var(--border);
-  }
-  .compare-table td {
-    padding: 10px 16px;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    vertical-align: top;
-  }
-  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-  .compare-table .highlight { color: var(--text); font-weight: 500; }
-
-  /* ── GRID CARDS ── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin: 20px 0;
-  }
+  /* CARDS */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    transition: border-color 0.2s;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px; margin-bottom: 16px;
   }
-  .card:hover { border-color: var(--accent); }
-  .card-icon { font-size: 24px; margin-bottom: 12px; }
-  .card h4 { color: #fff; font-size: 15px; margin-bottom: 8px; }
-  .card p { color: var(--text-dim); font-size: 14px; }
+  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .card-row.three { grid-template-columns: 1fr 1fr 1fr; }
 
-  /* ── FLOW DIAGRAM ── */
-  .flow {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0;
-    margin: 20px 0;
+  /* CONCEPT PILL */
+  .pill {
+    display: inline-block; font-family: var(--mono); font-size: 11px;
+    padding: 2px 8px; border-radius: 4px; margin: 2px;
   }
-  .flow-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 18px;
+  .pill-blue { background: rgba(79,158,255,0.12); color: var(--accent); border: 1px solid rgba(79,158,255,0.25); }
+  .pill-green { background: rgba(80,227,194,0.1); color: var(--accent3); border: 1px solid rgba(80,227,194,0.2); }
+  .pill-red { background: rgba(255,107,107,0.1); color: var(--accent2); border: 1px solid rgba(255,107,107,0.2); }
+  .pill-yellow { background: rgba(245,166,35,0.1); color: var(--accent4); border: 1px solid rgba(245,166,35,0.2); }
+  .pill-purple { background: rgba(176,106,255,0.1); color: var(--accent5); border: 1px solid rgba(176,106,255,0.2); }
+
+  /* CODE BLOCKS */
+  .code {
+    background: #0a0c10; border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px 20px;
+    font-family: var(--mono); font-size: 13px;
+    line-height: 1.7; overflow-x: auto; margin: 12px 0;
+  }
+  .c-blue { color: var(--accent); }
+  .c-green { color: var(--accent3); }
+  .c-yellow { color: var(--accent4); }
+  .c-red { color: var(--accent2); }
+  .c-purple { color: var(--accent5); }
+  .c-muted { color: var(--muted); }
+
+  /* RULE BOX */
+  .rule-box {
+    border-left: 3px solid var(--accent4); background: rgba(245,166,35,0.05);
+    border-radius: 0 6px 6px 0; padding: 14px 18px; margin: 16px 0;
     font-size: 14px;
-    color: var(--text-dim);
-    white-space: nowrap;
   }
-  .flow-box.active { background: rgba(0,212,255,0.08); border-color: var(--accent); color: var(--accent); }
-  .flow-arrow {
-    color: var(--text-muted);
-    font-size: 18px;
-    padding: 0 8px;
-  }
+  .rule-box.blue { border-left-color: var(--accent); background: rgba(79,158,255,0.05); }
+  .rule-box.green { border-left-color: var(--accent3); background: rgba(80,227,194,0.05); }
+  .rule-box.red { border-left-color: var(--accent2); background: rgba(255,107,107,0.05); }
+  .rule-box.purple { border-left-color: var(--accent5); background: rgba(176,106,255,0.05); }
+  .rule-box strong { color: var(--heading); }
 
-  /* ── CODE BLOCK ── */
-  .code-block {
-    background: #030912;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    color: #a5f3fc;
-    overflow-x: auto;
-    margin: 16px 0;
-    line-height: 1.6;
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th {
+    background: var(--surface2); color: var(--accent); font-family: var(--mono);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 10px 14px; text-align: left; border: 1px solid var(--border);
   }
-  .code-block .kw { color: #c084fc; }
-  .code-block .str { color: #86efac; }
-  .code-block .cm { color: #475569; font-style: italic; }
-  .code-block .fn { color: #fbbf24; }
-  .code-block .num { color: #f97316; }
+  td { padding: 9px 14px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  td code { font-family: var(--mono); color: var(--accent3); font-size: 12px; }
 
-  /* ── QUIZ CALLOUT ── */
-  .quiz-callout {
-    background: rgba(245,158,11,0.07);
-    border: 1px solid rgba(245,158,11,0.25);
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin: 20px 0;
+  /* STEP BOXES */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
   }
-  .quiz-callout::before {
-    content: '🎯 LIKELY EXAM QUESTION';
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1px;
-    color: var(--accent4);
-    display: block;
-    margin-bottom: 8px;
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0; width: 28px; height: 28px;
+    background: rgba(79,158,255,0.1); border: 1px solid rgba(79,158,255,0.3);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    margin-top: 1px;
   }
-  .quiz-callout p { color: #fde68a; font-size: 15px; }
+  .step-content { flex: 1; }
+  .step-title { font-weight: 500; color: var(--heading); margin-bottom: 4px; }
 
-  /* ── PROS/CONS ── */
-  .pros-cons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 20px 0;
+  /* COMPARISON */
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; margin: 16px 0;
   }
-  .pros, .cons {
-    border-radius: 8px;
-    padding: 18px;
+  .compare-col { background: var(--surface); padding: 20px; }
+  .compare-title {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 12px; font-weight: 600;
   }
-  .pros {
-    background: rgba(16,185,129,0.05);
-    border: 1px solid rgba(16,185,129,0.2);
-  }
-  .cons {
-    background: rgba(239,68,68,0.05);
-    border: 1px solid rgba(239,68,68,0.2);
-  }
-  .pros h4 { color: var(--accent3); margin-bottom: 10px; font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
-  .cons h4 { color: var(--accent5); margin-bottom: 10px; font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
-  .pros li, .cons li { color: var(--text-dim); font-size: 14px; margin-bottom: 6px; list-style: none; padding-left: 16px; position: relative; }
-  .pros li::before { content: '+'; color: var(--accent3); position: absolute; left: 0; }
-  .cons li::before { content: '−'; color: var(--accent5); position: absolute; left: 0; }
+  .compare-title.blue { color: var(--accent); }
+  .compare-title.green { color: var(--accent3); }
+  .compare-title.yellow { color: var(--accent4); }
+  .compare-title.red { color: var(--accent2); }
 
-  /* ── TEXT ── */
-  p { margin-bottom: 14px; color: var(--text-dim); }
-  h3 { font-size: 18px; color: #fff; margin: 28px 0 12px; }
-  h4 { font-size: 15px; color: var(--text); margin: 20px 0 8px; }
-  ul, ol { padding-left: 22px; margin-bottom: 14px; }
-  li { color: var(--text-dim); margin-bottom: 6px; font-size: 15px; }
-  strong { color: var(--text); }
+  /* SIGNAL TABLE */
+  .sig-val { font-family: var(--mono); font-weight: 600; }
+  .v0 { color: var(--accent2); }
+  .v1 { color: var(--accent3); }
+  .vx { color: var(--muted); }
+  .vbin { color: var(--accent4); }
 
-  /* ── BACK TO TOP ── */
-  .back-top {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    color: var(--text-muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    transition: color 0.2s;
+  /* TRUTH */
+  .truth { display: inline-flex; align-items: center; gap: 6px; }
+  .truth .t { color: var(--accent3); font-family: var(--mono); font-weight: 600; }
+  .truth .f { color: var(--accent2); font-family: var(--mono); font-weight: 600; }
+
+  /* QUIZ */
+  .quiz-item {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 14px 16px; margin: 8px 0; font-size: 14px;
+    cursor: pointer; transition: border-color 0.2s;
   }
-  .back-top:hover { color: var(--accent); }
+  .quiz-item:hover { border-color: var(--muted); }
+  .quiz-item .q { color: var(--text); margin-bottom: 4px; }
+  .quiz-item .a { display: none; font-family: var(--mono); font-size: 12px; padding-top: 8px; border-top: 1px solid var(--border); margin-top: 8px; }
+  .quiz-item.open .a { display: block; }
+  .quiz-item .toggle { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 20px 0;
+  /* MEMORY VIZ */
+  .mem-row {
+    display: flex; align-items: center; gap: 0;
+    font-family: var(--mono); font-size: 12px; margin-bottom: 2px;
   }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 40px;
-    color: var(--text-muted);
-    font-size: 13px;
-    font-family: 'Space Mono', monospace;
-    border-top: 1px solid var(--border);
+  .mem-addr {
+    width: 80px; color: var(--muted); flex-shrink: 0; font-size: 11px;
   }
+  .mem-block {
+    height: 24px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; border: 1px solid transparent;
+    border-radius: 3px; transition: all 0.2s; cursor: default;
+  }
+  .mem-block.hit { background: rgba(80,227,194,0.15); color: var(--accent3); border-color: rgba(80,227,194,0.3); }
+  .mem-block.miss { background: rgba(255,107,107,0.1); color: var(--accent2); border-color: rgba(255,107,107,0.2); }
+  .mem-block.empty { background: rgba(255,255,255,0.03); color: var(--muted); border-color: var(--border); }
+  .mem-block.evict { background: rgba(245,166,35,0.1); color: var(--accent4); border-color: rgba(245,166,35,0.2); }
 
-  @media (max-width: 640px) {
-    .pros-cons { grid-template-columns: 1fr; }
-    .flow { flex-direction: column; align-items: flex-start; }
-    .flow-arrow { transform: rotate(90deg); }
+  /* PIPELINE VIZ */
+  .pipe-stage {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 6px 14px; border-radius: 4px; font-family: var(--mono);
+    font-size: 12px; font-weight: 600; margin: 2px;
+  }
+  .pipe-if { background: rgba(79,158,255,0.15); color: var(--accent); border: 1px solid rgba(79,158,255,0.3); }
+  .pipe-id { background: rgba(80,227,194,0.12); color: var(--accent3); border: 1px solid rgba(80,227,194,0.25); }
+  .pipe-ex { background: rgba(245,166,35,0.1); color: var(--accent4); border: 1px solid rgba(245,166,35,0.2); }
+  .pipe-mem { background: rgba(176,106,255,0.1); color: var(--accent5); border: 1px solid rgba(176,106,255,0.2); }
+  .pipe-wb { background: rgba(255,107,107,0.1); color: var(--accent2); border: 1px solid rgba(255,107,107,0.2); }
+  .pipe-arrow { color: var(--muted); margin: 0 4px; }
+  .pipe-empty { opacity: 0.2; }
+
+  /* FSM */
+  .fsm-state {
+    display: inline-block; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px 16px; margin: 4px; font-size: 13px;
+  }
+  .fsm-state .name { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+  .fsm-state .sigs { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+  /* NOTICE */
+  .notice {
+    background: rgba(79,158,255,0.05); border: 1px solid rgba(79,158,255,0.15);
+    border-radius: 6px; padding: 12px 16px; margin: 16px 0; font-size: 13px;
+  }
+  .notice strong { color: var(--accent); }
+
+  p { margin-bottom: 12px; color: var(--text); }
+  ul, ol { margin: 8px 0 12px 20px; }
+  li { margin-bottom: 4px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  strong { color: var(--heading); font-weight: 500; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { width: 200px; }
+    main { margin-left: 200px; padding: 32px 28px; }
+    .card-row { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .card-row.three { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<header id="top">
-  <div class="header-tag">Inha University Tashkent · Multimedia Application</div>
-  <h1>Quiz <span>2</span> Preparation Guide</h1>
-  <p>Complete study material covering Encoder-Decoder, Attention, Transformers, LLMs, RAG, Beam Search, and Dialogue Systems</p>
-  <div class="topic-pills">
-    <a href="#s1" class="pill">Encoder-Decoder</a>
-    <a href="#s2" class="pill">Attention</a>
-    <a href="#s3" class="pill">Transformers</a>
-    <a href="#s4" class="pill">Transfer Learning</a>
-    <a href="#s5" class="pill">Beam Search</a>
-    <a href="#s6" class="pill">RAG</a>
-    <a href="#s7" class="pill">LLM Pipeline</a>
-    <a href="#s8" class="pill">Dialogue Systems</a>
-    <a href="#s9" class="pill">MoE</a>
-    <a href="#practice" class="pill">🧪 Practice Problems</a>
-  </div>
-</header>
+<!-- NAV -->
+<nav>
+  <div class="logo">SOC2060 · Study Guide</div>
+  <div class="nav-section">Core Concepts</div>
+  <a href="#isa-uarch">1. ISA vs Microarchitecture</a>
+  <a href="#single-cycle">2. Single-Cycle Datapath</a>
+  <a href="#multi-cycle">3. Multi-Cycle Datapath</a>
+  <a href="#lc3">4. LC-3 Machine Code</a>
+  <a href="#cache">5. Caches</a>
+  <div class="nav-section">Reference</div>
+  <a href="#alu-ref">ALU Control Codes</a>
+  <a href="#signals-ref">Signal Quick Ref</a>
+  <a href="#formulas">Formulas</a>
+</nav>
 
-<!-- TOC -->
-<div class="toc" id="toc">
-  <h2>// Table of Contents</h2>
-  <div class="toc-grid">
-    <a href="#s1" class="toc-item"><span class="toc-num">01</span>Encoder-Decoder Model</a>
-    <a href="#s2" class="toc-item"><span class="toc-num">02</span>Attention Mechanism</a>
-    <a href="#s3" class="toc-item"><span class="toc-num">03</span>Transformers & Self-Attention</a>
-    <a href="#s4" class="toc-item"><span class="toc-num">04</span>Transfer Learning & Pre-training</a>
-    <a href="#s5" class="toc-item"><span class="toc-num">05</span>Beam Search</a>
-    <a href="#s6" class="toc-item"><span class="toc-num">06</span>RAG</a>
-    <a href="#s7" class="toc-item"><span class="toc-num">07</span>LLM Full Pipeline</a>
-    <a href="#s8" class="toc-item"><span class="toc-num">08</span>Dialogue Systems</a>
-    <a href="#s9" class="toc-item"><span class="toc-num">09</span>Mixture of Experts</a>
-    <a href="#s10" class="toc-item"><span class="toc-num">10</span>Decoding & Sampling</a>
-    <a href="#practice" class="toc-item"><span class="toc-num">✦</span>Practice Problems</a>
-  </div>
-</div>
+<!-- MAIN -->
+<main>
 
-<div class="container">
-
-<!-- ══════════════════════════════════════════
-     SECTION 1: ENCODER-DECODER
-══════════════════════════════════════════ -->
-<section class="section" id="s1">
-  <div class="section-header">
-    <span class="section-num">01</span>
-    <h2>Encoder-Decoder Model</h2>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="tag">Computer Architecture · SOC2060 · Spring 2026</div>
+    <h1>Complete Study Guide</h1>
+    <p>Every concept from the course material — ISA, datapaths, caches, virtual memory — explained from scratch with worked examples, rules, and the reasoning behind everything.</p>
   </div>
 
-  <div class="def">
-    <strong>Encoder-Decoder (Seq2Seq) Model</strong>
-    <p>A neural architecture used when input and output sequences can have <em>different lengths</em> and don't align word-to-word. Also called <strong>sequence-to-sequence networks</strong>. Key applications: machine translation, summarization, dialogue, question answering.</p>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: ISA vs MICROARCHITECTURE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section" id="isa-uarch">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>ISA vs. Microarchitecture</h2>
+    </div>
+
+    <p>The single most important distinction in this course. Every True/False question about properties comes down to this one line.</p>
+
+    <div class="compare">
+      <div class="compare-col">
+        <div class="compare-title blue">ISA — The Contract</div>
+        <p style="font-size:13px">What the programmer and compiler see. The hardware/software interface. <strong>Visible to software.</strong></p>
+        <ul style="font-size:13px">
+          <li>Opcode values (add = 0x20)</li>
+          <li>Number of registers (32 in MIPS)</li>
+          <li>Register names ($t0, $s0…)</li>
+          <li>Instruction formats (R/I/J-type)</li>
+          <li>Addressing modes</li>
+          <li>Memory model</li>
+          <li>Page size (set by ISA)</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-title green">Microarchitecture — The Implementation</div>
+        <p style="font-size:13px">How the ISA is actually built in silicon. <strong>Invisible to software.</strong></p>
+        <ul style="font-size:13px">
+          <li>Number of clock cycles per instruction (CPI)</li>
+          <li>Block/cache line size</li>
+          <li>Whether execution is pipelined</li>
+          <li>Intermediate register states (A, B, MDR, IR, ALUOut)</li>
+          <li>Whether there's a separate I-cache and D-cache</li>
+          <li>Page replacement policy (cooperative with OS)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-box">
+      <strong>The golden test:</strong> "Can a programmer write code that behaves differently depending on this property?" If yes → ISA. If no (the code just runs slower or faster) → Microarchitecture.
+    </div>
+
+    <h3>Why Intermediate States Are Invisible</h3>
+    <p>In a multi-cycle machine, one instruction takes multiple clock cycles. During those intermediate cycles the processor is in states like "computed the memory address, now fetching data." These intermediate states are <strong>not</strong> in the ISA — no instruction can observe them. From the programmer's view, the instruction either hasn't executed yet or it has — nothing in between.</p>
+
+    <div class="rule-box green">
+      <strong>Key quote from lectures:</strong> "From ISA point of view, there are no intermediate states between AS and AS' during instruction execution."
+    </div>
+
+    <h3>True/False Answer Logic</h3>
+    <table>
+      <tr><th>Statement</th><th>Answer</th><th>Reason</th></tr>
+      <tr><td>Block Size is property of Microarchitecture</td><td><span class="truth"><span class="t">T</span></span></td><td>Cache design decision, invisible to programs</td></tr>
+      <tr><td>Cycles to execute ADD is property of Microarchitecture</td><td><span class="truth"><span class="t">T</span></span></td><td>ISA says <em>what</em> ADD does; uarch decides <em>how many cycles</em></td></tr>
+      <tr><td>Multi-cycle: current signals generated in previous cycle</td><td><span class="truth"><span class="t">T</span></span></td><td>The FSM controller pipelines its own operation</td></tr>
+      <tr><td>Intermediate states visible to programmers</td><td><span class="truth"><span class="f">F</span></span></td><td>Only architectural state at instruction boundaries is visible</td></tr>
+      <tr><td>User processes have equal priority to OS</td><td><span class="truth"><span class="f">F</span></span></td><td>OS runs in supervisor mode with higher privilege</td></tr>
+      <tr><td>Multi-cycle: each phase takes only one clock cycle</td><td><span class="truth"><span class="f">F</span></span></td><td>Each phase <em>can</em> take multiple cycles — that's the whole point</td></tr>
+      <tr><td>OS and microarchitecture cooperatively manage page replacement</td><td><span class="truth"><span class="t">T</span></span></td><td>HW MMU does translation; OS decides which pages to evict (LRU/CLOCK)</td></tr>
+      <tr><td>Pipelined MIPS only allows a single memory</td><td><span class="truth"><span class="f">F</span></span></td><td>Pipelining <em>requires</em> separate I-cache and D-cache to avoid structural hazards</td></tr>
+      <tr><td>Compiler should know number of registers</td><td><span class="truth"><span class="t">T</span></span></td><td>Register count is ISA-level — compiler uses register names in generated code</td></tr>
+      <tr><td>Pipelined throughput decreases with repetition of identical ops</td><td><span class="truth"><span class="f">F</span></span></td><td>Repetition of identical, independent ops is <em>ideal</em> for pipelines</td></tr>
+    </table>
   </div>
 
-  <h3>Why Not Simple RNN?</h3>
-  <p>In simple tasks like part-of-speech tagging, each input token maps to exactly one output tag — local information suffices. But in <strong>machine translation</strong>, a verb may appear at the beginning in one language and at the end in another. The alignment is highly indirect, requiring the encoder-decoder architecture.</p>
 
-  <h3>Three Core Components</h3>
-  <div class="card-grid">
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: SINGLE-CYCLE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section" id="single-cycle">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Single-Cycle Processor &amp; Control Signals</h2>
+    </div>
+
+    <p>In a single-cycle processor, every instruction completes in <strong>exactly one clock cycle</strong>. All control signals are generated in that same cycle by the Control Unit reading the opcode. The clock cycle must be long enough for the <em>slowest</em> possible instruction (usually lw).</p>
+
+    <div class="compare">
+      <div class="compare-col">
+        <div class="compare-title blue">Advantage</div>
+        <p style="font-size:13px">Simple design. CPI = 1 always.</p>
+      </div>
+      <div class="compare-col">
+        <div class="compare-title red">Disadvantage</div>
+        <p style="font-size:13px">Clock period set by slowest instruction. Fast instructions (add) waste time waiting.</p>
+      </div>
+    </div>
+
+    <h3>What Every Control Signal Does</h3>
+    <p>Think of each signal as answering one question about a mux or component:</p>
+
+    <table>
+      <tr><th>Signal</th><th>0 means</th><th>1 means</th><th>Affected by</th></tr>
+      <tr><td><code>RegDst</code></td><td>Write result to <strong>rt</strong> (I-type)</td><td>Write result to <strong>rd</strong> (R-type)</td><td>Instruction type</td></tr>
+      <tr><td><code>ALUSrc</code></td><td>Second ALU input = register (RD2)</td><td>Second ALU input = sign-extended immediate</td><td>R-type vs I-type</td></tr>
+      <tr><td><code>MemtoReg</code></td><td>Write ALU result to register</td><td>Write memory data to register</td><td>lw vs others</td></tr>
+      <tr><td><code>RegWrite</code></td><td>Don't write register</td><td>Write register file</td><td>sw, branch, jump don't write</td></tr>
+      <tr><td><code>MemRead</code></td><td>Don't read memory</td><td>Read data memory</td><td>Only lw</td></tr>
+      <tr><td><code>MemWrite</code></td><td>Don't write memory</td><td>Write data memory</td><td>Only sw</td></tr>
+      <tr><td><code>Branch</code></td><td>Not a branch</td><td>Is a branch (AND'd with Zero)</td><td>beq/bne</td></tr>
+      <tr><td><code>PCSrc1</code> (Jump)</td><td>PC from normal flow</td><td>PC from jump target</td><td>Only j/jal</td></tr>
+      <tr><td><code>PCSrc2</code> (BrTaken)</td><td>PC+4</td><td>PC = branch target</td><td>Branch AND Zero signal</td></tr>
+      <tr><td><code>ALUControl[2:0]</code></td><td colspan="2">See ALU reference below</td><td>ALU operation needed</td></tr>
+    </table>
+
+    <h3>The Method: How to Fill Any Control Signal Table</h3>
     <div class="card">
-      <div class="card-icon">📥</div>
-      <h4>1. Encoder</h4>
-      <p>Accepts input sequence x<sub>1:n</sub>, generates contextualized hidden representations h<sub>1:n</sub>. Can be LSTM, CNN, or Transformer.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Identify the instruction type</div>
+            R-type (opcode 0, uses funct), I-type (non-zero opcode, uses rt as dest), J-type (jump).
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Trace the data flow through the datapath</div>
+            Where does data come from? Where does it go? Does it touch memory? Which register is written?
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">For each signal, ask "does this component participate?"</div>
+            If the component is not in the data path for this instruction, it's X (don't care).
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Set ALUControl based on the operation needed</div>
+            Add for address computation (lw/sw), subtract for compare (beq), operation from funct for R-type.
+          </div>
+        </div>
+      </div>
     </div>
+
+    <h3>Worked Example: subi (I-type subtract)</h3>
+    <p><strong>What subi does:</strong> <code>GPR[rt] ← GPR[rs] − sign_ext(imm)</code> then <code>PC ← PC+4</code></p>
+    <p>Trace: Read rs from register file → ALU gets rs and the immediate → ALU subtracts → result goes to rt → no memory involved → PC just increments.</p>
+
+    <table>
+      <tr><th>Signal</th><th>Value</th><th>Why</th></tr>
+      <tr><td>RegDst</td><td><span class="sig-val v0">0</span></td><td>I-type: destination is rt (bits 20-16), not rd</td></tr>
+      <tr><td>PCSrc1</td><td><span class="sig-val v0">0</span></td><td>Not a jump</td></tr>
+      <tr><td>Branch</td><td><span class="sig-val v0">0</span></td><td>Not a branch</td></tr>
+      <tr><td>MemRead</td><td><span class="sig-val v0">0</span></td><td>No memory read</td></tr>
+      <tr><td>MemtoReg</td><td><span class="sig-val v0">0</span></td><td>Write ALU result to register, not memory data</td></tr>
+      <tr><td>ALUControl</td><td><span class="sig-val vbin">110</span></td><td>Subtract operation</td></tr>
+      <tr><td>MemWrite</td><td><span class="sig-val v0">0</span></td><td>No memory write</td></tr>
+      <tr><td>ALUSrc</td><td><span class="sig-val v1">1</span></td><td>Second operand is the immediate, not a register</td></tr>
+      <tr><td>RegWrite</td><td><span class="sig-val v1">1</span></td><td>We write the result to rt</td></tr>
+      <tr><td>PCSrc2</td><td><span class="sig-val v0">0</span></td><td>Not a taken branch</td></tr>
+    </table>
+
+    <h3>Worked Example: j (J-type jump)</h3>
+    <p><strong>What j does:</strong> <code>PC ← {PC[31:28], imm26, 2'b00}</code></p>
+    <p>Trace: No registers read or written. No ALU needed. No memory. Just take the jump address and update PC.</p>
+
+    <table>
+      <tr><th>Signal</th><th>Value</th><th>Why</th></tr>
+      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>No register written, don't care</td></tr>
+      <tr><td>PCSrc1</td><td><span class="sig-val v1">1</span></td><td>This selects the jump target address for PC</td></tr>
+      <tr><td>Branch</td><td><span class="sig-val v0">0</span></td><td>Not a conditional branch</td></tr>
+      <tr><td>MemRead</td><td><span class="sig-val v0">0</span></td><td>No memory read</td></tr>
+      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>No register written, don't care</td></tr>
+      <tr><td>ALUControl</td><td><span class="sig-val vx">XXX</span></td><td>ALU not used</td></tr>
+      <tr><td>MemWrite</td><td><span class="sig-val v0">0</span></td><td>No memory write</td></tr>
+      <tr><td>ALUSrc</td><td><span class="sig-val vx">X</span></td><td>ALU not used, don't care</td></tr>
+      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>Jump writes no register</td></tr>
+      <tr><td>PCSrc2</td><td><span class="sig-val v0">0</span></td><td>Not a branch taken</td></tr>
+    </table>
+
+    <div class="rule-box">
+      <strong>Don't care (X) rule:</strong> If a signal controls a mux or component that is completely bypassed by the instruction's data path, its value literally doesn't matter — the output of that mux is never used. Write X. Never leave it blank.
+    </div>
+
+    <h3>Reference: Signal Values for All Instruction Types</h3>
+    <table>
+      <tr><th>Instruction</th><th>RegDst</th><th>ALUSrc</th><th>MemtoReg</th><th>RegWrite</th><th>MemRead</th><th>MemWrite</th><th>Branch</th><th>PCSrc1</th><th>ALUControl</th></tr>
+      <tr><td>R-type (add/sub/and/or)</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>from funct</td></tr>
+      <tr><td>I-type ALU (addi/subi)</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>010/110</td></tr>
+      <tr><td>lw</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>010</td></tr>
+      <tr><td>sw</td><td>X</td><td>1</td><td>X</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>010</td></tr>
+      <tr><td>beq</td><td>X</td><td>0</td><td>X</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>110</td></tr>
+      <tr><td>j</td><td>X</td><td>X</td><td>X</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>XXX</td></tr>
+    </table>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: MULTI-CYCLE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section" id="multi-cycle">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Multi-Cycle Processor &amp; FSM Control</h2>
+    </div>
+
+    <p>The multi-cycle processor breaks each instruction into phases, each taking one clock cycle. The advantage: clock cycle is short (set by the slowest <em>phase</em>, not the slowest instruction). Intermediate results are stored in registers between phases: <strong>IR</strong> (instruction register), <strong>A</strong> and <strong>B</strong> (register file outputs), <strong>ALUOut</strong>, <strong>MDR</strong> (memory data register).</p>
+
+    <h3>The 5 Phases</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0">
+      <div class="pipe-stage pipe-if">IF — Instruction Fetch</div>
+      <div style="color:var(--muted);display:flex;align-items:center">→</div>
+      <div class="pipe-stage pipe-id">ID — Decode / Reg Read</div>
+      <div style="color:var(--muted);display:flex;align-items:center">→</div>
+      <div class="pipe-stage pipe-ex">EX — Execute / Addr Gen</div>
+      <div style="color:var(--muted);display:flex;align-items:center">→</div>
+      <div class="pipe-stage pipe-mem">MEM — Memory Access</div>
+      <div style="color:var(--muted);display:flex;align-items:center">→</div>
+      <div class="pipe-stage pipe-wb">WB — Write Back</div>
+    </div>
+
+    <div class="rule-box blue">
+      <strong>Not all instructions go through all 5 phases.</strong> R-type skips MEM. sw skips WB. beq and j can finish after EX. Each instruction takes a different number of cycles.
+    </div>
+
+    <h3>New Signals in Multi-Cycle (not in single-cycle)</h3>
+    <table>
+      <tr><th>Signal</th><th>0 means</th><th>1 means</th></tr>
+      <tr><td><code>IorD</code></td><td>Memory address = PC (fetching instruction)</td><td>Memory address = ALUOut (accessing data)</td></tr>
+      <tr><td><code>IRWrite</code></td><td>Don't update IR</td><td>Latch instruction from memory into IR</td></tr>
+      <tr><td><code>PCWrite</code></td><td>Don't update PC</td><td>Write new value to PC</td></tr>
+      <tr><td><code>ALUSrcA</code></td><td>ALU input A = current PC</td><td>ALU input A = register A (rs value)</td></tr>
+      <tr><td><code>ALUSrcB[1:0]</code></td><td>00 = register B</td><td>01 = const 4 / 10 = sign-ext imm / 11 = imm&lt;&lt;2</td></tr>
+      <tr><td><code>PCSrc</code></td><td>PC ← ALU result (= PC+4 during IF)</td><td>PC ← branch target</td></tr>
+    </table>
+
+    <h3>Phase-by-Phase: What Happens and Why</h3>
+
+    <h4>IF — Instruction Fetch (same for ALL instructions)</h4>
+    <p>Goal: Read instruction from memory at address PC. Also compute PC+4 so we can advance.</p>
+    <div class="code">
+<span class="c-muted">-- Two things happen simultaneously:</span>
+<span class="c-green">IR ← Memory[PC]</span>        <span class="c-muted">(IRWrite=1 latches the instruction)</span>
+<span class="c-green">PC ← PC + 4</span>            <span class="c-muted">(ALU computes PC+4, PCWrite=1 updates PC)</span>
+
+<span class="c-muted">-- ALU is used to compute PC+4:</span>
+<span class="c-blue">IorD=0</span>      <span class="c-muted">(memory address = PC, not data address)</span>
+<span class="c-blue">ALUSrcA=0</span>   <span class="c-muted">(ALU A input = PC)</span>
+<span class="c-blue">ALUSrcB=01</span>  <span class="c-muted">(ALU B input = constant 4)</span>
+<span class="c-blue">ALUCtrl=010</span> <span class="c-muted">(add)</span>
+<span class="c-blue">PCSrc=0</span>     <span class="c-muted">(PC gets ALU result = PC+4)</span>
+<span class="c-blue">PCWrite=1</span>   <span class="c-muted">(write the new PC)</span>
+<span class="c-blue">IRWrite=1</span>   <span class="c-muted">(save instruction into IR)</span>
+    </div>
+
+    <h4>ID — Instruction Decode / Register Read (same for ALL instructions)</h4>
+    <p>Goal: Decode opcode, read the two source registers (rs and rt) into internal registers A and B. Also pre-compute branch target using the ALU (so it's ready if needed).</p>
+    <div class="code">
+<span class="c-green">A ← GPR[rs]</span>             <span class="c-muted">(read register file, save in A)</span>
+<span class="c-green">B ← GPR[rt]</span>             <span class="c-muted">(read register file, save in B)</span>
+<span class="c-green">ALUOut ← PC + (imm &lt;&lt; 2)</span> <span class="c-muted">(branch target pre-computed, maybe used later)</span>
+
+<span class="c-muted">-- No writes occur this cycle:</span>
+<span class="c-blue">IRWrite=0</span>   <span class="c-muted">(don't overwrite IR)</span>
+<span class="c-blue">PCWrite=0</span>   <span class="c-muted">(don't update PC yet)</span>
+<span class="c-blue">RegWrite=0</span>  <span class="c-muted">(don't write register file)</span>
+<span class="c-muted">-- Everything else is X (don't care)</span>
+    </div>
+
+    <h4>EX — Execute for different instruction types</h4>
+
+    <div class="card-row">
+      <div class="card">
+        <h4>R-type (S6: Execute)</h4>
+        <div class="code" style="font-size:11px">
+<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A)</span>
+<span class="c-yellow">ALUSrcB=00</span> <span class="c-muted">(use register B)</span>
+<span class="c-yellow">ALUOp=10</span>   <span class="c-muted">(look at funct field)</span>
+<span class="c-muted">→ ALUOut ← A op B</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>lw/sw (S2: MemAdr)</h4>
+        <div class="code" style="font-size:11px">
+<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A = rs)</span>
+<span class="c-yellow">ALUSrcB=10</span> <span class="c-muted">(use sign-ext imm)</span>
+<span class="c-yellow">ALUOp=00</span>   <span class="c-muted">(add = address calc)</span>
+<span class="c-muted">→ ALUOut ← rs + imm</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-row">
+      <div class="card">
+        <h4>beq (S8: Branch)</h4>
+        <div class="code" style="font-size:11px">
+<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A = rs)</span>
+<span class="c-yellow">ALUSrcB=00</span> <span class="c-muted">(use register B = rt)</span>
+<span class="c-yellow">ALUOp=01</span>   <span class="c-muted">(subtract, check Zero)</span>
+<span class="c-yellow">PCSrc=1</span>    <span class="c-muted">(branch target ready)</span>
+<span class="c-yellow">Branch=1</span>   <span class="c-muted">(PCEn = Branch AND Zero)</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>addi (S9: Execute)</h4>
+        <div class="code" style="font-size:11px">
+<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A = rs)</span>
+<span class="c-yellow">ALUSrcB=10</span> <span class="c-muted">(use sign-ext imm)</span>
+<span class="c-yellow">ALUOp=00</span>   <span class="c-muted">(add)</span>
+<span class="c-muted">→ ALUOut ← rs + imm</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Complete Signal Table: IF Phase</h3>
+    <table>
+      <tr><th>Signal</th><th>Value</th><th>Reasoning</th></tr>
+      <tr><td>IorD</td><td><span class="sig-val v0">0</span></td><td>Memory address comes from PC (fetching instruction)</td></tr>
+      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>Not writing any register</td></tr>
+      <tr><td>IRWrite</td><td><span class="sig-val v1">1</span></td><td>Must save the fetched instruction into IR</td></tr>
+      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>Registers not touched</td></tr>
+      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>Registers not touched</td></tr>
+      <tr><td>PCWrite</td><td><span class="sig-val v1">1</span></td><td>Must update PC to PC+4</td></tr>
+      <tr><td>PCSrc</td><td><span class="sig-val v0">0</span></td><td>New PC = ALU result (PC+4), not branch target</td></tr>
+      <tr><td>ALUControl</td><td><span class="sig-val vbin">010</span></td><td>Add (computing PC+4)</td></tr>
+      <tr><td>ALUSrcB</td><td><span class="sig-val vbin">01</span></td><td>Second ALU input = constant 4</td></tr>
+      <tr><td>ALUSrcA</td><td><span class="sig-val v0">0</span></td><td>First ALU input = PC</td></tr>
+    </table>
+
+    <h3>Complete Signal Table: ID/RF Phase for lw</h3>
+    <table>
+      <tr><th>Signal</th><th>Value</th><th>Reasoning</th></tr>
+      <tr><td>IorD</td><td><span class="sig-val vx">X</span></td><td>Memory not accessed this cycle</td></tr>
+      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>Only reading registers, not writing</td></tr>
+      <tr><td>IRWrite</td><td><span class="sig-val v0">0</span></td><td>IR already has the instruction, don't overwrite</td></tr>
+      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>Not writing register file</td></tr>
+      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>Not writing register file</td></tr>
+      <tr><td>PCWrite</td><td><span class="sig-val v0">0</span></td><td>PC already updated in IF</td></tr>
+      <tr><td>PCSrc</td><td><span class="sig-val vx">X</span></td><td>PC not being written</td></tr>
+      <tr><td>ALUControl</td><td><span class="sig-val vx">XXX</span></td><td>ALU result in this phase is pre-computed branch target — its value doesn't matter for lw</td></tr>
+      <tr><td>ALUSrcB</td><td><span class="sig-val vx">XX</span></td><td>ALU result not used by lw's ID phase</td></tr>
+      <tr><td>ALUSrcA</td><td><span class="sig-val vx">X</span></td><td>Same</td></tr>
+    </table>
+
+    <h3>Complete Signal Table: EX/AG Phase for beq</h3>
+    <table>
+      <tr><th>Signal</th><th>Value</th><th>Reasoning</th></tr>
+      <tr><td>IorD</td><td><span class="sig-val vx">X</span></td><td>No memory access this cycle</td></tr>
+      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>beq never writes a register</td></tr>
+      <tr><td>IRWrite</td><td><span class="sig-val v0">0</span></td><td>Instruction already in IR</td></tr>
+      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>No register written</td></tr>
+      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>No register written</td></tr>
+      <tr><td>PCWrite</td><td><span class="sig-val v0">0</span></td><td>PCWrite is 0; Branch signal handles conditional update</td></tr>
+      <tr><td>PCSrc</td><td><span class="sig-val v1">1</span></td><td>PC source = branch target (was pre-computed in ID)</td></tr>
+      <tr><td>ALUControl</td><td><span class="sig-val vbin">110</span></td><td>Subtract rs - rt; Zero flag = 1 if equal</td></tr>
+      <tr><td>ALUSrcB</td><td><span class="sig-val vbin">00</span></td><td>Use register B (rt value)</td></tr>
+      <tr><td>ALUSrcA</td><td><span class="sig-val v1">1</span></td><td>Use register A (rs value)</td></tr>
+    </table>
+
+    <div class="rule-box purple">
+      <strong>How branch actually works:</strong> PCEn = Branch AND Zero. The Branch control signal says "this is a branch instruction." Zero is the hardware output of the ALU (1 if rs=rt). PCWrite is 0, but the PC still updates if PCEn=1. This way a branch only changes PC when the condition is true.
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: LC-3 -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section" id="lc3">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>LC-3 Machine Code Tracing</h2>
+    </div>
+
+    <p>LC-3 is a 16-bit ISA. Every instruction is 16 bits wide. Bits 15–12 always give the <strong>opcode</strong>. The remaining 12 bits depend on the instruction type.</p>
+
+    <h3>LC-3 Opcode Table</h3>
+    <table>
+      <tr><th>Bits 15-12</th><th>Opcode</th><th>Format</th><th>Operation</th></tr>
+      <tr><td><code>0001</code></td><td>ADD</td><td>DR, SR1, [0,SR2] or [1,imm5]</td><td>DR ← SR1 + SR2 or SR1 + SEXT(imm5)</td></tr>
+      <tr><td><code>0101</code></td><td>AND</td><td>DR, SR1, [0,SR2] or [1,imm5]</td><td>DR ← SR1 AND SR2 or SR1 AND SEXT(imm5)</td></tr>
+      <tr><td><code>1001</code></td><td>NOT</td><td>DR, SR</td><td>DR ← NOT(SR)</td></tr>
+      <tr><td><code>0000</code></td><td>BR</td><td>n,z,p, PCoffset9</td><td>If condition, PC ← PC + SEXT(offset9)</td></tr>
+      <tr><td><code>0110</code></td><td>LDR</td><td>DR, BaseR, offset6</td><td>DR ← Mem[BaseR + SEXT(offset6)]</td></tr>
+      <tr><td><code>0111</code></td><td>STR</td><td>SR, BaseR, offset6</td><td>Mem[BaseR + SEXT(offset6)] ← SR</td></tr>
+      <tr><td><code>1110</code></td><td>LEA</td><td>DR, PCoffset9</td><td>DR ← PC + SEXT(offset9) [no mem access]</td></tr>
+    </table>
+
+    <h3>Instruction Bit Layout</h3>
+    <div class="code">
+<span class="c-muted">ADD with register:  </span><span class="c-blue">0001</span> <span class="c-green">DR[11:9]</span> <span class="c-yellow">SR1[8:6]</span> <span class="c-purple">0</span> <span class="c-muted">00</span> <span class="c-red">SR2[2:0]</span>
+<span class="c-muted">ADD with immediate: </span><span class="c-blue">0001</span> <span class="c-green">DR[11:9]</span> <span class="c-yellow">SR1[8:6]</span> <span class="c-purple">1</span> <span class="c-red">imm5[4:0]</span>
+<span class="c-muted">                        ↑ bit 5 = 0 → use register</span>
+<span class="c-muted">                        ↑ bit 5 = 1 → use immediate</span>
+
+<span class="c-muted">AND: identical structure to ADD but opcode 0101</span>
+
+<span class="c-muted">BR:  </span><span class="c-blue">0000</span> <span class="c-red">n[11] z[10] p[9]</span> <span class="c-green">PCoffset9[8:0]</span>
+<span class="c-muted">     branch taken if: (n AND N) OR (z AND Z) OR (p AND P)</span>
+<span class="c-muted">     where N,Z,P = current condition codes</span>
+    </div>
+
+    <h3>How to Decode Any LC-3 Instruction</h3>
     <div class="card">
-      <div class="card-icon">🔷</div>
-      <h4>2. Context Vector (c)</h4>
-      <p>A function of all encoder hidden states h<sub>1:n</sub>. Conveys the <em>essence</em> of the entire input to the decoder. This is the "bottleneck."</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Read bits 15–12 → opcode</div>
+            Write them as 4-bit binary and look up the table above.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Read bits 11–9 → DR (destination) or NZP (for branch)</div>
+            Three bits → register number 0–7. For BR: bit 11 = n, bit 10 = z, bit 9 = p.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">For ADD/AND: check bit 5</div>
+            0 = register mode (SR2 = bits 2–0). 1 = immediate mode (imm5 = bits 4–0).
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Sign-extend immediates</div>
+            imm5: if bit4=1, it's negative. Extend by copying bit4 to bits 15–5. E.g. <code>11110</code> = −2 in 5-bit = <code>1111 1111 1111 1110</code> = −2.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Execute and update condition codes</div>
+            After each instruction that writes a register, set N=1 if result&lt;0, Z=1 if result=0, P=1 if result&gt;0.
+          </div>
+        </div>
+      </div>
     </div>
+
+    <h3>Worked Example: Tracing the Bit-Count Program</h3>
+    <p>The program counts the number of 1-bits in R1 (which starts as x9357) and saves the count in R0. The answer at x300D is <strong>9</strong> — let's verify: x9357 = <code>1001 0011 0101 0111</code> → count the 1s: 1+0+0+1+0+0+1+1+0+1+0+1+0+1+1+1 = <strong>9</strong>. ✓</p>
+
+    <h4>Decoding the first few instructions:</h4>
+    <div class="code">
+<span class="c-muted">x3000: </span><span class="c-blue">0101</span> <span class="c-green">000</span> <span class="c-yellow">000</span> <span class="c-purple">1</span> <span class="c-red">00000</span>
+<span class="c-muted">       AND  DR=R0 SR1=R0 immediate=0</span>
+<span class="c-muted">       → R0 ← R0 AND 0 = 0   (clears R0, sets Z=1)</span>
+
+<span class="c-muted">x3001: </span><span class="c-blue">0001</span> <span class="c-green">001</span> <span class="c-yellow">001</span> <span class="c-purple">1</span> <span class="c-red">00000</span>
+<span class="c-muted">       ADD  DR=R1 SR1=R1 immediate=0</span>
+<span class="c-muted">       → R1 ← R1 + 0 = x9357   (sets condition codes: N=1 since x9357 is negative)</span>
+
+<span class="c-muted">x3002: </span><span class="c-blue">0000</span> <span class="c-red">011</span> <span class="c-green">000000001</span>
+<span class="c-muted">       BR   n=0,z=1,p=1, offset=1</span>
+<span class="c-muted">       → Branch if Z or P. R1 is negative (N=1), so Z=0,P=0. NOT taken → go to x3003</span>
+
+<span class="c-muted">x3003: </span><span class="c-blue">0001</span> <span class="c-green">000</span> <span class="c-yellow">000</span> <span class="c-purple">1</span> <span class="c-red">00001</span>
+<span class="c-muted">       ADD  DR=R0 SR1=R0 immediate=1</span>
+<span class="c-muted">       → R0 ← R0 + 1 = 1   (found a 1-bit! R0 = 1)</span>
+    </div>
+
+    <div class="rule-box green">
+      <strong>Sign extension rule for imm5:</strong> Take the 5 bits. If bit4 (the leftmost of the 5) is 0 → positive, just zero-extend to 16 bits. If bit4 is 1 → negative, fill all upper bits with 1. Example: <code>11110</code> → bit4=1 → <code>1111111111110</code> = −2.
+    </div>
+
+    <h3>Key Questions Explained</h3>
+
     <div class="card">
-      <div class="card-icon">📤</div>
-      <h4>3. Decoder</h4>
-      <p>Accepts context vector c, generates output sequence y<sub>1:m</sub> of arbitrary length autoregressively, one token at a time.</p>
-    </div>
-  </div>
-
-  <h3>How the Encoder Works</h3>
-  <p>In practice, encoders are <strong>stacked biLSTMs</strong> (bidirectional LSTMs). The top-layer forward and backward hidden states are concatenated to produce the contextualized representation for each input time step. The final hidden state h<sub>n</sub> becomes the context vector <strong>C</strong>.</p>
-
-  <h3>How the Decoder Works</h3>
-  <p>The decoder uses C to initialize its hidden state and then generates tokens autoregressively. To prevent the context from "fading," C is also concatenated at every decoding step:</p>
-  <div class="formula">
-    <span class="formula-label">DECODER HIDDEN STATE UPDATE</span>
-    h<sub>i</sub> = g(h<sub>i-1</sub>, ŷ<sub>i-1</sub>, C)
-    <br><br>
-    Where: g = RNN function, ŷ<sub>i-1</sub> = embedding of previous output token, C = context vector
-  </div>
-
-  <h3>Training: End-to-End with Teacher Forcing</h3>
-  <div class="def">
-    <strong>Teacher Forcing</strong>
-    <p>During training, instead of feeding the decoder's own (possibly wrong) output back as the next input, we feed the <em>gold (correct) target token</em>. This prevents error accumulation and speeds up training. During inference, the model uses its own predictions.</p>
-  </div>
-
-  <div class="note">During inference the decoder uses its predicted output ŷ as the next input. During training with teacher forcing it uses the true label. This mismatch is a known limitation called "exposure bias."</div>
-
-  <h3>Language Model Formulation</h3>
-  <p>An encoder-decoder translation model simply concatenates the source text, a separator token <code>&lt;s&gt;</code>, and the target text, then computes:</p>
-  <div class="formula">
-    <span class="formula-label">CONDITIONAL PROBABILITY</span>
-    p(Y|X) = ∏ p(y<sub>i</sub> | y<sub>&lt;i</sub>, X)
-  </div>
-
-  <h3>Limitations of Basic Encoder-Decoder</h3>
-  <ul>
-    <li><strong>Fixed-length bottleneck:</strong> The entire source must be compressed into one fixed-size vector C — impossible for long sequences.</li>
-    <li><strong>No selective focus:</strong> No mechanism to attend to specific relevant parts of the input while generating each output token.</li>
-  </ul>
-
-  <div class="quiz-callout">
-    <p>What is the bottleneck problem in encoder-decoder models, and how is it solved?</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 2: ATTENTION
-══════════════════════════════════════════ -->
-<section class="section" id="s2">
-  <div class="section-header">
-    <span class="section-num">02</span>
-    <h2>Attention Mechanism</h2>
-  </div>
-
-  <div class="def">
-    <strong>Attention Mechanism</strong>
-    <p>A solution to the bottleneck problem. Instead of relying on a single static context vector, the decoder computes a <strong>dynamic context vector C<sub>i</sub></strong> at each decoding step i, as a weighted sum of ALL encoder hidden states. Each weight reflects how relevant each encoder state is to the current decoding step.</p>
-  </div>
-
-  <h3>Step-by-Step: How Attention is Computed</h3>
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">ALGORITHM</span>
-      <h3>Dot-Product Attention — 4 Steps</h3>
+      <strong>Q: At PC=x3005, what is R0?</strong>
+      <p style="margin-top:8px;font-size:13px">By x3005, the program has executed x3000–x3004. x3000 clears R0. x3001 sets condition codes on R1 (negative). x3002 branch is NOT taken (Z and P are false). x3003 increments R0 to 1. x3004 starts examining the next bit. So R0 = <strong>1</strong>.</p>
     </div>
 
-    <div class="step">
-      <strong>Step 1 — Score:</strong> Compute relevance of each encoder state h<sub>j</sub> to the current decoder state h̃<sub>i</sub>:
-      <div class="formula" style="margin-top:10px;">score(h̃<sub>i</sub>, h<sub>j</sub>) = h̃<sub>i</sub> · h<sub>j</sub>   (dot product)</div>
-    </div>
-
-    <div class="step">
-      <strong>Step 2 — Normalize (Softmax):</strong> Convert scores to a probability distribution:
-      <div class="formula" style="margin-top:10px;">α<sub>ij</sub> = softmax(score(h̃<sub>i</sub>, h<sub>j</sub>))   ∀j</div>
-      α<sub>ij</sub> is the attention weight: how much attention decoder step i pays to encoder step j.
-    </div>
-
-    <div class="step">
-      <strong>Step 3 — Weighted Sum (Context Vector):</strong>
-      <div class="formula" style="margin-top:10px;">C<sub>i</sub> = Σ<sub>j</sub> α<sub>ij</sub> · h<sub>j</sub></div>
-      This gives a dynamic, fixed-length summary of the encoder states, focused on what's relevant now.
-    </div>
-
-    <div class="step">
-      <strong>Step 4 — Decode:</strong> Use C<sub>i</sub> to compute the next hidden state and generate a token:
-      <div class="formula" style="margin-top:10px;">h<sub>i</sub> = g(h<sub>i-1</sub>, ŷ<sub>i-1</sub>, C<sub>i</sub>)</div>
-    </div>
-  </div>
-
-  <h3>Types of Attention</h3>
-  <div class="compare-table-wrap" style="overflow-x:auto;">
-  <table class="compare-table">
-    <tr>
-      <th>Type</th>
-      <th>How Score is Computed</th>
-      <th>Speed</th>
-      <th>Flexibility</th>
-    </tr>
-    <tr>
-      <td class="highlight">Bahdanau (Additive)</td>
-      <td>Uses a small neural network layer: score = W·tanh(W<sub>1</sub>·h̃ + W<sub>2</sub>·h)</td>
-      <td>Slower</td>
-      <td>Very flexible</td>
-    </tr>
-    <tr>
-      <td class="highlight">Luong (Multiplicative)</td>
-      <td>Simple dot product: score = h̃ · h</td>
-      <td>Faster</td>
-      <td>Memory-efficient</td>
-    </tr>
-    <tr>
-      <td class="highlight">Global Attention</td>
-      <td>Considers ALL encoder hidden states</td>
-      <td>Slower for long seqs</td>
-      <td>Most thorough</td>
-    </tr>
-    <tr>
-      <td class="highlight">Local Attention</td>
-      <td>Focuses on a small window around current position</td>
-      <td>Faster</td>
-      <td>Good for long docs</td>
-    </tr>
-  </table>
-  </div>
-
-  <h3>Why RNN-based Attention Still Has Limits</h3>
-  <div class="note">Even with attention, RNNs are inherently sequential: step 100 cannot be computed until steps 1–99 are done. This prevents parallelization on GPUs, making training slow. → Solution: Transformers.</div>
-
-  <div class="quiz-callout">
-    <p>Explain how α<sub>ij</sub> is computed and what it represents physically in the attention mechanism.</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 3: TRANSFORMERS
-══════════════════════════════════════════ -->
-<section class="section" id="s3">
-  <div class="section-header">
-    <span class="section-num">03</span>
-    <h2>Transformers & Self-Attention</h2>
-  </div>
-
-  <div class="def">
-    <strong>Transformer</strong>
-    <p>A neural architecture that uses <strong>self-attention</strong> instead of recurrence. It is highly parallelizable and scales efficiently. Transformers map input sequences (x<sub>1</sub>,…,x<sub>n</sub>) to output sequences (z<sub>1</sub>,…,z<sub>n</sub>) of the same length using stacked transformer blocks.</p>
-  </div>
-
-  <div class="def">
-    <strong>Self-Attention</strong>
-    <p>An attention mechanism where a sequence attends to itself. Each token in a sequence looks at all other tokens (in its context window) to build a richer representation. Unlike encoder-decoder attention, self-attention operates within a single sequence.</p>
-  </div>
-
-  <h3>Query, Key, Value — The Core Idea</h3>
-  <p>In self-attention, each token plays <strong>three roles simultaneously</strong>:</p>
-  <div class="card-grid">
     <div class="card">
-      <div class="card-icon">🔍</div>
-      <h4>Query (Q)</h4>
-      <p>The current token being processed. "What am I looking for?"</p>
+      <strong>Q: At PC=x3003 (second time through), what is R1?</strong>
+      <p style="margin-top:8px;font-size:13px">Nothing ever writes to R1 in this program — R1 is only read (for AND and shift operations). So R1 = <strong>x9357</strong> throughout.</p>
     </div>
+
     <div class="card">
-      <div class="card-icon">🗝️</div>
-      <h4>Key (K)</h4>
-      <p>Every token in the context, used for matching. "What do I contain?"</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">💎</div>
-      <h4>Value (V)</h4>
-      <p>The actual content contribution of each token to the output.</p>
+      <strong>Q: At PC=x300D, what is R0?</strong>
+      <p style="margin-top:8px;font-size:13px">x300D is after the last instruction (x300C) executes. The program has counted all 16 bits of x9357 = 1001001101010111. Count the 1-bits: positions 15,12,9,8,6,4,2,1,0 = <strong>9</strong>.</p>
     </div>
   </div>
 
-  <h3>Scaled Dot-Product Self-Attention</h3>
-  <div class="formula">
-    <span class="formula-label">SELF-ATTENTION FORMULA (EQUATIONS 10.4 → 10.12)</span>
-    Step 1 — Scores:      score(q<sub>i</sub>, k<sub>j</sub>) = q<sub>i</sub> · k<sub>j</sub>
-    <br><br>
-    Step 2 — Scale:       score_scaled = (q<sub>i</sub> · k<sub>j</sub>) / √d<sub>k</sub>
-    <br><br>
-    Step 3 — Softmax:     α<sub>ij</sub> = softmax(score_scaled)
-    <br><br>
-    Step 4 — Output:      a<sub>i</sub> = Σ<sub>j</sub> α<sub>ij</sub> · v<sub>j</sub>
-    <br><br>
-    In matrix form:       Attention(Q,K,V) = softmax(QK<sup>T</sup> / √d<sub>k</sub>) V
-  </div>
 
-  <div class="note">We divide by √d<sub>k</sub> to prevent extremely large dot products from pushing softmax into regions of near-zero gradients (vanishing gradient during training).</div>
-
-  <h3>Causal (Backward-Looking) Self-Attention</h3>
-  <p>Used in <strong>language models</strong> (like GPT). At position i, the token can only attend to positions ≤ i (no future context). This is implemented by masking future positions with -∞ before softmax. Enables autoregressive generation.</p>
-
-  <h3>Bidirectional Self-Attention</h3>
-  <p>Used in <strong>encoders</strong> (like BERT). Each token can attend to all other tokens — both past and future. Better for tasks that need full context understanding (classification, NER, fill-in-the-blank).</p>
-
-  <h3>Multi-Head Attention</h3>
-  <div class="def">
-    <strong>Multi-Head Attention</strong>
-    <p>Instead of one self-attention computation, we run <strong>h parallel attention heads</strong>, each with its own Q, K, V weight matrices. Each head can learn different types of relationships. The outputs are concatenated and projected back.</p>
-  </div>
-  <div class="formula">
-    <span class="formula-label">MULTI-HEAD ATTENTION</span>
-    MultiHead(Q, K, V) = Concat(head<sub>1</sub>, ..., head<sub>h</sub>) W<sup>O</sup>
-    <br>
-    where head<sub>i</sub> = Attention(QW<sub>i</sub><sup>Q</sup>, KW<sub>i</sub><sup>K</sup>, VW<sub>i</sub><sup>V</sup>)
-  </div>
-
-  <h3>The Transformer Block</h3>
-  <p>Each transformer block contains 4 components in order:</p>
-  <div class="flow" style="flex-direction:column; align-items:flex-start; gap:8px;">
-    <div class="flow-box active">1. Multi-Head Self-Attention Layer</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-box">2. Add & Norm (Residual Connection + Layer Norm)</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-box">3. Feed-Forward Network (two linear layers + ReLU)</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-box">4. Add & Norm (Residual Connection + Layer Norm)</div>
-  </div>
-
-  <h3>Positional Encoding</h3>
-  <p>Since self-attention has no inherent notion of order (unlike RNNs), we add <strong>positional encodings</strong> to the input embeddings to inject sequence position information. Without this, the model treats all positions identically.</p>
-
-  <h3>Transformer Models by Architecture Type</h3>
-  <div class="compare-table-wrap" style="overflow-x:auto;">
-  <table class="compare-table">
-    <tr>
-      <th>Type</th>
-      <th>Examples</th>
-      <th>Attention Type</th>
-      <th>Good For</th>
-      <th>Cannot Do</th>
-    </tr>
-    <tr>
-      <td class="highlight">Encoder-Only</td>
-      <td>BERT, RoBERTa, DistilBERT</td>
-      <td>Bidirectional</td>
-      <td>Classification, NER, fill-in-blank</td>
-      <td>Generate text, translate, summarize</td>
-    </tr>
-    <tr>
-      <td class="highlight">Decoder-Only</td>
-      <td>GPT, GPT-2, GPT-3, LLaMA</td>
-      <td>Causal (unidirectional)</td>
-      <td>Text generation, chatbots, code</td>
-      <td>Bidirectional understanding tasks</td>
-    </tr>
-    <tr>
-      <td class="highlight">Encoder-Decoder</td>
-      <td>BART, T5</td>
-      <td>Both</td>
-      <td>Translation, summarization, Q&A</td>
-      <td>—</td>
-    </tr>
-  </table>
-  </div>
-
-  <div class="quiz-callout">
-    <p>Why does scaling by √d<sub>k</sub> help in self-attention? What problem does it solve?</p>
-  </div>
-
-  <div class="quiz-callout">
-    <p>BERT cannot generate text. Why? What CAN BERT do that GPT cannot?</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 4: TRANSFER LEARNING & PRE-TRAINING
-══════════════════════════════════════════ -->
-<section class="section" id="s4">
-  <div class="section-header">
-    <span class="section-num">04</span>
-    <h2>Transfer Learning & Pre-training</h2>
-  </div>
-
-  <div class="def">
-    <strong>Pre-training</strong>
-    <p>Training a model on large amounts of unlabeled data with self-supervised objectives (e.g., next token prediction, masked language modeling). Weights start random and are learned from massive corpora. Produces a "base model" with general language understanding.</p>
-  </div>
-
-  <div class="def">
-    <strong>Transfer Learning</strong>
-    <p>Taking a pre-trained model (already trained on large data) and adapting it to a new, specific task using a much smaller labeled dataset. Avoids training from scratch. The model "transfers" its general knowledge to the new domain.</p>
-  </div>
-
-  <h3>Benefits of Transfer Learning</h3>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">⚡</div>
-      <h4>Faster Development</h4>
-      <p>No need to train from scratch. Start from a powerful baseline and fine-tune quickly.</p>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: CACHES -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section" id="cache">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Caches &amp; Memory Hierarchy</h2>
     </div>
-    <div class="card">
-      <div class="card-icon">📉</div>
-      <h4>Less Data Needed</h4>
-      <p>Fine-tuning only requires a small labeled dataset — the base model supplies general knowledge.</p>
+
+    <p>The fundamental problem: fast memory is expensive (SRAM), slow memory is cheap (DRAM). The solution: use a hierarchy. Keep frequently used data in small, fast caches; infrequently used data in large, slow memory.</p>
+
+    <h3>Why Caches Work: Locality</h3>
+    <div class="card-row">
+      <div class="card">
+        <div class="compare-title blue">Temporal Locality</div>
+        <p style="font-size:13px">If you accessed address X recently, you'll probably access it again soon. Example: loop variables.</p>
+      </div>
+      <div class="compare-col card">
+        <div class="compare-title green">Spatial Locality</div>
+        <p style="font-size:13px">If you accessed address X, you'll probably access nearby addresses soon. Example: arrays, sequential instructions.</p>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-icon">🏆</div>
-      <h4>Better Results</h4>
-      <p>Pre-trained models encode rich representations from billions of examples, leading to superior task performance.</p>
+
+    <h3>Core Vocabulary</h3>
+    <table>
+      <tr><th>Term</th><th>Definition</th><th>Example from HW</th></tr>
+      <tr><td>Block (line)</td><td>Unit of data transferred between levels</td><td>64 bytes</td></tr>
+      <tr><td>Capacity (C)</td><td>Total data bytes in cache</td><td>L1=256B, L2=2048B</td></tr>
+      <tr><td>Number of blocks (B=C/b)</td><td>How many blocks fit in cache</td><td>L1: 256/64=4, L2: 2048/64=32</td></tr>
+      <tr><td>Hit</td><td>Data found in cache</td><td>Pay only that level's latency</td></tr>
+      <tr><td>Miss</td><td>Data not in cache → fetch from next level</td><td>Pay this level + next level latency</td></tr>
+      <tr><td>Latency</td><td>Cycles to access a level</td><td>L1=4, L2=8, Mem=100</td></tr>
+    </table>
+
+    <h3>Direct-Mapped Cache (L1 in HW)</h3>
+    <p>Each block from memory can go to <strong>exactly one</strong> location in the cache. Which location? Determined by the block number modulo the number of cache blocks.</p>
+
+    <div class="rule-box">
+      <strong>Direct-mapped rules:</strong><br>
+      1. Block start address = floor(address ÷ block_size) × block_size<br>
+      2. Block number = block_start ÷ block_size<br>
+      3. Cache slot = block_number mod (C ÷ block_size)<br>
+      4. If that slot is occupied by a different block → EVICT the old block, put new one in
     </div>
-  </div>
 
-  <h3>Types of Deep Transfer Learning</h3>
-  <table class="compare-table">
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Example</th>
-    </tr>
-    <tr>
-      <td class="highlight">Instance-based</td>
-      <td>Reuse specific training instances from source domain</td>
-      <td>Weighting source samples</td>
-    </tr>
-    <tr>
-      <td class="highlight">Representation-based</td>
-      <td>Learn shared feature representations between domains</td>
-      <td>Shared embeddings</td>
-    </tr>
-    <tr>
-      <td class="highlight">Model Sharing-based</td>
-      <td>Share parameters or model layers between tasks</td>
-      <td>VGG-16 on ImageNet → custom task</td>
-    </tr>
-    <tr>
-      <td class="highlight">Adversarial-based</td>
-      <td>Use adversarial training to align source/target domains</td>
-      <td>Domain adaptation GANs</td>
-    </tr>
-  </table>
-
-  <h3>Implementation: Model Sharing (CNN Example)</h3>
-  <p>Using <strong>VGG-16</strong> (pre-trained on ImageNet with 1M+ images) and fine-tuning for a custom image classification task. The early layers (edge detectors, texture filters) are frozen; the final layers are retrained.</p>
-
-  <h3>GloVe: Pre-trained Word Embeddings</h3>
-  <div class="def">
-    <strong>GloVe (Global Vectors for Word Representation)</strong>
-    <p>An unsupervised algorithm that learns word vector representations by training on <strong>global word-word co-occurrence statistics</strong> from a corpus. The resulting vectors capture semantic relationships (e.g., king − man + woman ≈ queen). GloVe vectors represent a form of transfer learning for NLP.</p>
-  </div>
-
-  <div class="quiz-callout">
-    <p>What is the difference between instance-based and model-sharing-based transfer learning?</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 5: BEAM SEARCH
-══════════════════════════════════════════ -->
-<section class="section" id="s5">
-  <div class="section-header">
-    <span class="section-num">05</span>
-    <h2>Beam Search</h2>
-  </div>
-
-  <div class="def">
-    <strong>Beam Search</strong>
-    <p>A heuristic search algorithm that maintains <strong>k (beam width) active candidate sequences</strong> at each decoding step. At every step, it expands each candidate by all possible next tokens, scores the resulting W×B candidates, and keeps only the top k. It is a middle ground between greedy search (k=1) and exhaustive search (k=∞).</p>
-  </div>
-
-  <h3>Why Greedy Decoding Fails</h3>
-  <p><strong>Greedy decoding</strong> picks the highest-probability token at each step (argmax). Problem: a high-probability first token may lead to a very low-probability overall sequence. It cannot backtrack — it's "short-sighted" and gets trapped in local optima. It's also deterministic and produces repetitive text.</p>
-
-  <div class="formula">
-    <span class="formula-label">GREEDY DECODING</span>
-    ŷ<sub>t</sub> = argmax P(y<sub>t</sub> | y<sub>1</sub>, ..., y<sub>t-1</sub>, X)
-  </div>
-
-  <h3>The Search Space Problem</h3>
-  <div class="flow">
-    <div class="flow-box">Greedy (k=1)<br><small>Fast, local optima</small></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-box active">Beam Search (k=5–10)<br><small>Best balance</small></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-box">Exhaustive (k=∞)<br><small>Infeasible</small></div>
-  </div>
-
-  <h3>Beam Search Algorithm — Step by Step</h3>
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">ALGORITHM</span>
-      <h3>Beam Search with W=2, B=3</h3>
+    <div class="code">
+<span class="c-muted">Example: address 127, block_size=64, L1 capacity=256B (4 blocks)</span>
+<span class="c-green">block_start = floor(127/64) × 64 = 1 × 64 = 64</span>
+<span class="c-green">block_number = 64 / 64 = 1</span>
+<span class="c-green">L1_slot = 1 mod 4 = 1</span>
+<span class="c-muted">→ Block starting at address 64 goes into L1 slot 1</span>
     </div>
-    <div class="step">
-      <strong>1. Initialization:</strong> Start with root node (start token). Generate B=3 successors.
+
+    <h3>Fully Associative Cache (L2 in HW)</h3>
+    <p>A block can go to <strong>any</strong> location. No conflict misses. Only evicts when the cache is completely full. Requires checking all blocks to find a match (more hardware, but higher hit rate).</p>
+
+    <div class="compare">
+      <div class="compare-col">
+        <div class="compare-title blue">Direct-Mapped</div>
+        <ul style="font-size:13px">
+          <li>1 possible slot per block</li>
+          <li>Fast lookup (one comparison)</li>
+          <li>Conflict misses possible</li>
+          <li>Good for large caches</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-title green">Fully Associative</div>
+        <ul style="font-size:13px">
+          <li>Any slot available</li>
+          <li>Slow lookup (compare all)</li>
+          <li>No conflict misses</li>
+          <li>Good for small, critical caches</li>
+        </ul>
+      </div>
     </div>
-    <div class="step">
-      <strong>2. Expansion:</strong> From the W active beams, generate all B successors. Total candidates = W × B = 6.
+
+    <h3>Cycle Counting</h3>
+    <div class="rule-box blue">
+      <strong>L1 HIT:</strong> 4 cycles (L1 latency only)<br>
+      <strong>L1 MISS, L2 HIT:</strong> 4 + 8 = <strong>12 cycles</strong><br>
+      <strong>L1 MISS, L2 MISS (full miss):</strong> 4 + 8 + 100 = <strong>112 cycles</strong><br>
+      On a full miss: block is loaded into BOTH L1 and L2.
     </div>
-    <div class="step">
-      <strong>3. Selection:</strong> Score all 6 candidates using the heuristic (log probability sum). Keep top W=2.
+
+    <h3>Worked Example: HW2 Question 5 — All 5 Accesses</h3>
+    <p>Setup: block=64B, L1=256B=4 slots (direct-mapped), L2=2048B=32 slots (fully associative). Both start empty.</p>
+
+    <h4>Access 1 — address 127</h4>
+    <div class="code">
+<span class="c-green">block_start = floor(127/64)×64 = 64</span>   <span class="c-muted">block# = 1</span>
+<span class="c-green">L1 slot = 1 mod 4 = 1</span>
+<span class="c-red">L1 slot 1: EMPTY → miss</span>
+<span class="c-red">L2: EMPTY → miss</span>
+<span class="c-yellow">→ Full miss. Load block[64] into L2 slot (any), then L1 slot 1.</span>
+<span class="c-blue">Cycles: 112</span>
+<span class="c-muted">L1 state: [_, block[64], _, _]    L2 state: {block[64]}</span>
     </div>
-    <div class="step">
-      <strong>4. Iteration:</strong> Repeat Steps 2–3 until end-of-sequence token generated or max length reached.
+
+    <h4>Access 2 — address 25</h4>
+    <div class="code">
+<span class="c-green">block_start = floor(25/64)×64 = 0</span>    <span class="c-muted">block# = 0</span>
+<span class="c-green">L1 slot = 0 mod 4 = 0</span>
+<span class="c-red">L1 slot 0: EMPTY → miss</span>
+<span class="c-red">L2: does not have block[0] → miss</span>
+<span class="c-yellow">→ Full miss. Load block[0] into L2, then L1 slot 0.</span>
+<span class="c-blue">Cycles: 112</span>
+<span class="c-muted">L1 state: [block[0], block[64], _, _]    L2 state: {block[64], block[0]}</span>
     </div>
-    <div class="step">
-      <strong>5. Termination:</strong> Return the highest-scoring complete sequence among all beams.
+
+    <h4>Access 3 — address 8192</h4>
+    <div class="code">
+<span class="c-green">block_start = floor(8192/64)×64 = 8192</span>  <span class="c-muted">block# = 128</span>
+<span class="c-green">L1 slot = 128 mod 4 = 0</span>
+<span class="c-red">L1 slot 0: has block[0] ≠ block[8192] → CONFLICT MISS, evict block[0]</span>
+<span class="c-red">L2: does not have block[8192] → miss</span>
+<span class="c-yellow">→ Full miss. Load block[8192] into L2, evict block[0] from L1, put block[8192] in slot 0.</span>
+<span class="c-blue">Cycles: 112</span>
+<span class="c-muted">L1: [block[8192], block[64], _, _]    L2: {block[64], block[0], block[8192]}</span>
+    </div>
+
+    <div class="notice">
+      <strong>Notice:</strong> block[0] was evicted from L1 but L2 still has it! L2 has 32 slots and only 2 blocks — nowhere near full. This is the key insight for access 4.
+    </div>
+
+    <h4>Access 4 — address 63</h4>
+    <div class="code">
+<span class="c-green">block_start = floor(63/64)×64 = 0</span>    <span class="c-muted">block# = 0   (same block as address 25!)</span>
+<span class="c-green">L1 slot = 0 mod 4 = 0</span>
+<span class="c-red">L1 slot 0: has block[8192] ≠ block[0] → miss</span>
+<span class="c-green">L2: HAS block[0]! → L2 HIT</span>
+<span class="c-yellow">→ L2 hit: load block[0] from L2 into L1 slot 0 (evict block[8192]).</span>
+<span class="c-blue">Cycles: 4 + 8 = 12  ← saved 100 cycles!</span>
+<span class="c-muted">L1: [block[0], block[64], _, _]    L2: {block[64], block[0], block[8192]}</span>
+    </div>
+
+    <h4>Access 5 — address 320</h4>
+    <div class="code">
+<span class="c-green">block_start = floor(320/64)×64 = 320</span>  <span class="c-muted">block# = 5</span>
+<span class="c-green">L1 slot = 5 mod 4 = 1</span>
+<span class="c-red">L1 slot 1: has block[64] ≠ block[320] → conflict miss, evict block[64]</span>
+<span class="c-red">L2: does not have block[320] → miss</span>
+<span class="c-yellow">→ Full miss. Load block[320] into L2, evict block[64] from L1, put block[320] in slot 1.</span>
+<span class="c-blue">Cycles: 112</span>
+<span class="c-muted">L1: [block[0], block[320], _, _]    L2: {block[64], block[0], block[8192], block[320]}</span>
+    </div>
+
+    <h3>Summary Table</h3>
+    <table>
+      <tr><th>Access</th><th>Address</th><th>Block start</th><th>L1 slot</th><th>Outcome</th><th>Cycles</th></tr>
+      <tr><td>1</td><td>127</td><td>64</td><td>1</td><td>Full miss</td><td><strong>112</strong></td></tr>
+      <tr><td>2</td><td>25</td><td>0</td><td>0</td><td>Full miss</td><td><strong>112</strong></td></tr>
+      <tr><td>3</td><td>8192</td><td>8192</td><td>0</td><td>Conflict miss (evicts block[0])</td><td><strong>112</strong></td></tr>
+      <tr><td>4</td><td>63</td><td>0</td><td>0</td><td>L1 miss, <strong>L2 hit</strong></td><td><strong>12</strong></td></tr>
+      <tr><td>5</td><td>320</td><td>320</td><td>1</td><td>Full miss (evicts block[64])</td><td><strong>112</strong></td></tr>
+    </table>
+
+    <h3>Types of Cache Misses</h3>
+    <div class="card-row three">
+      <div class="card">
+        <div class="compare-title blue">Compulsory</div>
+        <p style="font-size:13px">First time ever accessing a block. Unavoidable — the data has never been loaded.</p>
+        <p style="font-size:12px;color:var(--muted)">All 5 accesses start this way on first touch.</p>
+      </div>
+      <div class="card">
+        <div class="compare-title yellow">Conflict</div>
+        <p style="font-size:13px">Two blocks map to the same direct-mapped slot. One evicts the other.</p>
+        <p style="font-size:12px;color:var(--muted)">Access 3 and 4 are conflict misses in L1.</p>
+      </div>
+      <div class="card">
+        <div class="compare-title red">Capacity</div>
+        <p style="font-size:13px">Cache is full. Any new block requires evicting something.</p>
+        <p style="font-size:12px;color:var(--muted)">Happens in L2 once all 32 slots are used.</p>
+      </div>
+    </div>
+
+    <h3>Virtual Memory (Brief Overview)</h3>
+    <p>Physical memory (DRAM) acts as a cache for disk. Programs use <strong>virtual addresses</strong>; hardware translates to <strong>physical addresses</strong> via a page table managed by the OS.</p>
+
+    <table>
+      <tr><th>Cache term</th><th>Virtual Memory equivalent</th></tr>
+      <tr><td>Block</td><td>Page</td></tr>
+      <tr><td>Block size</td><td>Page size (e.g. 4 KB)</td></tr>
+      <tr><td>Miss</td><td>Page fault</td></tr>
+      <tr><td>Tag</td><td>Virtual Page Number (VPN)</td></tr>
+      <tr><td>Cache entry</td><td>Page Table Entry (PTE)</td></tr>
+    </table>
+
+    <div class="rule-box green">
+      <strong>Address translation steps:</strong> Split virtual address into VPN (upper bits) and page offset (lower bits). Look up VPN in page table → get Physical Frame Number (PFN). Physical address = PFN concatenated with page offset unchanged. The TLB caches recent VPN→PFN lookups to avoid a full page table access on every instruction.
     </div>
   </div>
 
-  <h3>Key Characteristics</h3>
-  <table class="compare-table">
-    <tr>
-      <th>Property</th>
-      <th>Details</th>
-    </tr>
-    <tr>
-      <td class="highlight">Beam Width (W)</td>
-      <td>Number of candidates kept at each level. Higher W = better quality but slower.</td>
-    </tr>
-    <tr>
-      <td class="highlight">Branching Factor (B)</td>
-      <td>Number of possible next tokens (vocab size V). Evaluates W×B at each step.</td>
-    </tr>
-    <tr>
-      <td class="highlight">Time Complexity</td>
-      <td>O(T × V × k) where T = sequence length, V = vocabulary size, k = beam width</td>
-    </tr>
-    <tr>
-      <td class="highlight">k=1</td>
-      <td>Equivalent to Greedy Search</td>
-    </tr>
-    <tr>
-      <td class="highlight">k→∞</td>
-      <td>Approaches Exhaustive Search</td>
-    </tr>
-  </table>
 
-  <div class="pros-cons">
-    <div class="pros">
-      <h4>ADVANTAGES</h4>
-      <ul>
-        <li>More efficient than exhaustive search</li>
-        <li>Better quality than greedy</li>
-        <li>Adjustable via beam width hyperparameter</li>
-        <li>Memory bounded by W</li>
-      </ul>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- REFERENCE SECTION -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section" id="alu-ref">
+    <div class="section-header">
+      <span class="section-num">REF</span>
+      <h2>ALU Control Codes</h2>
     </div>
-    <div class="cons">
-      <h4>LIMITATIONS</h4>
-      <ul>
-        <li>No guarantee of optimal solution</li>
-        <li>Biased toward "safe," high-probability phrases</li>
-        <li>Produces repetitive, generic text</li>
-        <li>Heuristic-dependent quality</li>
-      </ul>
+
+    <p>ALUControl[2:0] (same as F[2:0] in the ALU design) selects the operation:</p>
+    <table>
+      <tr><th>ALUControl[2:0]</th><th>Operation</th><th>Used for</th></tr>
+      <tr><td><code>000</code></td><td>AND</td><td>and instruction</td></tr>
+      <tr><td><code>001</code></td><td>OR</td><td>or instruction</td></tr>
+      <tr><td><code>010</code></td><td>ADD</td><td>add, addi, lw, sw address calc, PC+4</td></tr>
+      <tr><td><code>110</code></td><td>SUBTRACT</td><td>sub, subi, beq (compare)</td></tr>
+      <tr><td><code>111</code></td><td>SLT (set if less than)</td><td>slt instruction</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="signals-ref">
+    <div class="section-header">
+      <span class="section-num">REF</span>
+      <h2>Signal Quick Reference</h2>
     </div>
+
+    <h3>ALUSrcB[1:0] in Multi-Cycle</h3>
+    <table>
+      <tr><th>Value</th><th>ALU B input</th><th>Used in</th></tr>
+      <tr><td><code>00</code></td><td>Register B (rt)</td><td>R-type EX, beq EX</td></tr>
+      <tr><td><code>01</code></td><td>Constant 4</td><td>IF (computing PC+4)</td></tr>
+      <tr><td><code>10</code></td><td>Sign-extended immediate</td><td>lw/sw address, addi</td></tr>
+      <tr><td><code>11</code></td><td>Sign-extended immediate × 4</td><td>ID (pre-computing branch target)</td></tr>
+    </table>
+
+    <h3>PCSrc in Multi-Cycle</h3>
+    <table>
+      <tr><th>Value</th><th>New PC</th></tr>
+      <tr><td><code>0</code></td><td>ALU result (= PC+4 during IF)</td></tr>
+      <tr><td><code>1</code></td><td>ALUOut (branch target, computed in ID)</td></tr>
+      <tr><td><code>10</code></td><td>Jump target (from instruction bits)</td></tr>
+    </table>
   </div>
 
-  <h3>When to Use Beam Search vs. Sampling</h3>
-  <table class="compare-table">
-    <tr>
-      <th>Task Type</th>
-      <th>Preferred Method</th>
-      <th>Reason</th>
-    </tr>
-    <tr>
-      <td class="highlight">Machine Translation</td>
-      <td>Beam Search</td>
-      <td>Deterministic, constrained — one correct answer</td>
-    </tr>
-    <tr>
-      <td class="highlight">Summarization</td>
-      <td>Beam Search</td>
-      <td>Factual accuracy important</td>
-    </tr>
-    <tr>
-      <td class="highlight">Chatbots / Storytelling</td>
-      <td>Sampling (top-p, temperature)</td>
-      <td>Diversity and creativity needed</td>
-    </tr>
-    <tr>
-      <td class="highlight">Code Generation</td>
-      <td>Beam Search or Greedy</td>
-      <td>Correctness over diversity</td>
-    </tr>
-  </table>
-
-  <div class="quiz-callout">
-    <p>Given beam width W=2 and branching factor B=3, trace the first two steps of beam search for the sentence "The cat sat on the ___" with these token probabilities. Show which candidates survive.</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 6: RAG
-══════════════════════════════════════════ -->
-<section class="section" id="s6">
-  <div class="section-header">
-    <span class="section-num">06</span>
-    <h2>Retrieval-Augmented Generation (RAG)</h2>
-  </div>
-
-  <div class="def">
-    <strong>RAG (Retrieval-Augmented Generation)</strong>
-    <p>A technique that enhances LLMs by combining them with a <strong>retrieval system</strong> that fetches relevant external information at inference time. Instead of relying solely on internal (parametric) knowledge, the model also uses dynamically retrieved (non-parametric) external knowledge. Reduces hallucinations and keeps information current without retraining.</p>
-  </div>
-
-  <h3>Why RAG? The Problem with Pure LLMs</h3>
-  <ul>
-    <li><strong>Static knowledge:</strong> LLMs are frozen at training cutoff. They can't answer questions about recent events.</li>
-    <li><strong>Hallucinations:</strong> Without retrieval, LLMs make up plausible-sounding but wrong facts.</li>
-    <li><strong>No provenance:</strong> Can't cite sources or explain where information came from.</li>
-    <li><strong>Fine-tuning is expensive:</strong> Updating a model for new domain knowledge requires costly retraining.</li>
-  </ul>
-
-  <h3>Parametric vs. Non-Parametric Memory</h3>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🧠</div>
-      <h4>Parametric Memory</h4>
-      <p>Knowledge stored inside the model's weights (parameters) learned during training. Fixed after training ends.</p>
+  <div class="section" id="formulas">
+    <div class="section-header">
+      <span class="section-num">REF</span>
+      <h2>Formulas to Memorize</h2>
     </div>
-    <div class="card">
-      <div class="card-icon">🗄️</div>
-      <h4>Non-Parametric Memory</h4>
-      <p>External knowledge base (vector database of documents). Can be updated without retraining the model.</p>
+
+    <div class="code">
+<span class="c-muted">═══ CACHE ═══</span>
+<span class="c-green">block_start = floor(address / block_size) × block_size</span>
+<span class="c-green">block_number = block_start / block_size</span>
+<span class="c-green">L1_slot = block_number mod (L1_capacity / block_size)</span>
+<span class="c-green">num_blocks = capacity / block_size</span>
+
+<span class="c-blue">AMAT = hit_rate × hit_latency + miss_rate × miss_latency</span>
+<span class="c-blue">Ti = ti + mi × Ti+1</span>   <span class="c-muted">(recursive latency)</span>
+<span class="c-blue">miss_rate + hit_rate = 1</span>
+
+<span class="c-muted">═══ PERFORMANCE ═══</span>
+<span class="c-yellow">Execution time = # instructions × CPI × clock_period</span>
+<span class="c-yellow">Single-cycle CPI = 1  (but long clock)</span>
+<span class="c-yellow">Multi-cycle CPI = varies per instruction type</span>
+<span class="c-yellow">Pipeline ideal speedup ≈ number of stages</span>
+
+<span class="c-muted">═══ VIRTUAL MEMORY ═══</span>
+<span class="c-purple">VPN bits = log2(virtual_memory_size / page_size)</span>
+<span class="c-purple">PFN bits = log2(physical_memory_size / page_size)</span>
+<span class="c-purple">page_offset bits = log2(page_size)</span>
+<span class="c-purple">Physical address = PFN concatenated with page_offset</span>
+
+<span class="c-muted">═══ LC-3 BRANCH ═══</span>
+<span class="c-red">branch target = PC + 1 + SEXT(offset9)</span>
+<span class="c-red">  (PC is already incremented by 1 when branch executes)</span>
+<span class="c-red">branch taken if: (n AND N) OR (z AND Z) OR (p AND P)</span>
+    </div>
+
+    <h3>Self-Check Questions</h3>
+    <p style="font-size:13px;color:var(--muted)">Click each question to reveal the answer.</p>
+
+    <div class="quiz-item" onclick="this.classList.toggle('open')">
+      <div class="q">Why does pipelined MIPS need separate instruction and data memories?</div>
+      <div class="toggle">▶ click to reveal</div>
+      <div class="a" style="color:var(--accent3)">Because in a 5-stage pipeline, IF (stage 1) fetches from instruction memory at the same time MEM (stage 4) reads/writes data memory. If there was only one memory, these two stages would conflict — a structural hazard. Separate memories remove the hazard.</div>
+    </div>
+
+    <div class="quiz-item" onclick="this.classList.toggle('open')">
+      <div class="q">In the multi-cycle processor, why is IRWrite only 1 during IF and 0 in all other phases?</div>
+      <div class="toggle">▶ click to reveal</div>
+      <div class="a" style="color:var(--accent3)">The instruction register (IR) must hold the current instruction for all subsequent phases. If IRWrite stayed 1, the next memory read (e.g., data read in MEM phase for lw) would overwrite IR with data instead of an instruction. By setting IRWrite=0 after IF, the IR is locked until the next instruction fetch.</div>
+    </div>
+
+    <div class="quiz-item" onclick="this.classList.toggle('open')">
+      <div class="q">Address 127 and address 63 are in the same cache block. Why?</div>
+      <div class="toggle">▶ click to reveal</div>
+      <div class="a" style="color:var(--accent3)">Block size = 64. Address 127: floor(127/64)=1, block starts at 64. Address 63: floor(63/64)=0, block starts at 0. Wait — they are in DIFFERENT blocks! Block[64] contains addresses 64–127. Block[0] contains addresses 0–63. Address 63 is at the very end of block[0], and address 64 is the start of block[1] which contains 127.</div>
+    </div>
+
+    <div class="quiz-item" onclick="this.classList.toggle('open')">
+      <div class="q">What is the difference between ISA and Microarchitecture? Give one example of each.</div>
+      <div class="toggle">▶ click to reveal</div>
+      <div class="a" style="color:var(--accent3)">ISA = the programmer-visible contract (what instructions do). Example: MIPS has 32 registers named $0–$31. Microarchitecture = the implementation (how it's built in hardware). Example: the MIPS R10000 executes instructions out-of-order with branch prediction — invisible to software, which still sees sequential execution.</div>
+    </div>
+
+    <div class="quiz-item" onclick="this.classList.toggle('open')">
+      <div class="q">For beq in multi-cycle, why is PCWrite=0 but PC still updates when branch is taken?</div>
+      <div class="toggle">▶ click to reveal</div>
+      <div class="a" style="color:var(--accent3)">PCEn = PCWrite OR (Branch AND Zero). When Branch=1 and Zero=1 (registers are equal), PCEn=1 through the Branch path, not the PCWrite path. This allows conditional PC updates without always enabling PCWrite. PCWrite is only for unconditional writes (IF phase updates, jump).</div>
     </div>
   </div>
 
-  <h3>RAG Pipeline — How It Works</h3>
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PIPELINE</span>
-      <h3>RAG Process Flow</h3>
-    </div>
-    <div class="step"><strong>1. Query:</strong> User submits a question or prompt.</div>
-    <div class="step"><strong>2. NLP Analysis:</strong> System parses query to understand intent.</div>
-    <div class="step"><strong>3. Embedding:</strong> Query is converted to a vector embedding.</div>
-    <div class="step"><strong>4. Similarity Search:</strong> Vector database is searched for documents with similar embeddings.</div>
-    <div class="step"><strong>5. Ranking & Filtering:</strong> Retrieved documents ranked by relevance; top K selected.</div>
-    <div class="step"><strong>6. Augmented Prompt:</strong> Original query + retrieved context → combined into enriched prompt.</div>
-    <div class="step"><strong>7. Generation:</strong> LLM generates answer using both its parametric knowledge and retrieved context.</div>
-    <div class="step"><strong>8. Post-processing (optional):</strong> Fact-checking, summarization, formatting of the response.</div>
-  </div>
-
-  <h3>Two RAG Model Variants</h3>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">📄</div>
-      <h4>RAG-Sequence</h4>
-      <p>Uses the <em>same retrieved document</em> to predict every target token in the output. One document for the whole answer.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔀</div>
-      <h4>RAG-Token</h4>
-      <p>Can use a <em>different retrieved document</em> for each target token. More flexible, can pull from multiple sources per answer.</p>
-    </div>
-  </div>
-
-  <h3>Chunking</h3>
-  <div class="def">
-    <strong>Chunking</strong>
-    <p>Breaking large documents into smaller, manageable pieces before storing in the vector database. Improves retrieval accuracy because smaller units can be matched more precisely to specific queries.</p>
-  </div>
-
-  <div class="pros-cons">
-    <div class="pros">
-      <h4>ADVANTAGES OF RAG</h4>
-      <ul>
-        <li>Reduces hallucinations with grounded facts</li>
-        <li>Provides citations and provenance</li>
-        <li>Access to current/real-time information</li>
-        <li>No expensive model retraining for new data</li>
-        <li>Transparent reasoning process</li>
-        <li>Handles ambiguous queries with context</li>
-      </ul>
-    </div>
-    <div class="cons">
-      <h4>LIMITATIONS OF RAG</h4>
-      <ul>
-        <li>Missing info if KB is incomplete</li>
-        <li>Suboptimal retrieval may miss relevant docs</li>
-        <li>Token limit constraints on retrieved context</li>
-        <li>LLM may still hallucinate despite context</li>
-        <li>Complex system infrastructure to maintain</li>
-        <li>Bias propagation from knowledge base</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="quiz-callout">
-    <p>Explain the difference between RAG-Sequence and RAG-Token. When would RAG-Token be preferable?</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 7: LLM FULL PIPELINE
-══════════════════════════════════════════ -->
-<section class="section" id="s7">
-  <div class="section-header">
-    <span class="section-num">07</span>
-    <h2>LLM Full Training Pipeline</h2>
-  </div>
-
-  <p>Modern LLMs are not simply trained once. They go through a <strong>3-stage progressive pipeline</strong>, each building on the previous.</p>
-
-  <div class="flow" style="flex-direction:column; align-items:stretch; gap:0;">
-    <div class="flow-box active" style="margin-bottom:0; border-radius:8px 8px 0 0; text-align:center; padding:16px;">
-      <strong style="color:#00d4ff;">Stage 1: Pre-training</strong><br>
-      <small style="color:#94a3b8;">Trillions of tokens • Self-supervised • Next token prediction</small>
-    </div>
-    <div class="flow-box" style="margin:0; border-radius:0; text-align:center; padding:16px; border-top:none;">
-      <strong style="color:#c4b5fd;">Stage 2: Supervised Fine-Tuning (SFT)</strong><br>
-      <small style="color:#94a3b8;">Instruction-following pairs • Smaller curated dataset</small>
-    </div>
-    <div class="flow-box" style="margin:0; border-radius:0 0 8px 8px; text-align:center; padding:16px; border-top:none;">
-      <strong style="color:#6ee7b7;">Stage 3: Preference Tuning (RLHF / DPO)</strong><br>
-      <small style="color:#94a3b8;">Human feedback • Helpful, Honest, Harmless</small>
-    </div>
-  </div>
-
-  <h3>Stage 1: Pre-training</h3>
-  <div class="def">
-    <strong>Pre-training</strong>
-    <p>The most computationally expensive phase. Uses <strong>Self-Supervised Learning (SSL)</strong>: the model predicts the next token from a massive unlabeled text corpus (Wikipedia, books, GitHub, ArXiv, Common Crawl). No human labels needed — the text itself is the supervision.</p>
-  </div>
-  <p>The model learns: grammar, world facts, reasoning, coding conventions, and much more. But a pre-trained model is NOT an assistant — if asked "What is the capital of France?" it might respond "And what is the capital of Germany?" because it thinks it's completing a quiz.</p>
-
-  <h3>Stage 2: Supervised Fine-Tuning (SFT)</h3>
-  <div class="def">
-    <strong>SFT / Instruction Tuning</strong>
-    <p>Training on a smaller, high-quality dataset of (Prompt, Response) pairs written by humans. Teaches the model the <em>format</em> of a helpful conversation. After SFT, the model knows that a question should be answered directly.</p>
-  </div>
-  <p>Data mixtures include: assistant dialogs, synthetic instructions, math/reasoning/code problems, safety alignment examples. Data can be both human-written and synthetic.</p>
-
-  <h3>Stage 3: Preference Tuning</h3>
-  <h4>RLHF (Reinforcement Learning from Human Feedback)</h4>
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">ALGORITHM</span>
-      <h3>RLHF Process</h3>
-    </div>
-    <div class="step"><strong>1. Sampling:</strong> The fine-tuned model generates multiple responses to the same prompt.</div>
-    <div class="step"><strong>2. Ranking:</strong> Human raters rank responses from best to worst (helpfulness, accuracy, harmlessness).</div>
-    <div class="step"><strong>3. Reward Model:</strong> A separate smaller model is trained to predict human preferences based on the rankings.</div>
-    <div class="step"><strong>4. Optimization:</strong> The main LLM is updated using PPO (Proximal Policy Optimization) to maximize the reward model's score.</div>
-  </div>
-
-  <h4>DPO (Direct Preference Optimization)</h4>
-  <p>A newer, more efficient alternative to RLHF. Skips the separate reward model and directly optimizes the LLM on ranked pairs (chosen vs. rejected responses). More stable training, lower computational cost.</p>
-
-  <h3>Scaling Laws</h3>
-  <div class="def">
-    <strong>Scaling Laws</strong>
-    <p>Performance of LLMs follows predictable <strong>power-law relationships</strong> with three factors: Parameters (N), Data (D), and Compute (C). Discovered by OpenAI and DeepMind researchers.</p>
-  </div>
-  <p><strong>Chinchilla Observation:</strong> For optimal training, dataset size should grow proportionally with model size. Scaling parameters without scaling data leads to diminishing returns quickly.</p>
-
-  <h3>LoRA: Parameter-Efficient Fine-Tuning</h3>
-  <div class="def">
-    <strong>LoRA (Low-Rank Adaptation)</strong>
-    <p>Instead of fine-tuning all model weights (expensive), LoRA adds small, trainable low-rank matrices to each layer. Only a small fraction of parameters are updated, with similar performance to full fine-tuning. Key benefit: you can swap LoRA matrices to switch tasks without re-loading the base model.</p>
-  </div>
-  <div class="note">LoRA needs a higher learning rate than full fine-tuning, and performs poorly with large batch sizes compared to full fine-tuning.</div>
-
-  <div class="quiz-callout">
-    <p>Describe the full 3-stage LLM pipeline. Why is each stage necessary? What happens if you skip Stage 3?</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 8: DIALOGUE SYSTEMS
-══════════════════════════════════════════ -->
-<section class="section" id="s8">
-  <div class="section-header">
-    <span class="section-num">08</span>
-    <h2>Dialogue Systems & Conversational Agents</h2>
-  </div>
-
-  <div class="def">
-    <strong>Conversational Agents / Dialogue Systems</strong>
-    <p>Systems designed to interact with humans via text or speech. Examples: SIRI, Alexa, Cortana, Google Assistant. They range from simple (timers, music) to complex (travel booking, mental health support).</p>
-  </div>
-
-  <h3>Two Types of Conversational Agents</h3>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">💬</div>
-      <h4>Chatbots</h4>
-      <p>Mimic informal human conversation. Goal: engaging, natural dialogue for fun or therapy. Example: early ELIZA, modern LLM chatbots.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h4>Task-Based Dialogue Agents</h4>
-      <p>Goal: help user complete a specific task (booking flights, setting alarms, ordering food). Architecture: frames with slots and values.</p>
-    </div>
-  </div>
-
-  <h3>Chatbot Architectures</h3>
-  <table class="compare-table">
-    <tr>
-      <th>Type</th>
-      <th>Examples</th>
-      <th>Mechanism</th>
-    </tr>
-    <tr>
-      <td class="highlight">Rule-Based: Pattern-Action</td>
-      <td>ELIZA</td>
-      <td>Pattern matching → scripted responses</td>
-    </tr>
-    <tr>
-      <td class="highlight">Rule-Based: Mental Model</td>
-      <td>PARRY</td>
-      <td>Internal state machine + rules. First to pass Turing Test!</td>
-    </tr>
-    <tr>
-      <td class="highlight">Corpus: Information Retrieval</td>
-      <td>XiaoIce</td>
-      <td>Retrieve best matching response from past conversations</td>
-    </tr>
-    <tr>
-      <td class="highlight">Corpus: Neural Encoder-Decoder</td>
-      <td>BlenderBot</td>
-      <td>Generate response from user utterance using seq2seq model</td>
-    </tr>
-  </table>
-
-  <h3>Task-Based Dialogue: Frames and Slots</h3>
-  <div class="def">
-    <strong>Frame</strong>
-    <p>A knowledge structure representing user intent, consisting of <strong>slots</strong> (fields to be filled) and associated questions. Example for flight booking:</p>
-  </div>
-  <div class="formula">
-    <span class="formula-label">FLIGHT BOOKING FRAME</span>
-    SLOT        TYPE    QUESTION
-    ORIGIN      city    "What city are you leaving from?"
-    DEST        city    "Where are you going?"
-    DEP_DATE    date    "What day would you like to leave?"
-    DEP_TIME    time    "What time would you like to leave?"
-    AIRLINE     line    "What is your preferred airline?"
-  </div>
-
-  <h3>Properties of Human Conversation</h3>
-  <ul>
-    <li><strong>Turns:</strong> Each contribution to a conversation is a "turn." Conversation is a game where participants take turns.</li>
-    <li><strong>Turn-taking:</strong> Rules for when to take the floor and when to yield it. Includes interruptions.</li>
-    <li><strong>Barge-in:</strong> Allowing a user to interrupt the system mid-speech.</li>
-    <li><strong>End-pointing:</strong> Detecting when the user has stopped talking. Very hard — people pause in the middle of turns.</li>
-    <li><strong>Latching:</strong> Speakers time their response to begin immediately when the other finishes, with minimal pause.</li>
-  </ul>
-
-  <h3>Speech Acts (Dialogue Acts)</h3>
-  <div class="def">
-    <strong>Speech Acts</strong>
-    <p>Each utterance in dialogue is an action. Classification from Bach and Harnish (1979):</p>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <h4>Constatives</h4>
-      <p>Commit speaker to something being true. (answering, claiming, stating, denying)</p>
-    </div>
-    <div class="card">
-      <h4>Directives</h4>
-      <p>Speaker tries to get addressee to do something. (asking, ordering, requesting, advising)</p>
-    </div>
-    <div class="card">
-      <h4>Commissives</h4>
-      <p>Commit speaker to future action. (promising, planning, vowing, betting)</p>
-    </div>
-    <div class="card">
-      <h4>Acknowledgments</h4>
-      <p>Express speaker's attitude toward hearer. (greeting, thanking, apologizing)</p>
-    </div>
-  </div>
-
-  <h3>Grounding</h3>
-  <div class="def">
-    <strong>Grounding</strong>
-    <p>The process of establishing <strong>common ground</strong> — mutual confirmation that communication was understood. The <em>Principle of Closure</em>: agents need evidence, sufficient for current purposes, that they succeeded in performing an action. In dialogue: one speaker signals understanding (e.g., "OK", "uh-huh"), the other continues.</p>
-  </div>
-  <p>Example: Why do elevator buttons light up? To ground the action — confirm to the user that pressing was registered.</p>
-
-  <h3>Conversation Structure</h3>
-  <ul>
-    <li><strong>Adjacency Pairs:</strong> Locally structured pairs: QUESTION→ANSWER, PROPOSAL→ACCEPTANCE/REJECTION, COMPLIMENT→DOWNPLAYER</li>
-    <li><strong>Subdialogues:</strong> Embedded sub-conversations within the main dialogue (e.g., clarification subdialogue, correction subdialogue)</li>
-    <li><strong>Presequences:</strong> "Can you make train reservations?" → "Yes" → "Then I'd like to book..."</li>
-  </ul>
-
-  <div class="quiz-callout">
-    <p>What is grounding and why does it matter for dialogue systems? Give a real-world example.</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 9: MIXTURE OF EXPERTS
-══════════════════════════════════════════ -->
-<section class="section" id="s9">
-  <div class="section-header">
-    <span class="section-num">09</span>
-    <h2>Mixture of Experts (MoE)</h2>
-  </div>
-
-  <div class="def">
-    <strong>Mixture of Experts (MoE)</strong>
-    <p>An architecture that improves LLM efficiency by dividing model capacity among multiple specialized sub-networks called "experts." A learned <strong>router</strong> selects only a small subset of experts for each input token. Unlike dense models (all parameters active every time), MoE models are <strong>sparse</strong> — most parameters sleep while only relevant ones activate.</p>
-  </div>
-
-  <h3>Why MoE?</h3>
-  <p>Dense models (e.g., LLaMA 3) activate <em>all</em> parameters for every token — even parameters specialized for chemistry are activated when processing a cooking recipe. MoE makes this efficient by routing tokens only to relevant experts.</p>
-
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">💡</div>
-      <h4>Scale without Cost</h4>
-      <p>MoE models can have 100B–1T+ parameters while keeping per-token compute manageable, because only ~1–2 experts activate per token.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔀</div>
-      <h4>Specialization</h4>
-      <p>Different experts learn different aspects of language/knowledge. One expert may specialize in code, another in mathematics.</p>
-    </div>
-  </div>
-
-  <h3>Routing Collapse — Key Challenge</h3>
-  <div class="note">The most dangerous MoE training failure: the router always sends tokens to the same 1–2 experts, ignoring all others. The unused experts never learn. Called <strong>routing collapse</strong>. Solved with auxiliary load-balancing losses that penalize imbalanced routing.</div>
-
-  <h3>MoE in Transformers</h3>
-  <p>In transformer-based MoE (e.g., Mixtral), the <strong>feedforward network (FFN)</strong> layer within each transformer block is replaced by a mixture of FFN experts plus a routing network. The attention layers remain shared/dense.</p>
-
-  <div class="quiz-callout">
-    <p>What is routing collapse in MoE models and why does it happen? How is it mitigated?</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 10: DECODING & SAMPLING STRATEGIES
-══════════════════════════════════════════ -->
-<section class="section" id="s10">
-  <div class="section-header">
-    <span class="section-num">10</span>
-    <h2>Decoding & Sampling Strategies</h2>
-  </div>
-
-  <p>After the LLM computes probability distributions over the vocabulary, a <strong>decoding strategy</strong> determines which token to pick next.</p>
-
-  <table class="compare-table">
-    <tr>
-      <th>Strategy</th>
-      <th>How It Works</th>
-      <th>Problem</th>
-      <th>Best For</th>
-    </tr>
-    <tr>
-      <td class="highlight">Greedy</td>
-      <td>Always pick argmax P(y<sub>t</sub>|context)</td>
-      <td>Repetitive, deterministic, local optima</td>
-      <td>Simple tasks</td>
-    </tr>
-    <tr>
-      <td class="highlight">Beam Search</td>
-      <td>Keep top-k sequences at each step</td>
-      <td>Generic, "safe" output; no true creativity</td>
-      <td>Translation, summarization</td>
-    </tr>
-    <tr>
-      <td class="highlight">Random Sampling</td>
-      <td>Sample from full distribution P(y<sub>t</sub>|context)</td>
-      <td>Low-probability words pollute output</td>
-      <td>Not recommended directly</td>
-    </tr>
-    <tr>
-      <td class="highlight">Top-k Sampling</td>
-      <td>Sample only from top-k highest probability tokens</td>
-      <td>k is fixed regardless of distribution shape</td>
-      <td>Creative tasks</td>
-    </tr>
-    <tr>
-      <td class="highlight">Top-p (Nucleus) Sampling</td>
-      <td>Sample from smallest set covering cumulative probability ≥ p</td>
-      <td>More complex to tune</td>
-      <td>Best for open-ended generation</td>
-    </tr>
-    <tr>
-      <td class="highlight">Temperature Sampling</td>
-      <td>Reshape distribution: divide logits by T before softmax</td>
-      <td>T tuning required</td>
-      <td>Controlling diversity</td>
-    </tr>
-  </table>
-
-  <h3>Temperature Sampling Deep Dive</h3>
-  <div class="formula">
-    <span class="formula-label">TEMPERATURE SCALING</span>
-    P'(y<sub>t</sub>) = softmax(logits / T)
-    <br><br>
-    T &lt; 1.0 → sharper distribution → model is more confident → less diversity
-    T = 1.0 → original distribution
-    T &gt; 1.0 → flatter distribution → model is more random → more diversity
-  </div>
-
-  <h3>Top-p (Nucleus) Sampling vs. Top-k</h3>
-  <p><strong>Problem with top-k:</strong> If k=10, sometimes the top 10 tokens cover 99% of probability mass (good), other times they cover only 30% (the rest is spread thinly — bad). k doesn't adapt to distribution shape.</p>
-  <p><strong>Top-p fix:</strong> Include the smallest set of tokens whose cumulative probability ≥ p (e.g., 0.9). Automatically adapts the number of candidates to the distribution.</p>
-
-  <h3>Inference Optimizations</h3>
-  <ul>
-    <li><strong>KV Caching:</strong> Cache Key and Value tensors from attention for previously processed tokens. Avoids recomputing them at every decoding step.</li>
-    <li><strong>FlashAttention:</strong> Optimizes memory access patterns in GPU — reduces reads/writes between high-bandwidth memory (HBM) and on-chip SRAM.</li>
-    <li><strong>PagedAttention:</strong> Stores K and V in non-contiguous memory pages (like OS virtual memory). Minimizes wasted memory from fragmentation.</li>
-    <li><strong>Multi-Query Attention / Grouped Query Attention:</strong> Share key/value heads across groups of query heads — reduces KV cache size.</li>
-  </ul>
-
-  <div class="quiz-callout">
-    <p>Why is top-p sampling generally preferred over top-k sampling? Explain with a distribution shape example.</p>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     PRACTICE PROBLEMS
-══════════════════════════════════════════ -->
-<section class="section" id="practice">
-  <div class="section-header">
-    <span class="section-num" style="background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3); color:var(--accent3);">🧪 PRACTICE</span>
-    <h2>Practice Problems</h2>
-  </div>
-
-  <p style="color:var(--text-dim); margin-bottom:32px;">These problems require mathematical computation, algorithm tracing, or systematic reasoning — the kinds of problems likely to appear on the quiz. Work through each before checking the hints.</p>
-
-  <!-- Problem 1 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 1</span>
-      <h3>Trace Beam Search Step-by-Step</h3>
-    </div>
-    <p><strong>Scenario:</strong> You are decoding with beam width k=2. The vocabulary is {A, B, C}. Log-probabilities at each step are given below.</p>
-
-    <div class="formula">
-      <span class="formula-label">STEP 1: Initial probabilities</span>
-      P(A | &lt;start&gt;) = 0.5   → log = -0.69
-      P(B | &lt;start&gt;) = 0.3   → log = -1.20
-      P(C | &lt;start&gt;) = 0.2   → log = -1.61
-    </div>
-
-    <div class="formula">
-      <span class="formula-label">STEP 2: Given beam survived ["A", "B"], conditional log-probs</span>
-      P(A|A)=0.1, P(B|A)=0.6, P(C|A)=0.3
-      P(A|B)=0.5, P(B|B)=0.2, P(C|B)=0.3
-    </div>
-
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>After Step 1: Which 2 tokens survive? (Keep k=2 highest log-prob candidates)</li>
-      <li>After Step 2: Compute all 6 candidate sequences (2 beams × 3 tokens). Sum log-probs. Which 2 sequences survive?</li>
-      <li>What is the difference between this and greedy decoding?</li>
-    </ol>
-
-    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
-      <span class="formula-label">WORKED SOLUTION — STEP 1</span>
-      Survivors: A (log=-0.69), B (log=-1.20) ✓   [C dropped]
-
-      <span class="formula-label" style="margin-top:16px;">STEP 2: Compute joint log-probs</span>
-      A→A: -0.69 + log(0.1) = -0.69 + (-2.30) = -2.99
-      A→B: -0.69 + log(0.6) = -0.69 + (-0.51) = -1.20 ★
-      A→C: -0.69 + log(0.3) = -0.69 + (-1.20) = -1.89
-      B→A: -1.20 + log(0.5) = -1.20 + (-0.69) = -1.89
-      B→B: -1.20 + log(0.2) = -1.20 + (-1.61) = -2.81
-      B→C: -1.20 + log(0.3) = -1.20 + (-1.20) = -2.40
-
-      Survivors: "AB" (-1.20) and "AC" (-1.89) ★
-
-      Greedy would have chosen: A (step 1) → B (step 2) = "AB"
-      Beam search found same here, but on longer sequences it diverges!
-    </div>
-  </div>
-
-  <!-- Problem 2 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 2</span>
-      <h3>Compute Dot-Product Attention</h3>
-    </div>
-    <p><strong>Scenario:</strong> You have an encoder with 3 hidden states and a decoder state at step 1:</p>
-    <div class="formula">
-      <span class="formula-label">VECTORS (simplified 2D for practice)</span>
-      Encoder:   h1 = [1, 0]    h2 = [0, 1]    h3 = [1, 1]
-      Decoder:   d1 = [1, 0.5]
-    </div>
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>Compute the score (dot product) of d1 with each encoder hidden state.</li>
-      <li>Apply softmax to get attention weights α.</li>
-      <li>Compute context vector C = Σ α<sub>j</sub> · h<sub>j</sub>.</li>
-      <li>Interpret: which encoder position did the decoder attend to most?</li>
-    </ol>
-
-    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
-      <span class="formula-label">WORKED SOLUTION</span>
-      Step 1 — Scores (dot products):
-        score(d1, h1) = 1·1 + 0.5·0 = 1.0
-        score(d1, h2) = 1·0 + 0.5·1 = 0.5
-        score(d1, h3) = 1·1 + 0.5·1 = 1.5  ← highest
-
-      Step 2 — Softmax (exp then normalize):
-        exp(1.0) = 2.718,  exp(0.5) = 1.649,  exp(1.5) = 4.482
-        sum = 8.849
-        α1 = 2.718/8.849 ≈ 0.307
-        α2 = 1.649/8.849 ≈ 0.186
-        α3 = 4.482/8.849 ≈ 0.507
-
-      Step 3 — Context vector:
-        C = 0.307·[1,0] + 0.186·[0,1] + 0.507·[1,1]
-          = [0.307,0] + [0,0.186] + [0.507,0.507]
-          = [0.814, 0.693]
-
-      Step 4 — Interpretation:
-        The decoder attends MOST to h3 (α=0.507), moderately to h1, least to h2.
-    </div>
-  </div>
-
-  <!-- Problem 3 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 3</span>
-      <h3>Temperature Sampling Calculation</h3>
-    </div>
-    <p><strong>Scenario:</strong> A language model produces the following raw logits for the next token:</p>
-    <div class="formula">
-      Logits: token_A = 3.0,  token_B = 1.0,  token_C = 0.5
-    </div>
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>Compute the softmax probabilities at T=1.0 (standard).</li>
-      <li>Compute the softmax probabilities at T=0.5 (cold/sharp).</li>
-      <li>Compute the softmax probabilities at T=2.0 (hot/flat).</li>
-      <li>Which temperature makes the model more deterministic? More random? Why?</li>
-    </ol>
-    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
-      <span class="formula-label">WORKED SOLUTION</span>
-      T=1.0: exp(3)=20.09, exp(1)=2.72, exp(0.5)=1.65  →  sum=24.46
-        P(A)=0.821, P(B)=0.111, P(C)=0.067
-
-      T=0.5: logits/0.5 → 6.0, 2.0, 1.0
-        exp(6)=403.4, exp(2)=7.39, exp(1)=2.72  →  sum=413.5
-        P(A)=0.976, P(B)=0.018, P(C)=0.007  → near-deterministic!
-
-      T=2.0: logits/2.0 → 1.5, 0.5, 0.25
-        exp(1.5)=4.48, exp(0.5)=1.65, exp(0.25)=1.28  →  sum=7.41
-        P(A)=0.605, P(B)=0.223, P(C)=0.173  → more uniform, creative
-
-      Lower T = sharper, more deterministic, safer
-      Higher T = flatter, more random, more creative (but more errors)
-    </div>
-  </div>
-
-  <!-- Problem 4 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 4</span>
-      <h3>Self-Attention Matrix Computation</h3>
-    </div>
-    <p><strong>Scenario:</strong> A 3-token sequence ["The", "cat", "sat"] with embedding dimension d=2.</p>
-    <div class="formula">
-      Token embeddings (matrix X):
-        "The" →  x1 = [1, 0]
-        "cat" →  x2 = [0, 1]
-        "sat" →  x3 = [0.5, 0.5]
-
-      For simplicity, assume Q = K = V = X (no weight matrices).
-    </div>
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>Compute the attention score matrix QK<sup>T</sup> (3×3).</li>
-      <li>Scale by 1/√d = 1/√2 ≈ 0.707.</li>
-      <li>Apply softmax to each row.</li>
-      <li>For a causal model: mask the upper triangle (future positions). What does this mean for row 1 (The) vs. row 3 (sat)?</li>
-    </ol>
-    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
-      <span class="formula-label">PARTIAL SOLUTION</span>
-      QK^T:
-        q1·k1=1·1+0·0=1,  q1·k2=1·0+0·1=0,  q1·k3=0.5
-        q2·k1=0,           q2·k2=1,           q2·k3=0.5
-        q3·k1=0.5,         q3·k2=0.5,         q3·k3=0.5
-
-      Matrix: [[1,   0,   0.5],
-               [0,   1,   0.5],
-               [0.5, 0.5, 0.5]]
-
-      After ×0.707: [[0.71, 0,    0.35],
-                     [0,    0.71, 0.35],
-                     [0.35, 0.35, 0.35]]
-
-      CAUSAL MASK (set upper triangle to -inf before softmax):
-        Row 1 (The):  [0.71, -inf, -inf]  → The can only attend to itself
-        Row 2 (cat):  [0,    0.71, -inf]  → cat attends to The and itself
-        Row 3 (sat):  [0.35, 0.35, 0.35] → sat attends to all three ✓
-    </div>
-  </div>
-
-  <!-- Problem 5 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 5</span>
-      <h3>RAG vs. Standard LLM: Design Problem</h3>
-    </div>
-    <p><strong>Scenario:</strong> You are building a Q&A system for a hospital. Users ask questions about hospital-specific protocols and recent drug approvals (updated monthly).</p>
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>Would you use a standard LLM or RAG? Justify with at least 3 specific reasons.</li>
-      <li>What would you put in the knowledge base (non-parametric memory)?</li>
-      <li>What retrieval failure scenarios must you guard against?</li>
-      <li>Would you choose RAG-Sequence or RAG-Token? Why?</li>
-    </ol>
-    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7;">
-      <span class="formula-label">MODEL ANSWER</span>
-      1. Use RAG because:
-         - Hospital protocols change monthly → LLM training data is stale
-         - Medical hallucinations are dangerous → need grounded, citable facts
-         - Hospital-specific protocols can't be in general training data
-         - Updating KB is cheaper than retraining a large model
-
-      2. Knowledge base contents:
-         - Hospital-specific protocol PDFs
-         - Drug approval databases (FDA, EMA), updated monthly
-         - Patient care guidelines, formulary lists
-         - Internal clinical research summaries
-
-      3. Failure scenarios:
-         - Query-document mismatch: "What's the max dose of X?" ≠ "Maximum
-           dosage for X" → use better embedding/chunking strategies
-         - Missing information: drug not yet in KB → system must say "unknown"
-           not hallucinate a dose
-         - Token limit: long protocols may be truncated → smart chunking needed
-
-      4. RAG-Token preferred here:
-         - Medical answers often synthesize from multiple sources
-           (protocol doc + drug database + research paper)
-         - Each fact in the answer may come from a different source
-         - RAG-Sequence would be limited to a single retrieved document
-    </div>
-  </div>
-
-  <!-- Problem 6 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 6</span>
-      <h3>RLHF Process Walkthrough</h3>
-    </div>
-    <p><strong>Scenario:</strong> You are the researcher running RLHF on a 7B parameter LLM. The prompt is: "Explain quantum entanglement to a 10-year-old."</p>
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>Describe what happens in the Sampling step.</li>
-      <li>What would a human rater look for when Ranking responses?</li>
-      <li>What does the Reward Model learn? What is its input and output?</li>
-      <li>What optimization algorithm is used to update the main LLM?</li>
-      <li>What is DPO and how does it differ from standard RLHF?</li>
-    </ol>
-  </div>
-
-  <!-- Problem 7 -->
-  <div class="practice-section">
-    <div class="ps-header">
-      <span class="practice-badge">PROBLEM 7 — FROM SLIDES</span>
-      <h3>Greedy vs. Beam Search (Uzbek/English)</h3>
-    </div>
-    <p>This is the exercise directly from the course slides (Exercise slide at end of Beam Search section):</p>
-    <p><strong>Task:</strong></p>
-    <ol>
-      <li>Apply greedy decoding to translate the Uzbek sentence: <em>"Bugun ob-havo juda yaxshi."</em> (Today the weather is very good.)</li>
-      <li>Apply beam search with k=2 to the same sentence.</li>
-      <li>Apply a length penalty so the output is not more than 3 words.</li>
-      <li>Compare: which approach produces a more natural-sounding English output?</li>
-    </ol>
-    <div class="note">This exercise tests your understanding of how beam search considers multiple candidates. With length penalty, beam search will prefer shorter complete sequences.</div>
-  </div>
-
-  <a href="#top" class="back-top">↑ BACK TO TOP</a>
-</section>
-
-<!-- ══════════════════════════════════════════
-     QUICK REFERENCE SUMMARY
-══════════════════════════════════════════ -->
-<section class="section" style="border-bottom:none;">
-  <div class="section-header">
-    <span class="section-num" style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.3); color:var(--accent4);">⚡ SUMMARY</span>
-    <h2>Key Formulas & Definitions Cheatsheet</h2>
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">ENCODER-DECODER</span>
-    p(Y|X) = ∏ p(y_i | y_&lt;i, X)
-    h_i (decoder) = g(h_{i-1}, ŷ_{i-1}, C)
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">ATTENTION</span>
-    score(d, h_j) = d · h_j                           [dot-product]
-    α_j = exp(score_j) / Σ_k exp(score_k)             [softmax]
-    C_i = Σ_j α_j · h_j                               [context vector]
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">SELF-ATTENTION (TRANSFORMER)</span>
-    Attention(Q,K,V) = softmax(QK^T / √d_k) · V
-    MultiHead = Concat(head_1,...,head_h) W^O
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">BEAM SEARCH</span>
-    Complexity: O(T × V × k)
-    k=1 → Greedy    k→∞ → Exhaustive
-    At each step: evaluate W×B candidates, keep top W
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">TEMPERATURE SAMPLING</span>
-    P'(y) = softmax(logits / T)
-    T&lt;1 → sharp → deterministic
-    T&gt;1 → flat → random
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">RAG PIPELINE</span>
-    Query → Embed → Vector Search → Top-K Docs → Augmented Prompt → LLM → Response
-    RAG-Sequence: same doc for all tokens
-    RAG-Token: different doc per token
-  </div>
-
-  <div class="formula">
-    <span class="formula-label">LLM PIPELINE</span>
-    Pre-training (SSL, next token pred) →
-    SFT (instruction pairs) →
-    RLHF/DPO (human preferences) →
-    Deployed model
-  </div>
-
-</section>
-
-</div><!-- /container -->
-
-<footer>
-  Multimedia Application · Inha University Tashkent · Dr. Minhaz Uddin Ahmed<br>
-  Quiz 2 Prep Material · Generated from lecture slides
-</footer>
+</main>
+
+<script>
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('nav a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
 
 </body>
 </html>
