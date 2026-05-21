@@ -3,1305 +3,1712 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Computer Architecture — Complete Study Guide</title>
+<title>IoT — Final Exam Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
-
   :root {
-    --bg: #0d0f14;
-    --surface: #13161e;
-    --surface2: #1a1e28;
-    --border: #252a38;
-    --accent: #4f9eff;
-    --accent2: #ff6b6b;
-    --accent3: #50e3c2;
-    --accent4: #f5a623;
-    --accent5: #b06aff;
-    --text: #d4d8e8;
-    --muted: #6b7394;
-    --heading: #ffffff;
-    --mono: 'IBM Plex Mono', monospace;
-    --sans: 'IBM Plex Sans', sans-serif;
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --accent4: #f59e0b;
+    --accent5: #ef4444;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --def-bg: #0d1f3c;
+    --def-border: #00d4ff;
+    --practice-bg: #0d1a0d;
+    --practice-border: #10b981;
+    --warn-bg: #1f0d0d;
+    --warn-border: #ef4444;
+    --note-bg: #1a1505;
+    --note-border: #f59e0b;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.75;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
-    background: var(--surface); border-right: 1px solid var(--border);
-    overflow-y: auto; padding: 24px 0; z-index: 100;
-  }
-  nav .logo {
-    padding: 0 20px 20px;
-    font-family: var(--mono); font-size: 11px; color: var(--accent);
-    letter-spacing: 0.15em; text-transform: uppercase;
-    border-bottom: 1px solid var(--border); margin-bottom: 16px;
-  }
-  nav a {
-    display: block; padding: 6px 20px;
-    color: var(--muted); text-decoration: none;
-    font-size: 13px; transition: all 0.15s;
-    border-left: 2px solid transparent;
-  }
-  nav a:hover, nav a.active {
-    color: var(--accent); border-left-color: var(--accent);
-    background: rgba(79,158,255,0.05);
-  }
-  nav .nav-section {
-    font-family: var(--mono); font-size: 10px; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.12em;
-    padding: 16px 20px 4px; margin-top: 8px;
-  }
-
-  /* MAIN */
-  main { margin-left: 260px; padding: 48px 56px; max-width: 960px; }
-
-  /* HERO */
-  .hero {
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 40px; margin-bottom: 56px;
-    background: linear-gradient(135deg, var(--surface) 0%, rgba(79,158,255,0.04) 100%);
-  }
-  .hero .tag {
-    font-family: var(--mono); font-size: 11px; color: var(--accent);
-    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;
-  }
-  .hero h1 {
-    font-size: 32px; font-weight: 600; color: var(--heading);
-    line-height: 1.2; margin-bottom: 12px;
-  }
-  .hero p { color: var(--muted); max-width: 560px; }
-
-  /* SECTIONS */
-  .section { margin-bottom: 72px; }
-  .section-header {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 32px; padding-bottom: 16px;
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #0a1628 100%);
     border-bottom: 1px solid var(--border);
-  }
-  .section-num {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--accent); background: rgba(79,158,255,0.1);
-    border: 1px solid rgba(79,158,255,0.2); border-radius: 4px;
-    padding: 2px 8px; white-space: nowrap;
-  }
-  h2 { font-size: 22px; font-weight: 600; color: var(--heading); }
-  h3 { font-size: 16px; font-weight: 500; color: var(--heading); margin: 28px 0 12px; }
-  h4 { font-size: 14px; font-weight: 500; color: var(--accent3); margin: 20px 0 8px;
-       font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; }
-
-  /* CARDS */
-  .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; padding: 24px; margin-bottom: 16px;
-  }
-  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .card-row.three { grid-template-columns: 1fr 1fr 1fr; }
-
-  /* CONCEPT PILL */
-  .pill {
-    display: inline-block; font-family: var(--mono); font-size: 11px;
-    padding: 2px 8px; border-radius: 4px; margin: 2px;
-  }
-  .pill-blue { background: rgba(79,158,255,0.12); color: var(--accent); border: 1px solid rgba(79,158,255,0.25); }
-  .pill-green { background: rgba(80,227,194,0.1); color: var(--accent3); border: 1px solid rgba(80,227,194,0.2); }
-  .pill-red { background: rgba(255,107,107,0.1); color: var(--accent2); border: 1px solid rgba(255,107,107,0.2); }
-  .pill-yellow { background: rgba(245,166,35,0.1); color: var(--accent4); border: 1px solid rgba(245,166,35,0.2); }
-  .pill-purple { background: rgba(176,106,255,0.1); color: var(--accent5); border: 1px solid rgba(176,106,255,0.2); }
-
-  /* CODE BLOCKS */
-  .code {
-    background: #0a0c10; border: 1px solid var(--border);
-    border-radius: 6px; padding: 16px 20px;
-    font-family: var(--mono); font-size: 13px;
-    line-height: 1.7; overflow-x: auto; margin: 12px 0;
-  }
-  .c-blue { color: var(--accent); }
-  .c-green { color: var(--accent3); }
-  .c-yellow { color: var(--accent4); }
-  .c-red { color: var(--accent2); }
-  .c-purple { color: var(--accent5); }
-  .c-muted { color: var(--muted); }
-
-  /* RULE BOX */
-  .rule-box {
-    border-left: 3px solid var(--accent4); background: rgba(245,166,35,0.05);
-    border-radius: 0 6px 6px 0; padding: 14px 18px; margin: 16px 0;
-    font-size: 14px;
-  }
-  .rule-box.blue { border-left-color: var(--accent); background: rgba(79,158,255,0.05); }
-  .rule-box.green { border-left-color: var(--accent3); background: rgba(80,227,194,0.05); }
-  .rule-box.red { border-left-color: var(--accent2); background: rgba(255,107,107,0.05); }
-  .rule-box.purple { border-left-color: var(--accent5); background: rgba(176,106,255,0.05); }
-  .rule-box strong { color: var(--heading); }
-
-  /* TABLE */
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th {
-    background: var(--surface2); color: var(--accent); font-family: var(--mono);
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 10px 14px; text-align: left; border: 1px solid var(--border);
-  }
-  td { padding: 9px 14px; border: 1px solid var(--border); vertical-align: top; }
-  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-  td code { font-family: var(--mono); color: var(--accent3); font-size: 12px; }
-
-  /* STEP BOXES */
-  .steps { display: flex; flex-direction: column; gap: 0; }
-  .step {
-    display: flex; gap: 16px; align-items: flex-start;
-    padding: 16px 0; border-bottom: 1px solid var(--border);
-  }
-  .step:last-child { border-bottom: none; }
-  .step-num {
-    flex-shrink: 0; width: 28px; height: 28px;
-    background: rgba(79,158,255,0.1); border: 1px solid rgba(79,158,255,0.3);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 12px; color: var(--accent);
-    margin-top: 1px;
-  }
-  .step-content { flex: 1; }
-  .step-title { font-weight: 500; color: var(--heading); margin-bottom: 4px; }
-
-  /* COMPARISON */
-  .compare {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: var(--border); border: 1px solid var(--border); border-radius: 8px;
-    overflow: hidden; margin: 16px 0;
-  }
-  .compare-col { background: var(--surface); padding: 20px; }
-  .compare-title {
-    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.1em; margin-bottom: 12px; font-weight: 600;
-  }
-  .compare-title.blue { color: var(--accent); }
-  .compare-title.green { color: var(--accent3); }
-  .compare-title.yellow { color: var(--accent4); }
-  .compare-title.red { color: var(--accent2); }
-
-  /* SIGNAL TABLE */
-  .sig-val { font-family: var(--mono); font-weight: 600; }
-  .v0 { color: var(--accent2); }
-  .v1 { color: var(--accent3); }
-  .vx { color: var(--muted); }
-  .vbin { color: var(--accent4); }
-
-  /* TRUTH */
-  .truth { display: inline-flex; align-items: center; gap: 6px; }
-  .truth .t { color: var(--accent3); font-family: var(--mono); font-weight: 600; }
-  .truth .f { color: var(--accent2); font-family: var(--mono); font-weight: 600; }
-
-  /* QUIZ */
-  .quiz-item {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 6px; padding: 14px 16px; margin: 8px 0; font-size: 14px;
-    cursor: pointer; transition: border-color 0.2s;
-  }
-  .quiz-item:hover { border-color: var(--muted); }
-  .quiz-item .q { color: var(--text); margin-bottom: 4px; }
-  .quiz-item .a { display: none; font-family: var(--mono); font-size: 12px; padding-top: 8px; border-top: 1px solid var(--border); margin-top: 8px; }
-  .quiz-item.open .a { display: block; }
-  .quiz-item .toggle { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-
-  /* MEMORY VIZ */
-  .mem-row {
-    display: flex; align-items: center; gap: 0;
-    font-family: var(--mono); font-size: 12px; margin-bottom: 2px;
-  }
-  .mem-addr {
-    width: 80px; color: var(--muted); flex-shrink: 0; font-size: 11px;
-  }
-  .mem-block {
-    height: 24px; display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 600; border: 1px solid transparent;
-    border-radius: 3px; transition: all 0.2s; cursor: default;
-  }
-  .mem-block.hit { background: rgba(80,227,194,0.15); color: var(--accent3); border-color: rgba(80,227,194,0.3); }
-  .mem-block.miss { background: rgba(255,107,107,0.1); color: var(--accent2); border-color: rgba(255,107,107,0.2); }
-  .mem-block.empty { background: rgba(255,255,255,0.03); color: var(--muted); border-color: var(--border); }
-  .mem-block.evict { background: rgba(245,166,35,0.1); color: var(--accent4); border-color: rgba(245,166,35,0.2); }
-
-  /* PIPELINE VIZ */
-  .pipe-stage {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 6px 14px; border-radius: 4px; font-family: var(--mono);
-    font-size: 12px; font-weight: 600; margin: 2px;
-  }
-  .pipe-if { background: rgba(79,158,255,0.15); color: var(--accent); border: 1px solid rgba(79,158,255,0.3); }
-  .pipe-id { background: rgba(80,227,194,0.12); color: var(--accent3); border: 1px solid rgba(80,227,194,0.25); }
-  .pipe-ex { background: rgba(245,166,35,0.1); color: var(--accent4); border: 1px solid rgba(245,166,35,0.2); }
-  .pipe-mem { background: rgba(176,106,255,0.1); color: var(--accent5); border: 1px solid rgba(176,106,255,0.2); }
-  .pipe-wb { background: rgba(255,107,107,0.1); color: var(--accent2); border: 1px solid rgba(255,107,107,0.2); }
-  .pipe-arrow { color: var(--muted); margin: 0 4px; }
-  .pipe-empty { opacity: 0.2; }
-
-  /* FSM */
-  .fsm-state {
-    display: inline-block; background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 6px; padding: 10px 16px; margin: 4px; font-size: 13px;
-  }
-  .fsm-state .name { font-family: var(--mono); font-size: 11px; color: var(--accent); }
-  .fsm-state .sigs { font-size: 12px; color: var(--muted); font-family: var(--mono); }
-
-  /* NOTICE */
-  .notice {
-    background: rgba(79,158,255,0.05); border: 1px solid rgba(79,158,255,0.15);
-    border-radius: 6px; padding: 12px 16px; margin: 16px 0; font-size: 13px;
-  }
-  .notice strong { color: var(--accent); }
-
-  p { margin-bottom: 12px; color: var(--text); }
-  ul, ol { margin: 8px 0 12px 20px; }
-  li { margin-bottom: 4px; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-  strong { color: var(--heading); font-weight: 500; }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { width: 200px; }
-    main { margin-left: 200px; padding: 32px 28px; }
-    .card-row { grid-template-columns: 1fr; }
-    .compare { grid-template-columns: 1fr; }
-    .card-row.three { grid-template-columns: 1fr; }
-  }
-
-  /* ═══ CHEATSHEET BUTTON ═══ */
-  .cheatsheet-btn {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 28px;
-    padding: 20px 28px;
-    background: linear-gradient(135deg, var(--accent) 0%, #2979d4 100%);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 4px 24px rgba(79,158,255,0.25);
+    padding: 60px 0 40px;
+    text-align: center;
     position: relative;
     overflow: hidden;
   }
-  .cheatsheet-btn::before {
+  header::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.05) 0%, transparent 60%);
     pointer-events: none;
   }
-  .cheatsheet-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(79,158,255,0.4);
-  }
-  .cheatsheet-btn:active { transform: translateY(0); }
-  .cs-btn-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
-  }
-  .cs-btn-text { flex: 1; }
-  .cs-btn-main {
-    display: block;
-    font-family: var(--sans);
-    font-size: 17px;
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: -0.01em;
-  }
-  .cs-btn-sub {
-    display: block;
-    font-family: var(--mono);
+  .header-tag {
+    font-family: 'Space Mono', monospace;
     font-size: 11px;
-    color: rgba(255,255,255,0.65);
-    margin-top: 3px;
-    letter-spacing: 0.04em;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
   }
-  .cs-btn-arrow {
-    font-size: 22px;
-    color: rgba(255,255,255,0.7);
-    flex-shrink: 0;
-    transition: transform 0.15s;
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 12px;
   }
-  .cheatsheet-btn:hover .cs-btn-arrow { transform: translateX(4px); }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--text-dim); font-size: 15px; max-width: 640px; margin: 0 auto 20px; }
 
-  /* ═══ MODAL ═══ */
-  .cs-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(4px);
-    animation: fadeIn 0.2s ease;
+  .exam-info {
+    display: inline-flex;
+    gap: 24px;
+    background: rgba(0,212,255,0.05);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 8px;
+    padding: 10px 24px;
+    margin-top: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
   }
-  .cs-modal.open { display: flex; align-items: stretch; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .exam-info span { opacity: 0.7; color: var(--text-muted); margin-right: 4px; }
 
-  .cs-modal-inner {
+  /* TOPIC PILLS */
+  .topic-pills {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    max-width: 1400px;
-    margin: 20px auto;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-    animation: slideUp 0.25s ease;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 24px 20px 0;
+    max-width: 1000px;
+    margin: 0 auto;
   }
-  @keyframes slideUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  .pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
   }
+  .pill:hover { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
 
-  .cs-modal-bar {
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 40px 24px;
+  }
+  .toc h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .toc-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px 20px;
-    background: #1a1814;
-    border-bottom: 2px solid #333;
-    flex-shrink: 0;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
   }
-  .cs-modal-title {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 600;
-    color: #4f9eff;
-    letter-spacing: 0.05em;
+  .toc-item:hover { background: var(--surface2); border-color: var(--border); color: var(--text); }
+  .toc-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent); min-width: 22px; }
+
+  /* SECTION */
+  .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
   }
-  .cs-close-btn {
-    background: rgba(255,107,107,0.15);
-    border: 1px solid rgba(255,107,107,0.3);
-    color: #ff6b6b;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.05em;
-  }
-  .cs-close-btn:hover {
-    background: rgba(255,107,107,0.3);
-    border-color: rgba(255,107,107,0.6);
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400;
     color: #fff;
   }
-  .cs-iframe {
-    flex: 1;
-    border: none;
-    width: 100%;
-    background: #f5f2eb;
+
+  /* DEFINITION BOX */
+  .def {
+    background: var(--def-bg);
+    border-left: 3px solid var(--def-border);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .def::before {
+    content: 'DEFINITION';
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .def strong { color: var(--accent); font-weight: 600; }
+  .def p { color: var(--text-dim); font-size: 15px; }
+
+  /* KEY CONCEPT */
+  .key-concept {
+    background: rgba(124,58,237,0.08);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .key-concept .kc-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .key-concept h4 { color: #c4b5fd; margin-bottom: 8px; font-size: 16px; }
+  .key-concept p { color: var(--text-dim); font-size: 15px; }
+
+  /* NOTE */
+  .note {
+    background: var(--note-bg);
+    border-left: 3px solid var(--note-border);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #d1b264;
+  }
+  .note::before { content: '⚠ NOTE · '; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; }
+
+  /* FORMULA BOX */
+  .formula {
+    background: #050d1a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #a5f3fc;
+    overflow-x: auto;
+  }
+  .formula .formula-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    display: block;
   }
 
+  /* PRACTICE SECTION */
+  .practice-section {
+    background: var(--practice-bg);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 28px 0;
+  }
+  .practice-section .ps-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .practice-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent3);
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .practice-section h3 { color: #6ee7b7; font-size: 17px; }
+  .practice-section p, .practice-section li { color: var(--text-dim); font-size: 15px; }
+  .practice-section ol, .practice-section ul { padding-left: 20px; margin-top: 12px; }
+  .practice-section li { margin-bottom: 10px; }
+  .practice-section .step {
+    background: rgba(16,185,129,0.05);
+    border: 1px solid rgba(16,185,129,0.1);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 10px 0;
+  }
+  .practice-section .step strong { color: #6ee7b7; }
+
+  /* COMPARE TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .compare-table th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .compare-table .highlight { color: var(--text); font-weight: 500; }
+
+  /* GRID CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-icon { font-size: 24px; margin-bottom: 12px; }
+  .card h4 { color: #fff; font-size: 15px; margin-bottom: 8px; }
+  .card p { color: var(--text-dim); font-size: 14px; }
+
+  /* FLOW */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin: 20px 0; }
+  .flow-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 14px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .flow-box.active { background: rgba(0,212,255,0.08); border-color: var(--accent); color: var(--accent); }
+  .flow-arrow { color: var(--text-muted); font-size: 18px; padding: 0 8px; }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: #030912;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #a5f3fc;
+    overflow-x: auto;
+    margin: 16px 0;
+    line-height: 1.7;
+  }
+  .code-block .kw { color: #c084fc; }
+  .code-block .cm { color: #475569; font-style: italic; }
+  .code-block .str { color: #86efac; }
+  .code-block .num { color: #f97316; }
+
+  /* QUIZ CALLOUT */
+  .quiz-callout {
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .quiz-callout::before {
+    content: '🎯 LIKELY EXAM QUESTION';
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--accent4);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .quiz-callout p { color: #fde68a; font-size: 15px; }
+
+  /* PROS/CONS */
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .pros { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2); border-radius: 8px; padding: 18px; }
+  .cons { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 18px; }
+  .pros h4 { color: var(--accent3); margin-bottom: 10px; font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+  .cons h4 { color: var(--accent5); margin-bottom: 10px; font-size: 13px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+  .pros li, .cons li { color: var(--text-dim); font-size: 14px; margin-bottom: 6px; list-style: none; padding-left: 16px; position: relative; }
+  .pros li::before { content: '+'; color: var(--accent3); position: absolute; left: 0; }
+  .cons li::before { content: '−'; color: var(--accent5); position: absolute; left: 0; }
+
+  /* TEXT */
+  p { margin-bottom: 14px; color: var(--text-dim); }
+  h3 { font-size: 18px; color: #fff; margin: 28px 0 12px; }
+  h4 { font-size: 15px; color: var(--text); margin: 20px 0 8px; }
+  ul, ol { padding-left: 22px; margin-bottom: 14px; }
+  li { color: var(--text-dim); margin-bottom: 6px; font-size: 15px; }
+  strong { color: var(--text); }
+  code { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); background: rgba(0,212,255,0.08); padding: 1px 6px; border-radius: 4px; }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 20px 0; }
+
+  .back-top {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-top:hover { color: var(--accent); }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .pros-cons { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; align-items: flex-start; }
+    .flow-arrow { transform: rotate(90deg); }
+    .exam-info { flex-direction: column; gap: 6px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">SOC2060 · Study Guide</div>
-  <div class="nav-section">Core Concepts</div>
-  <a href="#isa-uarch">1. ISA vs Microarchitecture</a>
-  <a href="#single-cycle">2. Single-Cycle Datapath</a>
-  <a href="#multi-cycle">3. Multi-Cycle Datapath</a>
-  <a href="#lc3">4. LC-3 Machine Code</a>
-  <a href="#cache">5. Caches</a>
-  <div class="nav-section">Reference</div>
-  <a href="#alu-ref">ALU Control Codes</a>
-  <a href="#signals-ref">Signal Quick Ref</a>
-  <a href="#formulas">Formulas</a>
-</nav>
+<!-- HEADER -->
+<header id="top">
+  <div class="header-tag">Inha University Tashkent · Internet of Things</div>
+  <h1>Final Exam <span>Study Guide</span></h1>
+  <p>Complete coverage of Digital Twin, Green IoT, AI-Driven IoT, Security &amp; Ethics, Industrial IoT, Wearable IoT, and Anomaly Detection</p>
+  <div class="exam-info">
+    <div><span>FORMAT</span>15 MCQ · 4 Code Fill-in · 5 Open-Ended</div>
+    <div><span>TOPICS</span>7 Core Themes</div>
+    <div><span>PROF</span>Dr. Minhaz Uddin Ahmed</div>
+  </div>
+  <div class="topic-pills">
+    <a href="#s1" class="pill">Digital Twin</a>
+    <a href="#s2" class="pill">Green IoT</a>
+    <a href="#s3" class="pill">AI-Driven IoT</a>
+    <a href="#s4" class="pill">Security &amp; Ethics</a>
+    <a href="#s5" class="pill">Industrial IoT</a>
+    <a href="#s6" class="pill">Wearable IoT</a>
+    <a href="#s7" class="pill">Isolation Forest</a>
+    <a href="#s8" class="pill">Autoencoder</a>
+    <a href="#practice" class="pill">🧪 Practice Problems</a>
+    <a href="#cheatsheet" class="pill">⚡ Cheatsheet</a>
+  </div>
+</header>
 
-<!-- MAIN -->
-<main>
+<!-- TOC -->
+<div class="toc" id="toc">
+  <h2>// Table of Contents</h2>
+  <div class="toc-grid">
+    <a href="#s1" class="toc-item"><span class="toc-num">01</span>Digital Twin</a>
+    <a href="#s2" class="toc-item"><span class="toc-num">02</span>Green IoT</a>
+    <a href="#s3" class="toc-item"><span class="toc-num">03</span>AI-Driven IoT &amp; TinyML</a>
+    <a href="#s4" class="toc-item"><span class="toc-num">04</span>Security &amp; Ethics</a>
+    <a href="#s5" class="toc-item"><span class="toc-num">05</span>Industrial IoT (IIoT)</a>
+    <a href="#s6" class="toc-item"><span class="toc-num">06</span>Wearable IoT</a>
+    <a href="#s7" class="toc-item"><span class="toc-num">07</span>Isolation Forest</a>
+    <a href="#s8" class="toc-item"><span class="toc-num">08</span>Autoencoder Anomaly Detection</a>
+    <a href="#practice" class="toc-item"><span class="toc-num">✦</span>Practice Problems</a>
+    <a href="#cheatsheet" class="toc-item"><span class="toc-num">⚡</span>Quick Cheatsheet</a>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="tag">Computer Architecture · SOC2060 · Spring 2026</div>
-    <h1>Complete Study Guide</h1>
-    <p>Every concept from the course material — ISA, datapaths, caches, virtual memory — explained from scratch with worked examples, rules, and the reasoning behind everything.</p>
+<div class="container">
 
-  <!-- CHEATSHEET BUTTON -->
-  <button class="cheatsheet-btn" onclick="openCheatsheet()">
-    <span class="cs-btn-icon">⚡</span>
-    <span class="cs-btn-text">
-      <span class="cs-btn-main">Open Control Signals Cheat Sheet</span>
-      <span class="cs-btn-sub">Single-Cycle &amp; Multi-Cycle · All phases · All instructions</span>
-    </span>
-    <span class="cs-btn-arrow">→</span>
-  </button>
-
-  <!-- MODAL OVERLAY -->
-  <div id="cs-modal" class="cs-modal" onclick="handleModalClick(event)">
-    <div class="cs-modal-inner">
-      <div class="cs-modal-bar">
-        <span class="cs-modal-title">⚡ MIPS Control Signals — Cheat Sheet</span>
-        <button class="cs-close-btn" onclick="closeCheatsheet()">✕ Close</button>
-      </div>
-      <iframe id="cs-iframe" class="cs-iframe" src="about:blank"></iframe>
-    </div>
+<!-- ══════════════════════════════════════════
+     SECTION 1: DIGITAL TWIN
+══════════════════════════════════════════ -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Digital Twin</h2>
   </div>
 
+  <div class="def">
+    <strong>Digital Twin</strong>
+    <p>A <strong>dynamic virtual representation</strong> of a physical asset that mirrors its structure, behavior, and performance through continuous, real-time data exchange. Unlike static simulation, it evolves and adapts as the physical asset changes. The bi-directional flow of information distinguishes it from traditional one-way modeling.</p>
   </div>
 
+  <p>The concept originated at <strong>NASA in the 1960s</strong>, which used early twinning to simulate and analyze spacecraft performance during missions — demonstrating the value of a ground-based replica for real-time problem-solving.</p>
 
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 1: ISA vs MICROARCHITECTURE -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section" id="isa-uarch">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2>ISA vs. Microarchitecture</h2>
-    </div>
-
-    <p>The single most important distinction in this course. Every True/False question about properties comes down to this one line.</p>
-
-    <div class="compare">
-      <div class="compare-col">
-        <div class="compare-title blue">ISA — The Contract</div>
-        <p style="font-size:13px">What the programmer and compiler see. The hardware/software interface. <strong>Visible to software.</strong></p>
-        <ul style="font-size:13px">
-          <li>Opcode values (add = 0x20)</li>
-          <li>Number of registers (32 in MIPS)</li>
-          <li>Register names ($t0, $s0…)</li>
-          <li>Instruction formats (R/I/J-type)</li>
-          <li>Addressing modes</li>
-          <li>Memory model</li>
-          <li>Page size (set by ISA)</li>
-        </ul>
-      </div>
-      <div class="compare-col">
-        <div class="compare-title green">Microarchitecture — The Implementation</div>
-        <p style="font-size:13px">How the ISA is actually built in silicon. <strong>Invisible to software.</strong></p>
-        <ul style="font-size:13px">
-          <li>Number of clock cycles per instruction (CPI)</li>
-          <li>Block/cache line size</li>
-          <li>Whether execution is pipelined</li>
-          <li>Intermediate register states (A, B, MDR, IR, ALUOut)</li>
-          <li>Whether there's a separate I-cache and D-cache</li>
-          <li>Page replacement policy (cooperative with OS)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="rule-box">
-      <strong>The golden test:</strong> "Can a programmer write code that behaves differently depending on this property?" If yes → ISA. If no (the code just runs slower or faster) → Microarchitecture.
-    </div>
-
-    <h3>Why Intermediate States Are Invisible</h3>
-    <p>In a multi-cycle machine, one instruction takes multiple clock cycles. During those intermediate cycles the processor is in states like "computed the memory address, now fetching data." These intermediate states are <strong>not</strong> in the ISA — no instruction can observe them. From the programmer's view, the instruction either hasn't executed yet or it has — nothing in between.</p>
-
-    <div class="rule-box green">
-      <strong>Key quote from lectures:</strong> "From ISA point of view, there are no intermediate states between AS and AS' during instruction execution."
-    </div>
-
-    <h3>True/False Answer Logic</h3>
-    <table>
-      <tr><th>Statement</th><th>Answer</th><th>Reason</th></tr>
-      <tr><td>Block Size is property of Microarchitecture</td><td><span class="truth"><span class="t">T</span></span></td><td>Cache design decision, invisible to programs</td></tr>
-      <tr><td>Cycles to execute ADD is property of Microarchitecture</td><td><span class="truth"><span class="t">T</span></span></td><td>ISA says <em>what</em> ADD does; uarch decides <em>how many cycles</em></td></tr>
-      <tr><td>Multi-cycle: current signals generated in previous cycle</td><td><span class="truth"><span class="t">T</span></span></td><td>The FSM controller pipelines its own operation</td></tr>
-      <tr><td>Intermediate states visible to programmers</td><td><span class="truth"><span class="f">F</span></span></td><td>Only architectural state at instruction boundaries is visible</td></tr>
-      <tr><td>User processes have equal priority to OS</td><td><span class="truth"><span class="f">F</span></span></td><td>OS runs in supervisor mode with higher privilege</td></tr>
-      <tr><td>Multi-cycle: each phase takes only one clock cycle</td><td><span class="truth"><span class="f">F</span></span></td><td>Each phase <em>can</em> take multiple cycles — that's the whole point</td></tr>
-      <tr><td>OS and microarchitecture cooperatively manage page replacement</td><td><span class="truth"><span class="t">T</span></span></td><td>HW MMU does translation; OS decides which pages to evict (LRU/CLOCK)</td></tr>
-      <tr><td>Pipelined MIPS only allows a single memory</td><td><span class="truth"><span class="f">F</span></span></td><td>Pipelining <em>requires</em> separate I-cache and D-cache to avoid structural hazards</td></tr>
-      <tr><td>Compiler should know number of registers</td><td><span class="truth"><span class="t">T</span></span></td><td>Register count is ISA-level — compiler uses register names in generated code</td></tr>
-      <tr><td>Pipelined throughput decreases with repetition of identical ops</td><td><span class="truth"><span class="f">F</span></span></td><td>Repetition of identical, independent ops is <em>ideal</em> for pipelines</td></tr>
-    </table>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 2: SINGLE-CYCLE -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section" id="single-cycle">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2>Single-Cycle Processor &amp; Control Signals</h2>
-    </div>
-
-    <p>In a single-cycle processor, every instruction completes in <strong>exactly one clock cycle</strong>. All control signals are generated in that same cycle by the Control Unit reading the opcode. The clock cycle must be long enough for the <em>slowest</em> possible instruction (usually lw).</p>
-
-    <div class="compare">
-      <div class="compare-col">
-        <div class="compare-title blue">Advantage</div>
-        <p style="font-size:13px">Simple design. CPI = 1 always.</p>
-      </div>
-      <div class="compare-col">
-        <div class="compare-title red">Disadvantage</div>
-        <p style="font-size:13px">Clock period set by slowest instruction. Fast instructions (add) waste time waiting.</p>
-      </div>
-    </div>
-
-    <h3>What Every Control Signal Does</h3>
-    <p>Think of each signal as answering one question about a mux or component:</p>
-
-    <table>
-      <tr><th>Signal</th><th>0 means</th><th>1 means</th><th>Affected by</th></tr>
-      <tr><td><code>RegDst</code></td><td>Write result to <strong>rt</strong> (I-type)</td><td>Write result to <strong>rd</strong> (R-type)</td><td>Instruction type</td></tr>
-      <tr><td><code>ALUSrc</code></td><td>Second ALU input = register (RD2)</td><td>Second ALU input = sign-extended immediate</td><td>R-type vs I-type</td></tr>
-      <tr><td><code>MemtoReg</code></td><td>Write ALU result to register</td><td>Write memory data to register</td><td>lw vs others</td></tr>
-      <tr><td><code>RegWrite</code></td><td>Don't write register</td><td>Write register file</td><td>sw, branch, jump don't write</td></tr>
-      <tr><td><code>MemRead</code></td><td>Don't read memory</td><td>Read data memory</td><td>Only lw</td></tr>
-      <tr><td><code>MemWrite</code></td><td>Don't write memory</td><td>Write data memory</td><td>Only sw</td></tr>
-      <tr><td><code>Branch</code></td><td>Not a branch</td><td>Is a branch (AND'd with Zero)</td><td>beq/bne</td></tr>
-      <tr><td><code>PCSrc1</code> (Jump)</td><td>PC from normal flow</td><td>PC from jump target</td><td>Only j/jal</td></tr>
-      <tr><td><code>PCSrc2</code> (BrTaken)</td><td>PC+4</td><td>PC = branch target</td><td>Branch AND Zero signal</td></tr>
-      <tr><td><code>ALUControl[2:0]</code></td><td colspan="2">See ALU reference below</td><td>ALU operation needed</td></tr>
-    </table>
-
-    <h3>The Method: How to Fill Any Control Signal Table</h3>
+  <h3>Three Core Components</h3>
+  <div class="card-grid">
     <div class="card">
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <div class="step-title">Identify the instruction type</div>
-            R-type (opcode 0, uses funct), I-type (non-zero opcode, uses rt as dest), J-type (jump).
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <div class="step-title">Trace the data flow through the datapath</div>
-            Where does data come from? Where does it go? Does it touch memory? Which register is written?
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <div class="step-title">For each signal, ask "does this component participate?"</div>
-            If the component is not in the data path for this instruction, it's X (don't care).
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <div class="step-title">Set ALUControl based on the operation needed</div>
-            Add for address computation (lw/sw), subtract for compare (beq), operation from funct for R-type.
-          </div>
-        </div>
-      </div>
+      <div class="card-icon">🏭</div>
+      <h4>Physical Asset</h4>
+      <p>The real-world object: a machine, sensor, or system. Generates data through sensors. In code: <code>PhysicalAsset</code> class with <code>get_data()</code> method.</p>
     </div>
-
-    <h3>Worked Example: subi (I-type subtract)</h3>
-    <p><strong>What subi does:</strong> <code>GPR[rt] ← GPR[rs] − sign_ext(imm)</code> then <code>PC ← PC+4</code></p>
-    <p>Trace: Read rs from register file → ALU gets rs and the immediate → ALU subtracts → result goes to rt → no memory involved → PC just increments.</p>
-
-    <table>
-      <tr><th>Signal</th><th>Value</th><th>Why</th></tr>
-      <tr><td>RegDst</td><td><span class="sig-val v0">0</span></td><td>I-type: destination is rt (bits 20-16), not rd</td></tr>
-      <tr><td>PCSrc1</td><td><span class="sig-val v0">0</span></td><td>Not a jump</td></tr>
-      <tr><td>Branch</td><td><span class="sig-val v0">0</span></td><td>Not a branch</td></tr>
-      <tr><td>MemRead</td><td><span class="sig-val v0">0</span></td><td>No memory read</td></tr>
-      <tr><td>MemtoReg</td><td><span class="sig-val v0">0</span></td><td>Write ALU result to register, not memory data</td></tr>
-      <tr><td>ALUControl</td><td><span class="sig-val vbin">110</span></td><td>Subtract operation</td></tr>
-      <tr><td>MemWrite</td><td><span class="sig-val v0">0</span></td><td>No memory write</td></tr>
-      <tr><td>ALUSrc</td><td><span class="sig-val v1">1</span></td><td>Second operand is the immediate, not a register</td></tr>
-      <tr><td>RegWrite</td><td><span class="sig-val v1">1</span></td><td>We write the result to rt</td></tr>
-      <tr><td>PCSrc2</td><td><span class="sig-val v0">0</span></td><td>Not a taken branch</td></tr>
-    </table>
-
-    <h3>Worked Example: j (J-type jump)</h3>
-    <p><strong>What j does:</strong> <code>PC ← {PC[31:28], imm26, 2'b00}</code></p>
-    <p>Trace: No registers read or written. No ALU needed. No memory. Just take the jump address and update PC.</p>
-
-    <table>
-      <tr><th>Signal</th><th>Value</th><th>Why</th></tr>
-      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>No register written, don't care</td></tr>
-      <tr><td>PCSrc1</td><td><span class="sig-val v1">1</span></td><td>This selects the jump target address for PC</td></tr>
-      <tr><td>Branch</td><td><span class="sig-val v0">0</span></td><td>Not a conditional branch</td></tr>
-      <tr><td>MemRead</td><td><span class="sig-val v0">0</span></td><td>No memory read</td></tr>
-      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>No register written, don't care</td></tr>
-      <tr><td>ALUControl</td><td><span class="sig-val vx">XXX</span></td><td>ALU not used</td></tr>
-      <tr><td>MemWrite</td><td><span class="sig-val v0">0</span></td><td>No memory write</td></tr>
-      <tr><td>ALUSrc</td><td><span class="sig-val vx">X</span></td><td>ALU not used, don't care</td></tr>
-      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>Jump writes no register</td></tr>
-      <tr><td>PCSrc2</td><td><span class="sig-val v0">0</span></td><td>Not a branch taken</td></tr>
-    </table>
-
-    <div class="rule-box">
-      <strong>Don't care (X) rule:</strong> If a signal controls a mux or component that is completely bypassed by the instruction's data path, its value literally doesn't matter — the output of that mux is never used. Write X. Never leave it blank.
-    </div>
-
-    <h3>Reference: Signal Values for All Instruction Types</h3>
-    <table>
-      <tr><th>Instruction</th><th>RegDst</th><th>ALUSrc</th><th>MemtoReg</th><th>RegWrite</th><th>MemRead</th><th>MemWrite</th><th>Branch</th><th>PCSrc1</th><th>ALUControl</th></tr>
-      <tr><td>R-type (add/sub/and/or)</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>from funct</td></tr>
-      <tr><td>I-type ALU (addi/subi)</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>010/110</td></tr>
-      <tr><td>lw</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>010</td></tr>
-      <tr><td>sw</td><td>X</td><td>1</td><td>X</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>010</td></tr>
-      <tr><td>beq</td><td>X</td><td>0</td><td>X</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>110</td></tr>
-      <tr><td>j</td><td>X</td><td>X</td><td>X</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>XXX</td></tr>
-    </table>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 3: MULTI-CYCLE -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section" id="multi-cycle">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2>Multi-Cycle Processor &amp; FSM Control</h2>
-    </div>
-
-    <p>The multi-cycle processor breaks each instruction into phases, each taking one clock cycle. The advantage: clock cycle is short (set by the slowest <em>phase</em>, not the slowest instruction). Intermediate results are stored in registers between phases: <strong>IR</strong> (instruction register), <strong>A</strong> and <strong>B</strong> (register file outputs), <strong>ALUOut</strong>, <strong>MDR</strong> (memory data register).</p>
-
-    <h3>The 5 Phases</h3>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0">
-      <div class="pipe-stage pipe-if">IF — Instruction Fetch</div>
-      <div style="color:var(--muted);display:flex;align-items:center">→</div>
-      <div class="pipe-stage pipe-id">ID — Decode / Reg Read</div>
-      <div style="color:var(--muted);display:flex;align-items:center">→</div>
-      <div class="pipe-stage pipe-ex">EX — Execute / Addr Gen</div>
-      <div style="color:var(--muted);display:flex;align-items:center">→</div>
-      <div class="pipe-stage pipe-mem">MEM — Memory Access</div>
-      <div style="color:var(--muted);display:flex;align-items:center">→</div>
-      <div class="pipe-stage pipe-wb">WB — Write Back</div>
-    </div>
-
-    <div class="rule-box blue">
-      <strong>Not all instructions go through all 5 phases.</strong> R-type skips MEM. sw skips WB. beq and j can finish after EX. Each instruction takes a different number of cycles.
-    </div>
-
-    <h3>New Signals in Multi-Cycle (not in single-cycle)</h3>
-    <table>
-      <tr><th>Signal</th><th>0 means</th><th>1 means</th></tr>
-      <tr><td><code>IorD</code></td><td>Memory address = PC (fetching instruction)</td><td>Memory address = ALUOut (accessing data)</td></tr>
-      <tr><td><code>IRWrite</code></td><td>Don't update IR</td><td>Latch instruction from memory into IR</td></tr>
-      <tr><td><code>PCWrite</code></td><td>Don't update PC</td><td>Write new value to PC</td></tr>
-      <tr><td><code>ALUSrcA</code></td><td>ALU input A = current PC</td><td>ALU input A = register A (rs value)</td></tr>
-      <tr><td><code>ALUSrcB[1:0]</code></td><td>00 = register B</td><td>01 = const 4 / 10 = sign-ext imm / 11 = imm&lt;&lt;2</td></tr>
-      <tr><td><code>PCSrc</code></td><td>PC ← ALU result (= PC+4 during IF)</td><td>PC ← branch target</td></tr>
-    </table>
-
-    <h3>Phase-by-Phase: What Happens and Why</h3>
-
-    <h4>IF — Instruction Fetch (same for ALL instructions)</h4>
-    <p>Goal: Read instruction from memory at address PC. Also compute PC+4 so we can advance.</p>
-    <div class="code">
-<span class="c-muted">-- Two things happen simultaneously:</span>
-<span class="c-green">IR ← Memory[PC]</span>        <span class="c-muted">(IRWrite=1 latches the instruction)</span>
-<span class="c-green">PC ← PC + 4</span>            <span class="c-muted">(ALU computes PC+4, PCWrite=1 updates PC)</span>
-
-<span class="c-muted">-- ALU is used to compute PC+4:</span>
-<span class="c-blue">IorD=0</span>      <span class="c-muted">(memory address = PC, not data address)</span>
-<span class="c-blue">ALUSrcA=0</span>   <span class="c-muted">(ALU A input = PC)</span>
-<span class="c-blue">ALUSrcB=01</span>  <span class="c-muted">(ALU B input = constant 4)</span>
-<span class="c-blue">ALUCtrl=010</span> <span class="c-muted">(add)</span>
-<span class="c-blue">PCSrc=0</span>     <span class="c-muted">(PC gets ALU result = PC+4)</span>
-<span class="c-blue">PCWrite=1</span>   <span class="c-muted">(write the new PC)</span>
-<span class="c-blue">IRWrite=1</span>   <span class="c-muted">(save instruction into IR)</span>
-    </div>
-
-    <h4>ID — Instruction Decode / Register Read (same for ALL instructions)</h4>
-    <p>Goal: Decode opcode, read the two source registers (rs and rt) into internal registers A and B. Also pre-compute branch target using the ALU (so it's ready if needed).</p>
-    <div class="code">
-<span class="c-green">A ← GPR[rs]</span>             <span class="c-muted">(read register file, save in A)</span>
-<span class="c-green">B ← GPR[rt]</span>             <span class="c-muted">(read register file, save in B)</span>
-<span class="c-green">ALUOut ← PC + (imm &lt;&lt; 2)</span> <span class="c-muted">(branch target pre-computed, maybe used later)</span>
-
-<span class="c-muted">-- No writes occur this cycle:</span>
-<span class="c-blue">IRWrite=0</span>   <span class="c-muted">(don't overwrite IR)</span>
-<span class="c-blue">PCWrite=0</span>   <span class="c-muted">(don't update PC yet)</span>
-<span class="c-blue">RegWrite=0</span>  <span class="c-muted">(don't write register file)</span>
-<span class="c-muted">-- Everything else is X (don't care)</span>
-    </div>
-
-    <h4>EX — Execute for different instruction types</h4>
-
-    <div class="card-row">
-      <div class="card">
-        <h4>R-type (S6: Execute)</h4>
-        <div class="code" style="font-size:11px">
-<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A)</span>
-<span class="c-yellow">ALUSrcB=00</span> <span class="c-muted">(use register B)</span>
-<span class="c-yellow">ALUOp=10</span>   <span class="c-muted">(look at funct field)</span>
-<span class="c-muted">→ ALUOut ← A op B</span>
-        </div>
-      </div>
-      <div class="card">
-        <h4>lw/sw (S2: MemAdr)</h4>
-        <div class="code" style="font-size:11px">
-<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A = rs)</span>
-<span class="c-yellow">ALUSrcB=10</span> <span class="c-muted">(use sign-ext imm)</span>
-<span class="c-yellow">ALUOp=00</span>   <span class="c-muted">(add = address calc)</span>
-<span class="c-muted">→ ALUOut ← rs + imm</span>
-        </div>
-      </div>
-    </div>
-    <div class="card-row">
-      <div class="card">
-        <h4>beq (S8: Branch)</h4>
-        <div class="code" style="font-size:11px">
-<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A = rs)</span>
-<span class="c-yellow">ALUSrcB=00</span> <span class="c-muted">(use register B = rt)</span>
-<span class="c-yellow">ALUOp=01</span>   <span class="c-muted">(subtract, check Zero)</span>
-<span class="c-yellow">PCSrc=1</span>    <span class="c-muted">(branch target ready)</span>
-<span class="c-yellow">Branch=1</span>   <span class="c-muted">(PCEn = Branch AND Zero)</span>
-        </div>
-      </div>
-      <div class="card">
-        <h4>addi (S9: Execute)</h4>
-        <div class="code" style="font-size:11px">
-<span class="c-yellow">ALUSrcA=1</span>  <span class="c-muted">(use register A = rs)</span>
-<span class="c-yellow">ALUSrcB=10</span> <span class="c-muted">(use sign-ext imm)</span>
-<span class="c-yellow">ALUOp=00</span>   <span class="c-muted">(add)</span>
-<span class="c-muted">→ ALUOut ← rs + imm</span>
-        </div>
-      </div>
-    </div>
-
-    <h3>Complete Signal Table: IF Phase</h3>
-    <table>
-      <tr><th>Signal</th><th>Value</th><th>Reasoning</th></tr>
-      <tr><td>IorD</td><td><span class="sig-val v0">0</span></td><td>Memory address comes from PC (fetching instruction)</td></tr>
-      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>Not writing any register</td></tr>
-      <tr><td>IRWrite</td><td><span class="sig-val v1">1</span></td><td>Must save the fetched instruction into IR</td></tr>
-      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>Registers not touched</td></tr>
-      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>Registers not touched</td></tr>
-      <tr><td>PCWrite</td><td><span class="sig-val v1">1</span></td><td>Must update PC to PC+4</td></tr>
-      <tr><td>PCSrc</td><td><span class="sig-val v0">0</span></td><td>New PC = ALU result (PC+4), not branch target</td></tr>
-      <tr><td>ALUControl</td><td><span class="sig-val vbin">010</span></td><td>Add (computing PC+4)</td></tr>
-      <tr><td>ALUSrcB</td><td><span class="sig-val vbin">01</span></td><td>Second ALU input = constant 4</td></tr>
-      <tr><td>ALUSrcA</td><td><span class="sig-val v0">0</span></td><td>First ALU input = PC</td></tr>
-    </table>
-
-    <h3>Complete Signal Table: ID/RF Phase for lw</h3>
-    <table>
-      <tr><th>Signal</th><th>Value</th><th>Reasoning</th></tr>
-      <tr><td>IorD</td><td><span class="sig-val vx">X</span></td><td>Memory not accessed this cycle</td></tr>
-      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>Only reading registers, not writing</td></tr>
-      <tr><td>IRWrite</td><td><span class="sig-val v0">0</span></td><td>IR already has the instruction, don't overwrite</td></tr>
-      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>Not writing register file</td></tr>
-      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>Not writing register file</td></tr>
-      <tr><td>PCWrite</td><td><span class="sig-val v0">0</span></td><td>PC already updated in IF</td></tr>
-      <tr><td>PCSrc</td><td><span class="sig-val vx">X</span></td><td>PC not being written</td></tr>
-      <tr><td>ALUControl</td><td><span class="sig-val vx">XXX</span></td><td>ALU result in this phase is pre-computed branch target — its value doesn't matter for lw</td></tr>
-      <tr><td>ALUSrcB</td><td><span class="sig-val vx">XX</span></td><td>ALU result not used by lw's ID phase</td></tr>
-      <tr><td>ALUSrcA</td><td><span class="sig-val vx">X</span></td><td>Same</td></tr>
-    </table>
-
-    <h3>Complete Signal Table: EX/AG Phase for beq</h3>
-    <table>
-      <tr><th>Signal</th><th>Value</th><th>Reasoning</th></tr>
-      <tr><td>IorD</td><td><span class="sig-val vx">X</span></td><td>No memory access this cycle</td></tr>
-      <tr><td>RegWrite</td><td><span class="sig-val v0">0</span></td><td>beq never writes a register</td></tr>
-      <tr><td>IRWrite</td><td><span class="sig-val v0">0</span></td><td>Instruction already in IR</td></tr>
-      <tr><td>RegDst</td><td><span class="sig-val vx">X</span></td><td>No register written</td></tr>
-      <tr><td>MemtoReg</td><td><span class="sig-val vx">X</span></td><td>No register written</td></tr>
-      <tr><td>PCWrite</td><td><span class="sig-val v0">0</span></td><td>PCWrite is 0; Branch signal handles conditional update</td></tr>
-      <tr><td>PCSrc</td><td><span class="sig-val v1">1</span></td><td>PC source = branch target (was pre-computed in ID)</td></tr>
-      <tr><td>ALUControl</td><td><span class="sig-val vbin">110</span></td><td>Subtract rs - rt; Zero flag = 1 if equal</td></tr>
-      <tr><td>ALUSrcB</td><td><span class="sig-val vbin">00</span></td><td>Use register B (rt value)</td></tr>
-      <tr><td>ALUSrcA</td><td><span class="sig-val v1">1</span></td><td>Use register A (rs value)</td></tr>
-    </table>
-
-    <div class="rule-box purple">
-      <strong>How branch actually works:</strong> PCEn = Branch AND Zero. The Branch control signal says "this is a branch instruction." Zero is the hardware output of the ALU (1 if rs=rt). PCWrite is 0, but the PC still updates if PCEn=1. This way a branch only changes PC when the condition is true.
-    </div>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 4: LC-3 -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section" id="lc3">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2>LC-3 Machine Code Tracing</h2>
-    </div>
-
-    <p>LC-3 is a 16-bit ISA. Every instruction is 16 bits wide. Bits 15–12 always give the <strong>opcode</strong>. The remaining 12 bits depend on the instruction type.</p>
-
-    <h3>LC-3 Opcode Table</h3>
-    <table>
-      <tr><th>Bits 15-12</th><th>Opcode</th><th>Format</th><th>Operation</th></tr>
-      <tr><td><code>0001</code></td><td>ADD</td><td>DR, SR1, [0,SR2] or [1,imm5]</td><td>DR ← SR1 + SR2 or SR1 + SEXT(imm5)</td></tr>
-      <tr><td><code>0101</code></td><td>AND</td><td>DR, SR1, [0,SR2] or [1,imm5]</td><td>DR ← SR1 AND SR2 or SR1 AND SEXT(imm5)</td></tr>
-      <tr><td><code>1001</code></td><td>NOT</td><td>DR, SR</td><td>DR ← NOT(SR)</td></tr>
-      <tr><td><code>0000</code></td><td>BR</td><td>n,z,p, PCoffset9</td><td>If condition, PC ← PC + SEXT(offset9)</td></tr>
-      <tr><td><code>0110</code></td><td>LDR</td><td>DR, BaseR, offset6</td><td>DR ← Mem[BaseR + SEXT(offset6)]</td></tr>
-      <tr><td><code>0111</code></td><td>STR</td><td>SR, BaseR, offset6</td><td>Mem[BaseR + SEXT(offset6)] ← SR</td></tr>
-      <tr><td><code>1110</code></td><td>LEA</td><td>DR, PCoffset9</td><td>DR ← PC + SEXT(offset9) [no mem access]</td></tr>
-    </table>
-
-    <h3>Instruction Bit Layout</h3>
-    <div class="code">
-<span class="c-muted">ADD with register:  </span><span class="c-blue">0001</span> <span class="c-green">DR[11:9]</span> <span class="c-yellow">SR1[8:6]</span> <span class="c-purple">0</span> <span class="c-muted">00</span> <span class="c-red">SR2[2:0]</span>
-<span class="c-muted">ADD with immediate: </span><span class="c-blue">0001</span> <span class="c-green">DR[11:9]</span> <span class="c-yellow">SR1[8:6]</span> <span class="c-purple">1</span> <span class="c-red">imm5[4:0]</span>
-<span class="c-muted">                        ↑ bit 5 = 0 → use register</span>
-<span class="c-muted">                        ↑ bit 5 = 1 → use immediate</span>
-
-<span class="c-muted">AND: identical structure to ADD but opcode 0101</span>
-
-<span class="c-muted">BR:  </span><span class="c-blue">0000</span> <span class="c-red">n[11] z[10] p[9]</span> <span class="c-green">PCoffset9[8:0]</span>
-<span class="c-muted">     branch taken if: (n AND N) OR (z AND Z) OR (p AND P)</span>
-<span class="c-muted">     where N,Z,P = current condition codes</span>
-    </div>
-
-    <h3>How to Decode Any LC-3 Instruction</h3>
     <div class="card">
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <div class="step-title">Read bits 15–12 → opcode</div>
-            Write them as 4-bit binary and look up the table above.
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <div class="step-title">Read bits 11–9 → DR (destination) or NZP (for branch)</div>
-            Three bits → register number 0–7. For BR: bit 11 = n, bit 10 = z, bit 9 = p.
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <div class="step-title">For ADD/AND: check bit 5</div>
-            0 = register mode (SR2 = bits 2–0). 1 = immediate mode (imm5 = bits 4–0).
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <div class="step-title">Sign-extend immediates</div>
-            imm5: if bit4=1, it's negative. Extend by copying bit4 to bits 15–5. E.g. <code>11110</code> = −2 in 5-bit = <code>1111 1111 1111 1110</code> = −2.
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-content">
-            <div class="step-title">Execute and update condition codes</div>
-            After each instruction that writes a register, set N=1 if result&lt;0, Z=1 if result=0, P=1 if result&gt;0.
-          </div>
-        </div>
-      </div>
+      <div class="card-icon">🔷</div>
+      <h4>Digital Twin (Virtual)</h4>
+      <p>Virtual counterpart that receives and stores data. Maintains a history of readings. In code: <code>DigitalTwin</code> class with <code>update_data()</code> and <code>data_history</code>.</p>
     </div>
-
-    <h3>Worked Example: Tracing the Bit-Count Program</h3>
-    <p>The program counts the number of 1-bits in R1 (which starts as x9357) and saves the count in R0. The answer at x300D is <strong>9</strong> — let's verify: x9357 = <code>1001 0011 0101 0111</code> → count the 1s: 1+0+0+1+0+0+1+1+0+1+0+1+0+1+1+1 = <strong>9</strong>. ✓</p>
-
-    <h4>Decoding the first few instructions:</h4>
-    <div class="code">
-<span class="c-muted">x3000: </span><span class="c-blue">0101</span> <span class="c-green">000</span> <span class="c-yellow">000</span> <span class="c-purple">1</span> <span class="c-red">00000</span>
-<span class="c-muted">       AND  DR=R0 SR1=R0 immediate=0</span>
-<span class="c-muted">       → R0 ← R0 AND 0 = 0   (clears R0, sets Z=1)</span>
-
-<span class="c-muted">x3001: </span><span class="c-blue">0001</span> <span class="c-green">001</span> <span class="c-yellow">001</span> <span class="c-purple">1</span> <span class="c-red">00000</span>
-<span class="c-muted">       ADD  DR=R1 SR1=R1 immediate=0</span>
-<span class="c-muted">       → R1 ← R1 + 0 = x9357   (sets condition codes: N=1 since x9357 is negative)</span>
-
-<span class="c-muted">x3002: </span><span class="c-blue">0000</span> <span class="c-red">011</span> <span class="c-green">000000001</span>
-<span class="c-muted">       BR   n=0,z=1,p=1, offset=1</span>
-<span class="c-muted">       → Branch if Z or P. R1 is negative (N=1), so Z=0,P=0. NOT taken → go to x3003</span>
-
-<span class="c-muted">x3003: </span><span class="c-blue">0001</span> <span class="c-green">000</span> <span class="c-yellow">000</span> <span class="c-purple">1</span> <span class="c-red">00001</span>
-<span class="c-muted">       ADD  DR=R0 SR1=R0 immediate=1</span>
-<span class="c-muted">       → R0 ← R0 + 1 = 1   (found a 1-bit! R0 = 1)</span>
-    </div>
-
-    <div class="rule-box green">
-      <strong>Sign extension rule for imm5:</strong> Take the 5 bits. If bit4 (the leftmost of the 5) is 0 → positive, just zero-extend to 16 bits. If bit4 is 1 → negative, fill all upper bits with 1. Example: <code>11110</code> → bit4=1 → <code>1111111111110</code> = −2.
-    </div>
-
-    <h3>Key Questions Explained</h3>
-
     <div class="card">
-      <strong>Q: At PC=x3005, what is R0?</strong>
-      <p style="margin-top:8px;font-size:13px">By x3005, the program has executed x3000–x3004. x3000 clears R0. x3001 sets condition codes on R1 (negative). x3002 branch is NOT taken (Z and P are false). x3003 increments R0 to 1. x3004 starts examining the next bit. So R0 = <strong>1</strong>.</p>
+      <div class="card-icon">📡</div>
+      <h4>IoT as Nervous System</h4>
+      <p>IoT sensors continuously feed the twin with live data. Edge computing handles latency issues when network connectivity is unreliable.</p>
     </div>
+  </div>
 
+  <h3>Types of Digital Twins</h3>
+  <table class="compare-table">
+    <tr>
+      <th>Type</th>
+      <th>Scope</th>
+      <th>Sophistication</th>
+    </tr>
+    <tr><td class="highlight">Component Twin</td><td>Individual part or sensor</td><td>Basic — tracks single properties</td></tr>
+    <tr><td class="highlight">Asset Twin</td><td>Whole machine or equipment</td><td>Aggregates component data</td></tr>
+    <tr><td class="highlight">System Twin</td><td>Collection of interconnected assets</td><td>Production lines, power grids</td></tr>
+    <tr><td class="highlight">Process Twin</td><td>Entire workflow incl. humans</td><td>Most comprehensive</td></tr>
+    <tr><td class="highlight">Virtual Twin</td><td>Any</td><td>No real-time connection — static model</td></tr>
+    <tr><td class="highlight">Connected Twin</td><td>Any</td><td>One-way data feed from physical → digital</td></tr>
+    <tr><td class="highlight">Autonomous Twin</td><td>Any</td><td>Self-optimizing, makes its own decisions</td></tr>
+  </table>
+
+  <h3>Python Implementation</h3>
+  <div class="code-block">
+<span class="kw">class</span> PhysicalAsset:
+    <span class="kw">def</span> __init__(self, asset_id, initial_temperature=<span class="num">25.0</span>):
+        self.asset_id = asset_id
+        self.temperature = initial_temperature
+        self.running = <span class="kw">True</span>
+
+    <span class="kw">def</span> get_data(self):
+        <span class="kw">if not</span> self.running:
+            <span class="kw">return</span> {<span class="str">"temperature"</span>: <span class="kw">None</span>, <span class="str">"status"</span>: <span class="str">"offline"</span>}
+        self.temperature += random.uniform(-<span class="num">0.5</span>, <span class="num">0.5</span>)
+        <span class="kw">return</span> {<span class="str">"temperature"</span>: self.temperature, <span class="str">"status"</span>: <span class="str">"online"</span>}
+
+<span class="kw">class</span> DigitalTwin:
+    <span class="kw">def</span> __init__(self, asset_id):
+        self.data_history = []   <span class="cm"># stores last 100 entries</span>
+
+    <span class="kw">def</span> update_data(self, data):
+        self.temperature = data[<span class="str">"temperature"</span>]
+        self.status = data[<span class="str">"status"</span>]
+        self.data_history.append({<span class="str">"timestamp"</span>: time.time(), <span class="str">"data"</span>: data})
+        self.data_history = self.data_history[-<span class="num">100</span>:]  <span class="cm"># keep only last 100</span>
+  </div>
+
+  <div class="note">Key exam point: <code>data_history = data_history[-100:]</code> is the slice that limits memory to the last 100 readings. The DigitalTwin runs in a separate <code>threading.Thread</code> as a daemon so it doesn't block the main thread.</div>
+
+  <h3>Applications by Industry</h3>
+  <ul>
+    <li><strong>Manufacturing:</strong> Predict equipment failures, optimize production layout, schedule maintenance proactively</li>
+    <li><strong>Healthcare:</strong> Patient monitoring, personalized treatment, drug discovery simulations</li>
+    <li><strong>Smart Cities:</strong> Traffic simulation, infrastructure planning, emergency response modeling</li>
+    <li><strong>Energy:</strong> Wind farm optimization, solar performance, smart grid management</li>
+    <li><strong>Aerospace:</strong> Aircraft lifecycle monitoring from design through maintenance</li>
+  </ul>
+
+  <h3>Key Libraries &amp; Tools</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Data Handling</h4><p>NumPy, Pandas for numerical computation and time-series data manipulation</p></div>
+    <div class="card"><h4>Communication</h4><p>Paho MQTT for pub/sub IoT messaging · asyncio for concurrent data streams</p></div>
+    <div class="card"><h4>Cloud SDKs</h4><p>AWS IoT SDK · Azure Digital Twins SDK · Flask/Django for dashboards</p></div>
+    <div class="card"><h4>Data Storage</h4><p>InfluxDB / TimescaleDB for time-series · MongoDB NoSQL · Amazon S3 for historical data</p></div>
+  </div>
+
+  <h3>Challenges</h3>
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>BENEFITS</h4>
+      <ul>
+        <li>Real-time asset performance monitoring</li>
+        <li>Proactive maintenance (predict before failure)</li>
+        <li>Remote monitoring — no on-site presence needed</li>
+        <li>Virtual prototyping before physical build</li>
+        <li>Better data-driven decision making</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>CHALLENGES</h4>
+      <ul>
+        <li>High initial cost: cloud storage, cybersecurity, software</li>
+        <li>Data accuracy — stale/wrong data → bad decisions</li>
+        <li>Integration with legacy systems is complex</li>
+        <li>Security — twins are prime cyberattack targets</li>
+        <li>Requires specialized technical expertise</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quiz-callout">
+    <p>What is the difference between a Connected Twin and an Autonomous Twin? How does IoT enable real-time digital twins?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: GREEN IOT
+══════════════════════════════════════════ -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Green IoT</h2>
+  </div>
+
+  <div class="def">
+    <strong>Green IoT</strong>
+    <p>The practice of designing, deploying, and using IoT technologies in a way that <strong>minimizes environmental and societal impacts</strong> while maximizing contributions to global sustainability. Covers the full device lifecycle: raw materials → manufacturing → operation → disposal. Key principles: reduce, reuse, recycle.</p>
+  </div>
+
+  <h3>Core Principles</h3>
+  <div class="card-grid">
     <div class="card">
-      <strong>Q: At PC=x3003 (second time through), what is R1?</strong>
-      <p style="margin-top:8px;font-size:13px">Nothing ever writes to R1 in this program — R1 is only read (for AND and shift operations). So R1 = <strong>x9357</strong> throughout.</p>
+      <div class="card-icon">⚡</div>
+      <h4>Energy Efficiency</h4>
+      <p>Low-power components, smart sleep/wake scheduling, efficient communication protocols (LoRaWAN, Sigfox, NB-IoT).</p>
     </div>
-
     <div class="card">
-      <strong>Q: At PC=x300D, what is R0?</strong>
-      <p style="margin-top:8px;font-size:13px">x300D is after the last instruction (x300C) executes. The program has counted all 16 bits of x9357 = 1001001101010111. Count the 1-bits: positions 15,12,9,8,6,4,2,1,0 = <strong>9</strong>.</p>
+      <div class="card-icon">♻️</div>
+      <h4>Waste Reduction</h4>
+      <p>Minimize e-waste. Design for repairability, reuse, and recycling. Sustainable materials in manufacturing.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">☀️</div>
+      <h4>Energy Harvesting</h4>
+      <p>Power devices from ambient sources: solar, wind, thermal, kinetic. Solar sensors have near-zero net energy cost.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <h4>Carbon Footprint</h4>
+      <p>Reduce GHG emissions from production, operation, disposal. Green cloud computing, edge processing.</p>
     </div>
   </div>
 
+  <h3>Key Technologies</h3>
+  <table class="compare-table">
+    <tr><th>Technology</th><th>What It Does</th><th>Green Benefit</th></tr>
+    <tr><td class="highlight">Edge Computing</td><td>Process data locally near source</td><td>Reduces transmission energy to cloud</td></tr>
+    <tr><td class="highlight">LoRaWAN / Sigfox / NB-IoT</td><td>Long-range low-power wireless</td><td>Low bandwidth, minimal energy</td></tr>
+    <tr><td class="highlight">Data Compression/Aggregation</td><td>Shrink data before transmitting</td><td>Less energy for communication</td></tr>
+    <tr><td class="highlight">Smart Sleep Modes</td><td>Device sleeps when idle</td><td>Dramatically reduces standby power</td></tr>
+    <tr><td class="highlight">Green RFID</td><td>Smaller, energy-efficient tags</td><td>Reduced tag energy consumption</td></tr>
+  </table>
 
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- SECTION 5: CACHES -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section" id="cache">
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <h2>Caches &amp; Memory Hierarchy</h2>
+  <h3>Python Code — SmartSensor Class</h3>
+  <div class="code-block">
+<span class="kw">class</span> SmartSensor:
+    <span class="kw">def</span> __init__(self, sensor_id, sensor_type, power_source=<span class="str">"battery"</span>,
+                 energy_consumption_rate=<span class="num">0.01</span>):
+        self.power_source = power_source         <span class="cm"># "battery" or "solar"</span>
+        self.energy_consumption_rate = energy_consumption_rate  <span class="cm"># kWh per hour</span>
+        self.operational = <span class="kw">True</span>
+        self.data_log = []
+
+    <span class="kw">def</span> consume_energy(self, duration_hours=<span class="num">1</span>):
+        <span class="kw">if</span> self.power_source == <span class="str">"battery"</span>:
+            energy_used = self.energy_consumption_rate * duration_hours
+            <span class="cm"># track battery, potentially go offline</span>
+        <span class="kw">elif</span> self.power_source == <span class="str">"solar"</span>:
+            print(<span class="str">"Using solar power."</span>)  <span class="cm"># near-zero net cost</span>
+
+    <span class="kw">def</span> check_power_status(self):
+        <span class="kw">if</span> self.power_source == <span class="str">"battery"</span>:
+            <span class="kw">if</span> random.random() < <span class="num">0.01</span>:  <span class="cm"># 1% chance low battery</span>
+                self.operational = <span class="kw">False</span>
+        <span class="kw">elif</span> self.power_source == <span class="str">"solar"</span>:
+            self.operational = <span class="kw">True</span>  <span class="cm"># assume sufficient sunlight</span>
+        <span class="kw">return</span> self.operational
+  </div>
+
+  <h3>Smart Irrigation System — Resource Efficiency in Action</h3>
+  <p>The <code>SmartIrrigationSystem</code> class demonstrates Green IoT: it uses soil moisture sensors to determine <em>actual</em> need before watering — avoiding over-watering (a major water waste). The decision is data-driven, not time-based.</p>
+  <div class="code-block">
+<span class="kw">def</span> should_irrigate(self, threshold=<span class="num">30</span>):
+    <span class="cm"># Reads moisture from all sensors, calculates average</span>
+    <span class="kw">if</span> average_moisture < threshold:
+        <span class="kw">return True</span>   <span class="cm"># irrigation needed</span>
+
+<span class="kw">def</span> optimize_irrigation(self):
+    <span class="kw">if</span> self.should_irrigate(threshold=<span class="num">40</span>):
+        self.control_valve(<span class="kw">True</span>)            <span class="cm"># open valve</span>
+        <span class="cm"># irrigate for 1-3 hours based on sensor data</span>
+        self.control_valve(<span class="kw">False</span>)           <span class="cm"># close valve</span>
+    <span class="kw">else</span>:
+        print(<span class="str">"Soil moisture sufficient. No irrigation needed."</span>)
+  </div>
+
+  <h3>Applications</h3>
+  <ul>
+    <li><strong>Smart Agriculture:</strong> Precision farming, optimize water and fertilizer usage, monitor soil/crops</li>
+    <li><strong>Smart Cities:</strong> Energy-efficient buildings, traffic flow, waste collection, air/water quality</li>
+    <li><strong>Renewable Energy Management:</strong> Monitor solar/wind assets, smart grids</li>
+    <li><strong>Smart Water Management:</strong> Leak detection, irrigation optimization, water quality</li>
+    <li><strong>IIoT Energy Optimization:</strong> Real-time energy monitoring in manufacturing</li>
+  </ul>
+
+  <div class="quiz-callout">
+    <p>How does the SmartIrrigationSystem code implement Green IoT principles? What makes solar sensors "green" vs. battery sensors?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: AI-DRIVEN IOT
+══════════════════════════════════════════ -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>AI-Driven IoT &amp; TinyML</h2>
+  </div>
+
+  <div class="def">
+    <strong>AIoT (AI-Driven IoT)</strong>
+    <p>The convergence of Artificial Intelligence and IoT. <em>IoT = the body</em> (sensors, data generation). <em>AI = the brains</em> (analysis, decision-making). Together they create systems that can perceive, learn, and react with minimal human intervention. Enables real-time analysis, predictive capabilities, personalized experiences, and automation.</p>
+  </div>
+
+  <h3>Data Value Hierarchy</h3>
+  <div class="flow">
+    <div class="flow-box">Descriptive<br><small>What happened?</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Diagnostic<br><small>Why did it happen?</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box active">Predictive<br><small>What will happen?</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Prescriptive<br><small>How to make it happen?</small></div>
+  </div>
+
+  <h3>ML Approaches in IoT</h3>
+  <table class="compare-table">
+    <tr><th>Approach</th><th>Technique</th><th>Use Case in IoT</th></tr>
+    <tr><td class="highlight">Supervised — Classification</td><td>Random Forest, SVM</td><td>Anomaly detection with labeled data</td></tr>
+    <tr><td class="highlight">Supervised — Regression</td><td>RandomForestRegressor, SVR</td><td>Predict temperature, remaining useful life (RUL)</td></tr>
+    <tr><td class="highlight">Unsupervised — Clustering</td><td>K-Means</td><td>User behavior segmentation, device grouping</td></tr>
+    <tr><td class="highlight">Unsupervised — Anomaly</td><td>Isolation Forest, Autoencoder</td><td>Detect sensor faults, intrusions, failures</td></tr>
+    <tr><td class="highlight">Deep Learning</td><td>LSTM, CNN</td><td>Complex time-series, image recognition in cameras</td></tr>
+  </table>
+
+  <h3>AI-Driven IoT Code — Key Pattern</h3>
+  <div class="code-block">
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestRegressor
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> mean_squared_error
+
+<span class="cm"># Activity-based WearableDevice with AI prediction</span>
+<span class="cm"># activity_level: "sedentary" | "walking" | "running"</span>
+<span class="cm"># sedentary: HR 60-80, O2 95-100</span>
+<span class="cm"># walking:   HR 80-120, O2 90-99</span>
+<span class="cm"># running:   HR 120-180, O2 85-95</span>
+
+<span class="kw">class</span> DataProcessor:
+    <span class="kw">def</span> train_model(self, data):
+        X = data[[<span class="str">'heart_rate'</span>, <span class="str">'oxygen_level'</span>, <span class="str">'steps'</span>]]
+        y = data[<span class="str">'target_metric'</span>]
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="num">0.2</span>)
+        model = RandomForestRegressor()
+        model.fit(X_train, y_train)
+        mse = mean_squared_error(y_test, model.predict(X_test))
+  </div>
+
+  <h3>Edge vs. Cloud Trade-off</h3>
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>EDGE COMPUTING</h4>
+      <ul>
+        <li>Low latency — millisecond responses</li>
+        <li>Privacy-preserving — data stays local</li>
+        <li>Works offline / poor connectivity</li>
+        <li>Immediate action without round-trip</li>
+      </ul>
     </div>
-
-    <p>The fundamental problem: fast memory is expensive (SRAM), slow memory is cheap (DRAM). The solution: use a hierarchy. Keep frequently used data in small, fast caches; infrequently used data in large, slow memory.</p>
-
-    <h3>Why Caches Work: Locality</h3>
-    <div class="card-row">
-      <div class="card">
-        <div class="compare-title blue">Temporal Locality</div>
-        <p style="font-size:13px">If you accessed address X recently, you'll probably access it again soon. Example: loop variables.</p>
-      </div>
-      <div class="compare-col card">
-        <div class="compare-title green">Spatial Locality</div>
-        <p style="font-size:13px">If you accessed address X, you'll probably access nearby addresses soon. Example: arrays, sequential instructions.</p>
-      </div>
-    </div>
-
-    <h3>Core Vocabulary</h3>
-    <table>
-      <tr><th>Term</th><th>Definition</th><th>Example from HW</th></tr>
-      <tr><td>Block (line)</td><td>Unit of data transferred between levels</td><td>64 bytes</td></tr>
-      <tr><td>Capacity (C)</td><td>Total data bytes in cache</td><td>L1=256B, L2=2048B</td></tr>
-      <tr><td>Number of blocks (B=C/b)</td><td>How many blocks fit in cache</td><td>L1: 256/64=4, L2: 2048/64=32</td></tr>
-      <tr><td>Hit</td><td>Data found in cache</td><td>Pay only that level's latency</td></tr>
-      <tr><td>Miss</td><td>Data not in cache → fetch from next level</td><td>Pay this level + next level latency</td></tr>
-      <tr><td>Latency</td><td>Cycles to access a level</td><td>L1=4, L2=8, Mem=100</td></tr>
-    </table>
-
-    <h3>Direct-Mapped Cache (L1 in HW)</h3>
-    <p>Each block from memory can go to <strong>exactly one</strong> location in the cache. Which location? Determined by the block number modulo the number of cache blocks.</p>
-
-    <div class="rule-box">
-      <strong>Direct-mapped rules:</strong><br>
-      1. Block start address = floor(address ÷ block_size) × block_size<br>
-      2. Block number = block_start ÷ block_size<br>
-      3. Cache slot = block_number mod (C ÷ block_size)<br>
-      4. If that slot is occupied by a different block → EVICT the old block, put new one in
-    </div>
-
-    <div class="code">
-<span class="c-muted">Example: address 127, block_size=64, L1 capacity=256B (4 blocks)</span>
-<span class="c-green">block_start = floor(127/64) × 64 = 1 × 64 = 64</span>
-<span class="c-green">block_number = 64 / 64 = 1</span>
-<span class="c-green">L1_slot = 1 mod 4 = 1</span>
-<span class="c-muted">→ Block starting at address 64 goes into L1 slot 1</span>
-    </div>
-
-    <h3>Fully Associative Cache (L2 in HW)</h3>
-    <p>A block can go to <strong>any</strong> location. No conflict misses. Only evicts when the cache is completely full. Requires checking all blocks to find a match (more hardware, but higher hit rate).</p>
-
-    <div class="compare">
-      <div class="compare-col">
-        <div class="compare-title blue">Direct-Mapped</div>
-        <ul style="font-size:13px">
-          <li>1 possible slot per block</li>
-          <li>Fast lookup (one comparison)</li>
-          <li>Conflict misses possible</li>
-          <li>Good for large caches</li>
-        </ul>
-      </div>
-      <div class="compare-col">
-        <div class="compare-title green">Fully Associative</div>
-        <ul style="font-size:13px">
-          <li>Any slot available</li>
-          <li>Slow lookup (compare all)</li>
-          <li>No conflict misses</li>
-          <li>Good for small, critical caches</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>Cycle Counting</h3>
-    <div class="rule-box blue">
-      <strong>L1 HIT:</strong> 4 cycles (L1 latency only)<br>
-      <strong>L1 MISS, L2 HIT:</strong> 4 + 8 = <strong>12 cycles</strong><br>
-      <strong>L1 MISS, L2 MISS (full miss):</strong> 4 + 8 + 100 = <strong>112 cycles</strong><br>
-      On a full miss: block is loaded into BOTH L1 and L2.
-    </div>
-
-    <h3>Worked Example: HW2 Question 5 — All 5 Accesses</h3>
-    <p>Setup: block=64B, L1=256B=4 slots (direct-mapped), L2=2048B=32 slots (fully associative). Both start empty.</p>
-
-    <h4>Access 1 — address 127</h4>
-    <div class="code">
-<span class="c-green">block_start = floor(127/64)×64 = 64</span>   <span class="c-muted">block# = 1</span>
-<span class="c-green">L1 slot = 1 mod 4 = 1</span>
-<span class="c-red">L1 slot 1: EMPTY → miss</span>
-<span class="c-red">L2: EMPTY → miss</span>
-<span class="c-yellow">→ Full miss. Load block[64] into L2 slot (any), then L1 slot 1.</span>
-<span class="c-blue">Cycles: 112</span>
-<span class="c-muted">L1 state: [_, block[64], _, _]    L2 state: {block[64]}</span>
-    </div>
-
-    <h4>Access 2 — address 25</h4>
-    <div class="code">
-<span class="c-green">block_start = floor(25/64)×64 = 0</span>    <span class="c-muted">block# = 0</span>
-<span class="c-green">L1 slot = 0 mod 4 = 0</span>
-<span class="c-red">L1 slot 0: EMPTY → miss</span>
-<span class="c-red">L2: does not have block[0] → miss</span>
-<span class="c-yellow">→ Full miss. Load block[0] into L2, then L1 slot 0.</span>
-<span class="c-blue">Cycles: 112</span>
-<span class="c-muted">L1 state: [block[0], block[64], _, _]    L2 state: {block[64], block[0]}</span>
-    </div>
-
-    <h4>Access 3 — address 8192</h4>
-    <div class="code">
-<span class="c-green">block_start = floor(8192/64)×64 = 8192</span>  <span class="c-muted">block# = 128</span>
-<span class="c-green">L1 slot = 128 mod 4 = 0</span>
-<span class="c-red">L1 slot 0: has block[0] ≠ block[8192] → CONFLICT MISS, evict block[0]</span>
-<span class="c-red">L2: does not have block[8192] → miss</span>
-<span class="c-yellow">→ Full miss. Load block[8192] into L2, evict block[0] from L1, put block[8192] in slot 0.</span>
-<span class="c-blue">Cycles: 112</span>
-<span class="c-muted">L1: [block[8192], block[64], _, _]    L2: {block[64], block[0], block[8192]}</span>
-    </div>
-
-    <div class="notice">
-      <strong>Notice:</strong> block[0] was evicted from L1 but L2 still has it! L2 has 32 slots and only 2 blocks — nowhere near full. This is the key insight for access 4.
-    </div>
-
-    <h4>Access 4 — address 63</h4>
-    <div class="code">
-<span class="c-green">block_start = floor(63/64)×64 = 0</span>    <span class="c-muted">block# = 0   (same block as address 25!)</span>
-<span class="c-green">L1 slot = 0 mod 4 = 0</span>
-<span class="c-red">L1 slot 0: has block[8192] ≠ block[0] → miss</span>
-<span class="c-green">L2: HAS block[0]! → L2 HIT</span>
-<span class="c-yellow">→ L2 hit: load block[0] from L2 into L1 slot 0 (evict block[8192]).</span>
-<span class="c-blue">Cycles: 4 + 8 = 12  ← saved 100 cycles!</span>
-<span class="c-muted">L1: [block[0], block[64], _, _]    L2: {block[64], block[0], block[8192]}</span>
-    </div>
-
-    <h4>Access 5 — address 320</h4>
-    <div class="code">
-<span class="c-green">block_start = floor(320/64)×64 = 320</span>  <span class="c-muted">block# = 5</span>
-<span class="c-green">L1 slot = 5 mod 4 = 1</span>
-<span class="c-red">L1 slot 1: has block[64] ≠ block[320] → conflict miss, evict block[64]</span>
-<span class="c-red">L2: does not have block[320] → miss</span>
-<span class="c-yellow">→ Full miss. Load block[320] into L2, evict block[64] from L1, put block[320] in slot 1.</span>
-<span class="c-blue">Cycles: 112</span>
-<span class="c-muted">L1: [block[0], block[320], _, _]    L2: {block[64], block[0], block[8192], block[320]}</span>
-    </div>
-
-    <h3>Summary Table</h3>
-    <table>
-      <tr><th>Access</th><th>Address</th><th>Block start</th><th>L1 slot</th><th>Outcome</th><th>Cycles</th></tr>
-      <tr><td>1</td><td>127</td><td>64</td><td>1</td><td>Full miss</td><td><strong>112</strong></td></tr>
-      <tr><td>2</td><td>25</td><td>0</td><td>0</td><td>Full miss</td><td><strong>112</strong></td></tr>
-      <tr><td>3</td><td>8192</td><td>8192</td><td>0</td><td>Conflict miss (evicts block[0])</td><td><strong>112</strong></td></tr>
-      <tr><td>4</td><td>63</td><td>0</td><td>0</td><td>L1 miss, <strong>L2 hit</strong></td><td><strong>12</strong></td></tr>
-      <tr><td>5</td><td>320</td><td>320</td><td>1</td><td>Full miss (evicts block[64])</td><td><strong>112</strong></td></tr>
-    </table>
-
-    <h3>Types of Cache Misses</h3>
-    <div class="card-row three">
-      <div class="card">
-        <div class="compare-title blue">Compulsory</div>
-        <p style="font-size:13px">First time ever accessing a block. Unavoidable — the data has never been loaded.</p>
-        <p style="font-size:12px;color:var(--muted)">All 5 accesses start this way on first touch.</p>
-      </div>
-      <div class="card">
-        <div class="compare-title yellow">Conflict</div>
-        <p style="font-size:13px">Two blocks map to the same direct-mapped slot. One evicts the other.</p>
-        <p style="font-size:12px;color:var(--muted)">Access 3 and 4 are conflict misses in L1.</p>
-      </div>
-      <div class="card">
-        <div class="compare-title red">Capacity</div>
-        <p style="font-size:13px">Cache is full. Any new block requires evicting something.</p>
-        <p style="font-size:12px;color:var(--muted)">Happens in L2 once all 32 slots are used.</p>
-      </div>
-    </div>
-
-    <h3>Virtual Memory (Brief Overview)</h3>
-    <p>Physical memory (DRAM) acts as a cache for disk. Programs use <strong>virtual addresses</strong>; hardware translates to <strong>physical addresses</strong> via a page table managed by the OS.</p>
-
-    <table>
-      <tr><th>Cache term</th><th>Virtual Memory equivalent</th></tr>
-      <tr><td>Block</td><td>Page</td></tr>
-      <tr><td>Block size</td><td>Page size (e.g. 4 KB)</td></tr>
-      <tr><td>Miss</td><td>Page fault</td></tr>
-      <tr><td>Tag</td><td>Virtual Page Number (VPN)</td></tr>
-      <tr><td>Cache entry</td><td>Page Table Entry (PTE)</td></tr>
-    </table>
-
-    <div class="rule-box green">
-      <strong>Address translation steps:</strong> Split virtual address into VPN (upper bits) and page offset (lower bits). Look up VPN in page table → get Physical Frame Number (PFN). Physical address = PFN concatenated with page offset unchanged. The TLB caches recent VPN→PFN lookups to avoid a full page table access on every instruction.
+    <div class="cons">
+      <h4>CLOUD COMPUTING</h4>
+      <ul>
+        <li>Long-term storage and archiving</li>
+        <li>Heavy-duty model training</li>
+        <li>Global pattern recognition</li>
+        <li>No hardware constraints</li>
+      </ul>
     </div>
   </div>
 
-
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- REFERENCE SECTION -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section" id="alu-ref">
-    <div class="section-header">
-      <span class="section-num">REF</span>
-      <h2>ALU Control Codes</h2>
-    </div>
-
-    <p>ALUControl[2:0] (same as F[2:0] in the ALU design) selects the operation:</p>
-    <table>
-      <tr><th>ALUControl[2:0]</th><th>Operation</th><th>Used for</th></tr>
-      <tr><td><code>000</code></td><td>AND</td><td>and instruction</td></tr>
-      <tr><td><code>001</code></td><td>OR</td><td>or instruction</td></tr>
-      <tr><td><code>010</code></td><td>ADD</td><td>add, addi, lw, sw address calc, PC+4</td></tr>
-      <tr><td><code>110</code></td><td>SUBTRACT</td><td>sub, subi, beq (compare)</td></tr>
-      <tr><td><code>111</code></td><td>SLT (set if less than)</td><td>slt instruction</td></tr>
-    </table>
+  <h3>TinyML — AI on Microcontrollers</h3>
+  <div class="def">
+    <strong>TinyML</strong>
+    <p>A specialized area of Edge AI that focuses on deploying ML models on <strong>extremely resource-constrained microcontrollers</strong> (MCUs) with RAM in KBs, no GPU, and real-time inference requirements. Platforms: Arduino, ESP32, Raspberry Pi.</p>
   </div>
 
-  <div class="section" id="signals-ref">
-    <div class="section-header">
-      <span class="section-num">REF</span>
-      <h2>Signal Quick Reference</h2>
+  <h3>Model Compression Techniques</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🔢</div>
+      <h4>Quantization</h4>
+      <p>Reduce numerical precision: <strong>32-bit float → 8-bit int (INT8)</strong>. Smaller, faster models. Most common TinyML technique.</p>
     </div>
-
-    <h3>ALUSrcB[1:0] in Multi-Cycle</h3>
-    <table>
-      <tr><th>Value</th><th>ALU B input</th><th>Used in</th></tr>
-      <tr><td><code>00</code></td><td>Register B (rt)</td><td>R-type EX, beq EX</td></tr>
-      <tr><td><code>01</code></td><td>Constant 4</td><td>IF (computing PC+4)</td></tr>
-      <tr><td><code>10</code></td><td>Sign-extended immediate</td><td>lw/sw address, addi</td></tr>
-      <tr><td><code>11</code></td><td>Sign-extended immediate × 4</td><td>ID (pre-computing branch target)</td></tr>
-    </table>
-
-    <h3>PCSrc in Multi-Cycle</h3>
-    <table>
-      <tr><th>Value</th><th>New PC</th></tr>
-      <tr><td><code>0</code></td><td>ALU result (= PC+4 during IF)</td></tr>
-      <tr><td><code>1</code></td><td>ALUOut (branch target, computed in ID)</td></tr>
-      <tr><td><code>10</code></td><td>Jump target (from instruction bits)</td></tr>
-    </table>
-  </div>
-
-  <div class="section" id="formulas">
-    <div class="section-header">
-      <span class="section-num">REF</span>
-      <h2>Formulas to Memorize</h2>
+    <div class="card">
+      <div class="card-icon">✂️</div>
+      <h4>Pruning</h4>
+      <p>Remove unnecessary weights from the model. Structured (whole neurons) or unstructured (individual weights).</p>
     </div>
-
-    <div class="code">
-<span class="c-muted">═══ CACHE ═══</span>
-<span class="c-green">block_start = floor(address / block_size) × block_size</span>
-<span class="c-green">block_number = block_start / block_size</span>
-<span class="c-green">L1_slot = block_number mod (L1_capacity / block_size)</span>
-<span class="c-green">num_blocks = capacity / block_size</span>
-
-<span class="c-blue">AMAT = hit_rate × hit_latency + miss_rate × miss_latency</span>
-<span class="c-blue">Ti = ti + mi × Ti+1</span>   <span class="c-muted">(recursive latency)</span>
-<span class="c-blue">miss_rate + hit_rate = 1</span>
-
-<span class="c-muted">═══ PERFORMANCE ═══</span>
-<span class="c-yellow">Execution time = # instructions × CPI × clock_period</span>
-<span class="c-yellow">Single-cycle CPI = 1  (but long clock)</span>
-<span class="c-yellow">Multi-cycle CPI = varies per instruction type</span>
-<span class="c-yellow">Pipeline ideal speedup ≈ number of stages</span>
-
-<span class="c-muted">═══ VIRTUAL MEMORY ═══</span>
-<span class="c-purple">VPN bits = log2(virtual_memory_size / page_size)</span>
-<span class="c-purple">PFN bits = log2(physical_memory_size / page_size)</span>
-<span class="c-purple">page_offset bits = log2(page_size)</span>
-<span class="c-purple">Physical address = PFN concatenated with page_offset</span>
-
-<span class="c-muted">═══ LC-3 BRANCH ═══</span>
-<span class="c-red">branch target = PC + 1 + SEXT(offset9)</span>
-<span class="c-red">  (PC is already incremented by 1 when branch executes)</span>
-<span class="c-red">branch taken if: (n AND N) OR (z AND Z) OR (p AND P)</span>
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h4>Knowledge Distillation</h4>
+      <p>Train a small "student" model from a large "teacher" model. DistilBERT achieves ~97% of BERT's performance with 40% less size.</p>
     </div>
-
-    <h3>Self-Check Questions</h3>
-    <p style="font-size:13px;color:var(--muted)">Click each question to reveal the answer.</p>
-
-    <div class="quiz-item" onclick="this.classList.toggle('open')">
-      <div class="q">Why does pipelined MIPS need separate instruction and data memories?</div>
-      <div class="toggle">▶ click to reveal</div>
-      <div class="a" style="color:var(--accent3)">Because in a 5-stage pipeline, IF (stage 1) fetches from instruction memory at the same time MEM (stage 4) reads/writes data memory. If there was only one memory, these two stages would conflict — a structural hazard. Separate memories remove the hazard.</div>
-    </div>
-
-    <div class="quiz-item" onclick="this.classList.toggle('open')">
-      <div class="q">In the multi-cycle processor, why is IRWrite only 1 during IF and 0 in all other phases?</div>
-      <div class="toggle">▶ click to reveal</div>
-      <div class="a" style="color:var(--accent3)">The instruction register (IR) must hold the current instruction for all subsequent phases. If IRWrite stayed 1, the next memory read (e.g., data read in MEM phase for lw) would overwrite IR with data instead of an instruction. By setting IRWrite=0 after IF, the IR is locked until the next instruction fetch.</div>
-    </div>
-
-    <div class="quiz-item" onclick="this.classList.toggle('open')">
-      <div class="q">Address 127 and address 63 are in the same cache block. Why?</div>
-      <div class="toggle">▶ click to reveal</div>
-      <div class="a" style="color:var(--accent3)">Block size = 64. Address 127: floor(127/64)=1, block starts at 64. Address 63: floor(63/64)=0, block starts at 0. Wait — they are in DIFFERENT blocks! Block[64] contains addresses 64–127. Block[0] contains addresses 0–63. Address 63 is at the very end of block[0], and address 64 is the start of block[1] which contains 127.</div>
-    </div>
-
-    <div class="quiz-item" onclick="this.classList.toggle('open')">
-      <div class="q">What is the difference between ISA and Microarchitecture? Give one example of each.</div>
-      <div class="toggle">▶ click to reveal</div>
-      <div class="a" style="color:var(--accent3)">ISA = the programmer-visible contract (what instructions do). Example: MIPS has 32 registers named $0–$31. Microarchitecture = the implementation (how it's built in hardware). Example: the MIPS R10000 executes instructions out-of-order with branch prediction — invisible to software, which still sees sequential execution.</div>
-    </div>
-
-    <div class="quiz-item" onclick="this.classList.toggle('open')">
-      <div class="q">For beq in multi-cycle, why is PCWrite=0 but PC still updates when branch is taken?</div>
-      <div class="toggle">▶ click to reveal</div>
-      <div class="a" style="color:var(--accent3)">PCEn = PCWrite OR (Branch AND Zero). When Branch=1 and Zero=1 (registers are equal), PCEn=1 through the Branch path, not the PCWrite path. This allows conditional PC updates without always enabling PCWrite. PCWrite is only for unconditional writes (IF phase updates, jump).</div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h4>Efficient Architectures</h4>
+      <p>MobileNet, TinyCNN — designed with depthwise separable convolutions for minimal compute.</p>
     </div>
   </div>
 
-</main>
+  <div class="formula">
+    <span class="formula-label">TINYML DEPLOYMENT PIPELINE</span>
+    Train (full precision) → Optimize (quantize/prune) → Convert (TFLite) → Deploy (MCU)
+  </div>
 
-<script>
-// Highlight active nav link on scroll
-const sections = document.querySelectorAll('.section[id]');
-const navLinks = document.querySelectorAll('nav a');
+  <h3>TensorFlow Lite Workflow</h3>
+  <div class="code-block">
+<span class="cm"># 1. Train Keras model normally</span>
+model = tf.keras.Sequential([tf.keras.layers.Dense(units=<span class="num">1</span>, input_shape=[<span class="num">1</span>])])
+model.compile(optimizer=<span class="str">'sgd'</span>, loss=<span class="str">'mean_squared_error'</span>)
+model.fit(xs, ys, epochs=<span class="num">50</span>, verbose=<span class="num">0</span>)
 
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 80) current = s.id;
-  });
-  navLinks.forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
-});
-</script>
+<span class="cm"># 2. Convert to TFLite format</span>
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+<span class="kw">with</span> open(<span class="str">'model.tflite'</span>, <span class="str">'wb'</span>) <span class="kw">as</span> f:
+    f.write(tflite_model)
 
+<span class="cm"># 3. Run inference on device</span>
+interpreter = tf.lite.Interpreter(model_path=<span class="str">"model.tflite"</span>)
+interpreter.allocate_tensors()
+interpreter.set_tensor(input_details[<span class="num">0</span>][<span class="str">'index'</span>], input_data)
+interpreter.invoke()
+output = interpreter.get_tensor(output_details[<span class="num">0</span>][<span class="str">'index'</span>])
+  </div>
 
-<script>
-var _csContent = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>MIPS Control Signals \u2014 Cheat Sheet</title>\n<style>\n@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap');\n\n:root {\n  --bg: #f5f2eb;\n  --paper: #faf8f3;\n  --ink: #1a1814;\n  --ink2: #3d3a33;\n  --muted: #8c8880;\n  --border: #ddd9d0;\n  --border2: #c8c4bb;\n\n  --v0: #c0392b;\n  --v1: #27ae60;\n  --vx: #7f8c8d;\n  --vbin: #2471a3;\n  --vfunct: #8e44ad;\n\n  --tag-if: #e8f4fd;\n  --tag-id: #eafaf1;\n  --tag-ex: #fef9e7;\n  --tag-mem: #fdf2f8;\n  --tag-wb: #f0f3ff;\n\n  --tag-if-b: #2471a3;\n  --tag-id-b: #1e8449;\n  --tag-ex-b: #b7950b;\n  --tag-mem-b: #7d3c98;\n  --tag-wb-b: #1a5276;\n\n  --mono: 'JetBrains Mono', monospace;\n  --display: 'Syne', sans-serif;\n}\n\n* { margin: 0; padding: 0; box-sizing: border-box; }\n\nbody {\n  background: var(--bg);\n  color: var(--ink);\n  font-family: var(--mono);\n  font-size: 13px;\n  line-height: 1.5;\n  padding: 32px;\n  min-height: 100vh;\n}\n\n.page {\n  max-width: 1300px;\n  margin: 0 auto;\n}\n\n/* HEADER */\nheader {\n  display: flex;\n  justify-content: space-between;\n  align-items: flex-end;\n  border-bottom: 3px solid var(--ink);\n  padding-bottom: 16px;\n  margin-bottom: 32px;\n}\n.header-left h1 {\n  font-family: var(--display);\n  font-size: 28px;\n  font-weight: 800;\n  letter-spacing: -0.02em;\n  color: var(--ink);\n}\n.header-left p {\n  font-family: var(--mono);\n  font-size: 11px;\n  color: var(--muted);\n  margin-top: 4px;\n  letter-spacing: 0.08em;\n  text-transform: uppercase;\n}\n.header-right {\n  display: flex; gap: 8px;\n}\n.legend-item {\n  display: flex; align-items: center; gap: 5px;\n  font-size: 11px; color: var(--ink2);\n}\n.dot {\n  width: 20px; height: 20px; border-radius: 3px;\n  display: flex; align-items: center; justify-content: center;\n  font-weight: 700; font-size: 11px;\n}\n.dot-0 { background: #fdecea; color: var(--v0); border: 1px solid #f5c6c2; }\n.dot-1 { background: #eafaf1; color: var(--v1); border: 1px solid #a9dfbf; }\n.dot-x { background: #f4f6f6; color: var(--vx); border: 1px solid #d5dbdb; }\n.dot-b { background: #eaf2fb; color: var(--vbin); border: 1px solid #aed6f1; }\n\n/* GRID */\n.grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 28px;\n  margin-bottom: 28px;\n}\n.grid-full { grid-column: 1 / -1; }\n\n/* SECTION CARD */\n.card {\n  background: var(--paper);\n  border: 1.5px solid var(--border2);\n  border-radius: 6px;\n  overflow: hidden;\n}\n.card-header {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 12px 16px;\n  border-bottom: 1.5px solid var(--border2);\n  background: var(--ink);\n}\n.card-header h2 {\n  font-family: var(--display);\n  font-size: 14px;\n  font-weight: 700;\n  color: #fff;\n  letter-spacing: 0.02em;\n}\n.card-header .sub {\n  font-family: var(--mono);\n  font-size: 10px;\n  color: #aaa;\n  margin-left: auto;\n  letter-spacing: 0.06em;\n  text-transform: uppercase;\n}\n.badge {\n  font-family: var(--mono);\n  font-size: 9px;\n  font-weight: 600;\n  padding: 2px 7px;\n  border-radius: 3px;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n}\n.badge-sc { background: #e67e22; color: #fff; }\n.badge-mc { background: #2471a3; color: #fff; }\n\n/* TABLE */\ntable {\n  width: 100%;\n  border-collapse: collapse;\n}\nth {\n  background: #f0ede6;\n  font-family: var(--mono);\n  font-size: 10px;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.06em;\n  color: var(--ink2);\n  padding: 7px 10px;\n  border-bottom: 1.5px solid var(--border2);\n  border-right: 1px solid var(--border);\n  text-align: center;\n  white-space: nowrap;\n}\nth:first-child { text-align: left; min-width: 96px; }\nth.phase-if { background: var(--tag-if); color: var(--tag-if-b); border-bottom-color: var(--tag-if-b); }\nth.phase-id { background: var(--tag-id); color: var(--tag-id-b); border-bottom-color: var(--tag-id-b); }\nth.phase-ex { background: var(--tag-ex); color: var(--tag-ex-b); border-bottom-color: var(--tag-ex-b); }\nth.phase-mem { background: var(--tag-mem); color: var(--tag-mem-b); border-bottom-color: var(--tag-mem-b); }\nth.phase-wb { background: var(--tag-wb); color: var(--tag-wb-b); border-bottom-color: var(--tag-wb-b); }\nth.instr { background: #f0ede6; color: var(--ink); }\n\ntd {\n  padding: 6px 10px;\n  border-bottom: 1px solid var(--border);\n  border-right: 1px solid var(--border);\n  text-align: center;\n  vertical-align: middle;\n}\ntd:first-child {\n  text-align: left;\n  font-weight: 600;\n  color: var(--ink);\n  font-size: 12px;\n  background: #f7f4ef;\n  border-right: 1.5px solid var(--border2);\n}\ntr:last-child td { border-bottom: none; }\n\n/* VALUE CELLS */\n.v0 { color: var(--v0); font-weight: 700; }\n.v1 { color: var(--v1); font-weight: 700; }\n.vx { color: var(--vx); font-weight: 400; }\n.vbin { color: var(--vbin); font-weight: 700; }\n.vfunct { color: var(--vfunct); font-weight: 600; font-size: 10px; }\n\n.cell-0 { background: #fef8f7; }\n.cell-1 { background: #f4fef7; }\n.cell-x { background: #fafafa; }\n.cell-bin { background: #eaf4fd; }\n.cell-funct { background: #f9f0ff; }\n\n/* SIGNAL MEANING */\n.meaning-table td:first-child {\n  background: #f0ede6;\n  font-size: 11px;\n  font-weight: 600;\n  color: var(--ink);\n  width: 110px;\n}\n.meaning-table td {\n  font-size: 11px;\n  text-align: left;\n  padding: 6px 10px;\n  color: var(--ink2);\n}\n.meaning-table .m0 { color: var(--v0); font-weight: 600; }\n.meaning-table .m1 { color: var(--v1); font-weight: 600; }\n.meaning-table .mx { color: var(--vx); }\n\n/* SECTION DIVIDER */\n.divider {\n  display: flex; align-items: center; gap: 12px;\n  margin: 28px 0 20px;\n}\n.divider h2 {\n  font-family: var(--display);\n  font-size: 18px;\n  font-weight: 800;\n  color: var(--ink);\n  white-space: nowrap;\n}\n.divider-line {\n  flex: 1; height: 1.5px; background: var(--border2);\n}\n.divider-badge {\n  font-family: var(--mono); font-size: 10px;\n  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;\n  white-space: nowrap;\n}\n\n/* RULE STRIP */\n.rule-strip {\n  background: var(--ink); color: #f5f2eb;\n  padding: 10px 16px; font-size: 11px;\n  display: flex; gap: 24px; flex-wrap: wrap;\n  border-radius: 4px; margin-bottom: 20px;\n}\n.rule-strip span { display: flex; align-items: center; gap: 6px; }\n.rule-strip strong { color: #f1c40f; }\n\n/* FOOTER */\nfooter {\n  border-top: 1.5px solid var(--border2);\n  margin-top: 28px;\n  padding-top: 12px;\n  display: flex;\n  justify-content: space-between;\n  font-size: 10px;\n  color: var(--muted);\n  font-family: var(--mono);\n  letter-spacing: 0.06em;\n}\n\n/* ALU REF */\n.alu-grid {\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  gap: 0;\n}\n.alu-cell {\n  padding: 8px 12px;\n  border-right: 1px solid var(--border);\n  border-bottom: 1px solid var(--border);\n  font-size: 11px;\n}\n.alu-cell.header {\n  background: #f0ede6; font-weight: 600; color: var(--ink2);\n  font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;\n}\n.alu-cell .code { color: var(--vbin); font-weight: 700; font-size: 13px; display: block; }\n.alu-cell .op { color: var(--ink); font-weight: 600; font-size: 12px; display: block; }\n.alu-cell .use { color: var(--muted); font-size: 10px; display: block; margin-top: 2px; }\n\n@media print {\n  body { padding: 16px; }\n  .page { max-width: 100%; }\n}\n</style>\n</head>\n<body>\n<div class=\"page\">\n\n<!-- HEADER -->\n<header>\n  <div class=\"header-left\">\n    <h1>MIPS Control Signals \u2014 Cheat Sheet</h1>\n    <p>SOC2060 \u00b7 Computer Architecture \u00b7 Single-Cycle &amp; Multi-Cycle Reference</p>\n  </div>\n  <div class=\"header-right\">\n    <div class=\"legend-item\"><div class=\"dot dot-0\">0</div> disabled / off</div>\n    <div class=\"legend-item\"><div class=\"dot dot-1\">1</div> enabled / on</div>\n    <div class=\"legend-item\"><div class=\"dot dot-x\">X</div> don't care</div>\n    <div class=\"legend-item\"><div class=\"dot dot-b\">010</div> binary value</div>\n  </div>\n</header>\n\n<!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 SINGLE CYCLE \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->\n<div class=\"divider\">\n  <h2>Single-Cycle Processor</h2>\n  <div class=\"divider-line\"></div>\n  <span class=\"divider-badge\">one clock cycle per instruction \u00b7 all signals set simultaneously</span>\n</div>\n\n<div class=\"rule-strip\">\n  <span><strong>RegWrite=0</strong> \u2192 RegDst=X and MemtoReg=X (nothing written, destination irrelevant)</span>\n  <span><strong>j instruction</strong> \u2192 ALUSrc=X, ALUCtrl=XXX (ALU bypassed entirely)</span>\n  <span><strong>MemRead / MemWrite</strong> are never X (accidental memory access = data corruption)</span>\n  <span><strong>Branch / PCSrc1</strong> are never X (wrong jump = catastrophic)</span>\n</div>\n\n<div class=\"card grid-full\">\n  <div class=\"card-header\">\n    <span class=\"badge badge-sc\">Single-Cycle</span>\n    <h2>Control Signal Values by Instruction</h2>\n    <span class=\"sub\">All signals active in the same clock cycle</span>\n  </div>\n  <table>\n    <thead>\n      <tr>\n        <th>Signal</th>\n        <th class=\"instr\">R-type<br><span style=\"font-weight:400;color:#888\">add/sub/and/or/slt</span></th>\n        <th class=\"instr\">addi / subi<br><span style=\"font-weight:400;color:#888\">I-type ALU</span></th>\n        <th class=\"instr\">lw<br><span style=\"font-weight:400;color:#888\">load word</span></th>\n        <th class=\"instr\">sw<br><span style=\"font-weight:400;color:#888\">store word</span></th>\n        <th class=\"instr\">beq<br><span style=\"font-weight:400;color:#888\">branch equal</span></th>\n        <th class=\"instr\">j<br><span style=\"font-weight:400;color:#888\">jump</span></th>\n        <th style=\"background:#f7f4ef;color:var(--ink2);font-size:10px;text-align:left\">Why / What it controls</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>RegDst</td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">1=write to rd[15-11] (R-type) \u00b7 0=write to rt[20-16] (I-type) \u00b7 X when RegWrite=0</td>\n      </tr>\n      <tr>\n        <td>ALUSrc</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">0=2nd operand is reg rt \u00b7 1=2nd operand is sign-ext imm \u00b7 X when ALU unused</td>\n      </tr>\n      <tr>\n        <td>MemtoReg</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">0=write ALU result to reg \u00b7 1=write memory data to reg \u00b7 X when RegWrite=0</td>\n      </tr>\n      <tr>\n        <td>RegWrite</td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Enable register file write. sw/beq/j never write a register. Never X.</td>\n      </tr>\n      <tr>\n        <td>MemRead</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Only lw reads data memory. Never X \u2014 accidental reads corrupt state.</td>\n      </tr>\n      <tr>\n        <td>MemWrite</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Only sw writes data memory. Never X \u2014 accidental writes corrupt memory.</td>\n      </tr>\n      <tr>\n        <td>Branch</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">AND-ed with Zero flag \u2192 PCSrc2. Never X \u2014 wrong PC = disaster.</td>\n      </tr>\n      <tr>\n        <td>PCSrc1<br><span style=\"font-size:10px;color:var(--muted);font-weight:400\">(Jump)</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">1 selects the 26-bit jump target for PC. Only j/jal. Never X.</td>\n      </tr>\n      <tr>\n        <td>PCSrc2<br><span style=\"font-size:10px;color:var(--muted);font-weight:400\">(BrTaken)</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"background:#fff8e1\"><span style=\"color:#b7950b;font-weight:600\">Branch<br>\u2227 Zero</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Hardware = Branch AND Zero. Only relevant for beq. Never X.</td>\n      </tr>\n      <tr>\n        <td>ALUCtrl<br><span style=\"font-size:10px;color:var(--muted);font-weight:400\">[2:0]</span></td>\n        <td class=\"cell-funct\"><span class=\"vfunct\">from<br>funct</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">110</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">010</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">010</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">110</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">010=add \u00b7 110=sub \u00b7 000=AND \u00b7 001=OR \u00b7 111=SLT \u00b7 XXX when ALU unused (j)</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n<!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 MULTI CYCLE \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->\n<div class=\"divider\" style=\"margin-top:36px\">\n  <h2>Multi-Cycle Processor</h2>\n  <div class=\"divider-line\"></div>\n  <span class=\"divider-badge\">signals set per phase \u00b7 FSM controller \u00b7 intermediate registers hold state</span>\n</div>\n\n<div class=\"rule-strip\">\n  <span><strong>IRWrite=1</strong> only in IF \u2014 after that, IR must stay locked or data overwrites the instruction</span>\n  <span><strong>PCWrite=1</strong> only in IF (PC+4) and final phase of j</span>\n  <span><strong>IorD=0</strong> in IF (use PC), <strong>IorD=1</strong> in MEM (use ALUOut as address)</span>\n  <span><strong>ALUSrcA=0</strong> when ALU uses PC \u00b7 <strong>=1</strong> when ALU uses register A (rs)</span>\n</div>\n\n<div class=\"card grid-full\">\n  <div class=\"card-header\">\n    <span class=\"badge badge-mc\">Multi-Cycle</span>\n    <h2>Control Signals by Phase \u00d7 Instruction</h2>\n    <span class=\"sub\">Fill per FSM state \u2014 not all instructions go through all 5 phases</span>\n  </div>\n  <table>\n    <thead>\n      <tr>\n        <th>Signal</th>\n        <th class=\"phase-if\">IF<br><span style=\"font-weight:400;font-size:9px\">All instrs</span></th>\n        <th class=\"phase-id\">ID<br><span style=\"font-weight:400;font-size:9px\">All instrs</span></th>\n        <th class=\"phase-ex\">EX<br><span style=\"font-weight:400;font-size:9px\">R-type</span></th>\n        <th class=\"phase-ex\">EX<br><span style=\"font-weight:400;font-size:9px\">addi/subi</span></th>\n        <th class=\"phase-ex\">EX<br><span style=\"font-weight:400;font-size:9px\">lw / sw</span></th>\n        <th class=\"phase-ex\">EX<br><span style=\"font-weight:400;font-size:9px\">beq</span></th>\n        <th class=\"phase-ex\">EX<br><span style=\"font-weight:400;font-size:9px\">j</span></th>\n        <th class=\"phase-mem\">MEM<br><span style=\"font-weight:400;font-size:9px\">lw</span></th>\n        <th class=\"phase-mem\">MEM<br><span style=\"font-weight:400;font-size:9px\">sw</span></th>\n        <th class=\"phase-wb\">WB<br><span style=\"font-weight:400;font-size:9px\">lw</span></th>\n        <th class=\"phase-wb\">WB<br><span style=\"font-weight:400;font-size:9px\">R-type</span></th>\n        <th class=\"phase-wb\">WB<br><span style=\"font-weight:400;font-size:9px\">addi</span></th>\n        <th style=\"background:#f0ede6;color:var(--ink2);font-size:10px;text-align:left;min-width:200px\">What this signal does</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>IorD</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">0=PC\u2192memory address \u00b7 1=ALUOut\u2192mem address. X when memory not accessed.</td>\n      </tr>\n      <tr>\n        <td>IRWrite</td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Latch instruction into IR. ONLY in IF. 0 everywhere else or MEM overwrites IR.</td>\n      </tr>\n      <tr>\n        <td>PCWrite</td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Enable PC update. IF=PC+4. j EX=jump addr. beq uses Branch\u2227Zero instead.</td>\n      </tr>\n      <tr>\n        <td>ALUSrcA</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">0=ALU A input is PC \u00b7 1=ALU A input is register A (rs). X in MEM/WB, ALU idle.</td>\n      </tr>\n      <tr>\n        <td>ALUSrcB<br><span style=\"font-size:10px;font-weight:400;color:var(--muted)\">[1:0]</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">01</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">11</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">00</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">10</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">10</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">00</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XX</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">00=reg B \u00b7 01=const 4 \u00b7 10=sign-ext imm \u00b7 11=imm\u00d74 (branch target prep)</td>\n      </tr>\n      <tr>\n        <td>ALUCtrl<br><span style=\"font-size:10px;font-weight:400;color:var(--muted)\">[2:0]</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">010</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">010</span></td>\n        <td class=\"cell-funct\"><span class=\"vfunct\">funct</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">110</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">010</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">110</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">XXX</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">IF+ID=add(010) for PC math. EX depends on instr. X in MEM/WB (ALU done).</td>\n      </tr>\n      <tr>\n        <td>PCSrc</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">10</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">0=PC\u2190ALUresult(PC+4) \u00b7 1=PC\u2190ALUOut(branch target) \u00b7 10=jump address</td>\n      </tr>\n      <tr>\n        <td>Branch</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">PCEn = PCWrite OR (Branch AND Zero). Enables PC update on taken branch.</td>\n      </tr>\n      <tr>\n        <td>RegWrite</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Register write only happens in WB phase. Never in IF/ID/EX/MEM.</td>\n      </tr>\n      <tr>\n        <td>MemtoReg</td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Only meaningful in WB. 1=write memory data (lw) \u00b7 0=write ALU result. X all other phases.</td>\n      </tr>\n      <tr>\n        <td>RegDst</td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">X</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Only meaningful in WB. 0=destination is rt (I-type) \u00b7 1=destination is rd (R-type).</td>\n      </tr>\n      <tr>\n        <td>MemWrite</td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">Only sw MEM phase. Never X \u2014 accidental writes corrupt memory.</td>\n      </tr>\n      <tr>\n        <td>MemRead</td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">1</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td class=\"cell-0\"><span class=\"v0\">0</span></td>\n        <td style=\"text-align:left;font-size:11px;color:var(--ink2)\">IF reads instruction memory. lw MEM reads data memory. Never X.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n<!-- BOTTOM ROW: ALU ref + X rule + signal meaning -->\n<div class=\"grid\" style=\"grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top:0\">\n\n  <!-- ALU CODES -->\n  <div class=\"card\">\n    <div class=\"card-header\">\n      <h2>ALU Control Codes [2:0]</h2>\n    </div>\n    <table class=\"meaning-table\">\n      <tr><td><span class=\"vbin\">010</span></td><td>ADD \u2014 addi, lw/sw addr calc, PC+4 (IF), branch target (ID)</td></tr>\n      <tr><td><span class=\"vbin\">110</span></td><td>SUB \u2014 subi, beq comparison (rs \u2212 rt, check Zero)</td></tr>\n      <tr><td><span class=\"vbin\">000</span></td><td>AND \u2014 andi instruction</td></tr>\n      <tr><td><span class=\"vbin\">001</span></td><td>OR \u2014 ori instruction</td></tr>\n      <tr><td><span class=\"vbin\">111</span></td><td>SLT \u2014 set less than instruction</td></tr>\n      <tr><td><span class=\"vfunct\">funct</span></td><td>R-type: ALU op determined by bits[5:0] of instruction</td></tr>\n      <tr><td><span class=\"vx\">XXX</span></td><td>j instruction \u2014 ALU output is never used</td></tr>\n    </table>\n  </div>\n\n  <!-- ALUSrcB -->\n  <div class=\"card\">\n    <div class=\"card-header\">\n      <h2>ALUSrcB [1:0] \u2014 Multi-Cycle Only</h2>\n    </div>\n    <table class=\"meaning-table\">\n      <tr><td><span class=\"vbin\">00</span></td><td>Register B (value of rt from register file) \u2014 R-type EX, beq EX</td></tr>\n      <tr><td><span class=\"vbin\">01</span></td><td>Constant 4 \u2014 used in IF phase to compute PC + 4</td></tr>\n      <tr><td><span class=\"vbin\">10</span></td><td>Sign-extended immediate \u2014 addi/subi EX, lw/sw address calc</td></tr>\n      <tr><td><span class=\"vbin\">11</span></td><td>Sign-extended imm \u00d7 4 \u2014 ID phase pre-computes branch target</td></tr>\n      <tr><td><span class=\"vx\">XX</span></td><td>Don't care \u2014 MEM and WB phases, ALU is no longer needed</td></tr>\n    </table>\n  </div>\n\n  <!-- X RULE -->\n  <div class=\"card\">\n    <div class=\"card-header\">\n      <h2>The Don't-Care (X) Rule</h2>\n    </div>\n    <table class=\"meaning-table\">\n      <tr>\n        <td style=\"color:var(--v0);font-size:13px\">\u2717</td>\n        <td><strong>RegWrite=0 \u2192 RegDst=X, MemtoReg=X</strong><br>\n        Nothing written to register file, so which register and what data are irrelevant.</td>\n      </tr>\n      <tr>\n        <td style=\"color:var(--v0);font-size:13px\">\u2717</td>\n        <td><strong>j instruction \u2192 ALUSrc=X, ALUCtrl=XXX</strong><br>\n        ALU output is never used \u2014 entire ALU path is bypassed.</td>\n      </tr>\n      <tr>\n        <td style=\"color:var(--v0);font-size:13px\">\u2717</td>\n        <td><strong>MEM/WB phases \u2192 ALUSrcA=X, ALUSrcB=XX, ALUCtrl=XXX</strong><br>\n        ALU already computed its result and stored it in ALUOut in EX.</td>\n      </tr>\n      <tr>\n        <td style=\"color:var(--v1);font-size:13px\">\u2713</td>\n        <td><strong>NEVER X:</strong> MemRead, MemWrite, Branch, PCSrc1<br>\n        These cause real side-effects (memory write, wrong PC). Must always be explicit.</td>\n      </tr>\n      <tr>\n        <td style=\"color:var(--v1);font-size:13px\">\u2713</td>\n        <td><strong>NEVER X:</strong> IRWrite, PCWrite, RegWrite<br>\n        These are enable signals \u2014 accidentally enabled = corrupted state.</td>\n      </tr>\n    </table>\n  </div>\n\n</div>\n\n<!-- INSTRUCTION PHASE FLOW -->\n<div class=\"card grid-full\" style=\"margin-top:20px\">\n  <div class=\"card-header\">\n    <span class=\"badge badge-mc\">Multi-Cycle</span>\n    <h2>Which Phases Each Instruction Goes Through</h2>\n    <span class=\"sub\">FSM state sequence \u2192 determines which rows of the table to fill</span>\n  </div>\n  <table>\n    <thead>\n      <tr>\n        <th style=\"text-align:left\">Instruction</th>\n        <th class=\"phase-if\">S0: IF</th>\n        <th class=\"phase-id\">S1: ID</th>\n        <th class=\"phase-ex\">EX / Addr Gen</th>\n        <th class=\"phase-mem\">MEM Access</th>\n        <th class=\"phase-wb\">WB</th>\n        <th style=\"text-align:left;background:#f0ede6;color:var(--ink2);font-size:10px\">Total cycles</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>R-type (add, sub, and, or)</td>\n        <td class=\"cell-1\"><span class=\"v1\">S0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">S6: Execute</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S7: ALU WB</span></td>\n        <td style=\"text-align:left;font-size:11px\">4 cycles</td>\n      </tr>\n      <tr>\n        <td>addi / subi (I-type ALU)</td>\n        <td class=\"cell-1\"><span class=\"v1\">S0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">S9: Execute</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S10: WB</span></td>\n        <td style=\"text-align:left;font-size:11px\">4 cycles</td>\n      </tr>\n      <tr>\n        <td>lw (load word)</td>\n        <td class=\"cell-1\"><span class=\"v1\">S0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">S2: MemAdr</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S3: MemRead</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S4: Mem WB</span></td>\n        <td style=\"text-align:left;font-size:11px\">5 cycles</td>\n      </tr>\n      <tr>\n        <td>sw (store word)</td>\n        <td class=\"cell-1\"><span class=\"v1\">S0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">S2: MemAdr</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S5: MemWrite</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td style=\"text-align:left;font-size:11px\">4 cycles</td>\n      </tr>\n      <tr>\n        <td>beq (branch if equal)</td>\n        <td class=\"cell-1\"><span class=\"v1\">S0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">S8: Branch</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td style=\"text-align:left;font-size:11px\">3 cycles</td>\n      </tr>\n      <tr>\n        <td>j (jump)</td>\n        <td class=\"cell-1\"><span class=\"v1\">S0</span></td>\n        <td class=\"cell-1\"><span class=\"v1\">S1</span></td>\n        <td class=\"cell-bin\"><span class=\"vbin\">S11: Jump</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td class=\"cell-x\"><span class=\"vx\">skip</span></td>\n        <td style=\"text-align:left;font-size:11px\">3 cycles</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n<footer>\n  <span>SOC2060 \u00b7 Computer Architecture \u00b7 INHA University in Tashkent \u00b7 Spring 2026</span>\n  <span>Single-Cycle: all signals set in 1 cycle \u00b7 Multi-Cycle: signals set per FSM phase</span>\n</footer>\n\n</div>\n</body>\n</html>\n";
-var _csLoaded = false;
+  <div class="quiz-callout">
+    <p>Why can't standard ML models run directly on microcontrollers? Name 3 compression techniques used in TinyML and explain each.</p>
+  </div>
 
-function openCheatsheet() {
-  var modal = document.getElementById('cs-modal');
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  if (!_csLoaded) {
-    var iframe = document.getElementById('cs-iframe');
-    var blob = new Blob([_csContent], {type: 'text/html'});
-    var url = URL.createObjectURL(blob);
-    iframe.src = url;
-    _csLoaded = true;
-  }
-}
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
 
-function closeCheatsheet() {
-  var modal = document.getElementById('cs-modal');
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-}
+<!-- ══════════════════════════════════════════
+     SECTION 4: SECURITY & ETHICS
+══════════════════════════════════════════ -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Security &amp; Ethics in IoT</h2>
+  </div>
 
-function handleModalClick(e) {
-  if (e.target === document.getElementById('cs-modal')) closeCheatsheet();
-}
+  <div class="def">
+    <strong>Ethical IoT</strong>
+    <p>Designing and deploying IoT systems that respect user rights including privacy, autonomy, transparency, and fairness. The IoT ecosystem raises multifaceted ethical challenges: data privacy, security vulnerabilities, algorithmic bias, accountability, environmental impact, and misuse potential.</p>
+  </div>
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeCheatsheet();
-});
-</script>
+  <h3>Privacy Threats</h3>
+  <ul>
+    <li><strong>Weak/default passwords:</strong> Easy entry point — publicly known credentials</li>
+    <li><strong>No encryption:</strong> Data at rest and in transit is readable without encryption</li>
+    <li><strong>Outdated firmware:</strong> Unpatched vulnerabilities on distributed devices</li>
+    <li><strong>Insecure network services:</strong> Open ports, insufficient segmentation</li>
+    <li><strong>Data aggregation:</strong> Combining innocuous data points reveals sensitive patterns</li>
+  </ul>
+
+  <h3>Mitigation Strategies</h3>
+  <div class="card-grid">
+    <div class="card"><h4>🔐 Authentication</h4><p>Strong unique passwords + multi-factor authentication. Secure access controls to prevent unauthorized device access.</p></div>
+    <div class="card"><h4>🔒 Encryption</h4><p>Encrypt data both at rest and in transit. Vital for protecting confidentiality of sensitive readings.</p></div>
+    <div class="card"><h4>🔄 Updates</h4><p>Regularly update firmware and software to patch known vulnerabilities. Critical for distributed IoT deployments.</p></div>
+    <div class="card"><h4>🌐 Segmentation</h4><p>Network segmentation and firewalls. Isolate IoT devices from sensitive networks.</p></div>
+    <div class="card"><h4>📉 Data Minimization</h4><p>Collect only strictly necessary data. Reduces privacy risks at the source.</p></div>
+    <div class="card"><h4>📋 Transparency</h4><p>Clear communication about what data is collected, how it's processed, and for what purpose.</p></div>
+  </div>
+
+  <h3>Key Ethical Principles (from SmartDevice Code)</h3>
+  <table class="compare-table">
+    <tr><th>Principle</th><th>Method in Code</th><th>What It Does</th></tr>
+    <tr><td class="highlight">Autonomy &amp; Consent</td><td><code>request_consent()</code></td><td>User opts in with yes/no — no data without explicit consent</td></tr>
+    <tr><td class="highlight">Transparency</td><td><code>provide_transparency_report()</code></td><td>Shows what data was collected, sensor types, reading counts, last timestamp</td></tr>
+    <tr><td class="highlight">Privacy / Anonymization</td><td><code>anonymize_data()</code></td><td>Replaces values with [ANONYMIZED] — selective or full dataset</td></tr>
+    <tr><td class="highlight">Data Minimization</td><td>Consent gate in <code>collect_data()</code></td><td>Only collects if user_consent=True</td></tr>
+  </table>
+
+  <h3>SmartDevice — Full Ethical Pattern</h3>
+  <div class="code-block">
+<span class="kw">class</span> SmartDevice:
+    <span class="kw">def</span> request_consent(self):
+        response = input(<span class="str">"Do you consent? (yes/no): "</span>).lower()
+        self.user_consent = response == <span class="str">"yes"</span>
+        <span class="kw">return</span> self.user_consent
+
+    <span class="kw">def</span> collect_data(self, sensor_name, value):
+        <span class="kw">if</span> self.user_consent:   <span class="cm"># ALWAYS check consent first</span>
+            timestamp = datetime.datetime.now().isoformat()
+            self.data_collected[sensor_name].append(
+                {<span class="str">"timestamp"</span>: timestamp, <span class="str">"value"</span>: value})
+        <span class="kw">else</span>:
+            print(<span class="str">"Cannot collect: consent not granted."</span>)
+
+    <span class="kw">def</span> anonymize_data(self, fields_to_anonymize=<span class="kw">None</span>):
+        <span class="kw">if</span> fields_to_anonymize <span class="kw">is None</span>:
+            self.data_collected = {<span class="str">"anonymized_data"</span>: <span class="str">"Data anonymized"</span>}
+        <span class="kw">else</span>:
+            <span class="kw">for</span> field <span class="kw">in</span> fields_to_anonymize:
+                <span class="cm"># Replace values with [ANONYMIZED], keep timestamps</span>
+                self.data_collected[field] = [
+                    {<span class="str">"timestamp"</span>: item[<span class="str">"timestamp"</span>], <span class="str">"value"</span>: <span class="str">"[ANONYMIZED]"</span>}
+                    <span class="kw">for</span> item <span class="kw">in</span> self.data_collected[field]]
+  </div>
+
+  <h3>Bias in IoT &amp; AI Systems</h3>
+  <div class="def">
+    <strong>Algorithmic Bias</strong>
+    <p>Systematic errors in AI decision-making that produce unfair or discriminatory outcomes. Sources: biased training data (underrepresents certain groups), flawed algorithm design, developer's own unconscious biases. Example: facial recognition less accurate for darker skin tones or women.</p>
+  </div>
+  <ul>
+    <li><strong>Fix:</strong> Collect diverse, representative training data</li>
+    <li><strong>Fix:</strong> Use fairness-aware algorithms; conduct algorithmic audits</li>
+    <li><strong>Fix:</strong> Human review and oversight during development</li>
+    <li><strong>Fix:</strong> Continuous monitoring for bias after deployment</li>
+    <li><strong>Fix:</strong> Transparency and explainability in model decisions</li>
+  </ul>
+
+  <div class="quiz-callout">
+    <p>Describe all 4 methods in the SmartDevice class and which ethical principle each implements. What is "purpose limitation" in IoT?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: INDUSTRIAL IOT
+══════════════════════════════════════════ -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Industrial IoT (IIoT)</h2>
+  </div>
+
+  <div class="def">
+    <strong>Industrial IoT (IIoT)</strong>
+    <p>The application of IoT technology in <strong>industrial environments</strong>. Involves networking of industrial assets — machinery, sensors, systems — to create a cohesive network capable of real-time data collection, exchange, and sophisticated analysis. Goal: intelligent industrial operations with substantial gains in efficiency, productivity, and safety.</p>
+  </div>
+
+  <h3>IIoT Architecture — 4 Layers</h3>
+  <div class="flow" style="flex-direction:column; align-items:stretch; gap:0;">
+    <div class="flow-box active" style="margin-bottom:0; border-radius:8px 8px 0 0; text-align:center; padding:16px;">
+      <strong style="color:#00d4ff;">Layer 1: Perception (Edge)</strong><br>
+      <small style="color:#94a3b8;">Smart sensors (vibration, temp, pressure), actuators, RFID</small>
+    </div>
+    <div class="flow-box" style="margin:0; border-radius:0; border-top:none; text-align:center; padding:16px;">
+      <strong style="color:#c4b5fd;">Layer 2: Connectivity</strong><br>
+      <small style="color:#94a3b8;">MQTT (lightweight pub/sub) · OPC UA (interoperability) · Modbus (legacy serial)</small>
+    </div>
+    <div class="flow-box" style="margin:0; border-radius:0; border-top:none; text-align:center; padding:16px;">
+      <strong style="color:#6ee7b7;">Layer 3: Platform / Middleware</strong><br>
+      <small style="color:#94a3b8;">Data ingestion, device management, Digital Twin creation, InfluxDB/TimescaleDB</small>
+    </div>
+    <div class="flow-box" style="margin:0; border-radius:0 0 8px 8px; border-top:none; text-align:center; padding:16px;">
+      <strong style="color:#f59e0b;">Layer 4: Application</strong><br>
+      <small style="color:#94a3b8;">ERP integration, dashboards, remote monitoring, business logic</small>
+    </div>
+  </div>
+
+  <h3>Industry 3.0 → Industry 4.0 Shift</h3>
+  <div class="pros-cons">
+    <div class="cons">
+      <h4>INDUSTRY 3.0 (ISA-95 Pyramid)</h4>
+      <ul>
+        <li>Rigid hierarchy: Sensor→Control→SCADA→MES→ERP</li>
+        <li>Data flows linearly — creates silos and bottlenecks</li>
+        <li>Each layer can only talk to adjacent layers</li>
+      </ul>
+    </div>
+    <div class="pros">
+      <h4>INDUSTRY 4.0 (Flat / UNS)</h4>
+      <ul>
+        <li>Decentralized, flat Unified Namespace (UNS)</li>
+        <li>Every asset communicates directly with any other</li>
+        <li>No bottlenecks, real-time everywhere</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>SCADA vs. MES vs. ERP</h3>
+  <table class="compare-table">
+    <tr><th>System</th><th>Level</th><th>Timeframe</th><th>Users</th><th>Function</th></tr>
+    <tr><td class="highlight">SCADA</td><td>Machine</td><td>Milliseconds</td><td>Operators / Engineers</td><td>Monitor and control PLCs and factory machines</td></tr>
+    <tr><td class="highlight">MES</td><td>Process</td><td>Real-time / Shifts</td><td>Production Supervisors</td><td>Translate ERP orders → production execution</td></tr>
+    <tr><td class="highlight">ERP</td><td>Business</td><td>Days / Weeks</td><td>Managers / Executives</td><td>Finance, procurement, scheduling, supply chain</td></tr>
+  </table>
+
+  <h3>OT vs. IT</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>OT — Operational Technology</h4>
+      <p>Hard real-time systems: PLCs (Programmable Logic Controllers), SCADA. <strong>Priority: Availability &amp; Safety.</strong> Must never go down.</p>
+    </div>
+    <div class="card">
+      <h4>IT — Information Technology</h4>
+      <p>Cloud-based, data-driven, interconnected systems. <strong>Priority: Confidentiality &amp; Data Integrity.</strong> Familiar enterprise software.</p>
+    </div>
+  </div>
+
+  <h3>IIoT Practice Code — Sensor Pipeline</h3>
+  <div class="code-block">
+<span class="kw">def</span> get_sensor_data():
+    normal_temp = <span class="num">75</span>     <span class="cm"># degrees Celsius, normal operating temp</span>
+    temperature = normal_temp + random.uniform(-<span class="num">5</span>, <span class="num">5</span>)
+    <span class="kw">return</span> temperature
+
+<span class="kw">def</span> process_data(data):
+    <span class="kw">return</span> round(data, <span class="num">1</span>)     <span class="cm"># round to 1 decimal place</span>
+
+<span class="kw">def</span> analyze_data(data):
+    temperature_threshold = <span class="num">85</span>   <span class="cm"># EXAM: this exact threshold!</span>
+    <span class="kw">if</span> data > temperature_threshold:
+        print(<span class="str">f"ALERT! Temperature: {data}°C > {temperature_threshold}°C"</span>)
+
+<span class="kw">def</span> main():
+    <span class="kw">while True</span>:
+        raw = get_sensor_data()
+        processed = process_data(raw)
+        store_data(processed)        <span class="cm"># print with timestamp</span>
+        analyze_data(processed)
+        time.sleep(<span class="num">5</span>)              <span class="cm"># read every 5 seconds</span>
+  </div>
+
+  <h3>Security in IIoT</h3>
+  <ul>
+    <li><strong>Legacy equipment:</strong> Never designed to be online — massive attack surface</li>
+    <li><strong>Threat vectors:</strong> Ransomware in manufacturing, unauthorized access to control loops</li>
+    <li><strong>Interoperability:</strong> Proprietary protocols vs. open standards like OPC UA</li>
+    <li><strong>Edge computing:</strong> Keeps sensitive process data on-premises for security</li>
+  </ul>
+
+  <div class="quiz-callout">
+    <p>Explain the difference between SCADA, MES, and ERP. Why does IIoT have stricter cybersecurity requirements than consumer IoT?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: WEARABLE IOT
+══════════════════════════════════════════ -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Wearable IoT Devices</h2>
+  </div>
+
+  <div class="def">
+    <strong>Wearable IoT Devices</strong>
+    <p>Electronic devices worn on the body (or attached to clothing) that collect personal physiological and environmental data, transmit via wireless protocols, and integrate into the broader IoT ecosystem. They are both <strong>data collection points</strong> (gathering health metrics) and <strong>interaction interfaces</strong> (controlling smart home devices).</p>
+  </div>
+
+  <h3>Four Key Hardware Components</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📡</div>
+      <h4>1. Sensors</h4>
+      <p>Accelerometers (motion), gyroscopes (orientation), optical sensors (HR), GPS, UV, temperature, SpO2. The data-gathering layer.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💻</div>
+      <h4>2. Processors</h4>
+      <p>ARM Cortex-M microcontrollers — chosen for low power consumption and adequate compute. Run algorithms on raw sensor data.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📶</div>
+      <h4>3. Connectivity</h4>
+      <p>Bluetooth, BLE, NFC, Wi-Fi. Short-range wireless links the wearable to smartphones and gateways.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔋</div>
+      <h4>4. Power Source</h4>
+      <p>Lithium-polymer battery optimized for energy efficiency. Research ongoing into energy-harvesting self-powered wearables.</p>
+    </div>
+  </div>
+
+  <h3>Communication Protocols</h3>
+  <table class="compare-table">
+    <tr><th>Protocol</th><th>Range</th><th>Power</th><th>Use Case</th></tr>
+    <tr><td class="highlight">Bluetooth Classic</td><td>~10 meters</td><td>Higher</td><td>Audio streaming, hands-free calls, data sync</td></tr>
+    <tr><td class="highlight">BLE (Bluetooth Low Energy)</td><td>~10 meters</td><td>Very low — sleeps between bursts</td><td>Continuous health data transmission. Best for wearables.</td></tr>
+    <tr><td class="highlight">NFC</td><td>≤4 cm</td><td>Minimal</td><td>Contactless payments, secure area access, device pairing</td></tr>
+    <tr><td class="highlight">Wi-Fi</td><td>~50m indoor</td><td>High</td><td>When power is less critical and full network needed</td></tr>
+  </table>
+
+  <div class="note">BLE is the dominant protocol for wearables because it stays in sleep mode and only wakes for brief transmissions — dramatically extending battery life vs. Classic Bluetooth.</div>
+
+  <h3>Data Flow in Wearable IoT</h3>
+  <div class="flow" style="flex-direction:column; align-items:flex-start; gap:8px; margin:20px 0;">
+    <div class="flow-box active">1. Sensors → raw physiological data (HR, SpO2, steps, temp)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">2. BLE/Bluetooth → smartphone or dedicated hub</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">3. Wi-Fi/Cellular → cloud platform (AWS IoT, Azure IoT, Google Cloud IoT)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box">4. Cloud analysis → feedback/alerts sent back to wearable</div>
+  </div>
+
+  <h3>WearableDevice Python Class</h3>
+  <div class="code-block">
+<span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="kw">class</span> WearableDevice:
+    <span class="kw">def</span> __init__(self, device_id, sampling_rate=<span class="num">1</span>):
+        self.heart_rate = <span class="num">70</span>
+        self.oxygen_level = <span class="num">98</span>
+        self.steps = <span class="num">0</span>
+        self.battery_level = <span class="num">100</span>
+        self.activity_level = <span class="str">"sedentary"</span>   <span class="cm"># sedentary | walking | running</span>
+        self.data_queue = deque(maxlen=<span class="num">100</span>)   <span class="cm"># circular buffer, last 100 pts</span>
+
+    <span class="kw">def</span> get_sensor_data(self):
+        <span class="kw">if</span> self.activity_level == <span class="str">"sedentary"</span>:
+            self.heart_rate = max(<span class="num">60</span>, min(self.heart_rate + random.randint(-<span class="num">5</span>, <span class="num">5</span>), <span class="num">80</span>))
+            self.oxygen_level = max(<span class="num">95</span>, min(self.oxygen_level, <span class="num">100</span>))
+        <span class="kw">elif</span> self.activity_level == <span class="str">"walking"</span>:
+            self.heart_rate = max(<span class="num">80</span>, min(self.heart_rate + random.randint(<span class="num">5</span>, <span class="num">15</span>), <span class="num">120</span>))
+            self.oxygen_level = max(<span class="num">90</span>, min(self.oxygen_level, <span class="num">99</span>))
+        <span class="kw">elif</span> self.activity_level == <span class="str">"running"</span>:
+            self.heart_rate = max(<span class="num">120</span>, min(self.heart_rate + random.randint(<span class="num">10</span>, <span class="num">20</span>), <span class="num">180</span>))
+  </div>
+
+  <h3>Device Examples</h3>
+  <table class="compare-table">
+    <tr><th>Category</th><th>Examples</th><th>Key Features</th></tr>
+    <tr><td class="highlight">Fitness Trackers</td><td>Fitbit, Garmin, Xiaomi Mi Band</td><td>Steps, HR, calories, sleep, distance</td></tr>
+    <tr><td class="highlight">Smartwatches</td><td>Apple Watch, Samsung Galaxy Watch</td><td>Above + notifications, GPS, NFC payments, apps</td></tr>
+    <tr><td class="highlight">Smart Glasses</td><td>Google Glass, Microsoft HoloLens</td><td>AR overlay, hands-free information, field worker support</td></tr>
+    <tr><td class="highlight">Smart Clothing</td><td>Various research garments</td><td>HR, temp, respiratory rate, muscle activity in fabric</td></tr>
+    <tr><td class="highlight">Medical Wearables</td><td>Dexcom (glucose), Zoll LifeVest</td><td>Continuous critical health monitoring, real-time alerts</td></tr>
+  </table>
+
+  <div class="quiz-callout">
+    <p>Why is BLE preferred over Classic Bluetooth for wearables? Trace the full data flow from wearable sensor to cloud analytics response.</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: ISOLATION FOREST
+══════════════════════════════════════════ -->
+<section class="section" id="s7">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>Anomaly Detection — Isolation Forest</h2>
+  </div>
+
+  <div class="def">
+    <strong>Anomaly Detection</strong>
+    <p>The "first line of defense" in IoT — identifying data points that don't conform to expected behavior. Used for: cybersecurity breaches, sensor malfunctions, industrial equipment failures. Most common unsupervised approaches: <strong>Isolation Forest</strong> and <strong>Autoencoders</strong>.</p>
+  </div>
+
+  <div class="def">
+    <strong>Isolation Forest</strong>
+    <p>An outlier detection algorithm proposed by <strong>Liu, Ting &amp; Zhou (2008)</strong>. Instead of profiling normality, it explicitly <em>isolates anomalous points</em>. Based on two properties of anomalies: (1) they are a minority of instances, and (2) they have attribute values very different from normal data. Result: anomalies are easier to isolate — they need fewer random partitions.</p>
+  </div>
+
+  <h3>Core Idea: Path Length = Anomaly Score</h3>
+  <p>The algorithm builds an ensemble of <strong>Isolation Trees (iTrees)</strong> by recursively and randomly partitioning the data. Anomalies require fewer partitions to be isolated → <strong>shorter path length</strong> in the tree → higher anomaly score.</p>
+
+  <div class="formula">
+    <span class="formula-label">ANOMALY SCORE INTERPRETATION</span>
+    Score close to 1.0  →  Very likely anomaly
+    Score &lt; 0.5       →  Likely normal
+    Score ≈ 0.5 for all →  No anomalies in the sample
+  </div>
+
+  <h3>Algorithm Steps</h3>
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">ALGORITHM</span>
+      <h3>Isolation Forest — 2 Stages</h3>
+    </div>
+    <div class="step"><strong>Stage 1 — Training:</strong> Build iTrees from a training sample. At each node: randomly select a feature, randomly select a split value between min and max of that feature. Recursively partition until points are isolated.</div>
+    <div class="step"><strong>Stage 2 — Scoring:</strong> Pass each test instance through all iTrees. Measure average path length h(x) to reach an external (leaf) node. Compute anomaly score using h(x) normalized by c(m) — the expected path length for a random BST of size m.</div>
+  </div>
+
+  <h3>Properties of Isolation Forest</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Advantages</h4>
+      <p>Low linear time complexity. Small memory. Handles high-dimensional data. Works without anomalies in training set. Sub-sampling makes it fast.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚠️</div>
+      <h4>Swamping</h4>
+      <p>When normal instances are too close to anomalies, more partitions needed → harder to detect. Fix: sub-sampling reduces the effect.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎭</div>
+      <h4>Masking</h4>
+      <p>When anomalies cluster in dense groups, individual ones appear normal. Fix: sub-sampling reduces cluster density.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <h4>High-Dimensional Data</h4>
+      <p>Distance-based methods fail in high dimensions (all points equidistant). Isolation Forest handles this better with feature selection (Kurtosis test).</p>
+    </div>
+  </div>
+
+  <h3>Python Code — Complete Implementation</h3>
+  <div class="code-block">
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> IsolationForest
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+<span class="cm"># 1. Generate data: 800 normal readings + 20 anomalies</span>
+normal_data = np.random.normal(<span class="num">0</span>, <span class="num">0.5</span>, (<span class="num">800</span>, <span class="num">1</span>))
+outliers = np.random.uniform(low=-<span class="num">4</span>, high=<span class="num">4</span>, size=(<span class="num">20</span>, <span class="num">1</span>))
+data = np.concatenate([normal_data, outliers], axis=<span class="num">0</span>)
+df = pd.DataFrame(data, columns=[<span class="str">'Temperature'</span>])
+
+<span class="cm"># 2. Train Isolation Forest</span>
+model = IsolationForest(
+    n_estimators=<span class="num">100</span>,        <span class="cm"># number of isolation trees</span>
+    contamination=<span class="num">0.02</span>,     <span class="cm"># expected % of outliers in data</span>
+    random_state=<span class="num">42</span>
+)
+model.fit(df[[<span class="str">'Temperature'</span>]])
+
+<span class="cm"># 3. Predict: -1 = anomaly, +1 = normal</span>
+df[<span class="str">'Anomaly_Score'</span>] = model.decision_function(df[[<span class="str">'Temperature'</span>]])
+df[<span class="str">'Is_Anomaly'</span>] = model.predict(df[[<span class="str">'Temperature'</span>]])
+<span class="cm"># -1 = anomaly · +1 = normal</span>
+
+anomalies = df[df[<span class="str">'Is_Anomaly'</span>] == -<span class="num">1</span>]
+print(f<span class="str">"Total anomalies detected: {len(anomalies)}"</span>)
+  </div>
+
+  <div class="note">Key parameters: <code>n_estimators</code> = number of trees (more = more stable), <code>contamination</code> = expected fraction of outliers (tune this to your domain knowledge). <code>predict()</code> returns -1 (anomaly) or +1 (normal). <code>decision_function()</code> returns the raw anomaly score.</div>
+
+  <div class="quiz-callout">
+    <p>What does <code>contamination=0.02</code> mean? Why do anomalies have shorter path lengths in iTrees? What are swamping and masking?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8: AUTOENCODER
+══════════════════════════════════════════ -->
+<section class="section" id="s8">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>Autoencoder for Anomaly Detection</h2>
+  </div>
+
+  <div class="def">
+    <strong>Autoencoder</strong>
+    <p>A neural network trained to <strong>reconstruct its own input</strong> (X → X). Learns the "fingerprint" of normal data during training. When an anomalous input is fed in at inference time, the model cannot reconstruct it accurately → <strong>high Mean Squared Error (MSE)</strong> = anomaly signal. Completely unsupervised — no anomaly labels needed.</p>
+  </div>
+
+  <h3>Architecture: Encoder → Bottleneck → Decoder</h3>
+  <div class="flow">
+    <div class="flow-box active">Input<br><small>4 features</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box active">Dense(8)<br><small>ReLU · Encoder</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box active" style="border-color:#ef4444; color:#ef4444;">Dense(2)<br><small>Bottleneck!</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box active">Dense(8)<br><small>ReLU · Decoder</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box active">Output<br><small>4 features</small></div>
+  </div>
+
+  <ul style="margin-top:16px;">
+    <li><strong>Encoder:</strong> Compresses 4 sensor inputs → 2-dimensional bottleneck. Forces the network to learn only the most important patterns, discarding noise.</li>
+    <li><strong>Bottleneck (encoding_dim=2):</strong> The compressed representation. The network MUST learn what's essential about "normal" to fit through this layer.</li>
+    <li><strong>Decoder:</strong> Reconstructs the original 4 features from the 2-dimensional encoding. Loss = MSE between input and output.</li>
+  </ul>
+
+  <h3>Preprocessing — Why StandardScaler is Critical</h3>
+  <div class="def">
+    <strong>StandardScaler</strong>
+    <p>Transforms data so each feature has <strong>mean = 0 and variance = 1</strong>. Neural networks struggle when one feature (Pressure at 1013) is on a vastly different scale than another (Vibration at 0.05). Without scaling, large-scale features dominate the loss function and the model fails to learn smaller-scale patterns.</p>
+  </div>
+
+  <h3>Complete Python Implementation</h3>
+  <div class="code-block">
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> tensorflow <span class="kw">as</span> tf
+<span class="kw">from</span> tensorflow.keras <span class="kw">import</span> layers, models
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+
+<span class="cm"># 1. Simulate 4-sensor IoT data (temp, humidity, pressure, vibration)</span>
+<span class="kw">def</span> generate_iot_data(n=<span class="num">2000</span>):
+    np.random.seed(<span class="num">42</span>)
+    temp  = np.random.normal(<span class="num">25</span>, <span class="num">2</span>, n)
+    hum   = np.random.normal(<span class="num">50</span>, <span class="num">5</span>, n)
+    press = np.random.normal(<span class="num">1013</span>, <span class="num">10</span>, n)
+    vib   = np.random.normal(<span class="num">0.05</span>, <span class="num">0.01</span>, n)
+    <span class="kw">return</span> pd.DataFrame({<span class="str">'temp'</span>: temp, <span class="str">'hum'</span>: hum, <span class="str">'press'</span>: press, <span class="str">'vib'</span>: vib})
+
+<span class="cm"># 2. Preprocess</span>
+df = generate_iot_data()
+scaler = StandardScaler()
+scaled = scaler.fit_transform(df)    <span class="cm"># mean=0, variance=1</span>
+X_train, X_test = train_test_split(scaled, test_size=<span class="num">0.2</span>, random_state=<span class="num">42</span>)
+
+<span class="cm"># 3. Build Autoencoder</span>
+input_dim, encoding_dim = <span class="num">4</span>, <span class="num">2</span>
+input_layer = layers.Input(shape=(input_dim,))
+encoder     = layers.Dense(<span class="num">8</span>, activation=<span class="str">'relu'</span>)(input_layer)
+bottleneck  = layers.Dense(encoding_dim, activation=<span class="str">'relu'</span>)(encoder)
+decoder     = layers.Dense(<span class="num">8</span>, activation=<span class="str">'relu'</span>)(bottleneck)
+output_layer = layers.Dense(input_dim, activation=<span class="str">'sigmoid'</span>)(decoder)
+
+autoencoder = models.Model(inputs=input_layer, outputs=output_layer)
+autoencoder.compile(optimizer=<span class="str">'adam'</span>, loss=<span class="str">'mse'</span>)
+
+<span class="cm"># 4. Train: X_train as BOTH input AND target (reconstruction)</span>
+autoencoder.fit(X_train, X_train, epochs=<span class="num">50</span>, batch_size=<span class="num">32</span>,
+                validation_split=<span class="num">0.1</span>, verbose=<span class="num">0</span>)
+
+<span class="cm"># 5. Detect anomaly: high MSE = anomaly</span>
+<span class="kw">def</span> detect_anomaly(new_data):
+    scaled_new = scaler.transform(new_data)     <span class="cm"># same scaler as training!</span>
+    reconstructed = autoencoder.predict(scaled_new)
+    mse = np.mean(np.power(scaled_new - reconstructed, <span class="num">2</span>), axis=<span class="num">1</span>)
+    <span class="kw">return</span> mse    <span class="cm"># high MSE = anomaly</span>
+
+<span class="cm"># Normal MSE ≈ 0.5 · Anomaly MSE can be 100-1000x higher</span>
+  </div>
+
+  <h3>Comparison: Isolation Forest vs. Autoencoder</h3>
+  <table class="compare-table">
+    <tr><th>Property</th><th>Isolation Forest</th><th>Autoencoder</th></tr>
+    <tr><td class="highlight">Algorithm Type</td><td>Tree-based ensemble</td><td>Neural network (deep learning)</td></tr>
+    <tr><td class="highlight">Library</td><td>sklearn.ensemble</td><td>TensorFlow / Keras</td></tr>
+    <tr><td class="highlight">Speed</td><td>Fast, low memory</td><td>Slower, requires GPU for large data</td></tr>
+    <tr><td class="highlight">Pattern Complexity</td><td>Simple, linear splits</td><td>Complex non-linear patterns</td></tr>
+    <tr><td class="highlight">Output</td><td>-1/+1 binary label</td><td>Continuous MSE score</td></tr>
+    <tr><td class="highlight">Preprocessing</td><td>Optional</td><td>StandardScaler required</td></tr>
+    <tr><td class="highlight">Key Parameter</td><td>contamination (% outliers)</td><td>encoding_dim (bottleneck size)</td></tr>
+    <tr><td class="highlight">Best For</td><td>Fast, tabular, resource-constrained</td><td>Complex multi-sensor with subtle drift</td></tr>
+    <tr><td class="highlight">Threshold</td><td>Built into contamination param</td><td>mean_training_error + 3σ</td></tr>
+    <tr><td class="highlight">Edge Deployment</td><td>Small model, easy to port</td><td>Encoder portion via TFLite</td></tr>
+  </table>
+
+  <div class="quiz-callout">
+    <p>Why is the autoencoder trained with X_train as both input AND target? What does a high reconstruction MSE mean physically? What does StandardScaler do and why is it required?</p>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRACTICE PROBLEMS
+══════════════════════════════════════════ -->
+<section class="section" id="practice">
+  <div class="section-header">
+    <span class="section-num" style="background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3); color:var(--accent3);">🧪 PRACTICE</span>
+    <h2>Practice Problems</h2>
+  </div>
+  <p style="color:var(--text-dim); margin-bottom:32px;">These cover likely MCQ topics, code fill-ins, and open-ended question patterns. Work through before checking the solutions.</p>
+
+  <!-- Problem 1: Code fill-in -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">CODE FILL-IN 1</span>
+      <h3>Isolation Forest — Complete the Code</h3>
+    </div>
+    <p>Fill in the 4 blanks to complete a working Isolation Forest anomaly detector:</p>
+    <div class="code-block">
+model = IsolationForest(
+    n_estimators=___,        <span class="cm"># number of isolation trees</span>
+    contamination=___,       <span class="cm"># expected proportion of outliers</span>
+    random_state=___
+)
+model.fit(df[[<span class="str">'Temperature'</span>]])
+df[<span class="str">'Is_Anomaly'</span>] = model.___(df[[<span class="str">'Temperature'</span>]])
+<span class="cm"># ___ = anomaly, +1 = normal</span>
+    </div>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">ANSWERS</span>
+      n_estimators=100   ·   contamination=0.02   ·   random_state=42
+      method: predict()   ·   -1 = anomaly
+    </div>
+  </div>
+
+  <!-- Problem 2: Code fill-in -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">CODE FILL-IN 2</span>
+      <h3>Autoencoder — Training Call</h3>
+    </div>
+    <p>Fill in the blanks for the autoencoder training line:</p>
+    <div class="code-block">
+autoencoder.compile(optimizer=<span class="str">'___'</span>, loss=<span class="str">'___'</span>)
+autoencoder.fit(
+    X_train,             <span class="cm"># input</span>
+    ___,                 <span class="cm"># target (same as input!)</span>
+    epochs=___,
+    batch_size=<span class="num">32</span>,
+    validation_split=<span class="num">0.1</span>,
+    verbose=<span class="num">0</span>
+)
+    </div>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">ANSWERS</span>
+      optimizer='adam'   ·   loss='mse'   ·   target=X_train   ·   epochs=50
+    </div>
+  </div>
+
+  <!-- Problem 3: Code fill-in -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">CODE FILL-IN 3</span>
+      <h3>Digital Twin — data_history Slice</h3>
+    </div>
+    <p>Fill in the missing line that limits the DigitalTwin's memory to the last 100 readings:</p>
+    <div class="code-block">
+<span class="kw">def</span> update_data(self, data):
+    self.temperature = data[<span class="str">"temperature"</span>]
+    self.status = data[<span class="str">"status"</span>]
+    self.data_history.append({<span class="str">"timestamp"</span>: time.time(), <span class="str">"data"</span>: data})
+    self.data_history = self.data_history___   <span class="cm"># keep only last 100</span>
+    </div>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">ANSWER</span>
+      self.data_history = self.data_history[-100:]
+    </div>
+  </div>
+
+  <!-- Problem 4: Code fill-in -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">CODE FILL-IN 4</span>
+      <h3>SmartDevice — Consent Gate</h3>
+    </div>
+    <p>Fill in the consent check and consent field name in SmartDevice.collect_data():</p>
+    <div class="code-block">
+<span class="kw">def</span> collect_data(self, sensor_name, value):
+    <span class="kw">if</span> self.___:                   <span class="cm"># check attribute here</span>
+        timestamp = datetime.datetime.now().isoformat()
+        self.data_collected[sensor_name].append(
+            {<span class="str">"timestamp"</span>: timestamp, <span class="str">"value"</span>: value})
+    <span class="kw">else</span>:
+        print(<span class="str">"Cannot collect: consent not granted."</span>)
+    </div>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">ANSWER</span>
+      if self.user_consent:
+    </div>
+  </div>
+
+  <!-- Open-ended 1 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">OPEN-ENDED 1</span>
+      <h3>Explain how an Autoencoder detects anomalies</h3>
+    </div>
+    <p>Describe the training process, the role of the bottleneck layer, and how the reconstruction error is used to trigger an alert.</p>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">MODEL ANSWER</span>
+      An autoencoder is trained exclusively on normal sensor data with the
+      goal of reconstructing its own input (autoencoder.fit(X_train, X_train)).
+      The encoder compresses 4 sensor features into a 2-dimensional bottleneck
+      (encoding_dim=2), forcing the network to learn only the essential "fingerprint"
+      of normal operation. The decoder reconstructs the original 4 features.
+      Training minimizes MSE between input and output.
+
+      At inference: when normal data is fed in, the model reconstructs it well
+      (low MSE ≈ 0.5). When anomalous data arrives — representing patterns the
+      model has never seen (e.g., temp=85°C during training on 25°C normal) —
+      the model fails to reconstruct it accurately → high MSE (can be 100–1000x
+      higher). An alert threshold is typically set at:
+        mean(training_errors) + 3 × std(training_errors)
+      Any reading above this triggers an anomaly alert.
+
+      Key advantage: completely unsupervised — no labeled anomaly data needed.
+      The encoder portion can also be deployed via TFLite to IoT edge gateways.
+    </div>
+  </div>
+
+  <!-- Open-ended 2 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">OPEN-ENDED 2</span>
+      <h3>Compare Isolation Forest vs. Autoencoder</h3>
+    </div>
+    <p>Compare both anomaly detection methods. When would you choose one over the other in an IoT context?</p>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">MODEL ANSWER</span>
+      Isolation Forest: tree-based, sklearn, fast, low memory, outputs binary (-1/+1).
+      Works well for tabular sensor data, doesn't need StandardScaler, handles
+      high-dimensional data, trains without labeled anomalies. Set contamination
+      parameter based on domain knowledge.
+      → Choose when: fast deployment needed, resource-constrained, simple tabular data.
+
+      Autoencoder: neural network (TF/Keras), requires StandardScaler,
+      learns complex non-linear patterns, outputs continuous MSE score.
+      Needs more training data and computation, but catches subtle drift patterns
+      that tree-based methods miss. Encoder can be deployed via TFLite.
+      → Choose when: complex multi-sensor data, subtle gradual anomalies,
+        need a continuous confidence score rather than binary label.
+
+      Key difference in threshold: Isolation Forest uses contamination parameter
+      at train time. Autoencoder sets threshold post-training using
+      mean + 3σ of training reconstruction errors.
+    </div>
+  </div>
+
+  <!-- Open-ended 3 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">OPEN-ENDED 3</span>
+      <h3>Describe the IIoT 4-Layer Architecture and OT vs. IT</h3>
+    </div>
+    <p>Explain each layer of the IIoT architecture stack. What is the difference between OT and IT, and why does IIoT have stricter security requirements than consumer IoT?</p>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">MODEL ANSWER</span>
+      Layer 1 — Perception (Edge): Physical sensors and actuators collect raw
+      industrial data. Smart sensors have embedded processing + communications.
+
+      Layer 2 — Connectivity: Data transmission protocols. MQTT is lightweight
+      pub/sub for IoT. OPC UA is the industrial interoperability standard. Modbus
+      is legacy serial protocol for old equipment.
+
+      Layer 3 — Platform/Middleware: Data ingestion, device management, Digital
+      Twin creation. Time-series databases (InfluxDB, TimescaleDB) store sensor data.
+
+      Layer 4 — Application: Business logic. ERP integration, dashboards,
+      remote monitoring tools like SCADA/MES interfaces.
+
+      OT (Operational Technology): PLCs, SCADA — hard real-time, priority is
+      Availability and Safety. Must never fail — a downed factory line costs
+      millions per hour. IT (Information Technology): cloud-based, priority is
+      Confidentiality and Data Integrity.
+
+      Stricter security in IIoT because:
+      1. Legacy equipment never designed to be online — large attack surface
+      2. Consequences of breach: physical damage, safety hazards, production loss
+      3. Ransomware in manufacturing can shut down entire production lines
+      4. Control loops (OT) must be isolated from internet (IT) via air gaps or
+         strict network segmentation
+    </div>
+  </div>
+
+  <!-- Open-ended 4 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">OPEN-ENDED 4</span>
+      <h3>Explain Green IoT principles using the lab code</h3>
+    </div>
+    <p>What are the core Green IoT principles, and how does the SmartIrrigationSystem from the lab implement them?</p>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">MODEL ANSWER</span>
+      Core principles: energy efficiency, resource optimization, waste reduction,
+      reduced carbon footprint, environmental monitoring.
+
+      SmartIrrigationSystem implementation:
+      1. Solar power: soil sensors use power_source='solar' in SmartSensor class.
+         consume_energy() prints "Using solar power." — near-zero net cost.
+         This eliminates battery replacement waste.
+
+      2. Data-driven irrigation: should_irrigate(threshold=40) reads actual
+         soil moisture. Only opens valve when average_moisture < threshold.
+         Avoids over-watering (major water waste in traditional time-based systems).
+
+      3. check_power_status(): Models battery depletion — sensor can go offline
+         if battery low. Highlights importance of energy-efficient operation
+         for continuous availability.
+
+      4. control_valve(True/False): Minimal actuation — only when sensor data
+         justifies it. Reduced mechanical wear + water usage.
+
+      5. Data minimization: transmit_data() only called when sensor is operational
+         and has a reading — no wasteful "empty" transmissions.
+
+      Real-world additions: lifecycle assessment, recyclable materials,
+      LoRaWAN instead of Wi-Fi for lower transmission energy,
+      edge processing before cloud upload.
+    </div>
+  </div>
+
+  <!-- Open-ended 5 -->
+  <div class="practice-section">
+    <div class="ps-header">
+      <span class="practice-badge">OPEN-ENDED 5</span>
+      <h3>Ethical IoT Design — SmartDevice Class</h3>
+    </div>
+    <p>Describe all four methods in the SmartDevice class and the ethical principle each implements. What additional real-world considerations should a production ethical IoT system address?</p>
+    <div class="formula" style="border-color:rgba(16,185,129,0.3); color:#6ee7b7; margin-top:16px;">
+      <span class="formula-label">MODEL ANSWER</span>
+      request_consent() — Ethical principle: Autonomy and Control.
+        User explicitly grants or denies data collection. Consent must be:
+        freely given, specific, informed, and unambiguous (clear yes/no action).
+        Sets self.user_consent = True/False.
+
+      collect_data() — Ethical principle: Data Minimization + Consent Enforcement.
+        Every collection event checks: if self.user_consent: — data never
+        collected without consent, no matter what. Prevents passive background
+        data gathering without knowledge.
+
+      anonymize_data() — Ethical principle: Privacy Protection.
+        Replaces field values with [ANONYMIZED] while keeping timestamps.
+        Selective anonymization (specific fields) or full (all data replaced
+        with "Data anonymized"). Protects user identity in analytics pipelines.
+
+      provide_transparency_report() — Ethical principle: Transparency.
+        Shows: consent status, which sensor types collected data, reading count,
+        last updated timestamp. Enables informed user awareness.
+
+      Real-world additions needed:
+      - Purpose limitation: data only used for disclosed purposes
+      - Granular consent: per-data-type or per-purpose opt-ins
+      - Data retention policies: define how long data is stored, deletion schedule
+      - Revocation: user can withdraw consent at any time, data deleted
+      - Security by design: encryption, secure storage (not just consent)
+      - Bias auditing: algorithms processing IoT data must be tested for fairness
+      - Accountability framework: who is responsible when harm occurs?
+    </div>
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CHEATSHEET
+══════════════════════════════════════════ -->
+<section class="section" id="cheatsheet" style="border-bottom:none;">
+  <div class="section-header">
+    <span class="section-num" style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.3); color:var(--accent4);">⚡ CHEATSHEET</span>
+    <h2>Key Formulas, Values &amp; Patterns</h2>
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">ISOLATION FOREST — CRITICAL VALUES</span>
+    n_estimators=100  ·  contamination=0.02  ·  random_state=42
+    predict() returns: -1 = anomaly  ·  +1 = normal
+    decision_function() → raw anomaly score (closer to -1 = more anomalous)
+    Score ≈ 1 → anomaly  ·  Score &lt; 0.5 → normal  ·  Score ≈ 0.5 → no anomalies
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">AUTOENCODER — CRITICAL PATTERN</span>
+    scaler = StandardScaler()                        # mean=0, variance=1
+    scaled = scaler.fit_transform(df)               # fit on training data
+    autoencoder.fit(X_train, X_train, epochs=50)    # X → X reconstruction
+    mse = np.mean(np.power(scaled - reconstructed, 2), axis=1)
+    threshold = mean(train_errors) + 3 * std(train_errors)
+    Architecture: Input(4) → Dense(8,relu) → Dense(2,relu) → Dense(8,relu) → Dense(4,sigmoid)
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">DIGITAL TWIN — CRITICAL PATTERN</span>
+    self.data_history = self.data_history[-100:]     # limit to last 100
+    iot_thread = threading.Thread(target=..., daemon=True)  # daemon=True!
+    iot_thread.start()
+    Temperature threshold in analyze_data: 80°C (high) / 10°C (low) for Twin
+    IIoT pipeline threshold: 85°C triggers ALERT
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">TINYML PIPELINE</span>
+    Train → Optimize (Quantize 32→8bit / Prune / Distill) → Convert (.tflite) → Deploy
+    converter = tf.lite.TFLiteConverter.from_keras_model(model)
+    interpreter.allocate_tensors()
+    interpreter.set_tensor(input_details[0]['index'], input_data)
+    interpreter.invoke()
+    output = interpreter.get_tensor(output_details[0]['index'])
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">WEARABLE ACTIVITY HEART RATE RANGES</span>
+    Sedentary:  HR 60–80 bpm  ·  SpO2 95–100%  ·  steps += 1–5
+    Walking:    HR 80–120 bpm ·  SpO2 90–99%   ·  steps += 10–20
+    Running:    HR 120–180 bpm · SpO2 85–95%   ·  steps += higher
+    Protocol ranges: Bluetooth ~10m  ·  BLE ~10m (sleep mode)  ·  NFC ≤4cm
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">IIOT KEY PROTOCOLS</span>
+    MQTT    — lightweight pub/sub messaging for IoT  (connectivity layer)
+    OPC UA  — industrial interoperability standard   (connectivity layer)
+    Modbus  — legacy serial protocol                 (connectivity layer)
+    InfluxDB / TimescaleDB  — time-series databases  (platform layer)
+    SCADA → milliseconds · MES → shifts · ERP → days/weeks
+    OT priority: Availability &amp; Safety · IT priority: Confidentiality &amp; Integrity
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">GREEN IOT KEY VALUES</span>
+    energy_consumption_rate = 0.01 kWh/hour (battery sensor)
+    energy used = energy_consumption_rate × duration_hours
+    solar power → consume_energy() prints "Using solar power." (no deduction)
+    should_irrigate(threshold=40) → True if average_moisture &lt; 40%
+    1% chance (random.random() &lt; 0.01) battery sensor goes offline
+  </div>
+
+  <div class="formula">
+    <span class="formula-label">ETHICAL IOT — 4 PRINCIPLES → 4 METHODS</span>
+    Autonomy     → request_consent()          — user_consent = True/False
+    Transparency → provide_transparency_report() — shows readings, timestamps
+    Privacy      → anonymize_data()           — [ANONYMIZED] values
+    Minimization → collect_data() gate        — if self.user_consent:
+    Real-world extras: purpose limitation, data retention, revocation, bias audit
+  </div>
+
+  <a href="#top" class="back-top">↑ BACK TO TOP</a>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  Internet of Things · Inha University Tashkent · Dr. Minhaz Uddin Ahmed<br>
+  Final Exam Study Guide · Covers Digital Twin, Green IoT, AI-Driven IoT, Security, IIoT, Wearable IoT, Anomaly Detection
+</footer>
 
 </body>
 </html>
